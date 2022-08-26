@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/menu_home">
+
+    <fragment
+        android:id="@+id/menu_home"
+        android:name="com.beatriz.olx_clone.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/menu_meus_anuncios"
+        android:name="com.beatriz.olx_clone.fragments.MeusAnunciosFragment"
+        android:label="fragment_meus_anuncios"
+        tools:layout="@layout/fragment_meus_anuncios" />
+    <fragment
+        android:id="@+id/menu_favoritos"
+        android:name="com.beatriz.olx_clone.fragments.FavoritosFragment"
+        android:label="fragment_favoritos"
+        tools:layout="@layout/fragment_favoritos" />
+    <fragment
+        android:id="@+id/menu_minha_conta"
+        android:name="com.beatriz.olx_clone.fragments.MinhaContaFragment"
+        android:label="fragment_minha_conta"
+        tools:layout="@layout/fragment_minha_conta" />
+</navigation>

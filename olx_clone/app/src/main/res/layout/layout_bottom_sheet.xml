@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_bottom_sheet">
+
+    <android.widget.Button
+        android:id="@+id/btn_camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="8dp"
+        android:text="Câmera"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:textAllCaps="false"
+        android:textAlignment="textStart"
+        android:drawableStart="@drawable/ic_camera"
+        android:drawablePadding="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="0dp"/>
+
+    <android.widget.Button
+        android:id="@+id/btn_galeria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="Galeria"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:textAllCaps="false"
+        android:textAlignment="textStart"
+        android:drawableStart="@drawable/ic_galeria"
+        android:drawablePadding="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="0dp"/>
+
+    <android.widget.Button
+        android:id="@+id/btn_close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text=" Cancelar"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:textAllCaps="false"
+        android:textAlignment="textStart"
+        android:drawableStart="@drawable/ic_close"
+        android:drawablePadding="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="0dp"/>
+
+</LinearLayout>
