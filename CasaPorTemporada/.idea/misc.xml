@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/bg_btn.xml" value="0.3085" />
+        <entry key="app/src/main/res/drawable/bg_edit.xml" value="0.3085" />
+        <entry key="app/src/main/res/drawable/ic_voltar.xml" value="0.2205" />
+        <entry key="app/src/main/res/drawable/ic_voltar_branco.xml" value="0.2205" />
+        <entry key="app/src/main/res/layout/activity_criar_conta.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/activity_detalhe_anuncio.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/activity_filtrar_anuncios.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/activity_form_anuncio.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/activity_meus_anuncios.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/activity_minha_conta.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/activity_recuperar_conta.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/item_anuncio.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/toolbar_main_activity.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/toolbar_voltar.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/toolbar_voltar_add.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/toolbar_voltar_salvar.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/menu/menu_home.xml" value="0.37447916666666664" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
