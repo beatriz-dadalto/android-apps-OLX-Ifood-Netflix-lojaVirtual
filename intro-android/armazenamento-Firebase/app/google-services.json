@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "312015496003",
+    "project_id": "controle-de-estoque-13053",
+    "storage_bucket": "controle-de-estoque-13053.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312015496003:android:655bc551e0921fab2f45f6",
+        "android_client_info": {
+          "package_name": "com.beatriz.controledeprodutos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "312015496003-cjtt0p3sqr3ub9n2m3lbnuv61mgpipin.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.beatriz.controledeprodutos",
+            "certificate_hash": "6246ca7aae88f38192d097ceea676a986535e9f4"
+          }
+        },
+        {
+          "client_id": "312015496003-f0bqgimqd5csd9u5j67u3cic97ain8u7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBflvYBw32DMLblGRbuhNaZ_WaJcbJ9pAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "312015496003-f0bqgimqd5csd9u5j67u3cic97ain8u7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
