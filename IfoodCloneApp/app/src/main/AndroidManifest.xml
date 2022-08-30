@@ -13,6 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IfoodClone">
         <activity
+            android:name=".activity.empresa.EmpresaEntregasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.empresa.EmpresaEnderecoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.empresa.EmpresaAddMaisActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.empresa.EmpresaRecebimentosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.empresa.EmpresaCategoriasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.empresa.EmpresaConfigActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.usuario.UsuarioEnderecosActivity"
             android:exported="false" />
         <activity
@@ -30,7 +48,7 @@
         <activity
             android:name=".activity.usuario.UsuarioHomeActivity"
             android:exported="false"
-            android:theme="@style/Theme.IfoodClone2"/>
+            android:theme="@style/Theme.IfoodClone2" />
         <activity
             android:name=".activity.usuario.UsuarioFinalizaCadastroActivity"
             android:exported="false" />

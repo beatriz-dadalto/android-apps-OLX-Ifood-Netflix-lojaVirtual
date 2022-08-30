@@ -25,16 +25,20 @@
 
                 <TextView
                     android:id="@+id/text_usuario"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:text="Olá, Beatriz"
                     android:textColor="@color/cor_cinza"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView3"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:text="Olá, Beatriz" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -47,10 +51,11 @@
                     app:layout_constraintTop_toBottomOf="@+id/text_usuario" />
 
                 <ImageView
+                    android:id="@+id/imageView3"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
-                    android:src="@drawable/ic_seta_direita"
                     android:layout_marginEnd="24dp"
+                    android:src="@drawable/ic_seta_direita"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

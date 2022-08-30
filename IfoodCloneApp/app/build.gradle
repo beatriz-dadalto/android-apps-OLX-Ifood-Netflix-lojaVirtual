@@ -65,5 +65,11 @@ dependencies {
      */
     implementation 'io.github.ParkSangGwon:tedpermission-normal:3.3.0'
 
+    /*
+        https://github.com/square/picasso
+        A powerful image downloading and caching library for Android
+      */
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 
 }
