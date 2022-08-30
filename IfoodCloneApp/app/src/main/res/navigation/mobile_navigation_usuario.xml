@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation_usuario"
+    app:startDestination="@id/menu_home">
+
+    <fragment
+        android:id="@+id/menu_home"
+        android:name="com.biamailov3.ifoodclone.fragment.usuario.UsuarioHomeFragment"
+        android:label="@string/menu_inicio"
+        tools:layout="@layout/fragment_usuario_home" />
+    <fragment
+        android:id="@+id/menu_pesquisa"
+        android:name="com.biamailov3.ifoodclone.fragment.usuario.UsuarioPesquisaFragment"
+        android:label="@string/menu_pesquisa"
+        tools:layout="@layout/fragment_usuario_pesquisa" />
+    <fragment
+        android:id="@+id/menu_pedidos"
+        android:name="com.biamailov3.ifoodclone.fragment.usuario.UsuarioPedidoFragment"
+        android:label="@string/menu_pedidos"
+        tools:layout="@layout/fragment_usuario_pedido" />
+    <fragment
+        android:id="@+id/menu_perfil"
+        android:name="com.biamailov3.ifoodclone.fragment.usuario.UsuarioPerfilFragment"
+        android:label="@string/menu_perfil"
+        tools:layout="@layout/fragment_usuario_perfil" />
+</navigation>

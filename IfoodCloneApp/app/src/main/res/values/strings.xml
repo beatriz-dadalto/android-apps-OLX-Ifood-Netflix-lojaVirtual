@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Ifood Clone</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_inicio">Início</string>
+    <string name="menu_pesquisa">Pesquisa</string>
+    <string name="menu_pedidos">Pedidos</string>
+    <string name="menu_perfil">Perfil</string>
+    <string name="menu_produtos">Produtos</string>
+    <string name="menu_financeiro">Financeiro</string>
+    <string name="menu_config">Config</string>
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.biamailov3.ifoodclone">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--    access gallery-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.IfoodClone">
+        <activity
+            android:name=".activity.empresa.EmpresaHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.empresa.EmpresaFinalizaCadastroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.usuario.UsuarioHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.usuario.UsuarioFinalizaCadastroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.autenticacao.CriarContaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.autenticacao.RecuperaContaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.autenticacao.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.app.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>
