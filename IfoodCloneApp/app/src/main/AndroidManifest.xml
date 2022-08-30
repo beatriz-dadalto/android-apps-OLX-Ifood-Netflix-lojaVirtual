@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.biamailov3.ifoodclone">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!--    access gallery-->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- access gallery -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -14,6 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IfoodClone">
         <activity
+            android:name=".activity.usuario.UsuarioEnderecosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.usuario.UsuarioFavoritosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.usuario.UsuarioPerfilActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.empresa.EmpresaHomeActivity"
             android:exported="false" />
         <activity
@@ -21,7 +29,8 @@
             android:exported="false" />
         <activity
             android:name=".activity.usuario.UsuarioHomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.IfoodClone2"/>
         <activity
             android:name=".activity.usuario.UsuarioFinalizaCadastroActivity"
             android:exported="false" />

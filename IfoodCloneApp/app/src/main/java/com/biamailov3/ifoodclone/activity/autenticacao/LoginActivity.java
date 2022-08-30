@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void configCliques() {
+        findViewById(R.id.ib_voltar).setOnClickListener(view -> finish());
         findViewById(R.id.text_criar_conta).setOnClickListener(view -> startActivity(new Intent(this, CriarContaActivity.class)));
     }
 
