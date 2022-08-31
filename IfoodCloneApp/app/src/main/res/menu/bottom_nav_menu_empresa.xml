@@ -7,7 +7,7 @@
         android:title="@string/menu_pedidos"/>
 
     <item
-        android:id="@+id/menu_produtos"
+        android:id="@+id/menu_produto"
         android:icon="@drawable/menu_item_produtos"
         android:title="@string/menu_produtos"/>
 
