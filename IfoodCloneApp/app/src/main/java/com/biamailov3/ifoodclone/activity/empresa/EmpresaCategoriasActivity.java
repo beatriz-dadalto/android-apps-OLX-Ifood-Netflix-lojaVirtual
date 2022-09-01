@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.biamailov3.ifoodclone.R;
 import com.biamailov3.ifoodclone.adapter.CategoriaAdapter;
@@ -59,7 +58,7 @@ public class EmpresaCategoriasActivity extends AppCompatActivity implements Cate
 
         iniciarComponentes();
         configCliques();
-        recuperarCategoria();
+        recuperarCategorias();
         configRv();
     }
 
@@ -90,7 +89,7 @@ public class EmpresaCategoriasActivity extends AppCompatActivity implements Cate
         });
     }
 
-    private void recuperarCategoria() {
+    private void recuperarCategorias() {
         DatabaseReference categoriaRef = FirebaseHelper.getDatabaseReference()
                 .child("categorias")
                 .child(FirebaseHelper.getIdFirebase());

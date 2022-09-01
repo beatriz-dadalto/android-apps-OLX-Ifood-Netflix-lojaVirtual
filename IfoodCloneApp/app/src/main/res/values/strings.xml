@@ -9,4 +9,6 @@
     <string name="menu_produtos">Produtos</string>
     <string name="menu_financeiro">Financeiro</string>
     <string name="menu_config">Config</string>
+
+    <string name="text_valor">R$ %1$s</string>
 </resources>
