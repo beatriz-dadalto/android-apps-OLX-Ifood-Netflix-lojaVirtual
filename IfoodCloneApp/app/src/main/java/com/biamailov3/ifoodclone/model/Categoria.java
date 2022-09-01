@@ -3,7 +3,9 @@ package com.biamailov3.ifoodclone.model;
 import com.biamailov3.ifoodclone.helper.FirebaseHelper;
 import com.google.firebase.database.DatabaseReference;
 
-public class Categoria {
+import java.io.Serializable;
+
+public class Categoria implements Serializable {
 
     private String id;
     private String nome;
