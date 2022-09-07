@@ -52,7 +52,7 @@ public class UsuarioFinalizaCadastroActivity extends AppCompatActivity {
 
                     ocultarTeclado();
                     progressBar.setVisibility(View.VISIBLE);
-                    finalizarCadastro(nome); // os dados do user foram recuperados com o bundle
+                    finalizarCadastro(nome, telefone); // os dados do user foram recuperados com o bundle
 
                 } else {
                     edtTelefone.requestFocus();
@@ -68,11 +68,12 @@ public class UsuarioFinalizaCadastroActivity extends AppCompatActivity {
         }
     }
 
-    private void finalizarCadastro(String nome) {
+    private void finalizarCadastro(String nome, String telefone) {
         login.setAcesso(true);
         login.salvar();
 
         usuario.setNome(nome);
+        usuario.setTelefone(telefone);
         usuario.salvar();
 
         finish();

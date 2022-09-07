@@ -41,6 +41,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.usuario.UsuarioPerfilActivity"
+            android:theme="@style/Theme.IfoodClone"
             android:exported="false" />
         <activity
             android:name=".activity.empresa.EmpresaHomeActivity"
