@@ -1,5 +1,6 @@
 package com.biamailov3.ifoodclone.fragment.usuario;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.biamailov3.ifoodclone.R;
+import com.biamailov3.ifoodclone.activity.empresa.EmpresaCardapioActivity;
 import com.biamailov3.ifoodclone.adapter.EmpresaAdapter;
 import com.biamailov3.ifoodclone.helper.FirebaseHelper;
 import com.biamailov3.ifoodclone.model.Empresa;
@@ -93,7 +95,8 @@ public class UsuarioHomeFragment extends Fragment implements EmpresaAdapter.OnCl
 
     @Override
     public void onClick(Empresa empresa) {
-        // TODO ir para a activity cardapio
-        Toast.makeText(requireContext(), empresa.getNome(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(requireContext(), EmpresaCardapioActivity.class);
+        intent.putExtra("empresaSelecionada", empresa);
+        startActivity(intent);
     }
 }
