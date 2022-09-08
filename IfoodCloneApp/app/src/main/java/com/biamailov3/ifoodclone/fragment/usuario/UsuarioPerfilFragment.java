@@ -57,9 +57,18 @@ public class UsuarioPerfilFragment extends Fragment {
         btnEntrar.setOnClickListener(view -> startActivity(new Intent(requireActivity(), LoginActivity.class)));
         btnCadastrar.setOnClickListener(view -> startActivity(new Intent(requireActivity(), CriarContaActivity.class)));
         menuDeslogar.setOnClickListener(view -> deslogar());
-        menuPerfil.setOnClickListener(view -> startActivity(new Intent(requireActivity(), UsuarioPerfilActivity.class)));
-        menuFavoritos.setOnClickListener(view -> startActivity(new Intent(requireActivity(), UsuarioFavoritosActivity.class)));
-        menuEnderecos.setOnClickListener(view -> startActivity(new Intent(requireActivity(), UsuarioEnderecosActivity.class)));
+
+        menuPerfil.setOnClickListener(view -> verificarAutenticacao(UsuarioPerfilActivity.class));
+        menuFavoritos.setOnClickListener(view -> verificarAutenticacao(UsuarioFavoritosActivity.class));
+        menuEnderecos.setOnClickListener(view -> verificarAutenticacao(UsuarioEnderecosActivity.class));
+    }
+
+    private void verificarAutenticacao(Class<?> clazzDestino) {
+        if (FirebaseHelper.getAutenticado()) {
+            startActivity(new Intent(requireActivity(), clazzDestino));
+        } else {
+            startActivity(new Intent(requireActivity(), LoginActivity.class));
+        }
     }
 
     private void deslogar() {
