@@ -108,8 +108,8 @@ public class EmpresaConfigActivity extends AppCompatActivity {
         configSalvar(false);
     }
 
-    private void configSalvar(boolean getProgressBar) {
-        if (getProgressBar) {
+    private void configSalvar(boolean showProgressBar) {
+        if (showProgressBar) {
             progressBar.setVisibility(View.VISIBLE);
             ibSalvar.setVisibility(View.GONE);
         } else {
