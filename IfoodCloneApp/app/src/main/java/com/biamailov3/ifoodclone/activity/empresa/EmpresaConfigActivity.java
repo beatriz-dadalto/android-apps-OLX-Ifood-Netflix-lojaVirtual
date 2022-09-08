@@ -99,8 +99,8 @@ public class EmpresaConfigActivity extends AppCompatActivity {
         Picasso.get().load(empresa.getUrlLogo()).into(imgLogo);
         edtNome.setText(empresa.getNome());
         edtTelefone.setText(empresa.getTelefone());
-        edtTaxaEntrega.setText(String.valueOf(empresa.getTaxaEntrega()));
-        edtPedidoMinimo.setText(String.valueOf(empresa.getPedidoMinimo()));
+        edtTaxaEntrega.setText(String.valueOf(empresa.getTaxaEntrega() * 10));
+        edtPedidoMinimo.setText(String.valueOf(empresa.getPedidoMinimo() * 10));
         edtTempoMinimo.setText(String.valueOf(empresa.getTempoMinEntrega()));
         edtTempoMaximo.setText(String.valueOf(empresa.getTempoMaxEntrega()));
         edtCategoria.setText(empresa.getCategoria());
