@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IfoodClone">
         <activity
+            android:name=".activity.usuario.UsuarioFormEnderecoActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.empresa.EmpresaFormProdutoActivity"
             android:exported="false" />
         <activity
@@ -41,8 +44,8 @@
             android:exported="false" />
         <activity
             android:name=".activity.usuario.UsuarioPerfilActivity"
-            android:theme="@style/Theme.IfoodClone"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.IfoodClone" />
         <activity
             android:name=".activity.empresa.EmpresaHomeActivity"
             android:exported="false" />
@@ -58,15 +61,15 @@
         <activity
             android:name=".activity.autenticacao.CriarContaActivity"
             android:exported="false"
-            android:theme="@style/Theme.IfoodClone2"/>
+            android:theme="@style/Theme.IfoodClone2" />
         <activity
             android:name=".activity.autenticacao.RecuperaContaActivity"
             android:exported="false"
-            android:theme="@style/Theme.IfoodClone2"/>
+            android:theme="@style/Theme.IfoodClone2" />
         <activity
             android:name=".activity.autenticacao.LoginActivity"
             android:exported="false"
-            android:theme="@style/Theme.IfoodClone2"/>
+            android:theme="@style/Theme.IfoodClone2" />
         <activity
             android:name=".activity.app.SplashActivity"
             android:exported="true"
