@@ -84,7 +84,7 @@ public class EmpresaCardapioActivity extends AppCompatActivity {
     private void configRv() {
         rvCategorias.setLayoutManager(new LinearLayoutManager(this));
         rvCategorias.setHasFixedSize(true);
-        cardapioAdapter = new CardapioAdapter(categoriaCardapioList, getBaseContext());
+        cardapioAdapter = new CardapioAdapter(categoriaCardapioList, this);
         rvCategorias.setAdapter(cardapioAdapter);
     }
 

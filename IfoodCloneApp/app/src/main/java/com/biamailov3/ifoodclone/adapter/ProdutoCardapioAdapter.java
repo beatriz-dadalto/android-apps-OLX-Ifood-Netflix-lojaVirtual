@@ -1,6 +1,8 @@
 package com.biamailov3.ifoodclone.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.biamailov3.ifoodclone.R;
+import com.biamailov3.ifoodclone.activity.empresa.EmpresaProdutoDetalhesActivity;
 import com.biamailov3.ifoodclone.helper.GetMask;
 import com.biamailov3.ifoodclone.model.Produto;
 import com.squareup.picasso.Picasso;
@@ -20,11 +23,11 @@ import java.util.List;
 public class ProdutoCardapioAdapter extends RecyclerView.Adapter<ProdutoCardapioAdapter.MyViewHolder> {
 
     private List<Produto> produtoList;
-    private Context context;
+    private Activity activity;
 
-    public ProdutoCardapioAdapter(List<Produto> produtoList, Context context) {
+    public ProdutoCardapioAdapter(List<Produto> produtoList, Activity activity) {
         this.produtoList = produtoList;
-        this.context = context;
+        this.activity = activity;
     }
 
     @NonNull
@@ -40,8 +43,13 @@ public class ProdutoCardapioAdapter extends RecyclerView.Adapter<ProdutoCardapio
 
         Picasso.get().load(produto.getUrlImagem()).into(holder.imagemProduto);
         holder.textProdutoNome.setText(produto.getNome());
-        holder.textProdutoValor.setText(context.getString(R.string.text_valor, GetMask.getValor(produto.getValor())));
+        holder.textProdutoValor.setText(activity.getString(R.string.text_valor, GetMask.getValor(produto.getValor())));
 
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(activity, EmpresaProdutoDetalhesActivity.class);
+            intent.putExtra("produtoSelecionado", produto);
+            activity.startActivity(intent);
+        });
     }
 
     @Override

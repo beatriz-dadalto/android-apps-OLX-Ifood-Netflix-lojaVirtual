@@ -1,5 +1,6 @@
 package com.biamailov3.ifoodclone.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +20,11 @@ import java.util.List;
 public class CardapioAdapter extends RecyclerView.Adapter<CardapioAdapter.MyViewHolder> {
 
     private List<CategoriaCardapio> categoriaCardapioList;
-    private Context context;
+    private Activity activity;
 
-    public CardapioAdapter(List<CategoriaCardapio> categoriaCardapioList, Context context) {
+    public CardapioAdapter(List<CategoriaCardapio> categoriaCardapioList, Activity activity) {
         this.categoriaCardapioList = categoriaCardapioList;
-        this.context = context;
+        this.activity = activity;
     }
 
     @NonNull
@@ -42,9 +43,9 @@ public class CardapioAdapter extends RecyclerView.Adapter<CardapioAdapter.MyView
 
         holder.rvProdutos.setLayoutManager(
                 new LinearLayoutManager(
-                        context, LinearLayoutManager.HORIZONTAL, false)); // chamando um adapter dentro do outro
+                        activity, LinearLayoutManager.HORIZONTAL, false)); // chamando um adapter dentro do outro
         holder.rvProdutos.setHasFixedSize(true);
-        ProdutoCardapioAdapter produtoCardapioAdapter = new ProdutoCardapioAdapter(categoriaCardapio.getProdutoList(), context);
+        ProdutoCardapioAdapter produtoCardapioAdapter = new ProdutoCardapioAdapter(categoriaCardapio.getProdutoList(), activity);
         holder.rvProdutos.setAdapter(produtoCardapioAdapter);
         produtoCardapioAdapter.notifyDataSetChanged();
     }
