@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="cor_principal">#EA1C2B</color>
+    <color name="cor_verde">#2ED67E</color>
     <color name="cor_cinza">#3E3E3E</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
