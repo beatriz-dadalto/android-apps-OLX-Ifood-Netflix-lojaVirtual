@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.biamailov3.ifoodclone.DAO.EmpresaDAO;
 import com.biamailov3.ifoodclone.DAO.ItemPedidoDAO;
 import com.biamailov3.ifoodclone.R;
+import com.biamailov3.ifoodclone.activity.usuario.CarrinhoActivity;
 import com.biamailov3.ifoodclone.helper.FirebaseHelper;
 import com.biamailov3.ifoodclone.helper.GetMask;
 import com.biamailov3.ifoodclone.model.Empresa;
@@ -96,7 +98,7 @@ public class EmpresaProdutoDetalhesActivity extends AppCompatActivity {
 
         if (empresaDAO.getEmpresa() == null) empresaDAO.salvar(empresa);
 
-        Toast.makeText(this, "Produto adicionado com sucesso!", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, CarrinhoActivity.class));
     }
 
     private void addQtdItem() {
