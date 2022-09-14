@@ -25,7 +25,7 @@ public class ItemPedidoDAO {
 
     public void salvar(ItemPedido itemPedido) {
         ContentValues cv = new ContentValues();
-        cv.put(DBHelper.COLUNA_ID_FIREBASE, itemPedido.getId());
+        cv.put(DBHelper.COLUNA_ID_FIREBASE, itemPedido.getIdItem());
         cv.put(DBHelper.COLUNA_NOME, itemPedido.getItem());
         cv.put(DBHelper.COLUNA_URL_IMAGEM, itemPedido.getUrlImagem());
         cv.put(DBHelper.COLUNA_VALOR, itemPedido.getValor());
@@ -71,6 +71,7 @@ public class ItemPedidoDAO {
             itemPedido.setId(id_local);
             itemPedido.setIdItem(id_firebase);
             itemPedido.setItem(item_nome);
+            itemPedido.setUrlImagem(url_imagem);
             itemPedido.setValor(valor);
             itemPedido.setQuantidade(quantidade);
 

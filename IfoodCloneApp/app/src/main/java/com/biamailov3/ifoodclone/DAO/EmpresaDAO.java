@@ -38,13 +38,13 @@ public class EmpresaDAO {
         }
     }
 
-    public Empresa getEmpresa() {
-        Empresa empresa = new Empresa();
+    public Empresa getEmpresa(){
+        Empresa empresa = null;
 
         String sql = " SELECT * FROM " + DBHelper.TABELA_EMPRESA + ";";
         Cursor cursor = read.rawQuery(sql, null);
 
-        while (cursor.moveToNext()) {
+        while (cursor.moveToNext()){
             @SuppressLint("Range") String id_firebase = cursor.getString(cursor.getColumnIndex(DBHelper.COLUNA_ID_FIREBASE));
             @SuppressLint("Range") String nome = cursor.getString(cursor.getColumnIndex(DBHelper.COLUNA_NOME));
             @SuppressLint("Range") double taxa_entrega = cursor.getDouble(cursor.getColumnIndex(DBHelper.COLUNA_TAXA_ENTREGA));
@@ -52,6 +52,7 @@ public class EmpresaDAO {
             @SuppressLint("Range") int tempo_maximo = cursor.getInt(cursor.getColumnIndex(DBHelper.COLUNA_TEMPO_MAXIMO));
             @SuppressLint("Range") String url_logo = cursor.getString(cursor.getColumnIndex(DBHelper.COLUNA_URL_IMAGEM));
 
+            empresa = new Empresa();
             empresa.setId(id_firebase);
             empresa.setNome(nome);
             empresa.setTaxaEntrega(taxa_entrega);
@@ -64,14 +65,12 @@ public class EmpresaDAO {
     }
 
     public void removerEmpresa() {
-
         try {
             write.delete(DBHelper.TABELA_EMPRESA, null, null);
             Log.i("INFO_DB", "onCreate: Sucessoooo ao remover a tabelaaaa");
         } catch (Exception e) {
             Log.i("INFO_DB", "onCreate: Erro ao remover a tabelaaaa");
         }
-
     }
 
 }

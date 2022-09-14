@@ -77,7 +77,7 @@ public class Empresa implements Serializable {
         this.email = email;
     }
 
-    // nao quero salva no realtime database. deixar firebase authentication gerencie a senha
+    // nao quero salvar no realtime database. deixar firebase authentication gerencie a senha
     @Exclude
     public String getSenha() {
         return senha;

@@ -38,42 +38,43 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String TABLE_EMPRESA = " CREATE TABLE IF NOT EXISTS " + TABELA_EMPRESA +
-                " (id_firebase TEXT NOT NULL, " +
+        String TABLE_EMPRESA = " CREATE TABLE IF NOT EXISTS " + TABELA_EMPRESA
+                + " (id_firebase TEXT NOT NULL, " +
                 " nome TEXT NOT NULL, " +
                 " taxa_entrega DOUBLE NOT NULL, " +
                 " tempo_minimo INTEGER NOT NULL, " +
                 " tempo_maximo INTEGER NOT NULL, " +
                 " url_imagem TEXT NOT NULL); ";
 
-        String TABLE_ITEM_PEDIDO = " CREATE TABLE IF NOT EXISTS " + TABELA_ITEM_PEDIDO +
-                " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        String TABLE_ITEM_PEDIDO = " CREATE TABLE IF NOT EXISTS " + TABELA_ITEM_PEDIDO
+                + " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 " id_firebase TEXT NOT NULL, " +
                 " nome TEXT NOT NULL, " +
                 " url_imagem TEXT NOT NULL, " +
                 " valor DOUBLE NOT NULL, " +
                 " quantidade INTEGER NOT NULL); ";
 
-        String TABLE_ENTREGA = " CREATE TABLE IF NOT EXISTS " + TABELA_ENTREGA +
-                " (forma_pagamento TEXT NOT NULL, " +
+        String TABLE_ENTREGA = " CREATE TABLE IF NOT EXISTS " + TABELA_ENTREGA
+                + " (forma_pagamento TEXT NOT NULL, " +
                 " logradouro TEXT NOT NULL, " +
                 " bairro TEXT NOT NULL, " +
                 " referencia TEXT NOT NULL, " +
-                " municipio TEXT NOT NULL); ";
+                " municipio INTEGER NOT NULL); ";
 
         try {
             db.execSQL(TABLE_EMPRESA);
             db.execSQL(TABLE_ITEM_PEDIDO);
             db.execSQL(TABLE_ENTREGA);
-            Log.i("INFO_DB", "onCreate: tabela criada com sucessooooo");
+            Log.i("INFO_DB", "onCreate: Tabela criada com sucesso.");
         } catch (Exception e) {
-            Log.i("INFO_DB", "onCreate: Erro ao criar tabelaaaaaaaaaa");
+            Log.i("INFO_DB", "onCreate: Erro ao criar tabela.");
         }
 
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
 }
+
