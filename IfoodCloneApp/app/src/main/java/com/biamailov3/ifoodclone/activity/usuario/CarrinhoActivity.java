@@ -63,7 +63,7 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
     private TextView textLogradouro;
     private TextView textReferencia;
 
-    private Pagamento pagamento;
+    private String pagamento;
     private TextView textFormaPagamento;
 
     private Button btnAddMais;
@@ -110,6 +110,7 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
         recuperaIdsItensAddMais();
         recuperarEnderecos();
         configSaldoCarrinho();
+        configPagamento();
     }
 
     private void showBottomSheet() {
@@ -262,8 +263,11 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
     }
 
     private void configPagamento() {
-        textFormaPagamento.setText(pagamento.getDescricao());
-        configStatus();
+        pagamento = entregaDAO.getEntrega().getFormaPagamento();
+        if (pagamento != null && !pagamento.isEmpty()) {
+            textFormaPagamento.setText(pagamento);
+            configStatus();
+        }
     }
 
     private void configStatus() {
@@ -435,9 +439,10 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
                 }
                 configEndereco();
             } else if (requestCode == REQUEST_PAGAMENTO){
-                pagamento = (Pagamento) data.getSerializableExtra("pagamentoSelecionado");
+                Pagamento formaPagamento = (Pagamento) data.getSerializableExtra("pagamentoSelecionado");
+                pagamento = formaPagamento.getDescricao();
+                entregaDAO.salvarPagamento(pagamento);
                 configPagamento();
-                entregaDAO.salvarPagamento(pagamento.getDescricao());
             }
         }
 
