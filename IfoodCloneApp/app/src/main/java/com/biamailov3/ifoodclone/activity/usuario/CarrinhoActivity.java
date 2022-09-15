@@ -224,7 +224,7 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
     }
 
     private void recuperarEnderecos() {
-        if (FirebaseHelper.getAutenticado()) {
+        if (FirebaseHelper.getAutenticado() && entregaDAO.getEndereco() == null) {
             DatabaseReference enderecoRef = FirebaseHelper.getDatabaseReference()
                     .child("enderecos")
                     .child(FirebaseHelper.getIdFirebase());
@@ -252,6 +252,7 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
     }
 
     private void configEndereco() {
+        endereco = entregaDAO.getEndereco();
         if (endereco != null) {
             textLogradouro.setText(endereco.getLogradouro());
             textReferencia.setText(endereco.getReferencia());
@@ -427,12 +428,12 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
                 startActivityForResult(intent, REQUEST_ENDERECO);
             } else if (requestCode == REQUEST_ENDERECO){
                 endereco = (Endereco) data.getSerializableExtra("enderecoSelecionado");
-                configEndereco();
                 if (entregaDAO.getEndereco() == null) {
                     entregaDAO.salvarEndereco(endereco);
                 } else {
                     entregaDAO.atualizarEndereco(endereco);
                 }
+                configEndereco();
             } else if (requestCode == REQUEST_PAGAMENTO){
                 pagamento = (Pagamento) data.getSerializableExtra("pagamentoSelecionado");
                 configPagamento();
