@@ -110,7 +110,7 @@ public class ItemPedidoDAO {
         }
     }
 
-    public void limparCarrinho(Long id) {
+    public void limparCarrinho() {
         try {
             write.delete(DBHelper.TABELA_EMPRESA, null, null);
             write.delete(DBHelper.TABELA_ENTREGA, null, null);
