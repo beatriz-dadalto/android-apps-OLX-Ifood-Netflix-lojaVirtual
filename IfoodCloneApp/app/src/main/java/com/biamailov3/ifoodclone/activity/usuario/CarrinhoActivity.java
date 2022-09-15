@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,10 +24,12 @@ import com.biamailov3.ifoodclone.activity.autenticacao.LoginActivity;
 import com.biamailov3.ifoodclone.adapter.CarrinhoAdapter;
 import com.biamailov3.ifoodclone.adapter.ProdutoCarrinhoAdapter;
 import com.biamailov3.ifoodclone.helper.FirebaseHelper;
+import com.biamailov3.ifoodclone.helper.GetMask;
 import com.biamailov3.ifoodclone.model.Endereco;
 import com.biamailov3.ifoodclone.model.ItemPedido;
 import com.biamailov3.ifoodclone.model.Pagamento;
 import com.biamailov3.ifoodclone.model.Produto;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,6 +46,7 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
     private final int REQUEST_PAGAMENTO = 300;
 
     private List<Produto> produtoList = new ArrayList<>();
+    private List<ItemPedido> itemPedidoList = new ArrayList<>();
 
     private CarrinhoAdapter carrinhoAdapter;
     private ProdutoCarrinhoAdapter produtoCarrinhoAdapter;
@@ -49,6 +54,7 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
     private RecyclerView rvProdutos;
     private RecyclerView rvAddMais;
     private LinearLayout llAddMais;
+    private LinearLayout llBtnAddMais;
     private Button btnContinuar;
     private Button textEscolherPagamento;
 
@@ -60,9 +66,30 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
     private Pagamento pagamento;
     private TextView textFormaPagamento;
 
+    private Button btnAddMais;
+    private TextView textSubTotal;
+    private TextView textTaxaEntrega;
+    private TextView textTotal;
+
     private ItemPedidoDAO itemPedidoDAO;
     private EmpresaDAO empresaDAO;
     private EntregaDAO entregaDAO;
+
+    private BottomSheetDialog bottomSheetDialog;
+
+    // iniciar componentes do metodo showBottomSheet
+    private TextView textNomeProduto;
+    private ImageButton ibRemove;
+    private ImageButton ibAdd;
+    private TextView textQtdProduto;
+    private TextView textTotalProdutoDialog;
+    private TextView textAtualizar;
+
+    private Produto produto;
+    private ItemPedido itemPedido;
+
+    private int quantidade = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +97,7 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
         setContentView(R.layout.activity_carrinho);
 
         itemPedidoDAO = new ItemPedidoDAO(getBaseContext());
+        itemPedidoList = itemPedidoDAO.getList();
         empresaDAO = new EmpresaDAO(getBaseContext());
         entregaDAO = new EntregaDAO(getBaseContext());
 
@@ -81,6 +109,118 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
 
         recuperaIdsItensAddMais();
         recuperarEnderecos();
+        configSaldoCarrinho();
+    }
+
+    private void showBottomSheet() {
+        View view = getLayoutInflater().inflate(R.layout.bottom_sheet_item_carrinho, null);
+        bottomSheetDialog = new BottomSheetDialog(this, R.style.BottomSheetDialog);
+        bottomSheetDialog.setContentView(view);
+        bottomSheetDialog.show();
+
+        textNomeProduto = view.findViewById(R.id.text_nome_produto);
+        ibRemove = view.findViewById(R.id.ib_remove);
+        ibAdd = view.findViewById(R.id.ib_add);
+        textQtdProduto = view.findViewById(R.id.text_qtd_produto);
+        textTotalProdutoDialog = view.findViewById(R.id.text_total_produto_dialog);
+        textAtualizar = view.findViewById(R.id.text_atualizar);
+
+        produto = new Produto();
+        produto.setNome(itemPedido.getItem());
+        produto.setId(itemPedido.getIdItem());
+        produto.setValor(itemPedido.getValor());
+        produto.setUrlImagem(itemPedido.getUrlImagem());
+
+        ibAdd.setOnClickListener(v -> addQtdItem());
+        ibRemove.setOnClickListener(v -> delQtdItem());
+
+        textQtdProduto.setText(String.valueOf(itemPedido.getQuantidade()));
+        textNomeProduto.setText(produto.getNome());
+        textTotalProdutoDialog.setText(getString(R.string.text_valor,
+                GetMask.getValor(produto.getValor() * itemPedido.getQuantidade())));
+        quantidade = itemPedido.getQuantidade();
+    }
+
+    private void configValoresDialog() {
+        textQtdProduto.setText(String.valueOf(quantidade));
+        textTotalProdutoDialog.setText(getString(R.string.text_valor,
+                GetMask.getValor(produto.getValor() * quantidade)));
+    }
+
+    private void addQtdItem() {
+        quantidade++;
+        if (quantidade == 1) {
+            ibRemove.setImageResource(R.drawable.ic_remove_red);
+            textTotalProdutoDialog.setVisibility(View.VISIBLE);
+            textAtualizar.setText("Atualizar");
+            textAtualizar.setGravity(Gravity.CENTER);
+        }
+
+        textAtualizar.setOnClickListener(view -> {
+            atualizarItem();
+        });
+
+        configValoresDialog();
+    }
+
+    private  void delQtdItem() {
+        if (quantidade > 0) {
+            quantidade--;
+            if (quantidade == 0 ) {
+                // remover item do carrinho
+                ibRemove.setImageResource(R.drawable.ic_remove);
+                textTotalProdutoDialog.setVisibility(View.GONE);
+                textAtualizar.setText("Remover");
+                textAtualizar.setGravity(Gravity.CENTER);
+
+                textAtualizar.setOnClickListener(view -> {
+                    itemPedidoDAO.remover(itemPedido.getId());
+                    itemPedidoList.remove(itemPedido);
+                    configSaldoCarrinho();
+                    configBtnAddMais();
+                    carrinhoAdapter.notifyDataSetChanged();
+                    bottomSheetDialog.dismiss();
+                });
+
+            } else {
+                textAtualizar.setOnClickListener(view -> atualizarItem());
+            }
+        }
+
+        configValoresDialog();
+    }
+
+    private void configBtnAddMais() {
+        if (itemPedidoList.isEmpty()) {
+            llBtnAddMais.setVisibility(View.GONE);
+        } else {
+            llBtnAddMais.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void atualizarItem() {
+        itemPedido.setQuantidade(quantidade);
+        itemPedidoDAO.atualizar(itemPedido);
+        carrinhoAdapter.notifyDataSetChanged();
+
+        configSaldoCarrinho();
+        bottomSheetDialog.dismiss();
+    }
+
+    private void configSaldoCarrinho() {
+        double subTotal = 0.0;
+        double taxaEntrega = 0.0;
+        double total = 0.0;
+
+        if (!itemPedidoDAO.getList().isEmpty()) {
+            subTotal = itemPedidoDAO.getTotal();
+            taxaEntrega = empresaDAO.getEmpresa().getTaxaEntrega();
+            total = subTotal + taxaEntrega;
+        }
+
+        textSubTotal.setText(getString(R.string.text_valor, GetMask.getValor(subTotal)));
+        textTaxaEntrega.setText(getString(R.string.text_valor, GetMask.getValor(taxaEntrega)));
+        textTotal.setText(getString(R.string.text_valor, GetMask.getValor(total)));
     }
 
     private void recuperarEnderecos() {
@@ -139,6 +279,13 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
     }
 
     private void configCliques() {
+
+        btnAddMais.setOnClickListener(view -> {
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
+        });
+
         findViewById(R.id.ib_voltar).setOnClickListener(v -> finish());
         findViewById(R.id.ib_limpar).setOnClickListener(view -> {
             itemPedidoDAO.limparCarrinho();
@@ -230,7 +377,7 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
     private void configRv(){
         rvProdutos.setLayoutManager(new LinearLayoutManager(this));
         rvProdutos.setHasFixedSize(true);
-        carrinhoAdapter = new CarrinhoAdapter(itemPedidoDAO.getList(), getBaseContext(), this);
+        carrinhoAdapter = new CarrinhoAdapter(itemPedidoList, getBaseContext(), this);
         rvProdutos.setAdapter(carrinhoAdapter);
 
         rvAddMais.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -252,11 +399,17 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
         btnContinuar = findViewById(R.id.btn_continuar);
         textFormaPagamento = findViewById(R.id.text_forma_pagamento);
         textEscolherPagamento = findViewById(R.id.text_escolher_pagamento);
+        textSubTotal = findViewById(R.id.text_subtotal);
+        textTaxaEntrega = findViewById(R.id.text_taxa_entrega);
+        textTotal = findViewById(R.id.text_total);
+        btnAddMais = findViewById(R.id.btn_add_mais);
+        llBtnAddMais = findViewById(R.id.ll_btn_add_mais);
     }
 
     @Override
     public void onClick(ItemPedido itemPedido) { // RV principal
-        Toast.makeText(this, itemPedido.getItem(), Toast.LENGTH_SHORT).show();
+        this.itemPedido = itemPedido;
+        showBottomSheet();
     }
 
     @Override
