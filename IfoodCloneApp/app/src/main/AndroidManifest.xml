@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IfoodClone">
         <activity
+            android:name=".activity.usuario.UsuarioSelecionaPagamentoActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.usuario.UsuarioSelecionaEnderecoActivity"
             android:exported="false" />
         <activity
