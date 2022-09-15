@@ -90,4 +90,27 @@ public class EntregaDAO {
         return entregaPedido;
     }
 
+    public Endereco getEndereco() {
+        Endereco endereco = null;
+
+        String sql = " SELECT * FROM " + DBHelper.TABELA_ENTREGA + ";";
+        Cursor cursor = read.rawQuery(sql, null);
+
+        while (cursor.moveToNext()) {
+            @SuppressLint("Range") String logradouro = cursor.getString(cursor.getColumnIndex(DBHelper.COLUNA_ENDERECO_LOGRADOURO));
+            @SuppressLint("Range") String bairro = cursor.getString(cursor.getColumnIndex(DBHelper.COLUNA_ENDERECO_BAIRRO));
+            @SuppressLint("Range") String municipio = cursor.getString(cursor.getColumnIndex(DBHelper.COLUNA_ENDERECO_MUNICIPIO));
+            @SuppressLint("Range") String referencia = cursor.getString(cursor.getColumnIndex(DBHelper.COLUNA_ENDERECO_REFERENCIA));
+
+            endereco = new Endereco();
+            endereco.setLogradouro(logradouro);
+            endereco.setBairro(bairro);
+            endereco.setMunicipio(municipio);
+            endereco.setReferencia(referencia);
+
+        }
+
+        return endereco;
+    }
+
 }

@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.biamailov3.ifoodclone.DAO.EmpresaDAO;
 import com.biamailov3.ifoodclone.R;
 import com.biamailov3.ifoodclone.adapter.SelecionaEnderecoAdapter;
 import com.biamailov3.ifoodclone.adapter.SelecionaPagamentoAdapter;
@@ -34,10 +36,14 @@ public class UsuarioSelecionaPagamentoActivity extends AppCompatActivity impleme
     private ProgressBar progressBar;
     private TextView textInfo;
 
+    private EmpresaDAO empresaDAO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario_seleciona_pagamento);
+
+        empresaDAO = new EmpresaDAO(getBaseContext());
 
         inciarComponentes();
         configCliques();
@@ -48,7 +54,7 @@ public class UsuarioSelecionaPagamentoActivity extends AppCompatActivity impleme
     private void recuperarPagamentos() {
         DatabaseReference pagamentosRef = FirebaseHelper.getDatabaseReference()
                 .child("recebimentos")
-                .child(FirebaseHelper.getIdFirebase());
+                .child(empresaDAO.getEmpresa().getId());
         pagamentosRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -57,7 +63,7 @@ public class UsuarioSelecionaPagamentoActivity extends AppCompatActivity impleme
                         Pagamento pagamento = ds.getValue(Pagamento.class);
                         pagamentoList.add(pagamento);
                     }
-
+                    textInfo.setText("");
                 } else {
                     textInfo.setText("Nenhuma forma de pagamento habilitada");
                 }
@@ -95,6 +101,9 @@ public class UsuarioSelecionaPagamentoActivity extends AppCompatActivity impleme
 
     @Override
     public void onClick(Pagamento pagamento) {
-
+        Intent intent = new Intent();
+        intent.putExtra("pagamentoSelecionado", pagamento);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

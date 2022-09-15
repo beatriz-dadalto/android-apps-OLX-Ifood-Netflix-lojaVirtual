@@ -98,8 +98,6 @@ public class LoginActivity extends AppCompatActivity {
                 login = snapshot.getValue(Login.class);
 
                 verificarTipoAcesso(login);
-
-
             }
 
             @Override
@@ -112,8 +110,10 @@ public class LoginActivity extends AppCompatActivity {
     private void verificarTipoAcesso(Login login) {
         if (login.getTipo().equals(TipoUsuario.USUARIO)) {
             if (login.getAcesso()) {
+                // vai logar e voltar pra tela de CarrinhoActivity
+                // setResult manda info para onActivityResult da CarrinhoActivity
+                setResult(RESULT_OK, new Intent());
                 finish();
-                startActivity(new Intent(getBaseContext(), UsuarioHomeActivity.class));
             } else {
                 recuperarUsuario();
             }
