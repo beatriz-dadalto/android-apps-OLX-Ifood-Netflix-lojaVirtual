@@ -11,7 +11,7 @@ public class Produto implements Serializable {
 
     private String id;
     private String nome;
-    private int idLocal;
+    private Long idLocal;
     private String idEmpresa;
     private String idCategoria;
     private Double valor;
@@ -66,11 +66,11 @@ public class Produto implements Serializable {
 
     // para nao salvar no firebase
     @Exclude
-    public int getIdLocal() {
+    public Long getIdLocal() {
         return idLocal;
     }
 
-    public void setIdLocal(int idLocal) {
+    public void setIdLocal(Long idLocal) {
         this.idLocal = idLocal;
     }
 

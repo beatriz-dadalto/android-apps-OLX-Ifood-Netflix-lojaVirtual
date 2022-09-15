@@ -23,7 +23,9 @@ public class ItemPedidoDAO {
         read = dbHelper.getReadableDatabase();
     }
 
-    public void salvar(ItemPedido itemPedido) {
+    public long salvar(ItemPedido itemPedido) {
+        long id = 0;
+
         ContentValues cv = new ContentValues();
         cv.put(DBHelper.COLUNA_ID_FIREBASE, itemPedido.getIdItem());
         cv.put(DBHelper.COLUNA_NOME, itemPedido.getItem());
@@ -32,11 +34,13 @@ public class ItemPedidoDAO {
         cv.put(DBHelper.COLUNA_QUANTIDADE, itemPedido.getQuantidade());
 
         try {
-            write.insert(DBHelper.TABELA_ITEM_PEDIDO, null, cv);
+            id = write.insert(DBHelper.TABELA_ITEM_PEDIDO, null, cv);
             Log.i("INFO_DB", "onCreate: Sucessoooo ao salvar a tabelaaaa");
         } catch (Exception e) {
             Log.i("INFO_DB", "onCreate: Erro ao salvar a tabelaaaa");
         }
+
+        return id;
     }
 
     public void atualizar(ItemPedido itemPedido) {

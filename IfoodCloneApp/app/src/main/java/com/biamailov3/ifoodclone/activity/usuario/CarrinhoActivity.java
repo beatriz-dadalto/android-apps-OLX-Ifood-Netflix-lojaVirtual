@@ -127,6 +127,7 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
         textAtualizar = view.findViewById(R.id.text_atualizar);
 
         produto = new Produto();
+        produto.setIdLocal(itemPedido.getId());
         produto.setNome(itemPedido.getItem());
         produto.setId(itemPedido.getIdItem());
         produto.setValor(itemPedido.getValor());
@@ -177,6 +178,7 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
                 textAtualizar.setOnClickListener(view -> {
                     itemPedidoDAO.remover(itemPedido.getId());
                     itemPedidoList.remove(itemPedido);
+                    addMaisList();
                     configSaldoCarrinho();
                     configBtnAddMais();
                     carrinhoAdapter.notifyDataSetChanged();
@@ -283,6 +285,35 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
         }
     }
 
+    private void configLayoutAddMais() {
+        if (produtoList.isEmpty()) {
+            llAddMais.setVisibility(View.GONE);
+        } else {
+            llAddMais.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void addMaisList() {
+        boolean contem = false;
+        if (produtoList.size() == 0) {
+            produtoList.add(produto);
+        } else {
+            for (Produto prod : produtoList) {
+                if (prod.getId().equals(produto.getId())) {
+                    contem = true;
+                    break;
+                }
+            }
+
+            if (!contem) {
+                produtoList.add(produto);
+            }
+        }
+
+        configLayoutAddMais();
+        produtoCarrinhoAdapter.notifyDataSetChanged();
+    }
+
     private void configCliques() {
 
         btnAddMais.setOnClickListener(view -> {
@@ -344,7 +375,7 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
                     recuperaProdutos(idsItensList);
 
                 }else {
-                    llAddMais.setVisibility(View.GONE);
+                    configLayoutAddMais();
                 }
             }
 
@@ -419,7 +450,24 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
 
     @Override
     public void onClick(Produto produto) { // Peça mais
+        ItemPedido itemPedido = new ItemPedido();
+        itemPedido.setQuantidade(1);
+        itemPedido.setItem(produto.getNome());
+        itemPedido.setIdItem(produto.getId());
+        itemPedido.setValor(produto.getValor());
+        itemPedido.setUrlImagem(produto.getUrlImagem());
 
+        long id = itemPedidoDAO.salvar(itemPedido);
+        itemPedido.setId(id);
+
+        itemPedidoList.add(itemPedido);
+        carrinhoAdapter.notifyDataSetChanged();
+
+        produtoList.remove(produto);
+        produtoCarrinhoAdapter.notifyDataSetChanged();
+
+        configSaldoCarrinho();
+        configLayoutAddMais();
     }
 
     @Override
