@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,14 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.biamailov3.ifoodclone.DAO.EmpresaDAO;
+import com.biamailov3.ifoodclone.DAO.ItemPedidoDAO;
 import com.biamailov3.ifoodclone.R;
 import com.biamailov3.ifoodclone.activity.empresa.EmpresaCardapioActivity;
+import com.biamailov3.ifoodclone.activity.usuario.CarrinhoActivity;
 import com.biamailov3.ifoodclone.adapter.EmpresaAdapter;
 import com.biamailov3.ifoodclone.helper.FirebaseHelper;
+import com.biamailov3.ifoodclone.helper.GetMask;
 import com.biamailov3.ifoodclone.model.Empresa;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,17 +44,39 @@ public class UsuarioHomeFragment extends Fragment implements EmpresaAdapter.OnCl
     private ProgressBar progressBar;
     private TextView textInfo;
 
+    private TextView textQtdItemSacola;
+    private TextView textTotalCarrinho;
+    private ConstraintLayout llSacola;
+
+    private ItemPedidoDAO itemPedidoDAO;
+    private EmpresaDAO empresaDAO;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_usuario_home, container, false);
 
+        itemPedidoDAO = new ItemPedidoDAO(getContext());
+        empresaDAO = new EmpresaDAO(getContext());
+
         iniciarComponentes(view);
+        configCliques();
         configRv();
         recuperarEmpresas();
 
         return view;
+    }
+
+    private void configCliques() {
+        llSacola.setOnClickListener(view -> startActivity(new Intent(getActivity(), CarrinhoActivity.class)));
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        confiSacola();
     }
 
     private void configRv() {
@@ -87,10 +115,29 @@ public class UsuarioHomeFragment extends Fragment implements EmpresaAdapter.OnCl
         });
     }
 
+    private void confiSacola() {
+        if (!itemPedidoDAO.getList().isEmpty()) {
+
+            double totalPedido = itemPedidoDAO.getTotal() + empresaDAO.getEmpresa().getTaxaEntrega();
+
+            llSacola.setVisibility(View.VISIBLE);
+            textQtdItemSacola.setText(String.valueOf(itemPedidoDAO.getList().size()));
+            textTotalCarrinho.setText(getString(R.string.text_valor, GetMask.getValor(totalPedido)));
+        } else {
+            llSacola.setVisibility(View.GONE);
+            textQtdItemSacola.setText("");
+            textTotalCarrinho.setText("");
+        }
+    }
+
     private void iniciarComponentes(View view) {
         rvEmpresas = view.findViewById(R.id.rv_empresas);
         progressBar = view.findViewById(R.id.progressBar);
         textInfo = view.findViewById(R.id.text_info);
+
+        textQtdItemSacola = view.findViewById(R.id.textQtdItemSacola);
+        textTotalCarrinho = view.findViewById(R.id.textTotalCarrinho);
+        llSacola = view.findViewById(R.id.ll_sacola);
     }
 
     @Override
