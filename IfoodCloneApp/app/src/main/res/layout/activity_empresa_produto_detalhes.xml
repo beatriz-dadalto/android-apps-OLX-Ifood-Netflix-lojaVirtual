@@ -159,7 +159,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/text_qdt_produto"
+                android:id="@+id/text_qtd_produto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"

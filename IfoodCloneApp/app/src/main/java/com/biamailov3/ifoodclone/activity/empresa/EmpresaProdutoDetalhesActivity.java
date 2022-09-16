@@ -185,7 +185,7 @@ public class EmpresaProdutoDetalhesActivity extends AppCompatActivity {
         textTempoEntrega = findViewById(R.id.text_tempo_entrega);
 
         btnAdicionar = findViewById(R.id.btn_adicionar);
-        textQtdProduto = findViewById(R.id.text_qdt_produto);
+        textQtdProduto = findViewById(R.id.text_qtd_produto);
         textTotalProduto = findViewById(R.id.text_total_produto);
         btnRemover = findViewById(R.id.btn_remover);
         btnAdd = findViewById(R.id.btn_add);
