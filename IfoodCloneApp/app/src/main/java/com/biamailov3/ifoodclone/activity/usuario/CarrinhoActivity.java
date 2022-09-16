@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.biamailov3.ifoodclone.DAO.EmpresaDAO;
 import com.biamailov3.ifoodclone.DAO.EntregaDAO;
@@ -107,7 +106,7 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
 
         configRv();
 
-        recuperaIdsItensAddMais();
+        recuperarIdsItensAddMais();
         recuperarEnderecos();
         configSaldoCarrinho();
         configPagamento();
@@ -165,10 +164,10 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
         configValoresDialog();
     }
 
-    private  void delQtdItem() {
+    private void delQtdItem() {
         if (quantidade > 0) {
             quantidade--;
-            if (quantidade == 0 ) {
+            if (quantidade == 0) {
                 // remover item do carrinho
                 ibRemove.setImageResource(R.drawable.ic_remove);
                 textTotalProdutoDialog.setVisibility(View.GONE);
@@ -350,6 +349,8 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
                 if (pagamento == null) {
                     Intent intent = new Intent(this, UsuarioSelecionaPagamentoActivity.class);
                     startActivityForResult(intent, REQUEST_PAGAMENTO);
+                } else {
+                    startActivity(new Intent(this, UsuarioResumoPedidoActivity.class));
                 }
             }
         } else {
@@ -358,23 +359,23 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
         }
     }
 
-    private void recuperaIdsItensAddMais(){
+    private void recuperarIdsItensAddMais() {
         DatabaseReference addMaisRef = FirebaseHelper.getDatabaseReference()
                 .child("addMais")
                 .child(empresaDAO.getEmpresa().getId());
         addMaisRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
+                if (snapshot.exists()) {
                     List<String> idsItensList = new ArrayList<>();
-                    for (DataSnapshot ds : snapshot.getChildren()){
+                    for (DataSnapshot ds : snapshot.getChildren()) {
                         String idProduto = ds.getValue(String.class);
                         idsItensList.add(idProduto);
                     }
 
-                    recuperaProdutos(idsItensList);
+                    recuperarProdutos(idsItensList);
 
-                }else {
+                } else {
                     configLayoutAddMais();
                 }
             }
@@ -386,16 +387,16 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
         });
     }
 
-    private void recuperaProdutos(List<String> idsItensList) {
+    private void recuperarProdutos(List<String> idsItensList) {
         DatabaseReference produtosRef = FirebaseHelper.getDatabaseReference()
                 .child("produtos")
                 .child(empresaDAO.getEmpresa().getId());
         produtosRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()){
+                for (DataSnapshot ds : snapshot.getChildren()) {
                     Produto produto = ds.getValue(Produto.class);
-                    if(idsItensList.contains(produto.getId())) produtoList.add(produto);
+                    if (idsItensList.contains(produto.getId())) produtoList.add(produto);
                 }
 
                 Collections.reverse(produtoList);
@@ -410,7 +411,7 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
         });
     }
 
-    private void configRv(){
+    private void configRv() {
         rvProdutos.setLayoutManager(new LinearLayoutManager(this));
         rvProdutos.setHasFixedSize(true);
         carrinhoAdapter = new CarrinhoAdapter(itemPedidoList, getBaseContext(), this);
@@ -422,7 +423,7 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
         rvAddMais.setAdapter(produtoCarrinhoAdapter);
     }
 
-    private void iniciarComponentes(){
+    private void iniciarComponentes() {
         TextView text_toolbar = findViewById(R.id.text_toolbar);
         text_toolbar.setText("Sacola");
 
@@ -478,7 +479,7 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
             if (requestCode == REQUEST_LOGIN) {
                 Intent intent = new Intent(this, UsuarioSelecionaEnderecoActivity.class);
                 startActivityForResult(intent, REQUEST_ENDERECO);
-            } else if (requestCode == REQUEST_ENDERECO){
+            } else if (requestCode == REQUEST_ENDERECO) {
                 endereco = (Endereco) data.getSerializableExtra("enderecoSelecionado");
                 if (entregaDAO.getEndereco() == null) {
                     entregaDAO.salvarEndereco(endereco);
@@ -486,7 +487,7 @@ public class CarrinhoActivity extends AppCompatActivity implements CarrinhoAdapt
                     entregaDAO.atualizarEndereco(endereco);
                 }
                 configEndereco();
-            } else if (requestCode == REQUEST_PAGAMENTO){
+            } else if (requestCode == REQUEST_PAGAMENTO) {
                 Pagamento formaPagamento = (Pagamento) data.getSerializableExtra("pagamentoSelecionado");
                 pagamento = formaPagamento.getDescricao();
                 entregaDAO.salvarPagamento(pagamento);

@@ -18,13 +18,16 @@ public class UsuarioHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario_home);
 
-        iniciarComponentes();
-
-    }
-
-    private void iniciarComponentes() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
+
+        int id = getIntent().getIntExtra("id", 0);
+        // levar para fragment de pedidos
+        if (id == 3) {
+            bottomNavigationView.setSelectedItemId(R.id.menu_pedidos);
+        }
+
     }
+
 }
