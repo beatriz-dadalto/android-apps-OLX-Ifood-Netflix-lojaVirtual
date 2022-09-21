@@ -12,10 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.biamailov3.ifoodclone.DAO.EmpresaDAO;
 import com.biamailov3.ifoodclone.DAO.ItemPedidoDAO;
@@ -76,7 +74,7 @@ public class UsuarioHomeFragment extends Fragment implements EmpresaAdapter.OnCl
     public void onStart() {
         super.onStart();
 
-        confiSacola();
+        configSacola();
     }
 
     private void configRv() {
@@ -115,7 +113,7 @@ public class UsuarioHomeFragment extends Fragment implements EmpresaAdapter.OnCl
         });
     }
 
-    private void confiSacola() {
+    private void configSacola() {
         if (!itemPedidoDAO.getList().isEmpty()) {
 
             double totalPedido = itemPedidoDAO.getTotal() + empresaDAO.getEmpresa().getTaxaEntrega();
