@@ -70,6 +70,7 @@
         <entry key="app/src/main/res/layout/adapter_cardapio.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/adapter_carrinho.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/adapter_pedido_empresa.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/adapter_pedido_usuario.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/adapter_produto_cardapio.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/add_mais_item.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/bottom_sheet_item_carrinho.xml" value="0.37447916666666664" />
@@ -89,6 +90,8 @@
         <entry key="app/src/main/res/layout/fragment_usuario.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/fragment_usuario_home.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/fragment_usuario_pedido.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/fragment_usuario_pedido_andamento.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/fragment_usuario_pedido_finalizado.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/fragment_usuario_perfil.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/fragment_usuario_pesquisa.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/layout_ver_sacola.xml" value="0.37447916666666664" />
