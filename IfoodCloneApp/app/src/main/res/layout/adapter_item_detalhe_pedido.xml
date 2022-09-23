@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp"
+            android:layout_gravity="center_vertical"
+            app:cardElevation="5dp"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:id="@+id/text_qtd_item_pedido"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:textSize="12sp"
+                tools:text="1"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/text_nome_item_pedido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            tools:text="Açaí 500ml - banana, leite em pó e leite condensado" />
+
+        <TextView
+            android:id="@+id/text_valor_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textAlignment="textEnd"
+            tools:text="R$ 19,99"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/divisor"/>
+
+</LinearLayout>

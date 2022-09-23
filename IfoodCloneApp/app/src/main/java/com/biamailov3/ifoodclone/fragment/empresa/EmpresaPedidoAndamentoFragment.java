@@ -1,5 +1,6 @@
 package com.biamailov3.ifoodclone.fragment.empresa;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.biamailov3.ifoodclone.R;
+import com.biamailov3.ifoodclone.activity.usuario.PedidoDetalheActivity;
 import com.biamailov3.ifoodclone.adapter.EmpresaPedidoAdapter;
 import com.biamailov3.ifoodclone.helper.FirebaseHelper;
 import com.biamailov3.ifoodclone.model.Empresa;
@@ -59,12 +61,11 @@ public class EmpresaPedidoAndamentoFragment extends Fragment implements EmpresaP
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     pedidoList.clear();
-
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Pedido pedido = ds.getValue(Pedido.class);
                         if (pedido != null) addPedidoList(pedido);
                     }
-
+                    textInfo.setText("");
                 } else {
                     textInfo.setText("Nenhum pedido recebido");
                 }
@@ -107,7 +108,10 @@ public class EmpresaPedidoAndamentoFragment extends Fragment implements EmpresaP
         if (rota == 0) {
             Toast.makeText(getContext(), "Status", Toast.LENGTH_SHORT).show();
         } else if (rota == 1) {
-            Toast.makeText(getContext(), "Detalhes do pedido", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), PedidoDetalheActivity.class);
+            intent.putExtra("pedidoSelecionado", pedido);
+            intent.putExtra("acesso", "empresa");
+            startActivity(intent);
         }
     }
 }

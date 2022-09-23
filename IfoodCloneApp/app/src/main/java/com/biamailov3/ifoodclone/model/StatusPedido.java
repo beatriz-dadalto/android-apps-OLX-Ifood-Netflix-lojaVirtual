@@ -1,6 +1,8 @@
 package com.biamailov3.ifoodclone.model;
 
-public enum StatusPedido {
+import java.io.Serializable;
+
+public enum StatusPedido implements Serializable {
     ENTREGUE,
     PENDENTE,
     PREPARACAO,
