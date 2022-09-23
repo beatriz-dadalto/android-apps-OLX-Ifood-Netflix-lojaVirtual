@@ -20,7 +20,7 @@
             android:padding="16dp"
             android:layout_weight="1"
             android:textAlignment="center"
-            android:hint="23/09/2022"/>
+            android:hint="__/__/____"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
             android:padding="16dp"
             android:layout_weight="1"
             android:textAlignment="center"
-            android:hint="23/09/2022"/>
+            android:hint="__/__/____"/>
 
     </LinearLayout>
 
@@ -55,14 +55,15 @@
             android:layout_height="wrap_content"
             android:text="Filtrar"
             android:layout_weight="1"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/bg_btn"/>
 
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/btn_todos"
@@ -70,6 +71,7 @@
             android:layout_height="wrap_content"
             android:text="Todos"
             android:layout_weight="1"
+            android:layout_marginStart="16dp"
             android:background="@drawable/bg_btn"/>
 
     </LinearLayout>
@@ -95,13 +97,13 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textColor="#34BB78"
-                tools:text="R$ 0,00"
+                android:text="R$ 0,00"
                 android:textAlignment="center"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Receita"
+                android:text="Receita"
                 android:textAlignment="center"/>
 
         </LinearLayout>
@@ -123,13 +125,13 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textColor="#FF614B"
-                tools:text="R$ 0,00"
+                android:text="R$ 0,00"
                 android:textAlignment="center"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Despesas"
+                android:text="Despesas"
                 android:textAlignment="center"/>
 
         </LinearLayout>
@@ -151,13 +153,13 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textColor="#34BB78"
-                tools:text="R$ 0,00"
+                android:text="R$ 0,00"
                 android:textAlignment="center"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Saldo"
+                android:text="Saldo"
                 android:textAlignment="center"/>
 
         </LinearLayout>
@@ -167,7 +169,7 @@
     <include layout="@layout/divisor"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_despesas"
+        android:id="@+id/rv_movimentos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="16dp"/>
