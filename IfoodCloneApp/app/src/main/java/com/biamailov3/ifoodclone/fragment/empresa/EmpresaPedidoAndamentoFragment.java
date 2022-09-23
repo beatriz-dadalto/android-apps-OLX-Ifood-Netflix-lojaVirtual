@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class EmpresaPedidoAndamentoFragment extends Fragment implements EmpresaPedidoAdapter.OnClickListener {
@@ -88,6 +89,7 @@ public class EmpresaPedidoAndamentoFragment extends Fragment implements EmpresaP
                 }
 
                 progressBar.setVisibility(View.GONE);
+                Collections.reverse(pedidoList);
                 empresaPedidoAdapter.notifyDataSetChanged();
             }
 

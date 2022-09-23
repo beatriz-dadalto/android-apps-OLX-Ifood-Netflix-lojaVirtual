@@ -19,6 +19,8 @@
         <entry key="app/src/main/res/drawable/ic_add_white.xml" value="0.2655" />
         <entry key="app/src/main/res/drawable/ic_ajuda.xml" value="0.2615" />
         <entry key="app/src/main/res/drawable/ic_baseline_factory_24.xml" value="0.3575" />
+        <entry key="app/src/main/res/drawable/ic_check_entregue.xml" value="0.259" />
+        <entry key="app/src/main/res/drawable/ic_check_pendente.xml" value="0.259" />
         <entry key="app/src/main/res/drawable/ic_check_transporte.xml" value="0.3575" />
         <entry key="app/src/main/res/drawable/ic_email.xml" value="0.3575" />
         <entry key="app/src/main/res/drawable/ic_email_red.xml" value="0.223" />
