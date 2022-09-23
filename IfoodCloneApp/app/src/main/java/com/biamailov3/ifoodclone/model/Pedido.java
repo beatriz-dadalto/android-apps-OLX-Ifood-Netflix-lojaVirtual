@@ -56,6 +56,37 @@ public class Pedido implements Serializable {
         dataStatusPedidoUsuarioRef.setValue(ServerValue.TIMESTAMP);
     }
 
+    public void atualizar() {
+        DatabaseReference empresaStatusPedido = FirebaseHelper.getDatabaseReference()
+                .child("empresaPedidos")
+                .child(getIdEmpresa())
+                .child(getId())
+                .child("statusPedido");
+        empresaStatusPedido.setValue(getStatusPedido());
+
+        DatabaseReference empresaDataStatusPedido = FirebaseHelper.getDatabaseReference()
+                .child("empresaPedidos")
+                .child(getIdEmpresa())
+                .child(getId())
+                .child("dataStatusPedido");
+        empresaDataStatusPedido.setValue(ServerValue.TIMESTAMP);
+
+
+        DatabaseReference usuarioStatusPedido = FirebaseHelper.getDatabaseReference()
+                .child("usuarioPedidos")
+                .child(getIdCliente())
+                .child(getId())
+                .child("statusPedido");
+        usuarioStatusPedido.setValue(getStatusPedido());
+
+        DatabaseReference usuarioDataStatusPedido = FirebaseHelper.getDatabaseReference()
+                .child("usuarioPedidos")
+                .child(getIdCliente())
+                .child(getId())
+                .child("dataStatusPedido");
+        usuarioDataStatusPedido.setValue(ServerValue.TIMESTAMP);
+    }
+
     public String getId() {
         return id;
     }

@@ -15,6 +15,12 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <!--  STYLE EmpresaPedidoAndamentoFragment when click button status -->
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/bg_dialog_status</item>
+        <item name="windowMinWidthMinor">80%</item>
+    </style>
+
     <!-- THEME2 with white status bar -->
     <style name="Theme.IfoodClone2" parent="Theme.IfoodClone">
         <item name="colorPrimaryVariant">@color/cor_principal</item>

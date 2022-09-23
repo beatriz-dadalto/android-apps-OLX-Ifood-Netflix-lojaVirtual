@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable/bg_borda_arredondada.xml" value="0.3575" />
         <entry key="app/src/main/res/drawable/bg_btn.xml" value="0.3575" />
         <entry key="app/src/main/res/drawable/bg_btn2.xml" value="0.3575" />
+        <entry key="app/src/main/res/drawable/bg_dialog_status.xml" value="0.259" />
         <entry key="app/src/main/res/drawable/bg_edit.xml" value="0.223" />
         <entry key="app/src/main/res/drawable/bg_edit2.xml" value="0.244" />
         <entry key="app/src/main/res/drawable/bg_item_sacola.xml" value="0.259" />
@@ -97,6 +98,7 @@
         <entry key="app/src/main/res/layout/fragment_usuario_pedido_finalizado.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/fragment_usuario_perfil.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/fragment_usuario_pesquisa.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/layout_status_pedido.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/layout_ver_sacola.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/pagamento_select.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/produto_item.xml" value="0.37447916666666664" />

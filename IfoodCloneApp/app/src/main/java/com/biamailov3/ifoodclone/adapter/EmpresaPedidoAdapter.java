@@ -47,12 +47,6 @@ public class EmpresaPedidoAdapter extends RecyclerView.Adapter<EmpresaPedidoAdap
 
         Pedido pedido = pedidoList.get(position);
 
-        if (pedido.getStatusPedido() == StatusPedido.CANCELADO_USUARIO ||
-        pedido.getStatusPedido() == StatusPedido.CANCELADO_EMPRESA ||
-                pedido.getStatusPedido() == StatusPedido.ENTREGUE) {
-            holder.btnStatus.setEnabled(false);
-        }
-
         if (pedido.getDataPedido() != null) {
             holder.textDataPedido.setText(GetMask.getDate(pedido.getDataPedido(), 3));
         }
