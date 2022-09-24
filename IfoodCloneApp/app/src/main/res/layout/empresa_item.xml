@@ -58,9 +58,9 @@
                     android:id="@+id/text_empresa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
-                    tools:text="Nome da empresa"/>
+                    tools:text="Pizzaria do Chefe"/>
 
                 <TextView
                     android:id="@+id/text_categoria_empresa"
@@ -68,7 +68,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
-                    tools:text="categoria"/>
+                    android:textColor="@color/black"
+                    tools:text="Pizza"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -79,14 +80,14 @@
                         android:id="@+id/text_tempo_minimo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:textColor="@color/black"
                         tools:text="60-"/>
 
                     <TextView
                         android:id="@+id/text_tempo_maximo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:textColor="@color/black"
                         tools:text="90 min"/>
 
                     <TextView
@@ -94,12 +95,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:layout_weight="1"
+                        android:textColor="@color/black"
                         tools:text="R$ 4,00"/>
 
                 </LinearLayout>
 
             </LinearLayout>
+
 
         </LinearLayout>
 

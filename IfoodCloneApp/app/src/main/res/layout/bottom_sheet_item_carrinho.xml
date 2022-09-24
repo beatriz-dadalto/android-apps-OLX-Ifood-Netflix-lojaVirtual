@@ -4,18 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@android:color/white">
 
     <TextView
         android:id="@+id/text_nome_produto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Leite condensado com Kit Kat"
+        android:layout_marginTop="32dp"
         android:textAlignment="center"
-        android:textStyle="bold"
         android:textColor="@android:color/black"
-        android:layout_marginTop="32dp"/>
+        android:textStyle="bold"
+        tools:text="Leite condensado com Kit Kat" />
 
     <include
         android:layout_marginStart="24dp"
@@ -75,10 +75,10 @@
                 android:background="@android:color/transparent"
                 android:padding="12dp"
                 android:src="@drawable/ic_add3"
+                android:tint="@color/cor_principal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/cor_principal" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -120,6 +120,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="R$ 0,00"
+
                 android:textAlignment="viewEnd"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"

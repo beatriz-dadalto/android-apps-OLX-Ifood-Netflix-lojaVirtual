@@ -47,16 +47,15 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"
                     android:background="@drawable/bg_edit2"
-                    android:padding="16dp" />
-
+                    android:padding="16dp"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="16dp"
+                android:orientation="horizontal"
                 android:background="@drawable/bg_edit2">
 
                 <CheckBox
@@ -72,16 +71,15 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"
                     android:background="@drawable/bg_edit2"
-                    android:padding="16dp" />
-
+                    android:padding="16dp"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="16dp"
+                android:orientation="horizontal"
                 android:background="@drawable/bg_edit2">
 
                 <CheckBox
@@ -97,8 +95,7 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"
                     android:background="@drawable/bg_edit2"
-                    android:padding="16dp" />
-
+                    android:padding="16dp"/>
 
             </LinearLayout>
 

@@ -11,22 +11,21 @@
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+
         <item name="android:windowLightStatusBar">true</item>
+        <!-- Customize your theme here. -->
     </style>
 
-    <!--  STYLE EmpresaPedidoAndamentoFragment when click button status -->
     <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:windowBackground">@drawable/bg_dialog_status</item>
-        <item name="windowMinWidthMinor">80%</item>
+        <item name="android:windowMinWidthMinor">80%</item>
     </style>
 
-    <!-- THEME2 with white status bar -->
     <style name="Theme.IfoodClone2" parent="Theme.IfoodClone">
         <item name="colorPrimaryVariant">@color/cor_principal</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
-    <!-- THEME Splash with white status bar -->
+
     <style name="Theme.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/cor_principal</item>
     </style>
@@ -34,6 +33,7 @@
     <style name="ThemeProgressBar" parent="Theme.IfoodClone">
         <item name="colorAccent">@color/white</item>
     </style>
+
     <style name="ThemeProgressBar2" parent="Theme.IfoodClone">
         <item name="colorAccent">#FF0000</item>
     </style>
@@ -43,15 +43,17 @@
         <item name="textAllCaps">false</item>
     </style>
 
-    <style name="ThemeBottomNavViewOn">
+    <style name="ThemeBnvOn">
         <item name="android:textSize">14sp</item>
     </style>
-
+    
     <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/bottomSheetStyleWrapper</item>
     </style>
+
     <style name="bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
     </style>
+
 
 </resources>

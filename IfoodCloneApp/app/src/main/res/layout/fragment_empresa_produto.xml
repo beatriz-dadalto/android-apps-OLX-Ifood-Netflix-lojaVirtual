@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".fragment.empresa.EmpresaProdutoFragment">
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add"
         android:layout_width="wrap_content"
@@ -47,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Carregando..."
+            android:text="Aguarde..."
             android:textAlignment="center" />
 
     </LinearLayout>

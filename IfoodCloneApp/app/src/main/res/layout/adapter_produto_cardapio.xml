@@ -38,7 +38,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/imagem_produto"
+                    android:id="@+id/imagemProduto"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
@@ -47,7 +47,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/text_produto_valor"
+                android:id="@+id/textProdutoValor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -61,7 +61,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/text_produto_nome"
+                android:id="@+id/textProdutoNome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

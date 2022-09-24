@@ -2,27 +2,28 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation_empresa"
+    android:id="@+id/mobile_navigation_usuario"
     app:startDestination="@id/menu_pedidos">
 
     <fragment
         android:id="@+id/menu_pedidos"
-        android:name="com.biamailov3.ifoodclone.fragment.empresa.EmpresaPedidoFragment"
+        android:name="com.example.ifoodclone.fragment.empresa.EmpresaPedidoFragment"
         android:label="@string/menu_pedidos"
         tools:layout="@layout/fragment_empresa_pedido" />
     <fragment
         android:id="@+id/menu_produto"
-        android:name="com.biamailov3.ifoodclone.fragment.empresa.EmpresaProdutoFragment"
+        android:name="com.example.ifoodclone.fragment.empresa.EmpresaProdutoFragment"
         android:label="@string/menu_produtos"
         tools:layout="@layout/fragment_empresa_produto" />
     <fragment
         android:id="@+id/menu_financeiro"
-        android:name="com.biamailov3.ifoodclone.fragment.empresa.EmpresaFinanceiroFragment"
+        android:name="com.example.ifoodclone.fragment.empresa.EmpresaFinanceiroFragment"
         android:label="@string/menu_financeiro"
         tools:layout="@layout/fragment_empresa_financeiro" />
     <fragment
         android:id="@+id/menu_config"
-        android:name="com.biamailov3.ifoodclone.fragment.empresa.EmpresaConfigFragment"
+        android:name="com.example.ifoodclone.fragment.empresa.EmpresaConfigFragment"
         android:label="@string/menu_config"
         tools:layout="@layout/fragment_empresa_config" />
+
 </navigation>

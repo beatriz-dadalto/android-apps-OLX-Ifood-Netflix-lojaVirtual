@@ -35,7 +35,7 @@
                     app:cardCornerRadius="100dp">
 
                     <ImageView
-                        android:id="@+id/img_logo_empresa"
+                        android:id="@+id/img_log_empresa"
                         android:layout_width="match_parent"
                         tools:src="@drawable/ic_produto"
                         android:scaleType="centerCrop"

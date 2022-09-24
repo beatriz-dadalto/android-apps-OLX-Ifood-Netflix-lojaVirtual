@@ -37,7 +37,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        tools:text="Avenida Central, Centro, Sao Paulo - SP"
+        tools:text="Avenida Central, Centro, São Paulo - SP"
         app:layout_constraintBottom_toTopOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/radioButton"

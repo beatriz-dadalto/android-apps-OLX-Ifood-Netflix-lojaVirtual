@@ -27,7 +27,7 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:id="@+id/linearLayout"
+                android:id="@+id/linearLayout6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -47,7 +47,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Dinheiro na entrega"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@color/black" />
 
                     <CheckBox
                         android:id="@+id/cb_de"
@@ -72,7 +72,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Dinheiro na retirada"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@color/black" />
 
                     <CheckBox
                         android:id="@+id/cb_dr"
@@ -97,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Cartão de crédito na entrega"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@color/black" />
 
                     <CheckBox
                         android:id="@+id/cb_cce"
@@ -122,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Cartão de crédito na retirada"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@color/black" />
 
                     <CheckBox
                         android:id="@+id/cb_ccr"
@@ -147,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Cartão de crédito pelo app"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@color/black" />
 
                     <CheckBox
                         android:id="@+id/cb_app"
@@ -168,22 +168,20 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="24dp"
-                android:text="O recebimento direto pelo app é gerenciado pelo Mercado Pago, se você ainda não tem uma conta no Mercado Pago será preciso criá-la e gerar as credênciais e adicionar nos campos abaixo"
+                android:layout_margin="16dp"
+                android:text="O Recebimento direto pelo app é gerenciado pelo Mercado pago, caso ainda não tem conta será preciso criá-la e gerar as credênciais e adicionar nos campos abaixo."
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                android:text="Public Key"
+                android:text="Public key"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -195,18 +193,18 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/bg_edit2"
-                android:hint="Public Key"
+                android:hint="Public key"
                 android:padding="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="Access Token"
+                android:text="Access token"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edt_public_key" />
 
@@ -216,19 +214,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="24dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/bg_edit2"
-                android:hint="Access Token"
+                android:hint="Access token"
                 android:padding="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/textView6"
                 app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </ScrollView>
 

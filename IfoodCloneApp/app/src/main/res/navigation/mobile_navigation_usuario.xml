@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/menu_home"
-        android:name="com.biamailov3.ifoodclone.fragment.usuario.UsuarioHomeFragment"
+        android:name="com.example.ifoodclone.fragment.usuario.UsuarioHomeFragment"
         android:label="@string/menu_inicio"
         tools:layout="@layout/fragment_usuario_home" />
     <fragment
         android:id="@+id/menu_pesquisa"
-        android:name="com.biamailov3.ifoodclone.fragment.usuario.UsuarioPesquisaFragment"
+        android:name="com.example.ifoodclone.fragment.usuario.UsuarioPesquisaFragment"
         android:label="@string/menu_pesquisa"
         tools:layout="@layout/fragment_usuario_pesquisa" />
     <fragment
         android:id="@+id/menu_pedidos"
-        android:name="com.biamailov3.ifoodclone.fragment.usuario.UsuarioPedidoFragment"
+        android:name="com.example.ifoodclone.fragment.usuario.UsuarioPedidoFragment"
         android:label="@string/menu_pedidos"
         tools:layout="@layout/fragment_usuario_pedido" />
     <fragment
         android:id="@+id/menu_perfil"
-        android:name="com.biamailov3.ifoodclone.fragment.usuario.UsuarioPerfilFragment"
+        android:name="com.example.ifoodclone.fragment.usuario.UsuarioPerfilFragment"
         android:label="@string/menu_perfil"
         tools:layout="@layout/fragment_usuario_perfil" />
 </navigation>

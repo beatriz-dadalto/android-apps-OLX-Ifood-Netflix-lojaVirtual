@@ -40,7 +40,6 @@
                         android:scaleType="centerCrop"
                         tools:src="@drawable/sua_logo"/>
 
-
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -48,22 +47,21 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="32dp"
-                    android:text="Olá, Pizzaria Mailov3"
-                    android:textColor="@color/cor_cinza"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
+                    android:layout_marginTop="24dp"
                     android:maxLines="1"
                     android:ellipsize="end"
+                    android:textColor="#3E3E3E"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/imageView2"
                     app:layout_constraintStart_toEndOf="@+id/cardView"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Olá, Pizzaria do Chefe" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:text="Meus dados"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -81,9 +79,9 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <include
-                    layout="@layout/divisor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    layout="@layout/divisor"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -94,9 +92,9 @@
                 android:id="@+id/menu_empresa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+                android:paddingBottom="16dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -105,17 +103,17 @@
                     android:layout_marginStart="24dp"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginStart="24dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="24dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/black"
                         android:text="Empresa"/>
 
                     <TextView
@@ -140,9 +138,9 @@
                 android:id="@+id/menu_categorias"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+                android:paddingBottom="16dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -151,17 +149,17 @@
                     android:layout_marginStart="24dp"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginStart="24dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="24dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/black"
                         android:text="Categorias"/>
 
                     <TextView
@@ -186,9 +184,9 @@
                 android:id="@+id/menu_recebimentos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+                android:paddingBottom="16dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -197,17 +195,17 @@
                     android:layout_marginStart="24dp"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginStart="24dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="24dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/black"
                         android:text="Recebimentos"/>
 
                     <TextView
@@ -232,9 +230,9 @@
                 android:id="@+id/menu_add_mais"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+                android:paddingBottom="16dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -243,23 +241,23 @@
                     android:layout_marginStart="24dp"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginStart="24dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="24dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:textColor="@android:color/black"
-                        android:text="Adicione mais"/>
+                        android:textColor="@color/black"
+                        android:text="Peça também"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Adicione mais produtos no carrinho"/>
+                        android:text="Peça mais produtos no carrinho"/>
 
                 </LinearLayout>
 
@@ -278,9 +276,9 @@
                 android:id="@+id/menu_endereco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+                android:paddingBottom="16dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -289,17 +287,17 @@
                     android:layout_marginStart="24dp"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginStart="24dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="24dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/black"
                         android:text="Endereço"/>
 
                     <TextView
@@ -324,9 +322,9 @@
                 android:id="@+id/menu_entregas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+                android:paddingBottom="16dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -335,17 +333,17 @@
                     android:layout_marginStart="24dp"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginStart="24dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="24dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/black"
                         android:text="Entregas"/>
 
                     <TextView
@@ -370,9 +368,9 @@
                 android:id="@+id/menu_deslogar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+                android:paddingBottom="16dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -383,21 +381,21 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginStart="24dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="24dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/black"
                         android:text="Sair"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sair da minha conta"/>
+                        android:text="Deslogar da minha conta"/>
 
                 </LinearLayout>
 
@@ -413,6 +411,7 @@
             <include layout="@layout/divisor"/>
 
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

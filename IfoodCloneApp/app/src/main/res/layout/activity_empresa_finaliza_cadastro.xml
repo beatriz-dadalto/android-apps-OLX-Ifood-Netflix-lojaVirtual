@@ -6,27 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".activity.empresa.EmpresaFinalizaCadastroActivity">
 
-    <include
-        android:id="@+id/include4"
-        layout="@layout/toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include4">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="24dp"
+            android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="150dp"
@@ -41,8 +34,7 @@
                     android:layout_height="match_parent"
                     android:onClick="selecionarLogo"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/sua_logo"/>
-
+                    android:src="@drawable/sua_logo" />
 
             </androidx.cardview.widget.CardView>
 
@@ -57,11 +49,9 @@
                 android:id="@+id/edt_nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:drawableStart="@drawable/ic_baseline_factory_24"
-                android:drawablePadding="16dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/bg_edit2"
-                android:hint="Nome da empresa"
+                android:hint="Ex Pazzaria do Chefe"
                 android:inputType="text"
                 android:padding="16dp" />
 
@@ -76,43 +66,43 @@
                 android:id="@+id/edt_telefone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
+                android:inputType="number"
+                app:mask="(__) _____-____"
                 android:background="@drawable/bg_edit2"
+                android:padding="16dp"
                 android:drawableStart="@drawable/ic_telefone"
                 android:drawablePadding="16dp"
-                android:hint="(11) 99999-9999"
-                android:inputType="number"
-                android:padding="16dp"
-                app:mask="(__) _____-____"
+                android:hint="Ex (11) 3232-2425"
                 app:maskCharacter="_"
                 app:maskStyle="completable" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16sp"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Taxa de entrega"/>
+                        android:text="Taxa entrega"/>
 
                     <com.blackcat.currencyedittext.CurrencyEditText
                         android:id="@+id/edt_taxa_entrega"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:background="@drawable/bg_edit2"
-                        android:padding="16dp" />
+                        android:layout_marginTop="8dp"
+                        android:padding="16dp"
+                        />
 
                 </LinearLayout>
 
@@ -120,22 +110,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pedido Minímo"/>
+                        android:text="Pedido mínimo"/>
 
                     <com.blackcat.currencyedittext.CurrencyEditText
                         android:id="@+id/edt_pedido_minimo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:background="@drawable/bg_edit2"
-                        android:padding="16dp" />
+                        android:layout_marginTop="8dp"
+                        android:padding="16dp"
+                        />
 
                 </LinearLayout>
 
@@ -144,31 +134,31 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tempo Minímo"/>
+                        android:text="Tempo mínimo (min)"/>
 
                     <EditText
                         android:id="@+id/edt_tempo_minimo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:background="@drawable/bg_edit2"
                         android:inputType="number"
-                        android:hint="minutos"
-                        android:padding="16dp" />
+                        android:layout_marginTop="8dp"
+                        android:hint="Ex 60 min"
+                        android:padding="16dp"
+                        />
 
                 </LinearLayout>
 
@@ -176,24 +166,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tempo Máximo"/>
+                        android:text="Tempo máximo (min)"/>
 
                     <EditText
                         android:id="@+id/edt_tempo_maximo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_edit2"
-                        android:hint="minutos"
                         android:inputType="number"
-                        android:padding="16dp" />
+                        android:background="@drawable/bg_edit2"
+                        android:layout_marginTop="8dp"
+                        android:hint="Ex 120"
+                        android:padding="16dp"
+                        />
 
                 </LinearLayout>
 
@@ -203,27 +193,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Categoria"
-                android:textSize="16sp" />
+                android:text="Categoria"/>
 
             <EditText
                 android:id="@+id/edt_categoria"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/bg_edit2"
-                android:hint="Exemplo: Lanches"
+                android:hint="Ex Lanches"
                 android:inputType="text"
                 android:padding="16dp" />
 
-            <android.widget.Button
+            <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="validarDados"
-                android:layout_marginTop="24dp"
-                android:text="Finalizar Cadastro"
-                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp"
                 android:textAllCaps="false"
+                android:text="Finalizar"
+                android:onClick="validaDados"
                 android:background="@drawable/bg_edit"
                 android:backgroundTint="@color/cor_principal"/>
 
@@ -238,6 +226,7 @@
                 android:theme="@style/ThemeProgressBar2"/>
 
         </LinearLayout>
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,11 +38,11 @@
                 android:id="@+id/edt_nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/bg_edit2"
                 android:drawableStart="@drawable/ic_user_on"
                 android:drawablePadding="16dp"
-                android:hint="Seu nome"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_edit2"
+                android:hint="Ex Arley Santana"
                 android:inputType="text"
                 android:padding="16dp" />
 
@@ -57,11 +57,11 @@
                 android:id="@+id/edt_telefone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/bg_edit2"
                 android:drawableStart="@drawable/ic_telefone"
                 android:drawablePadding="16dp"
-                android:hint="(11) 99999-9999"
+                android:hint="Ex (11) 93232-2425"
                 android:inputType="number"
                 android:padding="16dp"
                 app:mask="(__) _____-____"
@@ -72,24 +72,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="E-mail"
-                android:textSize="16sp" />
+                android:text="E-mail" />
 
             <EditText
                 android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:enabled="false"
-                android:clickable="false"
+                android:layout_marginTop="8dp"
                 android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="16dp"
-                android:hint="nome@email.com"
+                android:enabled="false"
+                android:clickable="false"
                 android:background="@drawable/bg_edit2"
                 android:inputType="textEmailAddress"
                 android:padding="16dp" />
 
         </LinearLayout>
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

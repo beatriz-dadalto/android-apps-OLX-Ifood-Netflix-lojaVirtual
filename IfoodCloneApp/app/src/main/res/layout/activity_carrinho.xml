@@ -33,7 +33,7 @@
                 android:id="@+id/ll_endereco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="16dp"
                 android:visibility="gone"
                 tools:visibility="visible"
                 android:background="@android:color/white"
@@ -115,7 +115,9 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_produtos"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/adapter_carrinho"/>
 
                 <LinearLayout
                     android:id="@+id/ll_btn_add_mais"
@@ -257,7 +259,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="16dp"/>
+                    android:layout_marginBottom="24dp"/>
 
             </LinearLayout>
 

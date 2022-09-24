@@ -84,7 +84,7 @@
                     android:layout_marginBottom="16dp">
 
                     <ImageView
-                        android:id="@+id/img_logo_empresa"
+                        android:id="@+id/img_log_empresa"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         tools:src="@drawable/ic_produto"
@@ -101,7 +101,7 @@
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     android:ellipsize="end"
-                    tools:text="Nome da empresa"/>
+                    tools:text="Casa do Mestre"/>
 
             </LinearLayout>
 
@@ -358,7 +358,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_item_pedido"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

@@ -6,13 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activity.usuario.UsuarioFinalizaCadastroActivity">
 
-    <include
-        android:id="@+id/include3"
-        layout="@layout/toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -20,7 +13,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include3">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,11 +31,11 @@
                 android:id="@+id/edt_nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/bg_edit2"
                 android:drawableStart="@drawable/ic_user_on"
                 android:drawablePadding="16dp"
-                android:hint="Digite seu nome"
+                android:hint="Nome"
                 android:inputType="text"
                 android:padding="16dp" />
 
@@ -57,27 +50,27 @@
                 android:id="@+id/edt_telefone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
+                android:inputType="number"
+                app:mask="(__) _____-____"
                 android:background="@drawable/bg_edit2"
+                android:padding="16dp"
                 android:drawableStart="@drawable/ic_telefone"
                 android:drawablePadding="16dp"
-                android:hint="Digite seu telefone"
-                android:inputType="number"
-                android:padding="16dp"
-                app:mask="(__) _____-____"
+                android:hint="Telefone"
                 app:maskCharacter="_"
                 app:maskStyle="completable" />
 
             <android.widget.Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="validarDados"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/bg_edit"
                 android:backgroundTint="@color/cor_principal"
-                android:text="Finalizar Cadastro"
+                android:text="Finalizar"
+                android:onClick="validaDados"
                 android:textAllCaps="false"
-                android:textColor="@android:color/white"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <ProgressBar

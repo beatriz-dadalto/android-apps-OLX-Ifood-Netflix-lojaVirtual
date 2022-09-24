@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".fragment.empresa.EmpresaFragment"
-    android:background="@color/cor_principal">
+    android:background="@color/cor_principal"
+    tools:context=".fragment.empresa.EmpresaFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,22 +20,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="24dp"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:text="E-mail"
-                android:textSize="16sp"/>
+                android:text="E-mail"/>
 
             <EditText
                 android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/bg_edit"
                 android:padding="16dp"
                 android:drawableStart="@drawable/ic_email_red"
@@ -46,42 +46,42 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:layout_marginTop="16dp"
-                android:text="Senha"
-                android:textSize="16sp"/>
+                android:text="Senha"/>
 
             <EditText
                 android:id="@+id/edt_senha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/bg_edit"
+                android:padding="16dp"
                 android:drawableStart="@drawable/ic_password"
                 android:drawablePadding="16dp"
-                android:padding="16dp"
-                android:layout_marginTop="4dp"
+                android:inputType="textPassword"
                 android:hint="Digite sua senha"/>
 
             <android.widget.Button
                 android:id="@+id/btn_criar_conta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_edit"
-                android:text="Criar Conta"
+                android:layout_marginTop="16dp"
+                android:text="Criar conta"
                 android:textColor="@color/cor_principal"
                 android:textAllCaps="false"
                 android:textSize="16sp"
-                android:layout_marginTop="32dp"/>
+                android:background="@drawable/bg_edit"/>
 
             <ProgressBar
                 android:id="@+id/progressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/ThemeProgressBar"
-                android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:layout_gravity="center"
+                android:theme="@style/ThemeProgressBar"
                 android:visibility="gone"
                 tools:visibility="visible"/>
 

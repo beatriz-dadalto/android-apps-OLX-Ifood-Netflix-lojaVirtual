@@ -69,9 +69,9 @@
                 android:background="@drawable/bg_add_tambem"
                 android:layout_margin="8dp"
                 android:src="@drawable/ic_add3"
+                android:tint="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:tint="@android:color/white" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

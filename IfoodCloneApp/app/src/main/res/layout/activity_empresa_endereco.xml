@@ -39,8 +39,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_edit2"
-                android:padding="16dp"
-                android:hint="Ex: Avenida Central"/>
+                android:hint="Ex Avenida Central"
+                android:padding="16dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,8 +51,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
@@ -65,17 +65,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_edit2"
                         android:padding="16dp"
-                        android:hint="Ex: Centro"/>
+                        android:background="@drawable/bg_edit2"
+                        android:hint="Ex Centro"/>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginStart="8dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
@@ -88,9 +88,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_edit2"
                         android:padding="16dp"
-                        android:hint="Ex: São Paulo"/>
+                        android:background="@drawable/bg_edit2"
+                        android:hint="Ex São Paulo"/>
 
                 </LinearLayout>
 

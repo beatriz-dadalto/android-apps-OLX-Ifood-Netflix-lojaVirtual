@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1042709472370:android:45e90d8b9379cfad7aceeb",
         "android_client_info": {
-          "package_name": "com.biamailov3.ifoodclone"
+          "package_name": "com.example.ifoodclone"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "1042709472370-uk5luc182vvm26ugtsdh80o0s3e1r1ke.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.biamailov3.ifoodclone",
+            "package_name": "com.example.ifoodclone",
             "certificate_hash": "6246ca7aae88f38192d097ceea676a986535e9f4"
           }
         },

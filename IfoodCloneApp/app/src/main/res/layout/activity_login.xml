@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -27,23 +26,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:padding="24dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:text="E-mail"
-                android:textSize="16sp"/>
+                android:text="E-mail"/>
 
             <EditText
                 android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/bg_edit"
                 android:padding="16dp"
                 android:drawableStart="@drawable/ic_email_red"
@@ -54,34 +53,34 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:layout_marginTop="16dp"
-                android:text="Senha"
-                android:textSize="16sp"/>
+                android:text="Senha"/>
 
             <EditText
                 android:id="@+id/edt_senha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/bg_edit"
+                android:padding="16dp"
                 android:drawableStart="@drawable/ic_password"
                 android:drawablePadding="16dp"
-                android:padding="16dp"
-                android:layout_marginTop="4dp"
+                android:inputType="textPassword"
                 android:hint="Digite sua senha"/>
 
             <android.widget.Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="validarDados"
-                android:background="@drawable/bg_edit"
+                android:layout_marginTop="16dp"
                 android:text="Entrar"
+                android:onClick="validaDados"
                 android:textColor="@color/cor_principal"
                 android:textAllCaps="false"
                 android:textSize="16sp"
-                android:layout_marginTop="32dp"/>
+                android:background="@drawable/bg_edit"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -94,17 +93,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textSize="16sp"
                     android:textColor="@android:color/white"
-                    android:text="Criar Conta"/>
+                    android:text="Criar conta"/>
 
                 <TextView
-                    android:id="@+id/text_recuperar_conta"
+                    android:id="@+id/recuperar_conta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textSize="16sp"
                     android:textAlignment="textEnd"
                     android:textColor="@android:color/white"
-                    android:text="Recuperar Conta"/>
+                    android:text="Recuperar conta"/>
 
             </LinearLayout>
 

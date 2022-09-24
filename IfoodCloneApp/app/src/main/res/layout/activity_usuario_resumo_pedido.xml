@@ -69,9 +69,7 @@
                     android:onClick="alterarEndereco"
                     android:paddingStart="0dp"
                     android:paddingEnd="0dp"
-                    android:text="Alterar endereço de entrega"
-                    android:textAllCaps="false"
-                    android:textSize="16sp"
+                    android:text="ALTERAR ENDEREÇO DE ENTREGA"
                     android:textAlignment="textStart"
                     android:textColor="@color/cor_principal" />
 

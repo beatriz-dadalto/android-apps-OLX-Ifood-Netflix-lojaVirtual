@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ifood Clone</string>
+    <string name="app_name">iFood</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_inicio">Início</string>
@@ -11,5 +11,5 @@
     <string name="menu_config">Config</string>
 
     <string name="text_valor">R$ %1$s</string>
-    <string name="mais_itens">mais %1$d item</string>
+    <string name="mais_item">mais %1$d item</string>
 </resources>

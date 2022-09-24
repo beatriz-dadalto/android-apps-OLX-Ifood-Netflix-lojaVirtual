@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragment.usuario.UsuarioPerfilFragment">
 
     <ScrollView
@@ -17,11 +18,11 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_logado"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:id="@+id/l_logado"
                 android:visibility="gone"
-                tools:visibility="visible">
+                tools:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/text_usuario"
@@ -32,18 +33,17 @@
                     android:layout_marginEnd="32dp"
                     android:maxLines="1"
                     android:ellipsize="end"
-                    android:text="Olá, Beatriz"
-                    android:textColor="@color/cor_cinza"
+                    android:textColor="#3E3E3E"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/imageView3"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Olá, Arley Santana" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:text="Meus dados"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -61,9 +61,9 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <include
-                    layout="@layout/divisor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    layout="@layout/divisor"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -71,19 +71,19 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_deslogado"
+                android:id="@+id/l_deslogado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Falta pouco para \nmatar sua fome!"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textColor="@color/cor_cinza"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="32dp"
+                    android:textColor="#3E3E3E"
+                    android:text="Falta pouco para \nmatar sua fome!"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -113,10 +113,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
+                        android:textSize="16sp"
                         android:background="@drawable/bg_btn"
                         android:padding="16dp"
                         android:text="Entrar"
-                        android:textSize="16sp"
                         android:textAllCaps="false" />
 
                     <android.widget.Button
@@ -124,11 +124,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:textSize="16sp"
                         android:layout_weight="1"
                         android:background="@drawable/bg_btn"
                         android:padding="16dp"
                         android:text="Cadastrar"
-                        android:textSize="16sp"
                         android:textAllCaps="false" />
 
                 </LinearLayout>
@@ -141,9 +141,9 @@
                 android:id="@+id/menu_perfil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+                android:paddingBottom="16dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -152,17 +152,17 @@
                     android:layout_marginStart="24dp"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginStart="24dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="24dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/black"
                         android:text="Perfil"/>
 
                     <TextView
@@ -187,9 +187,9 @@
                 android:id="@+id/menu_favoritos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+                android:paddingBottom="16dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -198,17 +198,17 @@
                     android:layout_marginStart="24dp"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginStart="24dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="24dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/black"
                         android:text="Favoritos"/>
 
                     <TextView
@@ -233,9 +233,9 @@
                 android:id="@+id/menu_enderecos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+                android:paddingBottom="16dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -244,17 +244,17 @@
                     android:layout_marginStart="24dp"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginStart="24dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="24dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/black"
                         android:text="Endereços"/>
 
                     <TextView
@@ -278,34 +278,34 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+                android:paddingBottom="16dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_cupom"
+                    android:src="@drawable/ic_perfil_off"
                     android:layout_marginStart="24dp"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginStart="24dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="24dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/black"
                         android:text="Cupons"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Meus cupons"/>
+                        android:text="Meus cupons de desconto"/>
 
                 </LinearLayout>
 
@@ -323,9 +323,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+                android:paddingBottom="16dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -334,23 +334,23 @@
                     android:layout_marginStart="24dp"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginStart="24dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="24dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/black"
                         android:text="Ajuda"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tire suas dúvidas"/>
+                        android:text="Tire todas suas dúvidas"/>
 
                 </LinearLayout>
 
@@ -369,9 +369,9 @@
                 android:id="@+id/menu_deslogar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+                android:paddingBottom="16dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -382,21 +382,21 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginStart="24dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="24dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/black"
                         android:text="Sair"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sair da minha conta"/>
+                        android:text="Deslogar da minha conta"/>
 
                 </LinearLayout>
 
@@ -412,7 +412,7 @@
             <include layout="@layout/divisor"/>
 
         </LinearLayout>
-    </ScrollView>
 
+    </ScrollView>
 
 </LinearLayout>
