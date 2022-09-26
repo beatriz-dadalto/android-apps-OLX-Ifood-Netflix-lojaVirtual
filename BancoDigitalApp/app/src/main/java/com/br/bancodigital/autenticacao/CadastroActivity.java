@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.br.bancodigital.MainActivity;
+import com.br.bancodigital.app.MainActivity;
 import com.br.bancodigital.R;
 import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.model.Usuario;

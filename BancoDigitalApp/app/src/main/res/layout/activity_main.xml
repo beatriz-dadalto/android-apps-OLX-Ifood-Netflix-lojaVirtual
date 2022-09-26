@@ -4,15 +4,175 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/colorPrimary"
+    tools:context=".app.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <HorizontalScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:scrollbarThumbHorizontal="@null"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardDeposito"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="5dp"
+                app:cardBackgroundColor="@android:color/white"
+                android:layout_marginStart="24dp"
+                android:layout_marginVertical="8dp">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_deposito"
+                    android:layout_margin="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Depositar"
+                    android:textColor="@android:color/black"
+                    android:layout_margin="8dp"
+                    android:layout_gravity="bottom"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardRecarga"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="5dp"
+                app:cardBackgroundColor="@android:color/white"
+                android:layout_marginStart="24dp"
+                android:layout_marginVertical="8dp">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_recarga_cel"
+                    android:layout_margin="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recarga de celular"
+                    android:textColor="@android:color/black"
+                    android:layout_margin="8dp"
+                    android:layout_gravity="bottom"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardExtrato"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="5dp"
+                app:cardBackgroundColor="@android:color/white"
+                android:layout_marginStart="24dp"
+                android:layout_marginVertical="8dp">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_historico"
+                    android:layout_margin="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Extrato"
+                    android:textColor="@android:color/black"
+                    android:layout_margin="8dp"
+                    android:layout_gravity="bottom"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardTransferir"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="5dp"
+                app:cardBackgroundColor="@android:color/white"
+                android:layout_marginStart="24dp"
+                android:layout_marginVertical="8dp">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_transferir"
+                    android:layout_margin="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Transferir"
+                    android:textColor="@android:color/black"
+                    android:layout_margin="8dp"
+                    android:layout_gravity="bottom"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardMinhaConta"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="5dp"
+                app:cardBackgroundColor="@android:color/white"
+                android:layout_marginStart="24dp"
+                android:layout_marginVertical="8dp">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_user_black"
+                    android:layout_margin="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Minha conta"
+                    android:textColor="@android:color/black"
+                    android:layout_margin="8dp"
+                    android:layout_gravity="bottom"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardDeslogar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="5dp"
+                app:cardBackgroundColor="@android:color/white"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginVertical="8dp">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_sair"
+                    android:layout_margin="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sair"
+                    android:textColor="@android:color/black"
+                    android:layout_margin="8dp"
+                    android:layout_gravity="bottom"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

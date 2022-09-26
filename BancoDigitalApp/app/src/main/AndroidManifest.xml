@@ -29,7 +29,7 @@
             android:name=".autenticacao.CadastroActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".app.MainActivity"
             android:exported="false" />
     </application>
 
