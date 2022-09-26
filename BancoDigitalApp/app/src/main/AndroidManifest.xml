@@ -10,10 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BancoDigitalApp">
         <activity
-            android:name=".autenticacao.RecuperaContaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".autenticacao.LoginActivity"
+            android:name=".app.SplashActivity"
+            android:theme="@style/Theme.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +19,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".autenticacao.RecuperaContaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".autenticacao.LoginActivity"
+            android:exported="false"/>
         <activity
             android:name=".autenticacao.CadastroActivity"
             android:exported="false" />
