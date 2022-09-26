@@ -9,10 +9,12 @@
         <entry key="app/src/main/res/drawable/ic_user_black.xml" value="0.352" />
         <entry key="app/src/main/res/drawable/ic_user_blue.xml" value="0.262" />
         <entry key="app/src/main/res/layout/activity_cadastro.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/activity_deposito_form.xml" value="0.37395833333333334" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.3859375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/activity_recupera_conta.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.3890625" />
+        <entry key="app/src/main/res/layout/toolbar_padrao.xml" value="0.37447916666666664" />
       </map>
     </option>
   </component>

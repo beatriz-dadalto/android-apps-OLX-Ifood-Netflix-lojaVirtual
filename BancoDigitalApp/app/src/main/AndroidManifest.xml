@@ -10,9 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BancoDigitalApp">
         <activity
+            android:name=".deposito.DepositoFormActivity"
+            android:exported="false" />
+        <activity
             android:name=".app.SplashActivity"
-            android:theme="@style/Theme.Splash"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +27,7 @@
             android:exported="false" />
         <activity
             android:name=".autenticacao.LoginActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".autenticacao.CadastroActivity"
             android:exported="false" />
