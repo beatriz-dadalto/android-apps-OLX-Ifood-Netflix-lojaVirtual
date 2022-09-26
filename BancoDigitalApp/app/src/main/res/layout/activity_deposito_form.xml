@@ -53,18 +53,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-            <EditText
+            <com.blackcat.currencyedittext.CurrencyEditText
                 android:id="@+id/edtValor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="24dp"
                 android:backgroundTint="@android:color/white"
-                android:hint="R$ 100,00"
                 android:textColor="@android:color/white"
                 android:textColorHint="@color/colorTextHint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:theme="@style/Theme.ProgressBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtValor" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -77,6 +88,7 @@
         android:layout_margin="24dp"
         android:background="@drawable/bg_btn"
         android:backgroundTint="@android:color/white"
+        android:onClick="validaDeposito"
         android:text="Confirmar"
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
