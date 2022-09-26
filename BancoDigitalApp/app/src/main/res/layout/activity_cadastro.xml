@@ -32,11 +32,11 @@
                     android:id="@+id/edtNome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorPrimary"
                     android:drawableStart="@drawable/ic_user_blue"
                     android:drawablePadding="16dp"
                     android:inputType="text"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/colorPrimary"
+                    android:backgroundTint="@color/colorPrimary"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -53,6 +53,7 @@
                     android:drawableStart="@drawable/ic_email_login"
                     android:drawablePadding="16dp"
                     android:inputType="textEmailAddress"
+                    android:textColor="@color/colorPrimary"
                     android:backgroundTint="@color/colorPrimary"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,6 +71,7 @@
                     android:drawableStart="@drawable/ic_celular_login"
                     android:drawablePadding="16dp"
                     android:inputType="number"
+                    android:textColor="@color/colorPrimary"
                     android:backgroundTint="@color/colorPrimary"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,6 +89,7 @@
                     android:drawableStart="@drawable/ic_senha_login"
                     android:drawablePadding="16dp"
                     android:inputType="textPassword"
+                    android:textColor="@color/colorPrimary"
                     android:backgroundTint="@color/colorPrimary"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,6 +107,7 @@
                     android:drawableStart="@drawable/ic_senha_login"
                     android:drawablePadding="16dp"
                     android:inputType="textPassword"
+                    android:textColor="@color/colorPrimary"
                     android:backgroundTint="@color/colorPrimary"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,6 +115,7 @@
                 android:id="@+id/btnCriarConta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="validaDados"
                 android:text="Criar Conta"
                 android:textSize="16sp"
                 android:textColor="@android:color/white"
