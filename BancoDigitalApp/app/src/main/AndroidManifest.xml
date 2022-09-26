@@ -10,8 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BancoDigitalApp">
         <activity
+            android:name=".autenticacao.RecuperaContaActivity"
+            android:exported="false" />
+        <activity
             android:name=".autenticacao.LoginActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,10 +23,10 @@
         </activity>
         <activity
             android:name=".autenticacao.CadastroActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>

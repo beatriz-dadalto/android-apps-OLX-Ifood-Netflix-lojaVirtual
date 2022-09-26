@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,70 +19,71 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical"
-            android:padding="32dp"
-            android:gravity="center">
+            android:padding="32dp">
 
             <EditText
                 android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_edit"
                 android:drawableStart="@drawable/ic_email_login"
                 android:drawablePadding="16dp"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
-                android:textColorHint="@color/colorTextHint"
+                android:padding="24dp"
                 android:textColor="@color/colorPrimary"
-                android:background="@drawable/bg_edit"
-                android:padding="24dp"/>
+                android:textColorHint="@color/colorTextHint" />
 
             <EditText
                 android:id="@+id/edtSenha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_edit"
                 android:drawableStart="@drawable/ic_senha_login"
                 android:drawablePadding="16dp"
-                android:layout_marginTop="16dp"
                 android:hint="Senha"
                 android:inputType="textPassword"
-                android:textColorHint="@color/colorTextHint"
+                android:padding="24dp"
                 android:textColor="@color/colorPrimary"
-                android:background="@drawable/bg_edit"
-                android:padding="24dp"/>
+                android:textColorHint="@color/colorTextHint" />
 
             <Button
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login"
-                android:textSize="16sp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/bg_btn"
+                android:text="Login"
                 android:textColor="@android:color/white"
-                android:layout_marginTop="16dp"/>
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textCriarConta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Criar conta"
-                    android:textColor="@color/colorPrimary"
                     android:layout_weight="1"
-                    android:onClick="criarConta"/>
+                    android:onClick="criarConta"
+                    android:text="Criar conta"
+                    android:textColor="@color/colorPrimary" />
 
                 <TextView
                     android:id="@+id/textRecuperarConta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="recuperarConta"
                     android:text="Recuperar conta"
-                    android:textColor="@color/colorPrimary"
                     android:textAlignment="textEnd"
-                    android:layout_weight="1"/>
+                    android:textColor="@color/colorPrimary" />
 
             </LinearLayout>
 
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:visibility="gone"
-                tools:visibility="visible"/>
+                tools:visibility="visible" />
 
         </LinearLayout>
 
