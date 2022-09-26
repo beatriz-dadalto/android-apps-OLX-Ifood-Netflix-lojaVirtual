@@ -1,5 +1,7 @@
 package com.br.bancodigital.model;
 
+import com.br.bancodigital.helper.FirebaseHelper;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
@@ -81,5 +83,13 @@ public class Usuario implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public void atualizarSaldo() {
+        DatabaseReference usuarioRef = FirebaseHelper.getDatabaseReference()
+                .child("usuarios")
+                .child(getId())
+                .child("saldo");
+        usuarioRef.setValue(getSaldo());
     }
 }
