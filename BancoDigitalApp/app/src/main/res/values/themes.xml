@@ -3,7 +3,7 @@
     <style name="Theme.BancoDigitalApp" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
-        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorAccent">@android:color/white</item>
         <item name="android:navigationBarColor">@color/colorPrimary</item>
         <!-- Customize your theme here. -->
     </style>

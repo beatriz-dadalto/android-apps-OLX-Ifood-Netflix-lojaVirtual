@@ -15,6 +15,7 @@ import com.br.bancodigital.deposito.DepositoFormActivity;
 import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.helper.GetMask;
 import com.br.bancodigital.model.Usuario;
+import com.br.bancodigital.recarga.RecargaFormActivity;
 import com.br.bancodigital.usuario.MinhaContaActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.cardDeposito).setOnClickListener(view ->
                 startActivity(new Intent(this, DepositoFormActivity.class)));
 
-        findViewById(R.id.minhaConta).setOnClickListener(v -> {
+        findViewById(R.id.minhaConta).setOnClickListener(view -> {
             if (usuario != null) {
                 Intent intent = new Intent(this, MinhaContaActivity.class);
                 intent.putExtra("usuario", usuario);
@@ -88,5 +89,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "\uD83E\uDD14 Ainda estamos recuperando seus dados!", Toast.LENGTH_SHORT).show();
             }
         });
+
+        findViewById(R.id.cardRecarga).setOnClickListener(view ->
+                startActivity(new Intent(this, RecargaFormActivity.class)));
     }
 }
