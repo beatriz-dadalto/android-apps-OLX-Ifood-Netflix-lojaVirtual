@@ -52,4 +52,7 @@ dependencies {
     // https://github.com/square/picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    // https://github.com/santalu/maskara
+    implementation 'com.github.santalu:maskara:1.0.0'
+
 }

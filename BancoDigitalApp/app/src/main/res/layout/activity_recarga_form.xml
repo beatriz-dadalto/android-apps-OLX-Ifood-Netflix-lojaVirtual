@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="24dp"
-                android:text="Valor do depósito"
+                android:text="Valor da recarga"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="24dp"
-                android:text="insira o número"
+                android:text="Insira o número"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
@@ -74,13 +74,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="24dp"
-                android:hint="Número"
+                android:hint="Número do celular"
                 android:textColorHint="@color/colorTextHint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.santalu.maskara.widget.MaskEditText
                     android:id="@+id/edtTelefone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -90,7 +90,10 @@
                     android:drawableTint="@android:color/white"
                     android:inputType="number"
                     android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/white" />
+                    android:textColorHint="@android:color/white"
+                    app:mask="(__) _____-____"
+                    app:maskCharacter="_"
+                    app:maskStyle="completable" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <ProgressBar
