@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BancoDigitalApp">
         <activity
+            android:name=".transferencia.TransferenciaFormActivity"
+            android:exported="false" />
+        <activity
             android:name=".recarga.RecargaReciboActivity"
             android:exported="false" />
         <activity

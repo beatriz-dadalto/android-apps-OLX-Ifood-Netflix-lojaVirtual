@@ -17,6 +17,7 @@ import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.helper.GetMask;
 import com.br.bancodigital.model.Usuario;
 import com.br.bancodigital.recarga.RecargaFormActivity;
+import com.br.bancodigital.transferencia.TransferenciaFormActivity;
 import com.br.bancodigital.usuario.MinhaContaActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -100,5 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.cardRecarga).setOnClickListener(view ->
                 startActivity(new Intent(this, RecargaFormActivity.class)));
+
+        findViewById(R.id.cardTransferir).setOnClickListener(view -> startActivity(new Intent(this, TransferenciaFormActivity.class)));
     }
 }
