@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BancoDigitalApp">
         <activity
+            android:name=".usuario.MinhaContaActivity"
+            android:theme="@style/Theme.BancoDigitalApp2"
+            android:exported="false" />
+        <activity
             android:name=".deposito.DepositoReciboActivity"
             android:exported="false" />
         <activity

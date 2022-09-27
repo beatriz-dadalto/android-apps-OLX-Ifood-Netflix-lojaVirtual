@@ -14,6 +14,7 @@ import com.br.bancodigital.deposito.DepositoFormActivity;
 import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.helper.GetMask;
 import com.br.bancodigital.model.Usuario;
+import com.br.bancodigital.usuario.MinhaContaActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -76,5 +77,8 @@ public class MainActivity extends AppCompatActivity {
     private void configCliques() {
         findViewById(R.id.cardDeposito).setOnClickListener(view ->
                 startActivity(new Intent(this, DepositoFormActivity.class)));
+
+        findViewById(R.id.minhaConta).setOnClickListener(v ->
+                startActivity(new Intent(this, MinhaContaActivity.class)));
     }
 }
