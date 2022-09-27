@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BancoDigitalApp">
         <activity
+            android:name=".deposito.DepositoReciboActivity"
+            android:exported="false" />
+        <activity
             android:name=".deposito.DepositoFormActivity"
             android:exported="false" />
         <activity

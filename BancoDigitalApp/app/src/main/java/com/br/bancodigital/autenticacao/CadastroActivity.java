@@ -51,7 +51,12 @@ public class CadastroActivity extends AppCompatActivity {
 
                                 progressBar.setVisibility(View.VISIBLE);
 
-                                Usuario usuario = new Usuario(nome, email, telefone, senha);
+                                Usuario usuario = new Usuario();
+                                usuario.setNome(nome);
+                                usuario.setEmail(email);
+                                usuario.setTelefone(telefone);
+                                usuario.setSenha(senha);
+                                usuario.setSaldo(0);
 
                                 cadastrarUsuario(usuario);
 

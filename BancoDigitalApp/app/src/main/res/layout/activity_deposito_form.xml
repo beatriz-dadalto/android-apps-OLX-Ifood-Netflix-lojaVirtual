@@ -59,8 +59,12 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="24dp"
                 android:backgroundTint="@android:color/white"
+                android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textColorHint="@color/colorTextHint"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:theme="@style/Theme.EditText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -70,12 +74,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:visibility="gone"
-                tools:visibility="visible"
                 android:theme="@style/Theme.ProgressBar"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtValor" />
+                app:layout_constraintTop_toBottomOf="@+id/edtValor"
+                tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

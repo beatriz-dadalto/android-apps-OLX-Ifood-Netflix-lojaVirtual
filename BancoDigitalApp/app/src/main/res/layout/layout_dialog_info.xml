@@ -26,13 +26,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:textAlignment="center"
-        tools:text="Digite um valor maior que 0."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTitulo" />
+        app:layout_constraintTop_toBottomOf="@+id/textTitulo"
+        tools:text="Digite um valor maior que zero." />
 
     <Button
-        android:id="@+id/btnOk"
+        android:id="@+id/btnOK"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"

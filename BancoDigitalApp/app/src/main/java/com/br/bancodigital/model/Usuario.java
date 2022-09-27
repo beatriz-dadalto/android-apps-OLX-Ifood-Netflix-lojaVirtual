@@ -13,18 +13,10 @@ public class Usuario implements Serializable {
     private String email;
     private String telefone;
     private String urlImagem;
-    private Double saldo;
+    private double saldo;
     private String senha;
 
     public Usuario() {
-    }
-
-    public Usuario(String nome, String email, String telefone, String senha) {
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-        this.saldo = 0.0;
-        this.senha = senha;
     }
 
     public String getId() {
@@ -67,11 +59,11 @@ public class Usuario implements Serializable {
         this.urlImagem = urlImagem;
     }
 
-    public Double getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(Double saldo) {
+    public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
 

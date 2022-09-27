@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -40,27 +41,36 @@ public class DepositoFormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_deposito_form);
 
         configToolbar();
+
         recuperaUsuario();
+
         iniciaComponentes();
+
     }
 
     public void validaDeposito(View view) {
-        double valorDepositado = (double) edtValor.getRawValue() / 100;
+        double valorDeposito = (double) edtValor.getRawValue() / 100;
 
-        if (valorDepositado > 0) {
+        if (valorDeposito > 0) {
+
             ocultarTeclado();
+
             progressBar.setVisibility(View.VISIBLE);
 
-            salvarExtrato(valorDepositado);
+            salvarExtrato(valorDeposito);
+
+
         } else {
-            showDialog("Digite um valor maior que zero.");
+            showDialog("Digite um valor maior que 0.");
         }
+
     }
 
-    private void salvarExtrato(double valorDepositado) {
+    private void salvarExtrato(double valorDeposito) {
+
         Extrato extrato = new Extrato();
         extrato.setOperacao("DEPOSITO");
-        extrato.setValor(valorDepositado);
+        extrato.setValor(valorDeposito);
         extrato.setTipo("ENTRADA");
 
         DatabaseReference extratoRef = FirebaseHelper.getDatabaseReference()
@@ -69,18 +79,22 @@ public class DepositoFormActivity extends AppCompatActivity {
                 .child(extrato.getId());
         extratoRef.setValue(extrato).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                DatabaseReference updateRef = extratoRef
+
+                DatabaseReference updateExtrato = extratoRef
                         .child("data");
-                updateRef.setValue(ServerValue.TIMESTAMP);
+                updateExtrato.setValue(ServerValue.TIMESTAMP);
 
                 salvarDeposito(extrato);
+
             } else {
                 showDialog("Não foi possível efetuar o deposito, tente mais tarde.");
             }
         });
+
     }
 
     private void salvarDeposito(Extrato extrato) {
+
         Deposito deposito = new Deposito();
         deposito.setId(extrato.getId());
         deposito.setValor(extrato.getValor());
@@ -88,6 +102,7 @@ public class DepositoFormActivity extends AppCompatActivity {
         DatabaseReference depositoRef = FirebaseHelper.getDatabaseReference()
                 .child("depositos")
                 .child(deposito.getId());
+
         depositoRef.setValue(deposito).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
 
@@ -98,12 +113,17 @@ public class DepositoFormActivity extends AppCompatActivity {
                 usuario.setSaldo(usuario.getSaldo() + deposito.getValor());
                 usuario.atualizarSaldo();
 
-                //startActivity(new Intent(this, DepositoReciboActivity.class));
+                Intent intent = new Intent(this, DepositoReciboActivity.class);
+                intent.putExtra("idDeposito", deposito.getId());
+                startActivity(intent);
+                finish();
+
             } else {
                 progressBar.setVisibility(View.GONE);
                 showDialog("Não foi possível efetuar o deposito, tente mais tarde.");
             }
         });
+
     }
 
     private void recuperaUsuario() {
@@ -113,7 +133,7 @@ public class DepositoFormActivity extends AppCompatActivity {
         usuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                usuario = snapshot.getValue(Usuario.class);
             }
 
             @Override
@@ -123,9 +143,10 @@ public class DepositoFormActivity extends AppCompatActivity {
         });
     }
 
-
     private void showDialog(String msg) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomAlertDialog);
+        AlertDialog.Builder builder = new AlertDialog.Builder(
+                this, R.style.CustomAlertDialog
+        );
 
         View view = getLayoutInflater().inflate(R.layout.layout_dialog_info, null);
 
@@ -135,20 +156,13 @@ public class DepositoFormActivity extends AppCompatActivity {
         TextView mensagem = view.findViewById(R.id.textMensagem);
         mensagem.setText(msg);
 
-        Button btnOk = view.findViewById(R.id.btnOk);
-        btnOk.setOnClickListener(v -> dialog.dismiss());
+        Button btnOK = view.findViewById(R.id.btnOK);
+        btnOK.setOnClickListener(v -> dialog.dismiss());
 
-        // exibir a view
         builder.setView(view);
 
         dialog = builder.create();
         dialog.show();
-    }
-
-    private void iniciaComponentes() {
-        edtValor = findViewById(R.id.edtValor);
-        edtValor.setLocale(new Locale("PT", "br"));
-        progressBar = findViewById(R.id.progressBar);
     }
 
     private void configToolbar() {
@@ -158,10 +172,17 @@ public class DepositoFormActivity extends AppCompatActivity {
         findViewById(R.id.ibVoltar).setOnClickListener(v -> finish());
     }
 
-    private void ocultarTeclado() {
-        if (getCurrentFocus() != null) {
-            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-        }
+    private void iniciaComponentes() {
+        edtValor = findViewById(R.id.edtValor);
+        edtValor.setLocale(new Locale("PT", "br"));
+
+        progressBar = findViewById(R.id.progressBar);
     }
+
+    private void ocultarTeclado() {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(edtValor.getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
 }

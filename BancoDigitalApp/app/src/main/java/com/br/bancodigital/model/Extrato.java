@@ -9,8 +9,8 @@ public class Extrato implements Serializable {
 
     private String id;
     private String operacao;
-    private Long data;
-    private Double valor;
+    private long data;
+    private double valor;
     private String tipo;
 
     public Extrato() {
@@ -35,19 +35,19 @@ public class Extrato implements Serializable {
         this.operacao = operacao;
     }
 
-    public Long getData() {
+    public long getData() {
         return data;
     }
 
-    public void setData(Long data) {
+    public void setData(long data) {
         this.data = data;
     }
 
-    public Double getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 

@@ -6,7 +6,7 @@ public class Deposito implements Serializable {
 
     private String id;
     private long data;
-    private Double valor;
+    private double valor;
 
     public Deposito() {
     }
@@ -27,11 +27,11 @@ public class Deposito implements Serializable {
         this.data = data;
     }
 
-    public Double getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 }
