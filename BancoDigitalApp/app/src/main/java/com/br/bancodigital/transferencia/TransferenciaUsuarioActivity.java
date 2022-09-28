@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -24,14 +26,20 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class TransferenciaUsuarioActivity extends AppCompatActivity {
 
     private UsuarioAdapter usuarioAdapter;
-    private List<Usuario> usuarioList = new ArrayList<>();
-
+    private final List<Usuario> usuarioList = new ArrayList<>();
     private RecyclerView rvUsuarios;
+
+    private TextView textPesquisa;
+    private TextView textLimpar;
     private EditText edtPesquisa;
+    private String pesquisa = "";
+    private LinearLayout llPesquisa;
+
     private TextView textInfo;
     private ProgressBar progressBar;
 
@@ -41,9 +49,81 @@ public class TransferenciaUsuarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_transferencia_usuario);
 
         configToolbar();
+
         iniciaComponentes();
-        recuperarUsuarios();
+
         configRv();
+
+        recuperarUsuarios();
+
+        configPesquisa();
+
+        configCliques();
+
+    }
+
+    private void configCliques() {
+        textLimpar.setOnClickListener(v -> {
+            pesquisa = "";
+            configFiltro();
+            recuperarUsuarios();
+            ocultarTeclado();
+        });
+    }
+
+    private void configPesquisa() {
+        edtPesquisa.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
+                // Oculta teclado do dispositivo
+                ocultarTeclado();
+
+                progressBar.setVisibility(View.VISIBLE);
+
+                pesquisa = v.getText().toString();
+
+                if (!pesquisa.equals("")) {
+
+                    configFiltro();
+
+                    pesquisaUsuarios();
+
+                } else {
+                    recuperarUsuarios();
+
+                    configFiltro();
+                }
+
+
+            }
+            return false;
+        });
+    }
+
+    private void pesquisaUsuarios() {
+        for (Usuario usuario : new ArrayList<>(usuarioList)) {
+            if (!usuario.getNome().toLowerCase().contains(pesquisa.toLowerCase())) {
+                usuarioList.remove(usuario);
+            }
+        }
+
+        if (usuarioList.isEmpty()) {
+            textInfo.setText("Nenhum usuário encontrado com este nome.");
+        }
+
+        progressBar.setVisibility(View.GONE);
+        usuarioAdapter.notifyDataSetChanged();
+
+    }
+
+    private void configFiltro() {
+        if (!pesquisa.equals("")) {
+            textPesquisa.setText("Pesquisa: " + pesquisa);
+            llPesquisa.setVisibility(View.VISIBLE);
+        } else {
+            textPesquisa.setText("");
+            llPesquisa.setVisibility(View.GONE);
+        }
     }
 
     private void recuperarUsuarios() {
@@ -61,15 +141,13 @@ public class TransferenciaUsuarioActivity extends AppCompatActivity {
                         if (usuario != null) {
                             if (!usuario.getId().equals(FirebaseHelper.getIdFirebase())) {
                                 usuarioList.add(usuario);
-                            } else {
-                                textInfo.setText("\uD83D\uDC64 \nNenhum usuário cadastrado!");
                             }
-                        } else {
-                            textInfo.setText("");
                         }
+
                     }
+                    textInfo.setText("");
                 } else {
-                    textInfo.setText("\uD83D\uDC64 \nNenhum usuário cadastrado!");
+                    textInfo.setText("Nenhum usuário cadastrado.");
                 }
 
                 progressBar.setVisibility(View.GONE);
@@ -107,8 +185,12 @@ public class TransferenciaUsuarioActivity extends AppCompatActivity {
 
     private void iniciaComponentes() {
         rvUsuarios = findViewById(R.id.rvUsuarios);
-        edtPesquisa = findViewById(R.id.edtPesquisa);
         textInfo = findViewById(R.id.textInfo);
         progressBar = findViewById(R.id.progressBar);
+        edtPesquisa = findViewById(R.id.edtPesquisa);
+        textLimpar = findViewById(R.id.textLimpar);
+        textPesquisa = findViewById(R.id.textPesquisa);
+        llPesquisa = findViewById(R.id.llPesquisa);
     }
+
 }
