@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.blackcat.currencyedittext.CurrencyEditText;
 import com.br.bancodigital.R;
 import com.br.bancodigital.helper.FirebaseHelper;
+import com.br.bancodigital.model.Transferencia;
 import com.br.bancodigital.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -58,7 +60,13 @@ public class TransferenciaFormActivity extends AppCompatActivity {
             if (usuario.getSaldo() >= valor) {
 
                 ocultarTeclado();
-                Toast.makeText(this, "Tudo certo", Toast.LENGTH_SHORT).show();
+
+                Transferencia transferencia = new Transferencia();
+                transferencia.setValor(valor);
+
+                Intent intent = new Intent(this, TransferenciaUsuarioActivity.class);
+                intent.putExtra("transferencia", transferencia);
+                startActivity(intent);
 
             } else {
                 showDialog("Saldo insuficiente! \uD83E\uDD72");
