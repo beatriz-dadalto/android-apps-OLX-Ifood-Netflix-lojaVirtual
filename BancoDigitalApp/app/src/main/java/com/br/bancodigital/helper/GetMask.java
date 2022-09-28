@@ -18,7 +18,7 @@ public class GetMask {
         final int DIA_MES_ANO = 1; // 31/12/2021
         final int HORA_MINUTO = 2; // 22:00
         final int DIA_MES_ANO_HORA_MINUTO = 3; // 31/12/2021 ás 22:00
-        final int DIA_MES = 4; // 31 Janeiro
+        final int DIA_MES = 4; // 31 de Janeiro
 
         Locale locale = new Locale("PT", "br");
         String fuso = "America/Sao_Paulo";
@@ -105,7 +105,7 @@ public class GetMask {
                 time = dia + "/" + mes + "/" + ano + " às " + hora + ":" + minuto + "h";
                 break;
             case DIA_MES:
-                time = dia + " " + mes;
+                time = dia + " de " + mes;
                 break;
             default:
                 time = "Erro";
