@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.br.bancodigital.R;
 import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.helper.GetMask;
+import com.br.bancodigital.model.Extrato;
 import com.br.bancodigital.model.Transferencia;
 import com.br.bancodigital.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
@@ -67,7 +68,14 @@ public class TransferenciaConfirmaActivity extends AppCompatActivity {
         if (transferencia != null) {
             if (usuarioOrigem.getSaldo() >= transferencia.getValor()) {
 
-                salvarTransferencia();
+                usuarioOrigem.setSaldo(usuarioOrigem.getSaldo() - transferencia.getValor());
+                usuarioOrigem.atualizarSaldo();
+
+                usuarioDestino.setSaldo(usuarioDestino.getSaldo() + transferencia.getValor());
+                usuarioDestino.atualizarSaldo();
+
+                salvarExtrato(usuarioOrigem, "SAIDA");
+                salvarExtrato(usuarioDestino, "ENTRADA");
 
             } else {
                 showDialog("\uD83E\uDD72 \nSaldo insuficiente!");
@@ -75,25 +83,54 @@ public class TransferenciaConfirmaActivity extends AppCompatActivity {
         }
     }
 
-    public void salvarTransferencia() {
+    private void salvarExtrato(Usuario usuario, String tipoTransferencia) {
+
+        Extrato extrato = new Extrato();
+        extrato.setOperacao("TRANSFERENCIA");
+        extrato.setValor(transferencia.getValor());
+        extrato.setTipo(tipoTransferencia);
+
+        DatabaseReference extratoRef = FirebaseHelper.getDatabaseReference()
+                .child("extratos")
+                .child(usuario.getId())
+                .child(extrato.getId());
+        extratoRef.setValue(extrato).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+
+                DatabaseReference updateExtrato = extratoRef
+                        .child("data");
+                updateExtrato.setValue(ServerValue.TIMESTAMP);
+
+                salvarTransferencia(extrato);
+
+            } else {
+                showDialog("Não foi possível efetuar o deposito, tente mais tarde.");
+            }
+        });
+
+    }
+
+    // tipoTransferencia: SAIDA ou ENTRADA
+    public void salvarTransferencia(Extrato extrato) {
+
+        transferencia.setId(extrato.getId());
+
         DatabaseReference transferenciaRef = FirebaseHelper.getDatabaseReference()
                 .child("transferencias")
                 .child(transferencia.getId());
         transferenciaRef.setValue(transferencia).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                usuarioOrigem.setSaldo(usuarioOrigem.getSaldo() - transferencia.getValor());
-                usuarioOrigem.atualizarSaldo();
-
-                usuarioDestino.setSaldo(usuarioDestino.getSaldo() + transferencia.getValor());
-                usuarioDestino.atualizarSaldo();
 
                 DatabaseReference updateTransferencia = transferenciaRef
                         .child("data");
                 updateTransferencia.setValue(ServerValue.TIMESTAMP);
 
-                Intent intent = new Intent(this, TransferenciaReciboActivity.class);
-                intent.putExtra("idTransferencia", transferencia.getId());
-                startActivity(intent);
+                if (extrato.getTipo().equals("ENTRADA")) {
+                    Intent intent = new Intent(this, TransferenciaReciboActivity.class);
+                    intent.putExtra("idTransferencia", transferencia.getId());
+                    startActivity(intent);
+                }
+
             } else {
                 showDialog("\uD83E\uDD7A \nNão foi possível salvar a transferência!");
             }

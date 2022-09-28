@@ -51,13 +51,13 @@ public class ExtratoAdapter extends RecyclerView.Adapter<ExtratoAdapter.MyViewHo
             case "DEPOSITO":
                 holder.textIcon.setBackgroundResource(R.drawable.bg_entrada);
                 break;
-            case "SAIDA":
+            case "RECARGA":
                 holder.textIcon.setBackgroundResource(R.drawable.bg_saida);
                 break;
             case "TRANSFERENCIA":
-                if (extrato.getOperacao().equals("DEPOSITO")) {
+                if (extrato.getTipo().equals("ENTRADA")) {
                     holder.textIcon.setBackgroundResource(R.drawable.bg_entrada);
-                } else {
+                } else if (extrato.getTipo().equals("SAIDA")){
                     holder.textIcon.setBackgroundResource(R.drawable.bg_saida);
                 }
                 break;

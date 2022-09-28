@@ -14,9 +14,6 @@ public class Transferencia implements Serializable {
     private double valor;
 
     public Transferencia() {
-        // vai gerar um id toda vez que instanciar uma nova transferencia
-        DatabaseReference transferenciaRef = FirebaseHelper.getDatabaseReference();
-        setId(transferenciaRef.push().getKey());
     }
 
     public String getId() {

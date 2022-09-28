@@ -96,7 +96,7 @@ public class RecargaFormActivity extends AppCompatActivity {
     private void salvarExtrato(double valor, String numero) {
 
         Extrato extrato = new Extrato();
-        extrato.setOperacao("REGARGA");
+        extrato.setOperacao("RECARGA");
         extrato.setValor(valor);
         extrato.setTipo("SAIDA");
 
