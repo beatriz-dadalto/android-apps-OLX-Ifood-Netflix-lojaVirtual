@@ -18,9 +18,11 @@ import java.util.List;
 public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.MyViewHolder> {
 
     private List<Usuario> usuarioList;
+    private OnClick onClick;
 
-    public UsuarioAdapter(List<Usuario> usuarioList) {
+    public UsuarioAdapter(List<Usuario> usuarioList, OnClick onClick) {
         this.usuarioList = usuarioList;
+        this.onClick = onClick;
     }
 
     @NonNull
@@ -44,11 +46,17 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.MyViewHo
             holder.imagemUsuario.setImageResource(R.drawable.ic_user);
         }
 
+        holder.itemView.setOnClickListener(view -> onClick.onClickListener(usuario));
+
     }
 
     @Override
     public int getItemCount() {
         return usuarioList.size();
+    }
+
+    public interface OnClick {
+        void onClickListener(Usuario usuario);
     }
 
     static  class MyViewHolder extends RecyclerView.ViewHolder {

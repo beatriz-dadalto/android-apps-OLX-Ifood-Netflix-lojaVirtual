@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BancoDigitalApp">
         <activity
+            android:name=".transferencia.TransferenciaConfirmaActivity"
+            android:exported="false" />
+        <activity
             android:name=".transferencia.TransferenciaUsuarioActivity"
             android:exported="false" />
         <activity
