@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/bg_btn.xml" value="0.1695" />
         <entry key="app/src/main/res/drawable/bg_edit.xml" value="0.17" />
+        <entry key="app/src/main/res/drawable/bg_saida.xml" value="0.2315" />
         <entry key="app/src/main/res/drawable/ic_logo.xml" value="0.2625" />
         <entry key="app/src/main/res/drawable/ic_user_black.xml" value="0.352" />
         <entry key="app/src/main/res/drawable/ic_user_blue.xml" value="0.262" />
@@ -23,6 +24,7 @@
         <entry key="app/src/main/res/layout/activity_transferencia_form.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/activity_transferencia_recibo.xml" value="0.3890625" />
         <entry key="app/src/main/res/layout/activity_transferencia_usuario.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/adapter_extrato.xml" value="0.3890625" />
         <entry key="app/src/main/res/layout/adapter_usuario.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/divisor.xml" value="0.3885416666666667" />
         <entry key="app/src/main/res/layout/layout_dialog_info.xml" value="0.37395833333333334" />
