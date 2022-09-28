@@ -1,15 +1,26 @@
 package com.br.bancodigital.transferencia;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.br.bancodigital.R;
+import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.helper.GetMask;
 import com.br.bancodigital.model.Transferencia;
 import com.br.bancodigital.model.Usuario;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class TransferenciaConfirmaActivity extends AppCompatActivity {
@@ -18,8 +29,11 @@ public class TransferenciaConfirmaActivity extends AppCompatActivity {
     private TextView textUsuario;
     private ImageView imagemUsuario;
 
-    private Usuario usuario;
+    private Usuario usuarioDestino;
+    private Usuario usuarioOrigem;
     private Transferencia transferencia;
+
+    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +43,93 @@ public class TransferenciaConfirmaActivity extends AppCompatActivity {
         configToolbar();
         iniciaComponentes();
         configDados();
+        recuperaUsuarioOrigem();
     }
 
-    private void configDados(){
-        usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+    private void recuperaUsuarioOrigem() {
+        DatabaseReference usuarioRef = FirebaseHelper.getDatabaseReference()
+                .child("usuarios")
+                .child(transferencia.getIdUserOrigem());
+        usuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                usuarioOrigem = snapshot.getValue(Usuario.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void confirmarTransferencia(View view) {
+        if (transferencia != null) {
+            if (usuarioOrigem.getSaldo() >= transferencia.getValor()) {
+
+                salvarTransferencia();
+
+            } else {
+                showDialog("\uD83E\uDD72 \nSaldo insuficiente!");
+            }
+        }
+    }
+
+    public void salvarTransferencia() {
+        DatabaseReference transferenciaRef = FirebaseHelper.getDatabaseReference()
+                .child("transferencias")
+                .child(transferencia.getId());
+        transferenciaRef.setValue(transferencia).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                usuarioOrigem.setSaldo(usuarioOrigem.getSaldo() - transferencia.getValor());
+                usuarioOrigem.atualizarSaldo();
+
+                usuarioDestino.setSaldo(usuarioDestino.getSaldo() + transferencia.getValor());
+                usuarioDestino.atualizarSaldo();
+
+                DatabaseReference updateTransferencia = transferenciaRef
+                        .child("data");
+                updateTransferencia.setValue(ServerValue.TIMESTAMP);
+
+                Intent intent = new Intent(this, TransferenciaReciboActivity.class);
+                intent.putExtra("idTransferencia", transferencia.getId());
+                startActivity(intent);
+            } else {
+                showDialog("\uD83E\uDD7A \nNão foi possível salvar a transferência!");
+            }
+        });
+    }
+
+    private void showDialog(String msg) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(
+                this, R.style.CustomAlertDialog
+        );
+
+        View view = getLayoutInflater().inflate(R.layout.layout_dialog_info, null);
+
+        TextView textTitulo = view.findViewById(R.id.textTitulo);
+        textTitulo.setText("Atenção");
+
+        TextView mensagem = view.findViewById(R.id.textMensagem);
+        mensagem.setText(msg);
+
+        Button btnOK = view.findViewById(R.id.btnOK);
+        btnOK.setOnClickListener(v -> dialog.dismiss());
+
+        builder.setView(view);
+
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    private void configDados() {
+        usuarioDestino = (Usuario) getIntent().getSerializableExtra("usuario");
         transferencia = (Transferencia) getIntent().getSerializableExtra("transferencia");
 
-        textUsuario.setText(usuario.getNome());
+        textUsuario.setText(usuarioDestino.getNome());
         textValor.setText(getString(R.string.text_valor, GetMask.getValor(transferencia.getValor())));
-        if (usuario.getUrlImagem() != null) {
-            Picasso.get().load(usuario.getUrlImagem())
+        if (usuarioDestino.getUrlImagem() != null) {
+            Picasso.get().load(usuarioDestino.getUrlImagem())
                     .placeholder(R.drawable.loading)
                     .into(imagemUsuario);
         }

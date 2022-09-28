@@ -28,7 +28,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 public class TransferenciaUsuarioActivity extends AppCompatActivity implements UsuarioAdapter.OnClick {
 
@@ -78,7 +77,6 @@ public class TransferenciaUsuarioActivity extends AppCompatActivity implements U
         edtPesquisa.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 
-                // Oculta teclado do dispositivo
                 ocultarTeclado();
 
                 progressBar.setVisibility(View.VISIBLE);
@@ -96,8 +94,6 @@ public class TransferenciaUsuarioActivity extends AppCompatActivity implements U
 
                     configFiltro();
                 }
-
-
             }
             return false;
         });
@@ -198,6 +194,9 @@ public class TransferenciaUsuarioActivity extends AppCompatActivity implements U
 
     @Override
     public void onClickListener(Usuario usuario) {
+
+        transferencia.setIdUserDestino(usuario.getId());
+
         Intent intent = new Intent(this, TransferenciaConfirmaActivity.class);
         intent.putExtra("usuario", usuario);
         intent.putExtra("transferencia", transferencia);

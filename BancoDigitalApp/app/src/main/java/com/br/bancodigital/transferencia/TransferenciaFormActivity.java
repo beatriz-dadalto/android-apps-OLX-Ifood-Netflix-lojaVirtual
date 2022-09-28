@@ -62,6 +62,7 @@ public class TransferenciaFormActivity extends AppCompatActivity {
                 ocultarTeclado();
 
                 Transferencia transferencia = new Transferencia();
+                transferencia.setIdUserOrigem(FirebaseHelper.getIdFirebase());
                 transferencia.setValor(valor);
 
                 Intent intent = new Intent(this, TransferenciaUsuarioActivity.class);
