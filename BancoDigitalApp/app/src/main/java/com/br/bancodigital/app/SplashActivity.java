@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        new Handler(Looper.getMainLooper()).postDelayed(this::getAutenticacao, 3000);
+        new Handler(Looper.getMainLooper()).postDelayed(this::getAutenticacao, 2000);
     }
 
     private void getAutenticacao() {

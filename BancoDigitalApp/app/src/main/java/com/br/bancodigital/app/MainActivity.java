@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.br.bancodigital.R;
 import com.br.bancodigital.deposito.DepositoFormActivity;
+import com.br.bancodigital.extrato.ExtratoActivity;
 import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.helper.GetMask;
 import com.br.bancodigital.model.Usuario;
@@ -102,6 +103,10 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.cardRecarga).setOnClickListener(view ->
                 startActivity(new Intent(this, RecargaFormActivity.class)));
 
-        findViewById(R.id.cardTransferir).setOnClickListener(view -> startActivity(new Intent(this, TransferenciaFormActivity.class)));
+        findViewById(R.id.cardTransferir).setOnClickListener(view ->
+                startActivity(new Intent(this, TransferenciaFormActivity.class)));
+
+        findViewById(R.id.cardExtrato).setOnClickListener(view ->
+                startActivity(new Intent(this, ExtratoActivity.class)));
     }
 }
