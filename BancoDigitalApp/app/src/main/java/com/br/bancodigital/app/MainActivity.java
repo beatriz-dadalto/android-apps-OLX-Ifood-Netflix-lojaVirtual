@@ -37,6 +37,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements ExtratoAdapter.OnClickListener {
 
     private List<Extrato> extratoList = new ArrayList<>();
+    private List<Extrato> extratoListTemp = new ArrayList<>();
     private ExtratoAdapter extratoAdapter;
     private RecyclerView rvExtrato;
 
@@ -80,24 +81,28 @@ public class MainActivity extends AppCompatActivity implements ExtratoAdapter.On
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     extratoList.clear();
+                    extratoListTemp.clear();
 
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Extrato extrato = ds.getValue(Extrato.class);
-                        extratoList.add(extrato);
-
-                        // TODO 6 ultimas atividades. aqui ta pegando as 6 primeiras
-                        if (extratoList.size() == 6) {
-                            break;
-                        }
-
+                        extratoListTemp.add(extrato);
                     }
+
                     textInfo.setText("");
                 } else {
                     textInfo.setText("Nenhuma informação encontrada");
                 }
 
+                Collections.reverse(extratoListTemp);
+
+                // mostrar as 6 ultimas movimentacoes
+                for (int i = 0; i < extratoListTemp.size(); i++) {
+                    if (i <= 5) {
+                        extratoList.add(extratoListTemp.get(i));
+                    }
+                }
+
                 progressBar.setVisibility(View.GONE);
-                Collections.reverse(extratoList);
                 extratoAdapter.notifyDataSetChanged();
             }
 
