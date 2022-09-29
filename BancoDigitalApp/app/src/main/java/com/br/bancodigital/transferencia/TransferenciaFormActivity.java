@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.blackcat.currencyedittext.CurrencyEditText;
 import com.br.bancodigital.R;
@@ -65,7 +64,7 @@ public class TransferenciaFormActivity extends AppCompatActivity {
                 transferencia.setIdUserOrigem(FirebaseHelper.getIdFirebase());
                 transferencia.setValor(valor);
 
-                Intent intent = new Intent(this, TransferenciaUsuarioActivity.class);
+                Intent intent = new Intent(this, SelecaoUsuarioActivity.class);
                 intent.putExtra("transferencia", transferencia);
                 startActivity(intent);
 

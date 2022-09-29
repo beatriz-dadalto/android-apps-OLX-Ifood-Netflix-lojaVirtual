@@ -13,7 +13,7 @@ import com.blackcat.currencyedittext.CurrencyEditText;
 import com.br.bancodigital.R;
 import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.model.Cobranca;
-import com.br.bancodigital.transferencia.TransferenciaUsuarioActivity;
+import com.br.bancodigital.transferencia.SelecaoUsuarioActivity;
 
 import java.util.Locale;
 
@@ -41,7 +41,7 @@ public class CobrancaFormActivity extends AppCompatActivity {
             cobranca.setIdEmitente(FirebaseHelper.getIdFirebase());
             cobranca.setValor(valor);
 
-            Intent intent = new Intent(this, TransferenciaUsuarioActivity.class);
+            Intent intent = new Intent(this, SelecaoUsuarioActivity.class);
             intent.putExtra("cobranca", cobranca);
             startActivity(intent);
         } else {

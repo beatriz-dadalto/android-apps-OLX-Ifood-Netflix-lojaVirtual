@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BancoDigitalApp">
         <activity
+            android:name=".cobranca.CobrancaConfirmaActivity"
+            android:exported="false" />
+        <activity
             android:name=".cobranca.CobrancaFormActivity"
             android:exported="false" />
         <activity
@@ -28,7 +31,7 @@
             android:name=".transferencia.TransferenciaConfirmaActivity"
             android:exported="false" />
         <activity
-            android:name=".transferencia.TransferenciaUsuarioActivity"
+            android:name=".transferencia.SelecaoUsuarioActivity"
             android:exported="false" />
         <activity
             android:name=".transferencia.TransferenciaFormActivity"

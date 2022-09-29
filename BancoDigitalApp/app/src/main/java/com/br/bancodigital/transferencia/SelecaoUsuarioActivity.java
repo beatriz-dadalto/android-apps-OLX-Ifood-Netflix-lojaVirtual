@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.br.bancodigital.R;
 import com.br.bancodigital.adapter.UsuarioAdapter;
 import com.br.bancodigital.helper.FirebaseHelper;
+import com.br.bancodigital.model.Cobranca;
 import com.br.bancodigital.model.Transferencia;
 import com.br.bancodigital.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TransferenciaUsuarioActivity extends AppCompatActivity implements UsuarioAdapter.OnClick {
+public class SelecaoUsuarioActivity extends AppCompatActivity implements UsuarioAdapter.OnClick {
 
     private UsuarioAdapter usuarioAdapter;
     private final List<Usuario> usuarioList = new ArrayList<>();
@@ -45,11 +46,12 @@ public class TransferenciaUsuarioActivity extends AppCompatActivity implements U
     private ProgressBar progressBar;
 
     private Transferencia transferencia;
+    private Cobranca cobranca;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transferencia_usuario);
+        setContentView(R.layout.activity_selecao_usuario);
 
         configToolbar();
         iniciaComponentes();
@@ -57,11 +59,16 @@ public class TransferenciaUsuarioActivity extends AppCompatActivity implements U
         recuperarUsuarios();
         configPesquisa();
         configCliques();
-        recuperaTransferencia();
+        getExtra();
     }
 
-    private void recuperaTransferencia() {
-        transferencia = (Transferencia) getIntent().getSerializableExtra("transferencia");
+    // receber dados de outra activity
+    private void getExtra() {
+        if (getIntent().hasExtra("transferencia")) {
+            transferencia = (Transferencia) getIntent().getSerializableExtra("transferencia");
+        } else if (getIntent().hasExtra("cobranca")) {
+            cobranca = (Cobranca) getIntent().getSerializableExtra("cobranca");
+        }
     }
 
     private void configCliques() {
@@ -195,11 +202,22 @@ public class TransferenciaUsuarioActivity extends AppCompatActivity implements U
     @Override
     public void onClickListener(Usuario usuario) {
 
-        transferencia.setIdUserDestino(usuario.getId());
+        Intent intent = new Intent();
+        String idUsuario = usuario.getId();
 
-        Intent intent = new Intent(this, TransferenciaConfirmaActivity.class);
+        if (transferencia != null) {
+            transferencia.setIdUserDestino(idUsuario);
+            new Intent(this, TransferenciaConfirmaActivity.class);
+            // enviar os dados para a proxima activity
+            intent.putExtra("transferencia", transferencia);
+        } else if (cobranca != null) {
+            cobranca.setIdDestinatario(idUsuario);
+            new Intent(this, TransferenciaConfirmaActivity.class);
+            // enviar os dados para a proxima activity
+            intent.putExtra("cobranca", cobranca);
+        }
+
         intent.putExtra("usuario", usuario);
-        intent.putExtra("transferencia", transferencia);
         startActivity(intent);
     }
 }
