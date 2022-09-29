@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.br.bancodigital.R;
 import com.br.bancodigital.adapter.UsuarioAdapter;
+import com.br.bancodigital.cobranca.CobrancaConfirmaActivity;
 import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.model.Cobranca;
 import com.br.bancodigital.model.Transferencia;
@@ -202,22 +203,22 @@ public class SelecaoUsuarioActivity extends AppCompatActivity implements Usuario
     @Override
     public void onClickListener(Usuario usuario) {
 
-        Intent intent = new Intent();
         String idUsuario = usuario.getId();
 
         if (transferencia != null) {
             transferencia.setIdUserDestino(idUsuario);
-            new Intent(this, TransferenciaConfirmaActivity.class);
+            Intent intent = new Intent(this, TransferenciaConfirmaActivity.class);
             // enviar os dados para a proxima activity
             intent.putExtra("transferencia", transferencia);
+            intent.putExtra("usuario", usuario);
+            startActivity(intent);
         } else if (cobranca != null) {
             cobranca.setIdDestinatario(idUsuario);
-            new Intent(this, TransferenciaConfirmaActivity.class);
+            Intent intent = new Intent(this, CobrancaConfirmaActivity.class);
             // enviar os dados para a proxima activity
             intent.putExtra("cobranca", cobranca);
+            intent.putExtra("usuario", usuario);
+            startActivity(intent);
         }
-
-        intent.putExtra("usuario", usuario);
-        startActivity(intent);
     }
 }

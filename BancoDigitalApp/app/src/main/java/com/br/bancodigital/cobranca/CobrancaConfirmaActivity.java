@@ -1,26 +1,26 @@
 package com.br.bancodigital.cobranca;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.br.bancodigital.R;
+import com.br.bancodigital.app.MainActivity;
 import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.helper.GetMask;
 import com.br.bancodigital.model.Cobranca;
 import com.br.bancodigital.model.Notificacao;
-import com.br.bancodigital.model.Transferencia;
 import com.br.bancodigital.model.Usuario;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.ServerValue;
 import com.squareup.picasso.Picasso;
 
 public class CobrancaConfirmaActivity extends AppCompatActivity {
@@ -28,10 +28,10 @@ public class CobrancaConfirmaActivity extends AppCompatActivity {
     private TextView textValor;
     private TextView textUsuario;
     private ImageView imagemUsuario;
+    private ProgressBar progressBar;
 
-    private Usuario usuarioDestino;
-    private Usuario usuarioOrigem;
     private Cobranca cobranca;
+    private Notificacao notificacao;
 
     private AlertDialog dialog;
 
@@ -43,37 +43,65 @@ public class CobrancaConfirmaActivity extends AppCompatActivity {
         configToolbar();
         iniciaComponentes();
         configDados();
-        recuperaUsuarioOrigem();
     }
 
     public void confirmarCobranca(View view) {
-        
-    }
+        DatabaseReference cobrancaRef = FirebaseHelper.getDatabaseReference()
+                .child("cobrancas")
+                .child(cobranca.getIdDestinatario())
+                .child(cobranca.getId());
+        cobrancaRef.setValue(cobranca).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
 
-    private void recuperaUsuarioOrigem() {
-        DatabaseReference usuarioRef = FirebaseHelper.getDatabaseReference()
-                .child("usuarios")
-                .child(FirebaseHelper.getIdFirebase());
-        usuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                usuarioOrigem = snapshot.getValue(Usuario.class);
-            }
+                progressBar.setVisibility(View.VISIBLE);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                DatabaseReference updateRef = cobrancaRef
+                        .child("data");
+                updateRef.setValue(ServerValue.TIMESTAMP);
 
+                configNotificacao();
+
+            } else {
+                showDialog("\uD83E\uDD7A \nNão foi possível salvar os dados. tente mais tarde!");
             }
         });
     }
 
-    private void enviaNotificacao(String idOperacao) {
-        Notificacao notificacao = new Notificacao();
-        notificacao.setOperacao("TRANSFERENCIA");
-        notificacao.setIdDestinatario(usuarioDestino.getId());
-        notificacao.setIdEmitente(usuarioOrigem.getId());
-        notificacao.setIdOperacao(idOperacao);
-        notificacao.enviar();
+    private void configNotificacao() {
+        notificacao = new Notificacao();
+        notificacao.setIdOperacao(cobranca.getId());
+        notificacao.setIdDestinatario(cobranca.getIdDestinatario());
+        notificacao.setIdEmitente(FirebaseHelper.getIdFirebase());
+        notificacao.setOperacao("COBRANCA");
+
+        // envia notificacao para o usuario que ira receber a cobranca
+        enviarNotificacao(notificacao);
+    }
+
+    // envia notificacao para o usuario que ira receber a cobranca
+    private void enviarNotificacao(Notificacao notificacao) {
+        DatabaseReference notificacaoRef = FirebaseHelper.getDatabaseReference()
+                .child("notificacoes")
+                .child(notificacao.getIdDestinatario())
+                .child(notificacao.getId());
+        notificacaoRef.setValue(notificacao).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+
+                DatabaseReference updateRef = notificacaoRef
+                        .child("data");
+                updateRef.setValue(ServerValue.TIMESTAMP);
+
+                Toast.makeText(this, "\uD83D\uDE09 \nCobrança enviada com sucesso!", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+            } else {
+                progressBar.setVisibility(View.GONE);
+                showDialog("Não foi possível enviar uma notificação para o destinário");
+            }
+        });
     }
 
     private void showDialog(String msg) {
@@ -99,7 +127,7 @@ public class CobrancaConfirmaActivity extends AppCompatActivity {
     }
 
     private void configDados() {
-        usuarioDestino = (Usuario) getIntent().getSerializableExtra("usuario");
+        Usuario usuarioDestino = (Usuario) getIntent().getSerializableExtra("usuario");
         cobranca = (Cobranca) getIntent().getSerializableExtra("cobranca");
 
         textUsuario.setText(usuarioDestino.getNome());
@@ -120,5 +148,6 @@ public class CobrancaConfirmaActivity extends AppCompatActivity {
         textValor = findViewById(R.id.textValor);
         textUsuario = findViewById(R.id.textUsuario);
         imagemUsuario = findViewById(R.id.imagemUsuario);
+        progressBar = findViewById(R.id.progressBar);
     }
 }
