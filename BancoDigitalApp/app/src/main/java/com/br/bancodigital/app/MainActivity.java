@@ -21,6 +21,7 @@ import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.helper.GetMask;
 import com.br.bancodigital.model.Extrato;
 import com.br.bancodigital.model.Usuario;
+import com.br.bancodigital.notificacoes.NotificacoesActivity;
 import com.br.bancodigital.recarga.RecargaFormActivity;
 import com.br.bancodigital.transferencia.TransferenciaFormActivity;
 import com.br.bancodigital.usuario.MinhaContaActivity;
@@ -181,6 +182,9 @@ public class MainActivity extends AppCompatActivity implements ExtratoAdapter.On
 
         findViewById(R.id.textVerTodas).setOnClickListener(view ->
                 startActivity(new Intent(this, ExtratoActivity.class)));
+
+        findViewById(R.id.btnNotificacoes).setOnClickListener(view ->
+                startActivity(new Intent(this, NotificacoesActivity.class)));
     }
 
     @Override
