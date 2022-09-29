@@ -53,23 +53,27 @@ public class RecargaFormActivity extends AppCompatActivity {
         String numero = edtTelefone.getUnMasked().trim();
 
         if (valor >= 15) {
-            if (valor <= usuario.getSaldo()) {
-                if (!numero.isEmpty()) {
-                    if (numero.length() == 11) {
+            if (usuario != null) {
+                if (valor <= usuario.getSaldo()) {
+                    if (!numero.isEmpty()) {
+                        if (numero.length() == 11) {
 
-                        progressBar.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.VISIBLE);
 
-                        salvarExtrato(valor, numero);
+                            salvarExtrato(valor, numero);
 
+                        } else {
+                            showDialog("O número digitado está incompleto");
+                        }
                     } else {
-                        showDialog("O número digitado está incompleto");
+                        edtTelefone.requestFocus();
+                        showDialog("Informe o número do celular");
                     }
                 } else {
-                    edtTelefone.requestFocus();
-                    showDialog("Informe o número do celular");
+                    showDialog("Saldo insuficiente! \uD83E\uDD72");
                 }
             } else {
-                showDialog("Saldo insuficiente! \uD83E\uDD72");
+                showDialog("\uD83E\uDD14 \nCarregando...");
             }
         } else {
             showDialog("Recarga mínima de R$ 15,00.");
@@ -138,7 +142,7 @@ public class RecargaFormActivity extends AppCompatActivity {
                         .child("data");
                 updateRecarga.setValue(ServerValue.TIMESTAMP);
 
-                usuario.setSaldo(usuario.getSaldo() - recarga.getValor());
+                usuario.setSaldo(usuario.getSaldo() - extrato.getValor());
                 usuario.atualizarSaldo();
 
                 Intent intent = new Intent(this, RecargaReciboActivity.class);
