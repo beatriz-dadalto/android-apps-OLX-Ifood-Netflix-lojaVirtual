@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.br.bancodigital.R;
 import com.br.bancodigital.adapter.ExtratoAdapter;
+import com.br.bancodigital.cobranca.CobrancaFormActivity;
 import com.br.bancodigital.deposito.DepositoFormActivity;
 import com.br.bancodigital.extrato.ExtratoActivity;
 import com.br.bancodigital.helper.FirebaseHelper;
@@ -221,6 +222,9 @@ public class MainActivity extends AppCompatActivity implements ExtratoAdapter.On
 
         findViewById(R.id.btnNotificacao).setOnClickListener(view ->
                 startActivity(new Intent(this, NotificacoesActivity.class)));
+
+        findViewById(R.id.cardCobrar).setOnClickListener(view ->
+                startActivity(new Intent(this, CobrancaFormActivity.class)));
     }
 
     @Override

@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/drawable/ic_user_black.xml" value="0.352" />
         <entry key="app/src/main/res/drawable/ic_user_blue.xml" value="0.262" />
         <entry key="app/src/main/res/layout/activity_cadastro.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/activity_cobranca_form.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/activity_deposito_form.xml" value="0.37395833333333334" />
         <entry key="app/src/main/res/layout/activity_deposito_recibo.xml" value="0.3885416666666667" />
         <entry key="app/src/main/res/layout/activity_extrato.xml" value="0.3890625" />
