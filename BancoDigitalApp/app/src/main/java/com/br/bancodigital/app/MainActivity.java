@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements ExtratoAdapter.On
         findViewById(R.id.textVerTodas).setOnClickListener(view ->
                 startActivity(new Intent(this, ExtratoActivity.class)));
 
-        findViewById(R.id.btnNotificacoes).setOnClickListener(view ->
+        findViewById(R.id.btnNotificacao).setOnClickListener(view ->
                 startActivity(new Intent(this, NotificacoesActivity.class)));
     }
 

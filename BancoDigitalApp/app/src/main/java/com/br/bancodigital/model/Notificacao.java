@@ -2,6 +2,7 @@ package com.br.bancodigital.model;
 
 import com.br.bancodigital.helper.FirebaseHelper;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ServerValue;
 
 import java.io.Serializable;
 
@@ -75,5 +76,19 @@ public class Notificacao implements Serializable {
 
     public void setLida(boolean lida) {
         this.lida = lida;
+    }
+
+    public void enviar() {
+        DatabaseReference notificacaoRef = FirebaseHelper.getDatabaseReference()
+                .child("notificacoes")
+                .child(getIdDestinatario())
+                .child(getId());
+        notificacaoRef.setValue(this).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DatabaseReference notificacaoUpdate = notificacaoRef
+                        .child("data");
+                notificacaoUpdate.setValue(ServerValue.TIMESTAMP);
+            }
+        });
     }
 }

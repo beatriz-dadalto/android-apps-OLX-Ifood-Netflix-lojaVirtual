@@ -15,6 +15,7 @@ import com.br.bancodigital.R;
 import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.helper.GetMask;
 import com.br.bancodigital.model.Extrato;
+import com.br.bancodigital.model.Notificacao;
 import com.br.bancodigital.model.Transferencia;
 import com.br.bancodigital.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
@@ -62,6 +63,15 @@ public class TransferenciaConfirmaActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void enviaNotificacao(String idOperacao) {
+        Notificacao notificacao = new Notificacao();
+        notificacao.setOperacao("TRANSFERENCIA");
+        notificacao.setIdDestinatario(usuarioDestino.getId());
+        notificacao.setIdEmitente(usuarioOrigem.getId());
+        notificacao.setOperacao(idOperacao);
+        notificacao.enviar();
     }
 
     public void confirmarTransferencia(View view) {
@@ -126,6 +136,8 @@ public class TransferenciaConfirmaActivity extends AppCompatActivity {
                 updateTransferencia.setValue(ServerValue.TIMESTAMP);
 
                 if (extrato.getTipo().equals("ENTRADA")) {
+
+                    enviaNotificacao(extrato.getId());
                     Intent intent = new Intent(this, TransferenciaReciboActivity.class);
                     intent.putExtra("idTransferencia", transferencia.getId());
                     startActivity(intent);
