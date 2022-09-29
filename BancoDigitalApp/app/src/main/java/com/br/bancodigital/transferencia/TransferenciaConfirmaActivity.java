@@ -70,7 +70,7 @@ public class TransferenciaConfirmaActivity extends AppCompatActivity {
         notificacao.setOperacao("TRANSFERENCIA");
         notificacao.setIdDestinatario(usuarioDestino.getId());
         notificacao.setIdEmitente(usuarioOrigem.getId());
-        notificacao.setOperacao(idOperacao);
+        notificacao.setIdOperacao(idOperacao);
         notificacao.enviar();
     }
 

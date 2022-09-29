@@ -49,13 +49,13 @@ public class NotificacaoAdapter extends RecyclerView.Adapter<NotificacaoAdapter.
         String titulo = "";
         switch (notificacao.getOperacao()) {
             case "COBRANCA":
-                titulo = "Você recebeu uma cobrança";
+                titulo = "Você recebeu uma cobrança.";
                 break;
             case "TRANSFERENCIA":
-                titulo = "Você recebeu uma transferencia";
+                titulo = "Você recebeu uma transferência.";
                 break;
             case "PAGAMENTO":
-                titulo = "Você recebeu um pagamento";
+                titulo = "Você recebeu um pagamento.";
                 break;
         }
 
@@ -72,7 +72,7 @@ public class NotificacaoAdapter extends RecyclerView.Adapter<NotificacaoAdapter.
 
         recuperaUsuario(notificacao, holder);
 
-        holder.itemView.setOnClickListener(view -> onClick.onClickListener(notificacao));
+        holder.itemView.setOnClickListener(v -> onClick.onClickListener(notificacao));
     }
 
     private void recuperaUsuario(Notificacao notificacao, MyViewHolder holder) {

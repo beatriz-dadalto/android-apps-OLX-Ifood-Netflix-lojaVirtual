@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
+            android:scaleType="centerCrop"
             android:src="@drawable/loading" />
 
     </androidx.cardview.widget.CardView>
@@ -40,15 +41,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_notificacao"
-        tools:text="10"
+        android:gravity="center"
+        android:paddingHorizontal="5dp"
         android:textColor="@android:color/white"
         android:textSize="12sp"
         android:textStyle="bold"
-        android:gravity="center"
         android:visibility="gone"
-        android:paddingHorizontal="5dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnNotificacoes"
-        app:layout_constraintTop_toTopOf="@+id/btnNotificacoes"
+        app:layout_constraintEnd_toStartOf="@+id/btnNotificacao"
+        app:layout_constraintTop_toTopOf="@+id/btnNotificacao"
+        tools:text="10"
         tools:visibility="visible" />
 
     <TextView

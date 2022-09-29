@@ -20,6 +20,7 @@ import com.br.bancodigital.extrato.ExtratoActivity;
 import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.helper.GetMask;
 import com.br.bancodigital.model.Extrato;
+import com.br.bancodigital.model.Notificacao;
 import com.br.bancodigital.model.Usuario;
 import com.br.bancodigital.notificacoes.NotificacoesActivity;
 import com.br.bancodigital.recarga.RecargaFormActivity;
@@ -37,14 +38,18 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ExtratoAdapter.OnClickListener {
 
+    private List<Notificacao> notificacaoList = new ArrayList<>();
+
     private List<Extrato> extratoList = new ArrayList<>();
     private List<Extrato> extratoListTemp = new ArrayList<>();
+
     private ExtratoAdapter extratoAdapter;
     private RecyclerView rvExtrato;
 
     private TextView textSaldo;
     private ProgressBar progressBar;
     private TextView textInfo;
+    private TextView textNotificacao;
     private ImageView imagemPerfil;
 
     private Usuario usuario;
@@ -64,6 +69,35 @@ public class MainActivity extends AppCompatActivity implements ExtratoAdapter.On
         super.onStart();
 
         recuperaDados();
+    }
+
+    private void recuperaNotificacoes() {
+        DatabaseReference notificacoesRef = FirebaseHelper.getDatabaseReference()
+                .child("notificacoes")
+                .child(FirebaseHelper.getIdFirebase());
+        notificacoesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                notificacaoList.clear();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Notificacao notificacao = ds.getValue(Notificacao.class);
+                    notificacaoList.add(notificacao);
+                }
+
+                if (notificacaoList.isEmpty()) {
+                    textNotificacao.setText("0");
+                    textNotificacao.setVisibility(View.GONE);
+                } else {
+                    textNotificacao.setText(String.valueOf(notificacaoList.size()));
+                    textNotificacao.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void configRv() {
@@ -117,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements ExtratoAdapter.On
     private void recuperaDados() {
         recuperaUsuario();
         recuperaExtrato();
+        recuperaNotificacoes();
     }
 
     private void recuperaUsuario() {
@@ -155,6 +190,7 @@ public class MainActivity extends AppCompatActivity implements ExtratoAdapter.On
         textInfo = findViewById(R.id.textInfo);
         imagemPerfil = findViewById(R.id.imagemPerfil);
         rvExtrato = findViewById(R.id.rvExtrato);
+        textNotificacao = findViewById(R.id.textNotificacao);
     }
 
     private void configCliques() {
