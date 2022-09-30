@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.br.bancodigital.R;
 import com.br.bancodigital.adapter.NotificacaoAdapter;
+import com.br.bancodigital.cobranca.PagamentoCobrancaActivity;
 import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.model.Notificacao;
 import com.google.firebase.database.DataSnapshot;
@@ -97,6 +99,12 @@ public class NotificacoesActivity extends AppCompatActivity implements Notificac
 
     @Override
     public void onClickListener(Notificacao notificacao) {
-
+        switch (notificacao.getOperacao()) {
+            case "COBRANCA":
+                Intent intent = new Intent(this, PagamentoCobrancaActivity.class);
+                intent.putExtra("notificacao", notificacao);
+                startActivity(intent);
+                break;
+        }
     }
 }
