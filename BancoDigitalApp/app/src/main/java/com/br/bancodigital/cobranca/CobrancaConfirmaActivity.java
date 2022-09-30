@@ -91,7 +91,7 @@ public class CobrancaConfirmaActivity extends AppCompatActivity {
                         .child("data");
                 updateRef.setValue(ServerValue.TIMESTAMP);
 
-                Toast.makeText(this, "\uD83D\uDE09 \nCobrança enviada com sucesso!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "\uD83D\uDE09 Cobrança enviada com sucesso", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);

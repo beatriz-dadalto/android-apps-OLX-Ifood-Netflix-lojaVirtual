@@ -37,12 +37,12 @@ public class PagamentoCobrancaActivity extends AppCompatActivity {
     private ImageView imagemUsuario;
     private ProgressBar progressBar;
 
+    private AlertDialog dialog;
+
     private Cobranca cobranca;
     private Notificacao notificacao;
-    private Usuario usuarioDestino; // recebe pagamento
-    private Usuario usuarioOrigem; // faz cobranca
-
-    private AlertDialog dialog;
+    private Usuario usuarioDestino;
+    private Usuario usuarioOrigem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,38 +53,49 @@ public class PagamentoCobrancaActivity extends AppCompatActivity {
         iniciaComponentes();
         recuperaUsuarioOrigem();
         getExtra();
+
     }
 
     public void confirmarPagamento(View view) {
-        if (usuarioDestino != null && usuarioOrigem != null) {
-            if (usuarioOrigem.getSaldo() > cobranca.getValor()) {
+        if (cobranca != null) {
+            if (!cobranca.isPaga()) {
+                if (usuarioDestino != null && usuarioOrigem != null) {
+                    if (usuarioOrigem.getSaldo() >= cobranca.getValor()) {
 
-                usuarioOrigem.setSaldo(usuarioOrigem.getSaldo() - cobranca.getValor());
-                usuarioOrigem.atualizarSaldo();
+                        usuarioOrigem.setSaldo(usuarioOrigem.getSaldo() - cobranca.getValor());
+                        usuarioOrigem.atualizarSaldo();
 
-                usuarioDestino.setSaldo(usuarioDestino.getSaldo() + cobranca.getValor());
-                usuarioDestino.atualizarSaldo();
+                        usuarioDestino.setSaldo(usuarioDestino.getSaldo() + cobranca.getValor());
+                        usuarioDestino.atualizarSaldo();
 
-                atualizarStatusCobranca();
-                // pagou cobranca
-                salvarExtrato(usuarioOrigem, "SAIDA");
-                // recebeu pagamento
-                salvarExtrato(usuarioDestino, "ENTRADA");
+                        atualizarStatusCobranca();
 
+                        // enviou o pagamento
+                        salvarExtrato(usuarioOrigem, "SAIDA");
+
+                        // recebeu o pagamento
+                        salvarExtrato(usuarioDestino, "ENTRADA");
+
+                    } else {
+                        showDialog("Saldo insuficiente.");
+                    }
+                } else {
+                    Toast.makeText(this, "Ainda estamos recuperando as informações.", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                showDialog("\uD83E\uDD7A \nSaldo insuficiente");
+                showDialog("O pagamento já foi realizado para esta cobrança.");
             }
         } else {
-            Toast.makeText(this, "\uD83E\uDD14 \nRecuperando dados...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Ainda estamos recuperando as informações.", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void salvarExtrato(Usuario usuario, String tipoTransferencia) {
+    private void salvarExtrato(Usuario usuario, String tipo) {
 
         Extrato extrato = new Extrato();
         extrato.setOperacao("PAGAMENTO");
         extrato.setValor(cobranca.getValor());
-        extrato.setTipo(tipoTransferencia);
+        extrato.setTipo(tipo);
 
         DatabaseReference extratoRef = FirebaseHelper.getDatabaseReference()
                 .child("extratos")
@@ -107,6 +118,7 @@ public class PagamentoCobrancaActivity extends AppCompatActivity {
     }
 
     private void salvarPagamento(Extrato extrato) {
+
         Pagamento pagamento = new Pagamento();
         pagamento.setId(extrato.getId());
         pagamento.setIdCobranca(cobranca.getId());
@@ -117,18 +129,21 @@ public class PagamentoCobrancaActivity extends AppCompatActivity {
         DatabaseReference pagamentoRef = FirebaseHelper.getDatabaseReference()
                 .child("pagamentos")
                 .child(extrato.getId());
-        pagamentoRef.setValue(pagamento).addOnCompleteListener(task -> {
+        pagamentoRef.setValue(pagamento).addOnSuccessListener(aVoid -> {
 
             DatabaseReference update = pagamentoRef.child("data");
             update.setValue(ServerValue.TIMESTAMP);
 
         });
 
-        if (extrato.getOperacao().equals("ENTRADA")) {
+        if (extrato.getTipo().equals("ENTRADA")) {
             configNotificacao(extrato.getId());
         } else {
-            // TODO activity pagamento recebido
+            Intent intent = new Intent(this, ReciboPagamentoActivity.class);
+            intent.putExtra("idPagamento", pagamento.getId());
+            startActivity(intent);
         }
+
     }
 
     private void atualizarStatusCobranca() {
@@ -166,63 +181,28 @@ public class PagamentoCobrancaActivity extends AppCompatActivity {
         });
     }
 
-    private void recuperaUsuarioDestino() {
-        DatabaseReference usuarioRef = FirebaseHelper.getDatabaseReference()
-                .child("usuarios")
-                .child(cobranca.getIdEmitente());
-        usuarioRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                usuarioDestino = snapshot.getValue(Usuario.class);
-
-                configDados();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void recuperaUsuarioOrigem() {
-        DatabaseReference usuarioRef = FirebaseHelper.getDatabaseReference()
-                .child("usuarios")
-                .child(FirebaseHelper.getIdFirebase());
-        usuarioRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                usuarioOrigem = snapshot.getValue(Usuario.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
     private void configNotificacao(String idOperacao) {
-        notificacao = new Notificacao();
+        Notificacao notificacao = new Notificacao();
         notificacao.setIdOperacao(idOperacao);
         notificacao.setIdDestinatario(usuarioDestino.getId());
         notificacao.setIdEmitente(usuarioOrigem.getId());
         notificacao.setOperacao("PAGAMENTO");
 
-        // envia notificacao para o usuario que ira receber a cobranca
+        // Envia a notificação para o usuário que irá receber a cobrança
         enviarNotificacao(notificacao);
+
     }
 
-    // envia notificacao para o usuario que ira receber o pagamento
+    // Envia a notificação para o usuário que irá receber o pagamento
     private void enviarNotificacao(Notificacao notificacao) {
-        DatabaseReference notificacaoRef = FirebaseHelper.getDatabaseReference()
+        DatabaseReference noficacaoRef = FirebaseHelper.getDatabaseReference()
                 .child("notificacoes")
                 .child(notificacao.getIdDestinatario())
                 .child(notificacao.getId());
-        notificacaoRef.setValue(notificacao).addOnCompleteListener(task -> {
+        noficacaoRef.setValue(notificacao).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
 
-                DatabaseReference updateRef = notificacaoRef
+                DatabaseReference updateRef = noficacaoRef
                         .child("data");
                 updateRef.setValue(ServerValue.TIMESTAMP);
 
@@ -252,12 +232,46 @@ public class PagamentoCobrancaActivity extends AppCompatActivity {
 
         dialog = builder.create();
         dialog.show();
+
+    }
+
+    private void recuperaUsuarioDestino() {
+        DatabaseReference usuarioRef = FirebaseHelper.getDatabaseReference()
+                .child("usuarios")
+                .child(cobranca.getIdEmitente());
+        usuarioRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                usuarioDestino = snapshot.getValue(Usuario.class);
+                configDados();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void recuperaUsuarioOrigem() {
+        DatabaseReference usuarioRef = FirebaseHelper.getDatabaseReference()
+                .child("usuarios")
+                .child(FirebaseHelper.getIdFirebase());
+        usuarioRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                usuarioOrigem = snapshot.getValue(Usuario.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void configDados() {
-
         textUsuario.setText(usuarioDestino.getNome());
-
         if (usuarioDestino.getUrlImagem() != null) {
             Picasso.get().load(usuarioDestino.getUrlImagem())
                     .placeholder(R.drawable.loading)
@@ -266,13 +280,14 @@ public class PagamentoCobrancaActivity extends AppCompatActivity {
 
         textData.setText(GetMask.getDate(cobranca.getData(), 3));
         textValor.setText(getString(R.string.text_valor, GetMask.getValor(cobranca.getValor())));
+
     }
 
     private void configToolbar() {
         TextView textTitulo = findViewById(R.id.textTitulo);
         textTitulo.setText("Confirme os dados");
 
-        findViewById(R.id.ibVoltar).setOnClickListener(view -> finish());
+        findViewById(R.id.ibVoltar).setOnClickListener(v -> finish());
     }
 
     private void iniciaComponentes() {
@@ -282,4 +297,5 @@ public class PagamentoCobrancaActivity extends AppCompatActivity {
         imagemUsuario = findViewById(R.id.imagemUsuario);
         progressBar = findViewById(R.id.progressBar);
     }
+
 }

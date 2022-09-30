@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements ExtratoAdapter.On
 
                     textInfo.setText("");
                 } else {
-                    textInfo.setText("Nenhuma informação encontrada");
+                    textInfo.setText("Você ainda não tem atividade!");
                 }
 
                 Collections.reverse(extratoListTemp);

@@ -84,7 +84,17 @@ public class NotificacaoAdapter extends RecyclerView.Adapter<NotificacaoAdapter.
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Usuario usuario = snapshot.getValue(Usuario.class);
                 if (usuario != null) {
-                    holder.textEmitente.setText(context.getString(R.string.text_enviada_por, usuario.getNome()));
+
+                    switch (notificacao.getOperacao()) {
+                        case "COBRANCA":
+                        case "TRANSFERENCIA":
+                            holder.textEmitente.setText(context.getString(R.string.text_enviada_por, usuario.getNome()));
+                            break;
+                        case "PAGAMENTO":
+                            holder.textEmitente.setText(context.getString(R.string.text_enviado_por, usuario.getNome()));
+                            break;
+                    }
+
                 }
             }
 
