@@ -18,6 +18,7 @@
             android:exported="false" />
         <activity
             android:name=".cobranca.PagamentoCobrancaActivity"
+            android:theme="@style/Theme.BancoDigitalApp3"
             android:exported="false" />
         <activity
             android:name=".cobranca.CobrancaConfirmaActivity"

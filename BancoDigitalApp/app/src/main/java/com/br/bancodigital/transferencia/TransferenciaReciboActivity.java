@@ -12,6 +12,7 @@ import com.br.bancodigital.R;
 import com.br.bancodigital.app.MainActivity;
 import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.helper.GetMask;
+import com.br.bancodigital.model.Notificacao;
 import com.br.bancodigital.model.Transferencia;
 import com.br.bancodigital.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
@@ -56,7 +57,7 @@ public class TransferenciaReciboActivity extends AppCompatActivity {
         DatabaseReference transferenciaRef = FirebaseHelper.getDatabaseReference()
                 .child("transferencias")
                 .child(idTransferencia);
-        transferenciaRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        transferenciaRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Transferencia transferencia = snapshot.getValue(Transferencia.class);

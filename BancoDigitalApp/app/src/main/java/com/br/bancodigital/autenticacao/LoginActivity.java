@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         if (!email.isEmpty()) {
             if (!senha.isEmpty()) {
 
+                ocultarTeclado();
                 progressBar.setVisibility(View.VISIBLE);
 
                 logar(email, senha);

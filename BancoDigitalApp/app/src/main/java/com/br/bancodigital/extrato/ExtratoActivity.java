@@ -69,7 +69,7 @@ public class ExtratoActivity extends AppCompatActivity implements ExtratoAdapter
 
                     textInfo.setText("");
                 } else {
-                    textInfo.setText("Nenhuma informação encontrada");
+                    textInfo.setText("Você ainda não tem movimentações");
                 }
 
                 progressBar.setVisibility(View.GONE);

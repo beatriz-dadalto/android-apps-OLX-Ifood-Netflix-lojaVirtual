@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements ExtratoAdapter.On
     private ImageView imagemPerfil;
 
     private Usuario usuario;
+    private Notificacao notificacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements ExtratoAdapter.On
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 notificacaoList.clear();
                 for (DataSnapshot ds : snapshot.getChildren()) {
-                    Notificacao notificacao = ds.getValue(Notificacao.class);
+                    notificacao = ds.getValue(Notificacao.class);
                     notificacaoList.add(notificacao);
                 }
 
@@ -90,9 +91,16 @@ public class MainActivity extends AppCompatActivity implements ExtratoAdapter.On
                     textNotificacao.setText("0");
                     textNotificacao.setVisibility(View.GONE);
                 } else {
-                    textNotificacao.setText(String.valueOf(notificacaoList.size()));
+                    int quantidadeNotificacoes = 0;
+                    for (Notificacao notificacao : notificacaoList) {
+                        if (!notificacao.isLida()) {
+                            quantidadeNotificacoes += 1;
+                        }
+                    }
+                    textNotificacao.setText(String.valueOf(quantidadeNotificacoes));
                     textNotificacao.setVisibility(View.VISIBLE);
                 }
+
             }
 
             @Override

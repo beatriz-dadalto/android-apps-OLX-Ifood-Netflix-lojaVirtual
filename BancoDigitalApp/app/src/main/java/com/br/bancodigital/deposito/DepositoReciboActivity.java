@@ -65,7 +65,7 @@ public class DepositoReciboActivity extends AppCompatActivity {
 
     private void configToolbar() {
         TextView textTitulo = findViewById(R.id.textTitulo);
-        textTitulo.setText("Comprovante");
+        textTitulo.setText("Recibo");
     }
 
     private void iniciaComponentes() {

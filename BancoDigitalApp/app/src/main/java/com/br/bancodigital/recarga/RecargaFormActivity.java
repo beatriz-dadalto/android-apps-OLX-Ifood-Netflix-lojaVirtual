@@ -50,13 +50,13 @@ public class RecargaFormActivity extends AppCompatActivity {
 
     public void validaDados(View view) {
         double valor = (double) edtValor.getRawValue() / 100;
-        String numero = edtTelefone.getUnMasked().trim();
+        String numero = edtTelefone.getMasked().trim();
 
         if (valor >= 15) {
             if (usuario != null) {
                 if (valor <= usuario.getSaldo()) {
                     if (!numero.isEmpty()) {
-                        if (numero.length() == 11) {
+                        if (numero.length() == 15) {
 
                             progressBar.setVisibility(View.VISIBLE);
 

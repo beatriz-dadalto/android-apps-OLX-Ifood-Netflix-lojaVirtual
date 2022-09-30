@@ -16,12 +16,13 @@ import com.br.bancodigital.R;
 import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.model.Usuario;
 import com.google.firebase.database.DatabaseReference;
+import com.santalu.maskara.widget.MaskEditText;
 
 public class CadastroActivity extends AppCompatActivity {
 
     private EditText edtNome;
     private EditText edtEmail;
-    private EditText edtTelefone;
+    private MaskEditText edtTelefone;
     private EditText edtSenha;
     private EditText edtConfirmaSenha;
     private ProgressBar progressBar;
@@ -38,7 +39,7 @@ public class CadastroActivity extends AppCompatActivity {
     public void validaDados(View view) {
         String nome = edtNome.getText().toString().trim();
         String email = edtEmail.getText().toString().trim();
-        String telefone = edtTelefone.getText().toString().trim();
+        String telefone = edtTelefone.getMasked().trim();
         String senha = edtSenha.getText().toString().trim();
         String confirmaSenha = edtConfirmaSenha.getText().toString().trim();
 
@@ -49,6 +50,7 @@ public class CadastroActivity extends AppCompatActivity {
                         if (!confirmaSenha.isEmpty()) {
                             if (senha.equals(confirmaSenha)) {
 
+                                ocultarTeclado();
                                 progressBar.setVisibility(View.VISIBLE);
 
                                 Usuario usuario = new Usuario();

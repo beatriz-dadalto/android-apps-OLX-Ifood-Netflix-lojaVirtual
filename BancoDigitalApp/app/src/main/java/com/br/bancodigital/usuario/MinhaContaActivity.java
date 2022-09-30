@@ -28,6 +28,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
+import com.santalu.maskara.widget.MaskEditText;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -39,7 +40,7 @@ public class MinhaContaActivity extends AppCompatActivity {
 
     private EditText edtNome;
     private EditText edtEmail;
-    private EditText edtTelefone;
+    private MaskEditText edtTelefone;
     private ProgressBar progressBar;
     private ImageView imagemPerfil;
 
@@ -126,7 +127,7 @@ public class MinhaContaActivity extends AppCompatActivity {
 
     public void validaDados(View view) {
         String nome = edtNome.getText().toString().trim();
-        String telefone = edtTelefone.getText().toString().trim();
+        String telefone = edtTelefone.getMasked().trim();
 
         if (!nome.isEmpty()) {
             if (!telefone.isEmpty()) {
