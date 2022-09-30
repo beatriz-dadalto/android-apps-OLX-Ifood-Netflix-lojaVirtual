@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.br.bancodigital.R;
 import com.br.bancodigital.adapter.ExtratoAdapter;
+import com.br.bancodigital.autenticacao.LoginActivity;
 import com.br.bancodigital.cobranca.CobrancaFormActivity;
 import com.br.bancodigital.deposito.DepositoFormActivity;
 import com.br.bancodigital.extrato.ExtratoActivity;
@@ -195,46 +196,45 @@ public class MainActivity extends AppCompatActivity implements ExtratoAdapter.On
     }
 
     private void configCliques() {
-        findViewById(R.id.cardDeposito).setOnClickListener(view ->
-                startActivity(new Intent(this, DepositoFormActivity.class)));
+        findViewById(R.id.cardDeposito).setOnClickListener(view -> redirecionarUsuario(DepositoFormActivity.class));
 
-        imagemPerfil.setOnClickListener(view -> {
-            if (usuario != null) {
-                Intent intent = new Intent(this, MinhaContaActivity.class);
-                intent.putExtra("usuario", usuario);
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, "\uD83E\uDD14 Ainda estamos recuperando seus dados!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        imagemPerfil.setOnClickListener(view -> perfilUsuario());
 
         findViewById(R.id.cardRecarga).setOnClickListener(view ->
                 startActivity(new Intent(this, RecargaFormActivity.class)));
 
-        findViewById(R.id.cardTransferir).setOnClickListener(view ->
-                startActivity(new Intent(this, TransferenciaFormActivity.class)));
+        findViewById(R.id.cardTransferir).setOnClickListener(view -> redirecionarUsuario(TransferenciaFormActivity.class));
+
+        findViewById(R.id.cardDeslogar).setOnClickListener(view -> {
+            FirebaseHelper.getAuth().signOut();
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        });
 
         findViewById(R.id.cardExtrato).setOnClickListener(view ->
                 startActivity(new Intent(this, ExtratoActivity.class)));
 
-        findViewById(R.id.textVerTodas).setOnClickListener(view ->
-                startActivity(new Intent(this, ExtratoActivity.class)));
+        findViewById(R.id.textVerTodas).setOnClickListener(view -> redirecionarUsuario(ExtratoActivity.class));
 
-        findViewById(R.id.btnNotificacao).setOnClickListener(view ->
-                startActivity(new Intent(this, NotificacoesActivity.class)));
+        findViewById(R.id.btnNotificacao).setOnClickListener(view -> redirecionarUsuario(NotificacoesActivity.class));
 
-        findViewById(R.id.cardCobrar).setOnClickListener(view ->
-                startActivity(new Intent(this, CobrancaFormActivity.class)));
-        
-        findViewById(R.id.cardMinhaConta).setOnClickListener(view -> {
-            if (usuario != null) {
-                Intent intent = new Intent(this, MinhaContaActivity.class);
-                intent.putExtra("usuario", usuario);
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, "Carregando seus dados...", Toast.LENGTH_SHORT).show();
-            }
-        });
+        findViewById(R.id.cardCobrar).setOnClickListener(view -> redirecionarUsuario(CobrancaFormActivity.class));
+
+        findViewById(R.id.cardMinhaConta).setOnClickListener(view -> perfilUsuario());
+    }
+
+    private void redirecionarUsuario(Class clazz) {
+        startActivity(new Intent(this, clazz));
+    }
+
+    private void perfilUsuario() {
+        if (usuario != null) {
+            Intent intent = new Intent(this, MinhaContaActivity.class);
+            intent.putExtra("usuario", usuario);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "\uD83E\uDD14 Recuperando seus dados!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
