@@ -30,10 +30,10 @@
             android:padding="24dp">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/textTipoTransferencia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tranferência efetuada \ncom sucesso! 😍"
+                tools:text="Tranferência efetuada \ncom sucesso! 😍"
                 android:textAlignment="center"
                 android:textColor="@color/colorRecibo"
                 android:textSize="24sp"
@@ -42,7 +42,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/textInfoTransferencia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -50,7 +50,7 @@
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                app:layout_constraintTop_toBottomOf="@+id/textTipoTransferencia" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -62,7 +62,7 @@
                 android:textColor="@color/colorText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                app:layout_constraintTop_toBottomOf="@+id/textInfoTransferencia" />
 
             <TextView
                 android:id="@+id/textCodigo"

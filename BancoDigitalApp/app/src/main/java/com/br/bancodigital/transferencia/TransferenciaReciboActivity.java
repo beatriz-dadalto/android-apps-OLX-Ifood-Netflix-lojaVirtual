@@ -26,6 +26,8 @@ public class TransferenciaReciboActivity extends AppCompatActivity {
     private TextView textUsuario;
     private TextView textData;
     private TextView textValor;
+    private TextView textTipoTransferencia;
+    private TextView textInfoTransferencia;
     private ImageView imagemUsuario;
 
     @Override
@@ -59,7 +61,13 @@ public class TransferenciaReciboActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Transferencia transferencia = snapshot.getValue(Transferencia.class);
                 if(transferencia != null){
-                    recuperaUsuarioDestino(transferencia);
+
+                    if (transferencia.getIdUserDestino().equals(FirebaseHelper.getIdFirebase())) {
+                        recuperaUsuario(transferencia, FirebaseHelper.getIdFirebase());
+                    } else {
+                        recuperaUsuario(transferencia, transferencia.getIdUserDestino());
+                    }
+
                 }
             }
 
@@ -70,16 +78,16 @@ public class TransferenciaReciboActivity extends AppCompatActivity {
         });
     }
 
-    private void recuperaUsuarioDestino(Transferencia transferencia){
+    private void recuperaUsuario(Transferencia transferencia, String idUsuarioDestino){
         DatabaseReference usuarioRef = FirebaseHelper.getDatabaseReference()
                 .child("usuarios")
-                .child(transferencia.getIdUserDestino());
+                .child(idUsuarioDestino);
         usuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Usuario usuarioDestino = snapshot.getValue(Usuario.class);
-                if(usuarioDestino != null){
-                    configDados(transferencia, usuarioDestino);
+                Usuario usuario = snapshot.getValue(Usuario.class);
+                if(usuario != null){
+                    configDados(transferencia, usuario);
                 }
             }
 
@@ -90,17 +98,25 @@ public class TransferenciaReciboActivity extends AppCompatActivity {
         });
     }
 
-    private void configDados(Transferencia transferencia, Usuario usuarioDestino){
+    private void configDados(Transferencia transferencia, Usuario usuario){
         textCodigo.setText(transferencia.getId());
         textData.setText(GetMask.getDate(transferencia.getData(), 3));
         textValor.setText(getString(R.string.text_valor, GetMask.getValor(transferencia.getValor())));
 
-        if(usuarioDestino.getUrlImagem() != null){
-            Picasso.get().load(usuarioDestino.getUrlImagem())
+        if (usuario.getId().equals(FirebaseHelper.getIdFirebase())) {
+            textTipoTransferencia.setText(getString(R.string.text_tipo_transferencia, "Recebida"));
+            textInfoTransferencia.setText("O valor recebido via transferência já foi adicionado ao saldo da sua conta.");
+        } else {
+            textTipoTransferencia.setText(getString(R.string.text_tipo_transferencia, "Enviada"));
+            textInfoTransferencia.setText("Débito realizado com sucesso. A previsão do crédito na conta de destino é de até 30 minutos.");
+        }
+
+        if(usuario.getUrlImagem() != null){
+            Picasso.get().load(usuario.getUrlImagem())
                     .placeholder(R.drawable.loading)
                     .into(imagemUsuario);
         }
-        textUsuario.setText(usuarioDestino.getNome());
+        textUsuario.setText(usuario.getNome());
     }
 
     private void configToolbar(){
@@ -113,6 +129,8 @@ public class TransferenciaReciboActivity extends AppCompatActivity {
         textUsuario = findViewById(R.id.textUsuario);
         textData = findViewById(R.id.textData);
         textValor = findViewById(R.id.textValor);
+        textTipoTransferencia = findViewById(R.id.textTipoTransferencia);
+        textInfoTransferencia = findViewById(R.id.textInfoTransferencia);
         imagemUsuario = findViewById(R.id.imagemUsuario);
     }
 

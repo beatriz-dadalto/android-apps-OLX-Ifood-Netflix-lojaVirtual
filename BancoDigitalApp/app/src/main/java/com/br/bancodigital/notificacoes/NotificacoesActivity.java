@@ -16,6 +16,7 @@ import com.br.bancodigital.adapter.NotificacaoAdapter;
 import com.br.bancodigital.cobranca.PagamentoCobrancaActivity;
 import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.model.Notificacao;
+import com.br.bancodigital.transferencia.TransferenciaReciboActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -99,12 +100,18 @@ public class NotificacoesActivity extends AppCompatActivity implements Notificac
 
     @Override
     public void onClickListener(Notificacao notificacao) {
-        switch (notificacao.getOperacao()) {
-            case "COBRANCA":
-                Intent intent = new Intent(this, PagamentoCobrancaActivity.class);
-                intent.putExtra("notificacao", notificacao);
-                startActivity(intent);
-                break;
+
+        if (notificacao.getOperacao().equals("COBRANCA")) {
+            Intent intent = new Intent(this, PagamentoCobrancaActivity.class);
+            intent.putExtra("notificacao", notificacao);
+            startActivity(intent);
+        } else if (notificacao.getOperacao().equals("TRANSFERENCIA")) {
+            Intent intent = new Intent(this, TransferenciaReciboActivity.class);
+            intent.putExtra("idTransferencia", notificacao.getIdOperacao());
+            startActivity(intent);
+        } else {
+
         }
+
     }
 }
