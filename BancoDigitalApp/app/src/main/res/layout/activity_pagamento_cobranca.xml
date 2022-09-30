@@ -172,7 +172,7 @@
         android:layout_margin="24dp"
         android:background="@drawable/bg_btn"
         android:backgroundTint="@color/colorRecibo"
-        android:onClick="confirmarCobranca"
+        android:onClick="confirmarPagamento"
         android:text="Confirmar"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"

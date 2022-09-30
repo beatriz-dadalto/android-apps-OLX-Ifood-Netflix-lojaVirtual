@@ -18,7 +18,9 @@ import com.br.bancodigital.app.MainActivity;
 import com.br.bancodigital.helper.FirebaseHelper;
 import com.br.bancodigital.helper.GetMask;
 import com.br.bancodigital.model.Cobranca;
+import com.br.bancodigital.model.Extrato;
 import com.br.bancodigital.model.Notificacao;
+import com.br.bancodigital.model.Pagamento;
 import com.br.bancodigital.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,7 +39,8 @@ public class PagamentoCobrancaActivity extends AppCompatActivity {
 
     private Cobranca cobranca;
     private Notificacao notificacao;
-    private Usuario usuarioDestino;
+    private Usuario usuarioDestino; // recebe pagamento
+    private Usuario usuarioOrigem; // faz cobranca
 
     private AlertDialog dialog;
 
@@ -48,7 +51,93 @@ public class PagamentoCobrancaActivity extends AppCompatActivity {
 
         configToolbar();
         iniciaComponentes();
+        recuperaUsuarioOrigem();
         getExtra();
+    }
+
+    public void confirmarPagamento(View view) {
+        if (usuarioDestino != null && usuarioOrigem != null) {
+            if (usuarioOrigem.getSaldo() > cobranca.getValor()) {
+
+                usuarioOrigem.setSaldo(usuarioOrigem.getSaldo() - cobranca.getValor());
+                usuarioOrigem.atualizarSaldo();
+
+                usuarioDestino.setSaldo(usuarioDestino.getSaldo() + cobranca.getValor());
+                usuarioDestino.atualizarSaldo();
+
+                atualizarStatusCobranca();
+                // pagou cobranca
+                salvarExtrato(usuarioOrigem, "SAIDA");
+                // recebeu pagamento
+                salvarExtrato(usuarioDestino, "ENTRADA");
+
+            } else {
+                showDialog("\uD83E\uDD7A \nSaldo insuficiente");
+            }
+        } else {
+            Toast.makeText(this, "\uD83E\uDD14 \nRecuperando dados...", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void salvarExtrato(Usuario usuario, String tipoTransferencia) {
+
+        Extrato extrato = new Extrato();
+        extrato.setOperacao("PAGAMENTO");
+        extrato.setValor(cobranca.getValor());
+        extrato.setTipo(tipoTransferencia);
+
+        DatabaseReference extratoRef = FirebaseHelper.getDatabaseReference()
+                .child("extratos")
+                .child(usuario.getId())
+                .child(extrato.getId());
+        extratoRef.setValue(extrato).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+
+                DatabaseReference updateExtrato = extratoRef
+                        .child("data");
+                updateExtrato.setValue(ServerValue.TIMESTAMP);
+
+                salvarPagamento(extrato);
+
+            } else {
+                showDialog("Não foi possível efetuar o pagamento, tente mais tarde.");
+            }
+        });
+
+    }
+
+    private void salvarPagamento(Extrato extrato) {
+        Pagamento pagamento = new Pagamento();
+        pagamento.setId(extrato.getId());
+        pagamento.setIdCobranca(cobranca.getId());
+        pagamento.setValor(cobranca.getValor());
+        pagamento.setIdUserDestino(usuarioDestino.getId());
+        pagamento.setIdUserOrigem(usuarioOrigem.getId());
+
+        DatabaseReference pagamentoRef = FirebaseHelper.getDatabaseReference()
+                .child("pagamentos")
+                .child(extrato.getId());
+        pagamentoRef.setValue(pagamento).addOnCompleteListener(task -> {
+
+            DatabaseReference update = pagamentoRef.child("data");
+            update.setValue(ServerValue.TIMESTAMP);
+
+        });
+
+        if (extrato.getOperacao().equals("ENTRADA")) {
+            configNotificacao(extrato.getId());
+        } else {
+            // TODO activity pagamento recebido
+        }
+    }
+
+    private void atualizarStatusCobranca() {
+        DatabaseReference cobrancaRef = FirebaseHelper.getDatabaseReference()
+                .child("cobrancas")
+                .child(FirebaseHelper.getIdFirebase())
+                .child(notificacao.getIdOperacao())
+                .child("paga");
+        cobrancaRef.setValue(true);
     }
 
     private void getExtra() {
@@ -96,12 +185,29 @@ public class PagamentoCobrancaActivity extends AppCompatActivity {
         });
     }
 
-    private void configNotificacao() {
+    private void recuperaUsuarioOrigem() {
+        DatabaseReference usuarioRef = FirebaseHelper.getDatabaseReference()
+                .child("usuarios")
+                .child(FirebaseHelper.getIdFirebase());
+        usuarioRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                usuarioOrigem = snapshot.getValue(Usuario.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void configNotificacao(String idOperacao) {
         notificacao = new Notificacao();
-        notificacao.setIdOperacao(cobranca.getId());
-        notificacao.setIdDestinatario(cobranca.getIdDestinatario());
-        notificacao.setIdEmitente(FirebaseHelper.getIdFirebase());
-        notificacao.setOperacao("COBRANCA");
+        notificacao.setIdOperacao(idOperacao);
+        notificacao.setIdDestinatario(usuarioDestino.getId());
+        notificacao.setIdEmitente(usuarioOrigem.getId());
+        notificacao.setOperacao("PAGAMENTO");
 
         // envia notificacao para o usuario que ira receber a cobranca
         enviarNotificacao(notificacao);
@@ -120,15 +226,8 @@ public class PagamentoCobrancaActivity extends AppCompatActivity {
                         .child("data");
                 updateRef.setValue(ServerValue.TIMESTAMP);
 
-                Toast.makeText(this, "\uD83D\uDE09 \nCobrança enviada com sucesso!", Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
             } else {
                 progressBar.setVisibility(View.GONE);
-                showDialog("Não foi possível enviar uma notificação para o destinário");
             }
         });
     }
