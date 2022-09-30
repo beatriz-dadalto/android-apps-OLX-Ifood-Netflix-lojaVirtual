@@ -14,15 +14,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.tsuryo.swipeablerv.SwipeableRecyclerView
         android:id="@+id/rvNotificacoes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:listitem="@layout/adapter_notificacao"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include12" />
+        app:layout_constraintTop_toBottomOf="@+id/include12"
+        app:leftBgColor="@color/colorPrimary"
+        app:leftImage="@drawable/ic_edit"
+        app:rightBgColor="@color/colorDelete"
+        app:rightImage="@drawable/ic_delete" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="🤔 \nCarregando..."
+            android:text="Carregando..."
             android:textAlignment="center" />
 
     </LinearLayout>

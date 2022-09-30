@@ -55,4 +55,7 @@ dependencies {
     // https://github.com/santalu/maskara
     implementation 'com.github.santalu:maskara:1.0.0'
 
+    // https://github.com/tsuryo/Swipeable-RecyclerView
+    implementation 'com.github.tsuryo:Swipeable-RecyclerView:1.1'
+
 }
