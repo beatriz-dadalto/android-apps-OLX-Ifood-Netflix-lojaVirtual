@@ -225,6 +225,16 @@ public class MainActivity extends AppCompatActivity implements ExtratoAdapter.On
 
         findViewById(R.id.cardCobrar).setOnClickListener(view ->
                 startActivity(new Intent(this, CobrancaFormActivity.class)));
+        
+        findViewById(R.id.cardMinhaConta).setOnClickListener(view -> {
+            if (usuario != null) {
+                Intent intent = new Intent(this, MinhaContaActivity.class);
+                intent.putExtra("usuario", usuario);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Carregando seus dados...", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

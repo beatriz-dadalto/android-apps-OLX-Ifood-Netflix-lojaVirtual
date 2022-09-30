@@ -14,12 +14,14 @@
         android:theme="@style/Theme.BancoDigitalApp">
         <activity
             android:name=".cobranca.ReciboPagamentoActivity"
+            android:theme="@style/Theme.BancoDigitalApp3"
             android:exported="false" />
         <activity
             android:name=".cobranca.PagamentoCobrancaActivity"
             android:exported="false" />
         <activity
             android:name=".cobranca.CobrancaConfirmaActivity"
+            android:theme="@style/Theme.BancoDigitalApp3"
             android:exported="false" />
         <activity
             android:name=".cobranca.CobrancaFormActivity"
@@ -32,18 +34,22 @@
             android:exported="false" />
         <activity
             android:name=".transferencia.TransferenciaReciboActivity"
+            android:theme="@style/Theme.BancoDigitalApp3"
             android:exported="false" />
         <activity
             android:name=".transferencia.TransferenciaConfirmaActivity"
+            android:theme="@style/Theme.BancoDigitalApp3"
             android:exported="false" />
         <activity
             android:name=".transferencia.SelecaoUsuarioActivity"
+            android:theme="@style/Theme.BancoDigitalApp3"
             android:exported="false" />
         <activity
             android:name=".transferencia.TransferenciaFormActivity"
             android:exported="false" />
         <activity
             android:name=".recarga.RecargaReciboActivity"
+            android:theme="@style/Theme.BancoDigitalApp3"
             android:exported="false" />
         <activity
             android:name=".recarga.RecargaFormActivity"
@@ -54,6 +60,7 @@
             android:theme="@style/Theme.BancoDigitalApp2" />
         <activity
             android:name=".deposito.DepositoReciboActivity"
+            android:theme="@style/Theme.BancoDigitalApp3"
             android:exported="false" />
         <activity
             android:name=".deposito.DepositoFormActivity"
@@ -62,7 +69,11 @@
             android:name=".app.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".autenticacao.RecuperaContaActivity"
@@ -70,11 +81,7 @@
         <activity
             android:name=".autenticacao.LoginActivity"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".autenticacao.CadastroActivity"
