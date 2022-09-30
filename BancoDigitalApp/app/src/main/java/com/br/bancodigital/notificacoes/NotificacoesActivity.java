@@ -4,12 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,9 +65,43 @@ public class NotificacoesActivity extends AppCompatActivity implements Notificac
 
             @Override
             public void onSwipedRight(int position) {
-                // TODO notificacao nao lida
+                showDialogStatusNotificacao(notificacaoList.get(position));
             }
         });
+    }
+
+    private void showDialogStatusNotificacao(Notificacao notificacao) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(
+                this, R.style.CustomAlertDialog
+        );
+
+        View view = getLayoutInflater().inflate(R.layout.layout_dialog, null);
+
+        TextView textTitulo = view.findViewById(R.id.textTitulo);
+        //TextView textMensagem = view.findViewById(R.id.textMensagem);
+
+        if (notificacao.isLida()) {
+            textTitulo.setText("Marcar esta notificação como não lida?");
+            //textMensagem.setText("Aperte em sim para marcar esta notificação como não lida ou \nAperte em fechar para cancelar");
+        } else {
+            textTitulo.setText("Marcar esta notificação como lida?");
+            //textMensagem.setText("Sim para marcar esta notificação como lida ou Aperte em não para cancelar");
+        }
+
+        view.findViewById(R.id.btnOK).setOnClickListener(view1 -> {
+            notificacao.salvar();
+            dialog.dismiss();
+        });
+
+        view.findViewById(R.id.btnFechar).setOnClickListener(v -> {
+            dialog.dismiss();
+            notificacaoAdapter.notifyDataSetChanged();
+        });
+
+        builder.setView(view);
+
+        dialog = builder.create();
+        dialog.show();
     }
 
     private void showDialogRemover(Notificacao notificacao) {
@@ -77,7 +109,13 @@ public class NotificacoesActivity extends AppCompatActivity implements Notificac
                 this, R.style.CustomAlertDialog
         );
 
-        View view = getLayoutInflater().inflate(R.layout.layout_dialog_delete, null);
+        View view = getLayoutInflater().inflate(R.layout.layout_dialog, null);
+
+        TextView textTitulo = view.findViewById(R.id.textTitulo);
+        //TextView textMensagem = view.findViewById(R.id.textMensagem);
+
+        textTitulo.setText("Deseja excluir a notificação?");
+        //textMensagem.setText("Aperte em sim para excluir esta notificação ou Aperte em não para cancelar");
 
         view.findViewById(R.id.btnOK).setOnClickListener(view1 -> {
             removerNotificacoes(notificacao);

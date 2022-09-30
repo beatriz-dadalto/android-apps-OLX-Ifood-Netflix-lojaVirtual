@@ -18,18 +18,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Deseja excluir a notificação?" />
+        tools:text="Deseja excluir a notificação?" />
 
     <TextView
         android:id="@+id/textMensagem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Aperte em sim para excluir esta notificação ou \nAperte em fechar para cancelar"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTitulo" />
+        app:layout_constraintTop_toBottomOf="@+id/textTitulo"
+        tools:text="Aperte em sim para excluir esta notificação ou \nAperte em não para cancelar" />
 
     <android.widget.Button
         android:id="@+id/btnOK"
@@ -50,7 +50,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_edit"
-        android:text="Fechar"
+        android:text="Não"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
