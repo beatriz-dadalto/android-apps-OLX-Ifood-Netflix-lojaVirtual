@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/menu_home"
+        android:icon="@drawable/ic_inicio"
+        android:title="@string/menu_inicio" />
+
+    <item
+        android:id="@+id/menu_busca"
+        android:icon="@drawable/ic_busca"
+        android:title="@string/menu_busca" />
+
+    <item
+        android:id="@+id/menu_add"
+        android:icon="@drawable/ic_add_red"
+        android:title="@string/menu_add" />
+
+    <item
+        android:id="@+id/menu_breve"
+        android:icon="@drawable/ic_breve"
+        android:title="@string/menu_breve" />
+
+    <item
+        android:id="@+id/menu_download"
+        android:icon="@drawable/ic_download"
+        android:title="@string/menu_downloads" />
+
 </menu>
