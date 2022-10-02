@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@android:color/transparent"
-                android:text="Novo por aqui? Inscreva-se agora."
+                android:text="Cadastre-se agora."
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
