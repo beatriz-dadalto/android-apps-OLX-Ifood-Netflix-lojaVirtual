@@ -27,46 +27,46 @@ public class CadastroActivity extends AppCompatActivity {
 
     }
 
-    private void validaDados(){
+    private void validaDados() {
         String email = edtEmail.getText().toString().trim();
         String senha = edtSenha.getText().toString().trim();
 
-        if(!email.isEmpty()){
-            if(!senha.isEmpty()){
+        if (!email.isEmpty()) {
+            if (!senha.isEmpty()) {
 
                 cadastroFirebase(email, senha);
 
-            }else {
+            } else {
                 edtSenha.requestFocus();
                 edtSenha.setError("Informe uma senha.");
             }
-        }else {
+        } else {
             edtEmail.requestFocus();
             edtEmail.setError("Informe um e-mail.");
         }
 
     }
 
-    private void cadastroFirebase(String email, String senha){
+    private void cadastroFirebase(String email, String senha) {
         FirebaseHelper.getAuth().createUserWithEmailAndPassword(
                 email, senha
         ).addOnCompleteListener(task -> {
-            if(task.isSuccessful()){
+            if (task.isSuccessful()) {
                 finish();
                 startActivity(new Intent(this, MainActivity.class));
-            }else {
+            } else {
                 Toast.makeText(this, FirebaseHelper.validaErros(task.getException().getMessage()), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void configClicks(){
+    private void configClicks() {
         findViewById(R.id.btnLogin).setOnClickListener(view -> finish());
 
         findViewById(R.id.btnCadastro).setOnClickListener(view -> validaDados());
     }
 
-    private void iniciaComponentes(){
+    private void iniciaComponentes() {
         edtEmail = findViewById(R.id.edtEmail);
         edtSenha = findViewById(R.id.edtSenha);
     }
