@@ -49,4 +49,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"
 
+    // https://github.com/ParkSangGwon/TedPermission
+    implementation 'io.github.ParkSangGwon:tedpermission-normal:3.3.0'
+
 }

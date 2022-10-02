@@ -24,9 +24,10 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
-                android:layout_width="150dp"
+                android:layout_width="160dp"
                 android:layout_height="200dp"
                 app:cardBackgroundColor="#676767"
+                app:cardCornerRadius="5dp"
                 app:layout_constraintBottom_toTopOf="@+id/edtTitulo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -34,11 +35,24 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed">
 
-                <ImageView
-                    android:id="@+id/image"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+
+                    <ImageView
+                        android:id="@+id/imageFake"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_camera"
+                        android:padding="40dp" />
+
+                </FrameLayout>
 
             </androidx.cardview.widget.CardView>
 
