@@ -10,8 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NetflixCloneApp">
         <activity
+            android:name=".autenticacao.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +23,7 @@
         </activity>
         <activity
             android:name=".activity.MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>
