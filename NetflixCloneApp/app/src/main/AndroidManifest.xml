@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NetflixCloneApp">
         <activity
+            android:name=".autenticacao.CadastroActivity"
+            android:exported="false" />
+        <activity
             android:name=".autenticacao.LoginActivity"
             android:exported="false" />
         <activity

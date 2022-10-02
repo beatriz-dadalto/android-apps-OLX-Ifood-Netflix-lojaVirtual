@@ -95,14 +95,14 @@
                 android:text="Precisa de ajuda?"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
-                app:layout_constraintBottom_toTopOf="@+id/button2"
+                app:layout_constraintBottom_toTopOf="@+id/btnCadastro"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btnCadastro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
