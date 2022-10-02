@@ -13,4 +13,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- THEME Red ProgressBar -->
+    <style name="ThemeProgressBar" parent="Theme.NetflixCloneApp">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
 </resources>
