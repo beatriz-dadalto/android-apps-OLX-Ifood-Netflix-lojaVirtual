@@ -18,4 +18,10 @@
     <style name="ThemeProgressBar" parent="Theme.NetflixCloneApp">
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
+
+    <!-- THEME ALERT DIALOG -->
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/bg_alert_dialog</item>
+        <item name="windowMinWidthMinor">80%</item>
+    </style>
 </resources>

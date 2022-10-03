@@ -159,7 +159,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
             <android.widget.Button
-                android:id="@+id/btnCadastrar"
+                android:id="@+id/btnSalvar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -182,7 +182,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnCadastrar"
+                app:layout_constraintTop_toBottomOf="@+id/btnSalvar"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
