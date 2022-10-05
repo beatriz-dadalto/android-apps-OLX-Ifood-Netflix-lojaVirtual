@@ -21,6 +21,10 @@ import com.br.netflix.autenticacao.LoginActivity;
 import com.br.netflix.helper.FirebaseHelper;
 import com.br.netflix.model.Categoria;
 import com.br.netflix.model.Post;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,16 +50,54 @@ public class InicioFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.btnLogin).setOnClickListener(view1 -> {
-            if (FirebaseHelper.getAutenticado()) {
-                Toast.makeText(requireContext(), "Usuário já autenticado!", Toast.LENGTH_SHORT).show();
-            } else {
-                startActivity(new Intent(requireActivity(), LoginActivity.class));
-            }
-        });
-
         iniciaComponentes(view);
         configRv();
+        recuperaCategorias();
+    }
+
+    private void recuperaCategorias() {
+        DatabaseReference categoriaRef = FirebaseHelper.getDatabaseReference()
+                .child("categorias");
+        categoriaRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    categoriaList.add(ds.getValue(Categoria.class));
+                }
+                
+                recuperaPosts();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void recuperaPosts() {
+        DatabaseReference postsRef = FirebaseHelper.getDatabaseReference()
+                .child("posts");
+        postsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    postList.add(ds.getValue(Post.class));
+                }
+
+                for (Categoria categoria : categoriaList) {
+                    categoria.setPostList(postList);
+                }
+
+                progressBar.setVisibility(View.GONE);
+                adapterCategoria.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void configRv() {

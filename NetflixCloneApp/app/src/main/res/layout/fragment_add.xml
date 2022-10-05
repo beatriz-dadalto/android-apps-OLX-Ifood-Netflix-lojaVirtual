@@ -49,8 +49,8 @@
                         android:id="@+id/imageFake"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_camera"
-                        android:padding="40dp" />
+                        android:padding="40dp"
+                        android:src="@drawable/ic_camera" />
 
                 </FrameLayout>
 
@@ -63,6 +63,7 @@
                 android:layout_marginTop="24dp"
                 android:background="@drawable/bg_edit3"
                 android:hint="Título"
+                android:inputType="text"
                 android:padding="16dp"
                 android:textColor="@android:color/white"
                 android:textColorHint="#454545"
@@ -79,6 +80,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_edit3"
                 android:hint="Gênero"
+                android:inputType="text"
                 android:padding="16dp"
                 android:textColor="@android:color/white"
                 android:textColorHint="#454545"
@@ -95,6 +97,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_edit3"
                 android:hint="Elenco"
+                android:inputType="text"
                 android:padding="16dp"
                 android:textColor="@android:color/white"
                 android:textColorHint="#454545"
@@ -124,6 +127,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/bg_edit3"
                     android:hint="Ano"
+                    android:inputType="text"
                     android:padding="16dp"
                     android:textColor="@android:color/white"
                     android:textColorHint="#454545" />
@@ -136,6 +140,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/bg_edit3"
                     android:hint="Duração"
+                    android:inputType="text"
                     android:padding="16dp"
                     android:textColor="@android:color/white"
                     android:textColorHint="#454545" />
@@ -149,10 +154,10 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_edit3"
                 android:hint="Sinopse"
+                android:inputType="text"
                 android:padding="16dp"
                 android:textColor="@android:color/white"
                 android:textColorHint="#454545"
-                app:layout_constraintBottom_toTopOf="@+id/btnCadastrar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
