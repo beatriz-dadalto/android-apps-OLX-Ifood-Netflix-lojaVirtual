@@ -24,4 +24,16 @@
         <item name="android:windowBackground">@drawable/bg_alert_dialog</item>
         <item name="windowMinWidthMinor">80%</item>
     </style>
+
+    <!-- THEME SEARCHVIEW -->
+    <style name="SearchViewTheme">
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="android:textColorHint">#7C7C7C</item>
+        <item name="android:editTextColor">@android:color/white</item>
+    </style>
+
+    <!-- THEME FLOAT ACTION BUTTON -->
+    <style name="FloatingActionButtonTheme">
+        <item name="colorOnSecondary">@android:color/white</item>
+    </style>
 </resources>

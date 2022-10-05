@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/drawable/ic_add_red.xml" value="0.2315" />
         <entry key="app/src/main/res/drawable/ic_breve.xml" value="0.2205" />
         <entry key="app/src/main/res/drawable/ic_busca.xml" value="0.2315" />
+        <entry key="app/src/main/res/drawable/ic_cast.xml" value="0.2315" />
         <entry key="app/src/main/res/drawable/ic_download.xml" value="0.2205" />
         <entry key="app/src/main/res/drawable/ic_like_white.xml" value="0.2315" />
         <entry key="app/src/main/res/drawable/item_selected.xml" value="0.2315" />
@@ -20,6 +21,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/adapter_categoria.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/adapter_listagem_busca.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/adapter_post.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/fragment_breve.xml" value="0.37447916666666664" />
