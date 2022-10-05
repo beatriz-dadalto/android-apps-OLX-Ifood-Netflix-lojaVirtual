@@ -1,5 +1,9 @@
 package com.br.netflix.fragment;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
+import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,16 +35,18 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class BuscaFragment extends Fragment {
 
-    private AdapterBusca adapterBusca;
     private List<Post> postList = new ArrayList<>();
+    private AdapterBusca adapterBusca;
 
     private SearchView searchView;
     private RecyclerView rvPosts;
     private ProgressBar progressBar;
     private TextView textInfo;
+    private AlertDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,8 +60,58 @@ public class BuscaFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         iniciaComponentes(view);
-        configRv();
+        configRv(postList);
         recuperaPosts();
+        configSearchView();
+    }
+
+    private void configSearchView() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String pesquisa) {
+                if (pesquisa.length() >= 3) {
+                    buscarPosts(pesquisa);
+                } else {
+                    ocultarTeclado();
+                    showDialog("Digite no mínimo 3 letras.");
+                }
+                
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        searchView.findViewById(androidx.appcompat.R.id.search_close_btn).setOnClickListener(view -> {
+            ocultarTeclado();
+            recuperaPosts();
+
+            EditText edt = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+            edt.getText().clear();
+            searchView.clearFocus();
+        });
+    }
+
+    private void buscarPosts(String pesquisa) {
+        List<Post> postListBusca = new ArrayList<>();
+
+        ocultarTeclado();
+
+        for (Post post : postList) {
+            if (post.getTitulo().toUpperCase(Locale.ROOT).contains(pesquisa.toUpperCase(Locale.ROOT))) {
+                postListBusca.add(post);
+            }
+        }
+
+        if (!postListBusca.isEmpty()) {
+            configRv(postListBusca);
+        } else {
+            configRv(new ArrayList<>());
+            textInfo.setText("Nada foi encontrado com o nome pesquisado.");
+        }
     }
 
     private void recuperaPosts() {
@@ -73,7 +132,7 @@ public class BuscaFragment extends Fragment {
                 }
 
                 progressBar.setVisibility(View.GONE);
-                adapterBusca.notifyDataSetChanged();
+                configRv(postList);
             }
 
             @Override
@@ -83,13 +142,42 @@ public class BuscaFragment extends Fragment {
         });
     }
 
-    private void configRv() {
+    private void configRv(List<Post> postList) {
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
         rvPosts.setHasFixedSize(true);
         adapterBusca = new AdapterBusca(postList, getContext());
         rvPosts.setAdapter(adapterBusca);
+        adapterBusca.notifyDataSetChanged();
     }
 
+    private void showDialog(String msg) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(
+                getContext(), R.style.CustomAlertDialog
+        );
+
+        View view = getLayoutInflater().inflate(R.layout.layout_dialog_info, null);
+
+        TextView textTitulo = view.findViewById(R.id.textTitulo);
+        textTitulo.setText("Atenção");
+
+        TextView mensagem = view.findViewById(R.id.textMensagem);
+        mensagem.setText(msg);
+
+        Button btnOK = view.findViewById(R.id.btnOK);
+        btnOK.setOnClickListener(v -> dialog.dismiss());
+
+        builder.setView(view);
+
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    private void ocultarTeclado() {
+        if (getActivity().getCurrentFocus() != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        }
+    }
 
     private void iniciaComponentes(View view) {
         searchView = view.findViewById(R.id.searchView);
