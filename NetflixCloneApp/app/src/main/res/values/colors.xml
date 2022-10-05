@@ -10,6 +10,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="colorPrimary">#E00915</color>
+    <color name="colorPrimaryDark">#A1000A</color>
     <color name="cor_bg_app">@android:color/black</color>
     <color name="colorIconeOffBnv">#626262</color>
     <color name="colorIconeOnBnv">#FFFFFF</color>
