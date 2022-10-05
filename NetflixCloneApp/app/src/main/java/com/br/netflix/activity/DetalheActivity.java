@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.br.netflix.adapter.AdapterPost;
 import com.br.netflix.helper.FirebaseHelper;
 import com.br.netflix.model.Categoria;
 import com.br.netflix.model.Download;
+import com.br.netflix.model.MinhaLista;
 import com.br.netflix.model.Post;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,11 +30,13 @@ import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DetalheActivity extends AppCompatActivity {
 
     private List<String> downloadList = new ArrayList<>();
+    private List<String> minhaListaList = new ArrayList<>();
     private List<Post> postList = new ArrayList<>();
     private AdapterPost adapterPost;
 
@@ -46,6 +50,7 @@ public class DetalheActivity extends AppCompatActivity {
     private ConstraintLayout btnBaixar;
     private TextView textSinopse;
     private RecyclerView rvPosts;
+    private LinearLayout llMinhaLista;
 
     private Post post;
 
@@ -60,11 +65,24 @@ public class DetalheActivity extends AppCompatActivity {
         configCliques();
         recuperaPosts();
         recuperaDownloads();
+        recuperaMinhaLista();
     }
 
     private void configCliques() {
         findViewById(R.id.ibVoltar).setOnClickListener(view -> finish());
         findViewById(R.id.btnBaixar).setOnClickListener(view -> efetuarDownloads());
+        findViewById(R.id.llMinhaLista).setOnClickListener(view -> addMinhaLista());
+    }
+
+    private void addMinhaLista() {
+        if (!minhaListaList.contains(post.getId())) {
+            minhaListaList.add(post.getId());
+            MinhaLista.salvar(minhaListaList);
+
+            Toast.makeText(this, "Foi adicionado à sua lista!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Já está adicionado em sua lista.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void efetuarDownloads() {
@@ -76,6 +94,25 @@ public class DetalheActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Você já fez o download anteriormente!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void recuperaMinhaLista() {
+        DatabaseReference minhaListaRef = FirebaseHelper.getDatabaseReference()
+                .child("minhaLista");
+        minhaListaRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    minhaListaList.add(ds.getValue(String.class));
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void recuperaDownloads() {
@@ -146,5 +183,6 @@ public class DetalheActivity extends AppCompatActivity {
         btnBaixar = findViewById(R.id.btnBaixar);
         textSinopse = findViewById(R.id.textSinopse);
         rvPosts = findViewById(R.id.rvPosts);
+        llMinhaLista = findViewById(R.id.llMinhaLista);
     }
 }

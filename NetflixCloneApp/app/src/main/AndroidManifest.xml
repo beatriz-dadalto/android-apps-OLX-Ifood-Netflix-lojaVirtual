@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NetflixCloneApp">
         <activity
+            android:name=".activity.MinhaListaActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.DetalheActivity"
             android:exported="false" />
         <activity

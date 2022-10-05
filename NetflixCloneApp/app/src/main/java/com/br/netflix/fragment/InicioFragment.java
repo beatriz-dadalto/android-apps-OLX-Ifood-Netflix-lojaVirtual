@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.br.netflix.R;
+import com.br.netflix.activity.MinhaListaActivity;
 import com.br.netflix.adapter.AdapterCategoria;
 import com.br.netflix.autenticacao.LoginActivity;
 import com.br.netflix.helper.FirebaseHelper;
@@ -38,6 +40,7 @@ public class InicioFragment extends Fragment {
 
     private RecyclerView rvCategorias;
     private ProgressBar progressBar;
+    private Button btnMinhaLista;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,8 +54,13 @@ public class InicioFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         iniciaComponentes(view);
+        configCliques();
         configRv();
         recuperaCategorias();
+    }
+
+    private void configCliques() {
+        btnMinhaLista.setOnClickListener(view -> startActivity(new Intent(getActivity(), MinhaListaActivity.class)));
     }
 
     private void recuperaCategorias() {
@@ -110,5 +118,6 @@ public class InicioFragment extends Fragment {
     private void iniciaComponentes(View view) {
         rvCategorias = view.findViewById(R.id.rvCategorias);
         progressBar = view.findViewById(R.id.progressBar);
+        btnMinhaLista = view.findViewById(R.id.btnMinhaLista);
     }
 }
