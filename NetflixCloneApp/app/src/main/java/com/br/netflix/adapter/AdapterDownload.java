@@ -40,6 +40,7 @@ public class AdapterDownload extends RecyclerView.Adapter<AdapterDownload.MyView
 
         Picasso.get().load(post.getImagem()).into(holder.imagem);
         holder.textTitulo.setText(post.getTitulo());
+        holder.checkBox.setChecked(true);
 
         holder.checkBox.setOnClickListener(view -> clickListener.onItemClickListener(post));
 
