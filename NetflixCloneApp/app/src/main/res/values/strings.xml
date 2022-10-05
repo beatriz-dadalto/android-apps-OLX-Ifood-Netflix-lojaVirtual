@@ -9,4 +9,6 @@
     <string name="menu_busca">Busca</string>
     <string name="menu_breve">Breve</string>
     <string name="menu_downloads">Downloads</string>
+
+    <string name="text_duracao">%s min</string>
 </resources>

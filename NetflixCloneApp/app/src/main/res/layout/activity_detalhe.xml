@@ -112,13 +112,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                tools:text="2021"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/cardView"
                 app:layout_constraintEnd_toStartOf="@+id/cardView"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView6"
-                app:layout_constraintTop_toTopOf="@+id/cardView" />
+                app:layout_constraintTop_toTopOf="@+id/cardView"
+                tools:text="2021" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
@@ -248,12 +248,12 @@
                 android:layout_marginTop="16dp"
                 android:ellipsize="end"
                 android:maxLines="3"
-                tools:text="No quarto filme da franquia Hotel Transilvânia, Van Helsing cria uma invenção que transforma humanos em monstros e vice versa. Assim, Drac e sua turma são transformados em pessoas comuns, enquanto Johnny vira uma monstro. Sem seus poderes de vampiro, Drac terá que correr contra o tempo para reverter essa assustadora situação antes que seus novos corpos se tornem permanentes."
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnBaixar" />
+                app:layout_constraintTop_toBottomOf="@+id/btnBaixar"
+                tools:text="No quarto filme da franquia Hotel Transilvânia, Van Helsing cria uma invenção que transforma humanos em monstros e vice versa. Assim, Drac e sua turma são transformados em pessoas comuns, enquanto Johnny vira uma monstro. Sem seus poderes de vampiro, Drac terá que correr contra o tempo para reverter essa assustadora situação antes que seus novos corpos se tornem permanentes." />
 
             <TextView
                 android:id="@+id/textView11"
@@ -274,21 +274,22 @@
                 android:layout_marginEnd="24dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                tools:text="Brian Hull, Kathryn Hahn, Andy Samberg"
                 android:textColor="#676767"
                 app:layout_constraintBottom_toBottomOf="@+id/textView11"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView11"
-                app:layout_constraintTop_toTopOf="@+id/textView11" />
+                app:layout_constraintTop_toTopOf="@+id/textView11"
+                tools:text="Brian Hull, Kathryn Hahn, Andy Samberg" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Direção:"
+                android:layout_marginTop="8dp"
+                android:text="Idiomas"
                 android:textColor="#676767"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/textSinopse"
+                app:layout_constraintStart_toStartOf="@+id/textView11"
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
             <TextView
@@ -296,37 +297,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="24dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="Derek Drymon"
-                android:textColor="#676767"
-                app:layout_constraintBottom_toBottomOf="@+id/textView12"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView12"
-                app:layout_constraintTop_toTopOf="@+id/textView12" />
-
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Idiomas"
-                android:textColor="#676767"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/textView12"
-                app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginTop="8dp"
                 android:text="Português, Inglês [original]"
                 android:textColor="#676767"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView14"
-                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                app:layout_constraintTop_toBottomOf="@+id/textElenco" />
 
             <LinearLayout
                 android:id="@+id/linearLayout3"
@@ -450,8 +426,8 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView15"
-                tools:listitem="@layout/adapter_post"
-                tools:itemCount="1"/>
+                tools:itemCount="1"
+                tools:listitem="@layout/adapter_post" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
