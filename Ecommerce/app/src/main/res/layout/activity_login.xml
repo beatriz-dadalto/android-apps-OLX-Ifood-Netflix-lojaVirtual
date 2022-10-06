@@ -79,12 +79,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edtSenha" />
 
+            <TextView
+                android:id="@+id/btnRecuperaSenha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recuperar senha"
+                android:textColor="@color/color_laranja"
+                android:textStyle="bold"
+                android:layout_marginEnd="24dp"
+                android:paddingVertical="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
             <ProgressBar
                 android:id="@+id/progressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:indeterminateTint="@color/color_laranja"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:visibility="gone"
                 tools:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"

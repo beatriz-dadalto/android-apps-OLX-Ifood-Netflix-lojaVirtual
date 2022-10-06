@@ -10,12 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ecommerce">
         <activity
+            android:name=".autenticacao.RecuperaContaActivity"
+            android:exported="false" />
+        <activity
             android:name=".autenticacao.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".activity.SplashActivity"
-            android:theme="@style/Theme.Splash"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
