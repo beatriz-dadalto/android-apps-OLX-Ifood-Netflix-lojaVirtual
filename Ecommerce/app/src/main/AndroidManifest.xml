@@ -10,8 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ecommerce">
         <activity
+            android:name=".autenticacao.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.SplashActivity"
-            android:exported="true" >
+            android:theme="@style/Theme.Splash"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +24,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>
