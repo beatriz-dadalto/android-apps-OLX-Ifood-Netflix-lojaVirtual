@@ -3,9 +3,14 @@ package com.br.ecommerce.autenticacao;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.br.ecommerce.R;
 import com.br.ecommerce.databinding.ActivityCadastroBinding;
+import com.br.ecommerce.helper.FirebaseHelper;
+import com.br.ecommerce.model.Usuario;
 
 public class CadastroActivity extends AppCompatActivity {
 
@@ -23,5 +28,74 @@ public class CadastroActivity extends AppCompatActivity {
     private void configCliques() {
         binding.include.ibVoltar.setOnClickListener(view -> finish());
         binding.btnLogin.setOnClickListener(view -> finish());
+    }
+
+    public void validaDados(View view) {
+        String nome = binding.edtNome.getText().toString().trim();
+        String email = binding.edtEmail.getText().toString().trim();
+        String senha = binding.edtSenha.getText().toString().trim();
+        String confirmaSenha = binding.edtConfirmaSenha.getText().toString().trim();
+
+        if (!nome.isEmpty()) {
+            if (!email.isEmpty()) {
+                if (!senha.isEmpty()) {
+                    if (!confirmaSenha.isEmpty()) {
+                        if (confirmaSenha.equals(senha)) {
+
+                            ocultarTeclado();
+                            binding.progressBar.setVisibility(View.VISIBLE);
+
+                            Usuario usuario = new Usuario();
+                            usuario.setNome(nome);
+                            usuario.setEmail(email);
+                            usuario.setSenha(senha);
+
+                            criarConta(usuario);
+
+                        } else {
+                            binding.edtConfirmaSenha.requestFocus();
+                            binding.edtConfirmaSenha.setError("Senhas diferentes.");
+                        }
+                    } else {
+                        binding.edtConfirmaSenha.requestFocus();
+                        binding.edtConfirmaSenha.setError("Confirme a senha.");
+                    }
+                } else {
+                    binding.edtSenha.requestFocus();
+                    binding.edtSenha.setError("Informe uma senha.");
+                }
+            } else {
+                binding.edtEmail.requestFocus();
+                binding.edtEmail.setError("Informe o email.");
+            }
+        } else {
+            binding.edtNome.requestFocus();
+            binding.edtNome.setError("Informe o nome.");
+        }
+    }
+
+    private void criarConta(Usuario usuario) {
+        FirebaseHelper.getAuth()
+                .createUserWithEmailAndPassword(usuario.getEmail(), usuario.getSenha())
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+
+                        String id = task.getResult().getUser().getUid();
+                        usuario.setId(id);
+                        usuario.salvar();
+
+                    } else {
+                        Toast.makeText(this, FirebaseHelper.validaErros(task.getException().getMessage()), Toast.LENGTH_LONG).show();
+                    }
+
+                    binding.progressBar.setVisibility(View.GONE);
+                });
+    }
+
+    private void ocultarTeclado() {
+        if (getCurrentFocus() != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
     }
 }

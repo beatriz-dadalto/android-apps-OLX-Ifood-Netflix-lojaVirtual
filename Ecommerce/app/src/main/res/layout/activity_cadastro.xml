@@ -109,6 +109,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_btn"
                 android:text="Criar conta"
+                android:onClick="validaDados"
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toTopOf="@+id/progressBar"
                 app:layout_constraintEnd_toEndOf="parent"
