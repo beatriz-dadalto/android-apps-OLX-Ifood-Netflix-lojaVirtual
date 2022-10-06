@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ecommerce">
         <activity
+            android:name=".autenticacao.CadastroActivity"
+            android:exported="false" />
+        <activity
             android:name=".autenticacao.RecuperaContaActivity"
             android:exported="false" />
         <activity

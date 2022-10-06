@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/ic_logo.xml" value="0.303" />
         <entry key="app/src/main/res/drawable/ic_user_login_on.xml" value="0.2005" />
+        <entry key="app/src/main/res/layout/activity_cadastro.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/activity_recupera_conta.xml" value="0.37447916666666664" />
