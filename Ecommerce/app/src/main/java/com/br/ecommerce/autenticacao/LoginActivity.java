@@ -17,8 +17,10 @@ public class LoginActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
-                String email = result.getData().getStringExtra("email");
-                binding.edtEmail.setText(email);
+                if (result.getResultCode() == RESULT_OK) {
+                    String email = result.getData().getStringExtra("email");
+                    binding.edtEmail.setText(email);
+                }
             }
     );
 
