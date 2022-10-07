@@ -2,6 +2,7 @@ package com.br.ecommerce.autenticacao;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -84,6 +85,11 @@ public class CadastroActivity extends AppCompatActivity {
                         usuario.setId(id);
                         usuario.salvar();
 
+                        Intent intent = new Intent();
+                        intent.putExtra("email", usuario.getEmail());
+                        setResult(RESULT_OK, intent);
+
+                        finish();
                     } else {
                         Toast.makeText(this, FirebaseHelper.validaErros(task.getException().getMessage()), Toast.LENGTH_LONG).show();
                     }
