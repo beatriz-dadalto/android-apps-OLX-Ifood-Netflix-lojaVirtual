@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding.btnLogin.setOnClickListener(view -> {
             if (FirebaseHelper.getAutenticado()) {
+                FirebaseHelper.getAuth().signOut();
                 Toast.makeText(this, "Usuário já autenticado", Toast.LENGTH_SHORT).show();
             } else {
                 startActivity(new Intent(this, LoginActivity.class));
