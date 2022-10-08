@@ -4,14 +4,22 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_logo.xml" value="0.303" />
+        <entry key="app/src/main/res/drawable/ic_perfil.xml" value="0.2395" />
         <entry key="app/src/main/res/drawable/ic_user_login_on.xml" value="0.2005" />
         <entry key="app/src/main/res/layout/activity_cadastro.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.359375" />
+        <entry key="app/src/main/res/layout/activity_main_usuario.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/activity_recupera_conta.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/activity_recupera_senha.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/fragment_usuario_carrinho.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/fragment_usuario_favorito.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/fragment_usuario_home.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/fragment_usuario_pedido.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/ib_voltar.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/item_selected.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/menu/menu_usuario.xml" value="0.37447916666666664" />
       </map>
     </option>
   </component>

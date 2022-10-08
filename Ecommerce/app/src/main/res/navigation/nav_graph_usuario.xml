@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_usuario"
+    app:startDestination="@id/menu_home">
+
+    <fragment
+        android:id="@+id/menu_home"
+        android:name="com.br.ecommerce.fragment.usuario.UsuarioHomeFragment"
+        android:label="fragment_usuario_home"
+        tools:layout="@layout/fragment_usuario_home" />
+    <fragment
+        android:id="@+id/menu_pedido"
+        android:name="com.br.ecommerce.fragment.usuario.UsuarioPedidoFragment"
+        android:label="fragment_usuario_pedido"
+        tools:layout="@layout/fragment_usuario_pedido" />
+    <fragment
+        android:id="@+id/menu_carrinho"
+        android:name="com.br.ecommerce.fragment.usuario.UsuarioCarrinhoFragment"
+        android:label="fragment_usuario_carrinho"
+        tools:layout="@layout/fragment_usuario_carrinho" />
+    <fragment
+        android:id="@+id/menu_favorito"
+        android:name="com.br.ecommerce.fragment.usuario.UsuarioFavoritoFragment"
+        android:label="fragment_usuario_favorito"
+        tools:layout="@layout/fragment_usuario_favorito" />
+    <fragment
+        android:id="@+id/menu_perfil"
+        android:name="com.br.ecommerce.fragment.usuario.UsuarioPerfilFragment"
+        android:label="fragment_usuario_perfil"
+        tools:layout="@layout/fragment_usuario_perfil" />
+</navigation>

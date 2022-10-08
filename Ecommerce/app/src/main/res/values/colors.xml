@@ -9,4 +9,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorIconeOnBnv">#FC6E20</color>
+    <color name="colorIconeOffBnv">#A59D98</color>
 </resources>

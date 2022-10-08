@@ -1,13 +1,12 @@
-package com.br.ecommerce.activity;
+package com.br.ecommerce.activity.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 
-import com.br.ecommerce.MainActivity;
+import com.br.ecommerce.activity.usuario.MainActivityUsuario;
 import com.br.ecommerce.R;
 
 public class SplashActivity extends AppCompatActivity {
@@ -19,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
 
         new Handler(getMainLooper()).postDelayed(() -> {
             finish();
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, MainActivityUsuario.class));
         }, 2000);
     }
 
