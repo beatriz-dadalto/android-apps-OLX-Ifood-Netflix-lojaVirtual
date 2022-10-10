@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.br.ecommerce.R;
 import com.br.ecommerce.databinding.ActivityCadastroBinding;
 import com.br.ecommerce.helper.FirebaseHelper;
+import com.br.ecommerce.model.Loja;
 import com.br.ecommerce.model.Usuario;
 
 public class CadastroActivity extends AppCompatActivity {
@@ -46,12 +47,22 @@ public class CadastroActivity extends AppCompatActivity {
                             ocultarTeclado();
                             binding.progressBar.setVisibility(View.VISIBLE);
 
-                            Usuario usuario = new Usuario();
-                            usuario.setNome(nome);
-                            usuario.setEmail(email);
-                            usuario.setSenha(senha);
 
-                            criarConta(usuario);
+                               // USAR PARA CRIAR UMA LOJA
+                                Loja loja = new Loja();
+                                loja.setNome(nome);
+                                loja.setEmail(email);
+                                loja.setSenha(senha);
+
+                                criarLoja(loja);
+
+
+//                            Usuario usuario = new Usuario();
+//                            usuario.setNome(nome);
+//                            usuario.setEmail(email);
+//                            usuario.setSenha(senha);
+//
+//                            criarConta(usuario);
 
                         } else {
                             binding.edtConfirmaSenha.requestFocus();
@@ -73,6 +84,24 @@ public class CadastroActivity extends AppCompatActivity {
             binding.edtNome.requestFocus();
             binding.edtNome.setError("Informe o nome.");
         }
+    }
+
+    private void criarLoja(Loja loja) {
+        FirebaseHelper.getAuth()
+                .createUserWithEmailAndPassword(loja.getEmail(), loja.getSenha())
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+
+                        String id = task.getResult().getUser().getUid();
+                        loja.setId(id);
+                        loja.salvar();
+
+                    } else {
+                        Toast.makeText(this, FirebaseHelper.validaErros(task.getException().getMessage()), Toast.LENGTH_LONG).show();
+                    }
+
+                    binding.progressBar.setVisibility(View.GONE);
+                });
     }
 
     private void criarConta(Usuario usuario) {
