@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.br.ecommerce.R;
+import com.br.ecommerce.databinding.DialogFormCategoriaBinding;
 import com.br.ecommerce.databinding.FragmentLojaCategoriaBinding;
 
 public class LojaCategoriaFragment extends Fragment {
@@ -42,9 +43,13 @@ public class LojaCategoriaFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),
                 R.style.CustomAlertDialog);
 
-        View view = getLayoutInflater().inflate(R.layout.dialog_form_categoria, null);
+        DialogFormCategoriaBinding categoriaBinding = DialogFormCategoriaBinding.
+                inflate(LayoutInflater.from(getContext()));
 
-        builder.setView(view);
+        categoriaBinding.btnFechar.setOnClickListener(view -> dialog.dismiss());
+        categoriaBinding.btnSalvar.setOnClickListener(view -> dialog.dismiss());
+
+        builder.setView(categoriaBinding.getRoot());
         dialog = builder.create();
         dialog.show();
     }
