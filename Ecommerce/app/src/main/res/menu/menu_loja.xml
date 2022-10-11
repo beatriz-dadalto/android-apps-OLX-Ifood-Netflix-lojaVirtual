@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_pedido"
+        android:icon="@drawable/ic_pedidos"
+        android:title="Pedidos" />
+
+    <item
+        android:id="@+id/menu_produto"
+        android:icon="@drawable/ic_produtos"
+        android:title="Produtos" />
+
+    <item
+        android:id="@+id/menu_categoria"
+        android:icon="@drawable/ic_categorias_list"
+        android:title="Categorias" />
+
+    <item
+        android:id="@+id/menu_config"
+        android:icon="@drawable/ic_config"
+        android:title="Configuração" />
+
+</menu>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_usuario"
+    app:startDestination="@id/lojaPedidoFragment">
+
+    <fragment
+        android:id="@+id/lojaPedidoFragment"
+        android:name="com.br.ecommerce.fragment.loja.LojaPedidoFragment"
+        android:label="fragment_loja_pedido"
+        tools:layout="@layout/fragment_loja_pedido" />
+    <fragment
+        android:id="@+id/lojaProdutoFragment"
+        android:name="com.br.ecommerce.fragment.loja.LojaProdutoFragment"
+        android:label="fragment_loja_produto"
+        tools:layout="@layout/fragment_loja_produto" />
+    <fragment
+        android:id="@+id/lojaCategoriaFragment"
+        android:name="com.br.ecommerce.fragment.loja.LojaCategoriaFragment"
+        android:label="fragment_loja_categoria"
+        tools:layout="@layout/fragment_loja_categoria" />
+    <fragment
+        android:id="@+id/lojaConfigFragment"
+        android:name="com.br.ecommerce.fragment.loja.LojaConfigFragment"
+        android:label="fragment_loja_config"
+        tools:layout="@layout/fragment_loja_config" />
+</navigation>

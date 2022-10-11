@@ -86,12 +86,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) { // Usuário
-                    finish();
                     startActivity(new Intent(getBaseContext(), MainActivityUsuario.class));
                 } else { // Loja
-                    finish();
                     startActivity(new Intent(getBaseContext(), MainActivityEmpresa.class));
                 }
+                finish();
             }
 
             @Override

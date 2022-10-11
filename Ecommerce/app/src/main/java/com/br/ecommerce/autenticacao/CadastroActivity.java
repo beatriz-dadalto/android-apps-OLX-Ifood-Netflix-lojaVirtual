@@ -47,22 +47,23 @@ public class CadastroActivity extends AppCompatActivity {
                             ocultarTeclado();
                             binding.progressBar.setVisibility(View.VISIBLE);
 
-
-                               // USAR PARA CRIAR UMA LOJA
+                            /*
+                                TODO USAR PARA CRIAR UMA LOJA
                                 Loja loja = new Loja();
                                 loja.setNome(nome);
                                 loja.setEmail(email);
                                 loja.setSenha(senha);
 
                                 criarLoja(loja);
+                            */
 
 
-//                            Usuario usuario = new Usuario();
-//                            usuario.setNome(nome);
-//                            usuario.setEmail(email);
-//                            usuario.setSenha(senha);
-//
-//                            criarConta(usuario);
+                            Usuario usuario = new Usuario();
+                            usuario.setNome(nome);
+                            usuario.setEmail(email);
+                            usuario.setSenha(senha);
+
+                            criarConta(usuario);
 
                         } else {
                             binding.edtConfirmaSenha.requestFocus();

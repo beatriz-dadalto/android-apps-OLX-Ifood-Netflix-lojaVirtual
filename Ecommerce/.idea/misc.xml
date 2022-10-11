@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_config.xml" value="0.2485" />
         <entry key="app/src/main/res/drawable/ic_logo.xml" value="0.303" />
         <entry key="app/src/main/res/drawable/ic_perfil.xml" value="0.2395" />
         <entry key="app/src/main/res/drawable/ic_user_login_on.xml" value="0.2005" />
@@ -14,6 +15,10 @@
         <entry key="app/src/main/res/layout/activity_recupera_conta.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/activity_recupera_senha.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/fragment_loja_categoria.xml" value="0.359375" />
+        <entry key="app/src/main/res/layout/fragment_loja_config.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/fragment_loja_pedido.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/fragment_loja_produto.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/fragment_usuario_carrinho.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/fragment_usuario_favorito.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/fragment_usuario_home.xml" value="0.37447916666666664" />
@@ -21,6 +26,7 @@
         <entry key="app/src/main/res/layout/fragment_usuario_perfil.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/ib_voltar.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/item_selected.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/menu/menu_loja.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/menu/menu_usuario.xml" value="0.37447916666666664" />
       </map>
     </option>
