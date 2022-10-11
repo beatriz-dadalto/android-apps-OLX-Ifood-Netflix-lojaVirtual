@@ -3,10 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bg_add_circle.xml" value="0.2485" />
+        <entry key="app/src/main/res/drawable/bg_btn.xml" value="0.2485" />
+        <entry key="app/src/main/res/drawable/bg_dialog.xml" value="0.2485" />
         <entry key="app/src/main/res/drawable/ic_config.xml" value="0.2485" />
         <entry key="app/src/main/res/drawable/ic_logo.xml" value="0.303" />
         <entry key="app/src/main/res/drawable/ic_perfil.xml" value="0.2395" />
         <entry key="app/src/main/res/drawable/ic_user_login_on.xml" value="0.2005" />
+        <entry key="app/src/main/res/drawable/placeholder_form_categorias.xml" value="0.2485" />
         <entry key="app/src/main/res/layout/activity_cadastro.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.359375" />
@@ -15,6 +19,7 @@
         <entry key="app/src/main/res/layout/activity_recupera_conta.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/activity_recupera_senha.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/dialog_form_categoria.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/fragment_loja_categoria.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/fragment_loja_config.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/fragment_loja_pedido.xml" value="0.37447916666666664" />

@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_usuario"
-    app:startDestination="@id/lojaPedidoFragment">
+    app:startDestination="@id/menu_pedido">
 
     <fragment
-        android:id="@+id/lojaPedidoFragment"
+        android:id="@+id/menu_pedido"
         android:name="com.br.ecommerce.fragment.loja.LojaPedidoFragment"
         android:label="fragment_loja_pedido"
         tools:layout="@layout/fragment_loja_pedido" />
     <fragment
-        android:id="@+id/lojaProdutoFragment"
+        android:id="@+id/menu_produto"
         android:name="com.br.ecommerce.fragment.loja.LojaProdutoFragment"
         android:label="fragment_loja_produto"
         tools:layout="@layout/fragment_loja_produto" />
     <fragment
-        android:id="@+id/lojaCategoriaFragment"
+        android:id="@+id/menu_categoria"
         android:name="com.br.ecommerce.fragment.loja.LojaCategoriaFragment"
         android:label="fragment_loja_categoria"
         tools:layout="@layout/fragment_loja_categoria" />
     <fragment
-        android:id="@+id/lojaConfigFragment"
+        android:id="@+id/menu_config"
         android:name="com.br.ecommerce.fragment.loja.LojaConfigFragment"
         android:label="fragment_loja_config"
         tools:layout="@layout/fragment_loja_config" />
