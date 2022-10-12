@@ -22,8 +22,8 @@
             android:id="@+id/imagemCategoria"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
             android:padding="8dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/placeholder_form_categorias" />
 
     </androidx.cardview.widget.CardView>
@@ -49,10 +49,11 @@
         app:layout_constraintTop_toBottomOf="@+id/edtCategoria" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="16dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cbTodosProdutos">
@@ -61,8 +62,8 @@
             android:id="@+id/btnFechar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginEnd="16dp"
+            android:layout_weight="1"
             android:background="@drawable/bg_btn"
             android:text="Fechar"
             android:textColor="@android:color/white" />
@@ -71,12 +72,24 @@
             android:id="@+id/btnSalvar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginStart="16dp"
+            android:layout_weight="1"
             android:background="@drawable/bg_btn"
             android:text="Salvar"
             android:textColor="@android:color/white" />
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:indeterminateTint="@color/color_laranja"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
