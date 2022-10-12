@@ -2,6 +2,7 @@ package com.br.ecommerce.activity.loja;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.Toast;
@@ -10,6 +11,10 @@ import com.br.ecommerce.R;
 import com.br.ecommerce.databinding.ActivityLojaFormProdutoBinding;
 import com.br.ecommerce.databinding.BottomSheetFormProdutoBinding;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.normal.TedPermission;
+
+import java.util.List;
 
 public class LojaFormProdutoActivity extends AppCompatActivity {
 
@@ -41,12 +46,12 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
         bottomSheetDialog.show();
 
         bottomSheetBinding.btnCamera.setOnClickListener(view -> {
-            Toast.makeText(this, "Câmera", Toast.LENGTH_SHORT).show();
+            verificaPermissaoCamera();
             bottomSheetDialog.dismiss();
         });
 
         bottomSheetBinding.btnGaleria.setOnClickListener(view -> {
-            Toast.makeText(this, "Galeria", Toast.LENGTH_SHORT).show();
+            verificaPermissaoGaleria();
             bottomSheetDialog.dismiss();
         });
 
@@ -54,5 +59,60 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
             Toast.makeText(this, "Cancelar", Toast.LENGTH_SHORT).show();
             bottomSheetDialog.dismiss();
         });
+    }
+
+    private void verificaPermissaoCamera() {
+        PermissionListener permissionListener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                abrirCamera();
+            }
+
+            @Override
+            public void onPermissionDenied(List<String> deniedPermissions) {
+                Toast.makeText(LojaFormProdutoActivity.this, "Permissão negada.", Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        showDialogPermissao(
+                permissionListener,
+                new String[] {Manifest.permission.CAMERA},
+                "Se você não aceitar a permissão não poderá acessar a câmera. Deseja aceitar a permissão agora?");
+    }
+
+    private void abrirCamera() {
+    }
+
+    private void verificaPermissaoGaleria() {
+        PermissionListener permissionListener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                abrirGaleria();
+            }
+
+            @Override
+            public void onPermissionDenied(List<String> deniedPermissions) {
+                Toast.makeText(LojaFormProdutoActivity.this, "Permissão negada.", Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        showDialogPermissao(
+                permissionListener,
+                new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},
+                "Se você não aceitar a permissão não poderá acessar a galeria. Deseja aceitar a permissão agora?");
+    }
+
+    private void abrirGaleria() {
+    }
+
+    private void showDialogPermissao(PermissionListener permissionListener, String[] permissoes, String msg) {
+        TedPermission.create()
+                .setPermissionListener(permissionListener)
+                .setDeniedTitle("Permissão negada")
+                .setDeniedMessage(msg)
+                .setDeniedCloseButtonText("Não")
+                .setGotoSettingButtonText("Sim")
+                .setPermissions(permissoes)
+                .check();
     }
 }
