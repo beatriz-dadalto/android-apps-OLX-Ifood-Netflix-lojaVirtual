@@ -53,7 +53,8 @@
                         <ImageView
                             android:id="@+id/imagemProduto0"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop" />
 
                         <ImageView
                             android:id="@+id/imageFake0"
@@ -75,7 +76,8 @@
                         <ImageView
                             android:id="@+id/imagemProduto1"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop" />
 
                         <ImageView
                             android:id="@+id/imageFake1"
@@ -97,7 +99,8 @@
                         <ImageView
                             android:id="@+id/imagemProduto2"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop" />
 
                         <ImageView
                             android:id="@+id/imageFake2"
