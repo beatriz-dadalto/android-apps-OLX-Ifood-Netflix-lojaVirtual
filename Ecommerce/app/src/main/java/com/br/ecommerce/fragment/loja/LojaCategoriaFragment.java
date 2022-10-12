@@ -41,6 +41,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
+import com.squareup.picasso.Picasso;
 import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
 
 import java.util.ArrayList;
@@ -127,7 +128,10 @@ public class LojaCategoriaFragment extends Fragment implements CategoriaAdapter.
     }
 
     private void configCliques() {
-        binding.btnAddCategoria.setOnClickListener(view -> showDialog());
+        binding.btnAddCategoria.setOnClickListener(view -> {
+            categoria = null;
+            showDialog();
+        });
     }
 
     private void showDialogDelete(Categoria categoria) {
@@ -170,26 +174,35 @@ public class LojaCategoriaFragment extends Fragment implements CategoriaAdapter.
         categoriaBinding = DialogFormCategoriaBinding.
                 inflate(LayoutInflater.from(getContext()));
 
+        if (categoria != null) {
+            categoriaBinding.edtCategoria.setText(categoria.getNome());
+            Picasso.get().load(categoria.getUrlImagem()).into(categoriaBinding.imagemCategoria);
+            categoriaBinding.cbTodosProdutos.setChecked(categoria.isTodas());
+        }
+
         categoriaBinding.btnFechar.setOnClickListener(view -> dialog.dismiss());
 
         categoriaBinding.btnSalvar.setOnClickListener(view -> {
             String nomeCategoria = categoriaBinding.edtCategoria.getText().toString().trim();
 
             if (!nomeCategoria.isEmpty()) {
-                if (caminhoImagem != null) {
 
+                if (categoria == null) categoria = new Categoria();
+                categoria.setNome(nomeCategoria);
+                categoria.setTodas(categoriaBinding.cbTodosProdutos.isChecked());
+
+                ocultarTeclado();
+                categoriaBinding.progressBar.setVisibility(View.VISIBLE);
+
+                if (caminhoImagem != null) { // novo cadastro ou edicao da imagem
                     ocultarTeclado();
-                    categoriaBinding.progressBar.setVisibility(View.VISIBLE);
-
-                    if (categoria == null) categoria = new Categoria();
-                    categoria.setNome(nomeCategoria);
-                    categoria.setTodas(categoriaBinding.cbTodosProdutos.isChecked());
-
                     salvarImagemFirebase();
-
-                } else {
-                    ocultarTeclado();
-                    Toast.makeText(getContext(), "Escolha uma imagem para a categoria.", Toast.LENGTH_SHORT).show();
+                } else if (categoria.getUrlImagem() != null) { // edicao de nome ou checkbox
+                    categoria.salvar();
+                    dialog.dismiss();
+                } else { // nao preencheu a imagem
+                    categoriaBinding.progressBar.setVisibility(View.GONE);
+                    Toast.makeText(getContext(), "Escolha uma imagem para categoria.", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 categoriaBinding.edtCategoria.setError("Informação obrigatória.");
@@ -292,6 +305,7 @@ public class LojaCategoriaFragment extends Fragment implements CategoriaAdapter.
 
     @Override
     public void onClickListener(Categoria categoria) {
-        Toast.makeText(getContext(), categoria.getNome(), Toast.LENGTH_SHORT).show();
+        this.categoria = categoria;
+        showDialog();
     }
 }
