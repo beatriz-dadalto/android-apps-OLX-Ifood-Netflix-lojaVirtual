@@ -40,7 +40,7 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
                 BottomSheetFormProdutoBinding.inflate(LayoutInflater.from(this));
 
         BottomSheetDialog bottomSheetDialog =
-                new BottomSheetDialog(this, R.style.BottomSheetTheme);
+                new BottomSheetDialog(this, R.style.BottomSheetDialog);
 
         bottomSheetDialog.setContentView(bottomSheetBinding.getRoot());
         bottomSheetDialog.show();
@@ -56,7 +56,6 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
         });
 
         bottomSheetBinding.btnCancelar.setOnClickListener(view -> {
-            Toast.makeText(this, "Cancelar", Toast.LENGTH_SHORT).show();
             bottomSheetDialog.dismiss();
         });
     }
@@ -70,7 +69,7 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
 
             @Override
             public void onPermissionDenied(List<String> deniedPermissions) {
-                Toast.makeText(LojaFormProdutoActivity.this, "Permissão negada.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Permissão negada.", Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -92,7 +91,7 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
 
             @Override
             public void onPermissionDenied(List<String> deniedPermissions) {
-                Toast.makeText(LojaFormProdutoActivity.this, "Permissão negada.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Permissão negada.", Toast.LENGTH_SHORT).show();
             }
         };
 

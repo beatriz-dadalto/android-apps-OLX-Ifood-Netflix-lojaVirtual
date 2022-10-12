@@ -43,11 +43,11 @@
     </style>
 
     <!-- BottomSheet DIALOG THEME -->
-    <style name="BottomSheetTheme" parent="Theme.Design.Light.BottomSheetDialog">
+    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/BottomSheetStyleWrapper</item>
     </style>
     <style name="BottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
-        <item name="background">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
 </resources>
