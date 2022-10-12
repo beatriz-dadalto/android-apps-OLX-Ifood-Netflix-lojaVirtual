@@ -2,6 +2,7 @@ package com.br.ecommerce.model;
 
 import com.br.ecommerce.helper.FirebaseHelper;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.Serializable;
 
@@ -22,6 +23,21 @@ public class Categoria implements Serializable {
                 .child("categorias")
                 .child(getId());
         categoriaRef.setValue(this);
+    }
+
+    public void delete() {
+        // realtime database
+        DatabaseReference categoriaRef = FirebaseHelper.getDatabaseReference()
+                .child("categorias")
+                .child(getId());
+        categoriaRef.removeValue();
+
+        // storage
+        StorageReference storageReference = FirebaseHelper.getStorageReference()
+                .child("imagens")
+                .child("categorias")
+                .child(getId() + ".jpeg");
+        storageReference.delete();
     }
 
     public String getId() {
