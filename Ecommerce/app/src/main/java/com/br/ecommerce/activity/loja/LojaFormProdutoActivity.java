@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
@@ -16,6 +17,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.br.ecommerce.R;
@@ -36,19 +38,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class LojaFormProdutoActivity extends AppCompatActivity {
 
-    private ActivityLojaFormProdutoBinding binding;
-
-    private int codeImagePosition = 0;
-
-    private String currentPhotoPath;
-
     private List<ImagemUpload> imagemUploadList = new ArrayList<>();
-
     private Produto produto;
     private boolean novoProduto = true;
+
+    private ActivityLojaFormProdutoBinding binding;
+
+    private int resultCode = 0;
+
+    private String currentPhotoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,45 +58,89 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
         binding = ActivityLojaFormProdutoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        configCliques();
+        configClicks();
+
     }
 
-    private void configCliques() {
-        binding.imagemProduto0.setOnClickListener(view -> showBottomSheet(0));
-        binding.imagemProduto1.setOnClickListener(view -> showBottomSheet(1));
-        binding.imagemProduto2.setOnClickListener(view -> showBottomSheet(2));
+    private void configClicks() {
+        binding.imagemProduto0.setOnClickListener(v -> showBottomSheet(0));
+        binding.imagemProduto1.setOnClickListener(v -> showBottomSheet(1));
+        binding.imagemProduto2.setOnClickListener(v -> showBottomSheet(2));
     }
 
-    private void showBottomSheet(int codeImagePosition) {
+    public void validaDados(View view) {
+        String titulo = binding.edtTitulo.getText().toString().trim();
+        String descricao = binding.edtDescricao.getText().toString().trim();
+        String valorAntigo = binding.edtValorAntigo.getText().toString().trim();
+        String valorAtual = binding.edtValorAtual.getText().toString().trim();
 
-        this.codeImagePosition = codeImagePosition;
+        if (!titulo.isEmpty()) {
+            if (!descricao.isEmpty()) {
 
-        BottomSheetFormProdutoBinding bottomSheetBinding =
+                if (produto == null) produto = new Produto();
+
+                produto.setTitulo(titulo);
+                produto.setDescricao(descricao);
+                produto.setValorAntigo(10);
+                produto.setValorAtual(8);
+
+                if (novoProduto) { // Novo produto
+                    if (imagemUploadList.size() == 3) {
+                        for (int i = 0; i < imagemUploadList.size(); i++) {
+                            salvarImagemFirebase(imagemUploadList.get(i));
+                        }
+                    } else {
+                        ocultaTeclado();
+                        Toast.makeText(this, "Escolha 3 imagens para o produto.", Toast.LENGTH_SHORT).show();
+                    }
+                } else { // Edição do produto
+                    if (imagemUploadList.size() > 0) {
+                        for (int i = 0; i < imagemUploadList.size(); i++) {
+                            salvarImagemFirebase(imagemUploadList.get(i));
+                        }
+                    } else {
+                        produto.salvar(false);
+                    }
+                }
+
+            } else {
+                binding.edtDescricao.setError("Informação obrigatória.");
+            }
+        } else {
+            binding.edtTitulo.setError("Informação obrigatória.");
+        }
+
+    }
+
+    private void showBottomSheet(int code) {
+
+        resultCode = code;
+
+        BottomSheetFormProdutoBinding sheetBinding =
                 BottomSheetFormProdutoBinding.inflate(LayoutInflater.from(this));
 
-        BottomSheetDialog bottomSheetDialog =
-                new BottomSheetDialog(this, R.style.BottomSheetDialog);
-
-        bottomSheetDialog.setContentView(bottomSheetBinding.getRoot());
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                this, R.style.BottomSheetDialog);
+        bottomSheetDialog.setContentView(sheetBinding.getRoot());
         bottomSheetDialog.show();
 
-        bottomSheetBinding.btnCamera.setOnClickListener(view -> {
+        sheetBinding.btnCamera.setOnClickListener(v -> {
             verificaPermissaoCamera();
             bottomSheetDialog.dismiss();
         });
 
-        bottomSheetBinding.btnGaleria.setOnClickListener(view -> {
+        sheetBinding.btnGaleria.setOnClickListener(v -> {
             verificaPermissaoGaleria();
             bottomSheetDialog.dismiss();
         });
 
-        bottomSheetBinding.btnCancelar.setOnClickListener(view -> {
+        sheetBinding.btnCancelar.setOnClickListener(v -> {
             bottomSheetDialog.dismiss();
         });
     }
 
     private void verificaPermissaoCamera() {
-        PermissionListener permissionListener = new PermissionListener() {
+        PermissionListener permissionlistener = new PermissionListener() {
             @Override
             public void onPermissionGranted() {
                 abrirCamera();
@@ -102,18 +148,19 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
 
             @Override
             public void onPermissionDenied(List<String> deniedPermissions) {
-                Toast.makeText(getBaseContext(), "Permissão negada.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Permissão Negada.", Toast.LENGTH_SHORT).show();
             }
         };
 
         showDialogPermissao(
-                permissionListener,
+                permissionlistener,
                 new String[]{Manifest.permission.CAMERA},
-                "Se você não aceitar a permissão não poderá acessar a câmera. Deseja aceitar a permissão agora?");
+                "Se você não aceitar a permissão não poderá acessar a Câmera do dispositivo, deseja ativar a permissão agora ?"
+        );
     }
 
     private void verificaPermissaoGaleria() {
-        PermissionListener permissionListener = new PermissionListener() {
+        PermissionListener permissionlistener = new PermissionListener() {
             @Override
             public void onPermissionGranted() {
                 abrirGaleria();
@@ -121,19 +168,15 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
 
             @Override
             public void onPermissionDenied(List<String> deniedPermissions) {
-                Toast.makeText(getBaseContext(), "Permissão negada.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Permissão Negada.", Toast.LENGTH_SHORT).show();
             }
         };
 
         showDialogPermissao(
-                permissionListener,
+                permissionlistener,
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                "Se você não aceitar a permissão não poderá acessar a galeria. Deseja aceitar a permissão agora?");
-    }
-
-    private void abrirGaleria() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        resultLauncher.launch(intent);
+                "Se você não aceitar a permissão não poderá acessar a Galeria do dispositivo, deseja ativar a permissão agora ?"
+        );
     }
 
     private void showDialogPermissao(PermissionListener permissionListener, String[] permissoes, String msg) {
@@ -147,153 +190,6 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
                 .check();
     }
 
-    private void configUpload(String caminhoImagem) {
-        int REQUEST_IMAGE_POSITION = 0;
-        // se for 0,1,2 imagem da galeria
-        // se for 3,4,5 imagem da camera
-        switch (codeImagePosition) {
-            case 0:
-            case 3:
-                REQUEST_IMAGE_POSITION = 0;
-                break;
-            case 1:
-            case 4:
-                REQUEST_IMAGE_POSITION = 1;
-                break;
-            case 2:
-            case 5:
-                REQUEST_IMAGE_POSITION = 2;
-                break;
-        }
-
-        ImagemUpload imagemUpload = new ImagemUpload(REQUEST_IMAGE_POSITION, caminhoImagem);
-
-        if (!imagemUploadList.isEmpty()) {
-            boolean encontrou = false;
-            for (int i = 0; i < imagemUploadList.size(); i++) {
-                if (imagemUploadList.get(i).getIndex() == REQUEST_IMAGE_POSITION) {
-                    encontrou = true;
-                }
-            }
-
-            if (encontrou) {
-                imagemUploadList.set(REQUEST_IMAGE_POSITION, imagemUpload);
-            } else {
-                imagemUploadList.add(imagemUpload); // imagem nova
-            }
-
-        } else {
-            imagemUploadList.add(imagemUpload);
-        }
-
-    }
-
-    private void salvarImagemFirebase(int index, String caminhoImagem) {
-
-        StorageReference storageReference = FirebaseHelper.getStorageReference()
-                .child("imagens")
-                .child("anuncios")
-                .child(produto.getId())
-                .child("imagem" + index + ".jpeg");
-
-        UploadTask uploadTask = storageReference.putFile(Uri.parse(caminhoImagem));
-        uploadTask.addOnSuccessListener(taskSnapshot -> storageReference.getDownloadUrl().addOnCompleteListener(task -> {
-
-            if (novoProduto) {
-                produto.getUrlsImagens().add(index, task.getResult().toString());
-            } else {
-                produto.getUrlsImagens().set(index, task.getResult().toString());
-            }
-
-            if (imagemUploadList.size() == index + 1) {
-                produto.salvar(novoProduto);
-            }
-
-        })).addOnFailureListener(e -> Toast.makeText(this, "Ocorreu um erro. tente novamente!", Toast.LENGTH_SHORT).show());
-
-    }
-
-    private final ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == RESULT_OK) {
-
-                    String caminhoImagem;
-
-                    /* saber se a imagem esta vindo da galeria ou da camera */
-                    if (codeImagePosition <= 2) { // galeria
-
-                        Uri imagemSelecionada = result.getData().getData();
-
-                        try {
-                            caminhoImagem = imagemSelecionada.toString();
-
-                            switch (codeImagePosition) {
-                                case 0:
-                                    binding.imageFake0.setVisibility(View.GONE);
-                                    binding.imagemProduto0.setImageBitmap(getBitmap(imagemSelecionada));
-                                    break;
-                                case 1:
-                                    binding.imageFake1.setVisibility(View.GONE);
-                                    binding.imagemProduto1.setImageBitmap(getBitmap(imagemSelecionada));
-                                    break;
-                                case 2:
-                                    binding.imageFake2.setVisibility(View.GONE);
-                                    binding.imagemProduto2.setImageBitmap(getBitmap(imagemSelecionada));
-                                    break;
-                            }
-
-                            configUpload(caminhoImagem);
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    } else { // camera
-
-                        File file = new File(currentPhotoPath);
-                        caminhoImagem = String.valueOf(file.toURI());
-
-                        switch (codeImagePosition) {
-                            case 3:
-                                binding.imageFake0.setVisibility(View.GONE);
-                                binding.imagemProduto0.setImageURI(Uri.fromFile(file));
-                                break;
-                            case 4:
-                                binding.imageFake1.setVisibility(View.GONE);
-                                binding.imagemProduto1.setImageURI(Uri.fromFile(file));
-                                break;
-                            case 5:
-                                binding.imageFake2.setVisibility(View.GONE);
-                                binding.imagemProduto2.setImageURI(Uri.fromFile(file));
-                                break;
-                        }
-
-                        configUpload(caminhoImagem);
-
-                    }
-
-                }
-            }
-    );
-
-    private Bitmap getBitmap(Uri caminhoUri) {
-        Bitmap bitmap = null;
-
-        try {
-            if (Build.VERSION.SDK_INT < 28) {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), caminhoUri);
-            } else {
-                ImageDecoder.Source source = ImageDecoder.createSource(getContentResolver(), caminhoUri);
-                bitmap = ImageDecoder.decodeBitmap(source);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return bitmap;
-    }
-
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -301,7 +197,7 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
-                ".jpg",   /* suffix */
+                ".jpg",         /* suffix */
                 storageDir      /* directory */
         );
 
@@ -311,22 +207,19 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
     }
 
     private void abrirCamera() {
-        // se for 0,1,2 imagem da galeria
-        // se for 3,4,5 imagem da camera
-        switch (codeImagePosition) {
+        switch (resultCode) {
             case 0:
-                codeImagePosition = 3;
+                resultCode = 3;
                 break;
             case 1:
-                codeImagePosition = 4;
+                resultCode = 4;
                 break;
             case 2:
-                codeImagePosition = 5;
+                resultCode = 5;
                 break;
         }
 
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
         // Create the File where the photo should go
         File photoFile = null;
         try {
@@ -342,6 +235,161 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
             resultLauncher.launch(takePictureIntent);
         }
+    }
 
+    private void abrirGaleria() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        resultLauncher.launch(intent);
+    }
+
+    private void configUpload(String caminhoImagem) {
+        int request = 0;
+        switch (resultCode) {
+            case 0:
+            case 3:
+                request = 0;
+                break;
+            case 1:
+            case 4:
+                request = 1;
+                break;
+            case 2:
+            case 5:
+                request = 2;
+                break;
+        }
+
+        ImagemUpload imagemUpload = new ImagemUpload(request, caminhoImagem);
+
+        if (!imagemUploadList.isEmpty()) {
+
+            boolean encontrou = false;
+            for (int i = 0; i < imagemUploadList.size(); i++) {
+                if (imagemUploadList.get(i).getIndex() == request) {
+                    encontrou = true;
+                }
+            }
+
+            if (encontrou) {
+                imagemUploadList.set(request, imagemUpload);
+            } else {
+                imagemUploadList.add(imagemUpload);
+            }
+
+        } else {
+            imagemUploadList.add(imagemUpload);
+        }
+
+    }
+
+    private void salvarImagemFirebase(ImagemUpload imagemUpload) {
+
+        int index = imagemUpload.getIndex();
+        String caminhoImagem = imagemUpload.getCaminhoImagem();
+
+        StorageReference storageReference = FirebaseHelper.getStorageReference()
+                .child("imagens")
+                .child("produtos")
+                .child(produto.getId())
+                .child("imagem" + index + ".jpeg");
+
+        UploadTask uploadTask = storageReference.putFile(Uri.parse(caminhoImagem));
+        uploadTask.addOnSuccessListener(taskSnapshot -> storageReference.getDownloadUrl().addOnCompleteListener(task -> {
+
+            imagemUpload.setCaminhoImagem(task.getResult().toString());
+            produto.getUrlsImagens().add(imagemUpload);
+
+            if (imagemUploadList.size() == index + 1) {
+                produto.salvar(novoProduto);
+            }
+
+        })).addOnFailureListener(e -> Toast.makeText(
+                this, "Ocorreu um erro com o upload, tente novamente.",
+                Toast.LENGTH_SHORT).show());
+    }
+
+    private final ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK) {
+
+                    String caminhaImagem;
+
+                    if (resultCode <= 2) { // Galeria
+
+                        Uri imagemSelecionada = result.getData().getData();
+
+                        try {
+
+                            caminhaImagem = imagemSelecionada.toString();
+
+                            switch (resultCode) {
+                                case 0:
+                                    binding.imageFake0.setVisibility(View.GONE);
+                                    binding.imagemProduto0.setImageBitmap(getBitmap(imagemSelecionada));
+                                    break;
+                                case 1:
+                                    binding.imageFake1.setVisibility(View.GONE);
+                                    binding.imagemProduto1.setImageBitmap(getBitmap(imagemSelecionada));
+                                    break;
+                                case 2:
+                                    binding.imageFake2.setVisibility(View.GONE);
+                                    binding.imagemProduto2.setImageBitmap(getBitmap(imagemSelecionada));
+                                    break;
+                            }
+
+                            configUpload(caminhaImagem);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    } else { // Camera
+
+                        File file = new File(currentPhotoPath);
+                        caminhaImagem = String.valueOf(file.toURI());
+
+                        switch (resultCode) {
+                            case 3:
+                                binding.imageFake0.setVisibility(View.GONE);
+                                binding.imagemProduto0.setImageURI(Uri.fromFile(file));
+                                break;
+                            case 4:
+                                binding.imageFake1.setVisibility(View.GONE);
+                                binding.imagemProduto1.setImageURI(Uri.fromFile(file));
+                                break;
+                            case 5:
+                                binding.imageFake2.setVisibility(View.GONE);
+                                binding.imagemProduto2.setImageURI(Uri.fromFile(file));
+                                break;
+                        }
+
+                        configUpload(caminhaImagem);
+
+                    }
+
+                }
+            }
+    );
+
+    private Bitmap getBitmap(Uri caminhoUri) {
+        Bitmap bitmap = null;
+        try {
+            if (Build.VERSION.SDK_INT < 28) {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), caminhoUri);
+            } else {
+                ImageDecoder.Source source = ImageDecoder.createSource(getContentResolver(), caminhoUri);
+                bitmap = ImageDecoder.decodeBitmap(source);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
+    private void ocultaTeclado() {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(binding.edtTitulo.getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
     }
 }
