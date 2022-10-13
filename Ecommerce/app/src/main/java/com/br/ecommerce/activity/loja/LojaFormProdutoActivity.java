@@ -21,8 +21,12 @@ import android.widget.Toast;
 import com.br.ecommerce.R;
 import com.br.ecommerce.databinding.ActivityLojaFormProdutoBinding;
 import com.br.ecommerce.databinding.BottomSheetFormProdutoBinding;
+import com.br.ecommerce.helper.FirebaseHelper;
 import com.br.ecommerce.model.ImagemUpload;
+import com.br.ecommerce.model.Produto;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
 
@@ -42,6 +46,9 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
     private String currentPhotoPath;
 
     private List<ImagemUpload> imagemUploadList = new ArrayList<>();
+
+    private Produto produto;
+    private boolean novoProduto = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,6 +188,31 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
 
     }
 
+    private void salvarImagemFirebase(int index, String caminhoImagem) {
+
+        StorageReference storageReference = FirebaseHelper.getStorageReference()
+                .child("imagens")
+                .child("anuncios")
+                .child(produto.getId())
+                .child("imagem" + index + ".jpeg");
+
+        UploadTask uploadTask = storageReference.putFile(Uri.parse(caminhoImagem));
+        uploadTask.addOnSuccessListener(taskSnapshot -> storageReference.getDownloadUrl().addOnCompleteListener(task -> {
+
+            if (novoProduto) {
+                produto.getUrlsImagens().add(index, task.getResult().toString());
+            } else {
+                produto.getUrlsImagens().set(index, task.getResult().toString());
+            }
+
+            if (imagemUploadList.size() == index + 1) {
+                produto.salvar(novoProduto);
+            }
+
+        })).addOnFailureListener(e -> Toast.makeText(this, "Ocorreu um erro. tente novamente!", Toast.LENGTH_SHORT).show());
+
+    }
+
     private final ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
@@ -211,6 +243,8 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
                                     break;
                             }
 
+                            configUpload(caminhoImagem);
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -234,6 +268,8 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
                                 binding.imagemProduto2.setImageURI(Uri.fromFile(file));
                                 break;
                         }
+
+                        configUpload(caminhoImagem);
 
                     }
 
@@ -291,21 +327,21 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
 
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-            // Create the File where the photo should go
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // Error occurred while creating the File
-            }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.br.ecommerce.fileprovider",
-                        photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                resultLauncher.launch(takePictureIntent);
-            }
+        // Create the File where the photo should go
+        File photoFile = null;
+        try {
+            photoFile = createImageFile();
+        } catch (IOException ex) {
+            // Error occurred while creating the File
+        }
+        // Continue only if the File was successfully created
+        if (photoFile != null) {
+            Uri photoURI = FileProvider.getUriForFile(this,
+                    "com.br.ecommerce.fileprovider",
+                    photoFile);
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+            resultLauncher.launch(takePictureIntent);
+        }
 
     }
 }
