@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.br.ecommerce.R;
 import com.br.ecommerce.databinding.ActivityLojaFormProdutoBinding;
 import com.br.ecommerce.databinding.BottomSheetFormProdutoBinding;
+import com.br.ecommerce.model.ImagemUpload;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
@@ -28,6 +29,7 @@ import com.gun0912.tedpermission.normal.TedPermission;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +40,8 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
     private int codeImagePosition = 0;
 
     private String currentPhotoPath;
+
+    private List<ImagemUpload> imagemUploadList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +138,47 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
                 .setGotoSettingButtonText("Sim")
                 .setPermissions(permissoes)
                 .check();
+    }
+
+    private void configUpload(String caminhoImagem) {
+        int REQUEST_IMAGE_POSITION = 0;
+        // se for 0,1,2 imagem da galeria
+        // se for 3,4,5 imagem da camera
+        switch (codeImagePosition) {
+            case 0:
+            case 3:
+                REQUEST_IMAGE_POSITION = 0;
+                break;
+            case 1:
+            case 4:
+                REQUEST_IMAGE_POSITION = 1;
+                break;
+            case 2:
+            case 5:
+                REQUEST_IMAGE_POSITION = 2;
+                break;
+        }
+
+        ImagemUpload imagemUpload = new ImagemUpload(REQUEST_IMAGE_POSITION, caminhoImagem);
+
+        if (!imagemUploadList.isEmpty()) {
+            boolean encontrou = false;
+            for (int i = 0; i < imagemUploadList.size(); i++) {
+                if (imagemUploadList.get(i).getIndex() == REQUEST_IMAGE_POSITION) {
+                    encontrou = true;
+                }
+            }
+
+            if (encontrou) {
+                imagemUploadList.set(REQUEST_IMAGE_POSITION, imagemUpload);
+            } else {
+                imagemUploadList.add(imagemUpload); // imagem nova
+            }
+
+        } else {
+            imagemUploadList.add(imagemUpload);
+        }
+
     }
 
     private final ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
