@@ -3,8 +3,11 @@ package com.br.ecommerce.activity.loja;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Activity;
@@ -23,8 +26,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.br.ecommerce.R;
+import com.br.ecommerce.adapter.CategoriaDialogAdapter;
 import com.br.ecommerce.databinding.ActivityLojaFormProdutoBinding;
 import com.br.ecommerce.databinding.BottomSheetFormProdutoBinding;
+import com.br.ecommerce.databinding.DialogFormCategoriaBinding;
+import com.br.ecommerce.databinding.DialogFormProdutoCategoriaBinding;
 import com.br.ecommerce.helper.FirebaseHelper;
 import com.br.ecommerce.model.Categoria;
 import com.br.ecommerce.model.ImagemUpload;
@@ -43,11 +49,15 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class LojaFormProdutoActivity extends AppCompatActivity {
+public class LojaFormProdutoActivity extends AppCompatActivity implements CategoriaDialogAdapter.OnClick {
+
+    private CategoriaDialogAdapter categoriaDialogAdapter;
+    private List<String> idsCategoriasSelecionadas = new ArrayList<>();
 
     private List<Categoria> categoriaList = new ArrayList<>();
 
@@ -56,10 +66,13 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
     private boolean novoProduto = true;
 
     private ActivityLojaFormProdutoBinding binding;
+    private DialogFormProdutoCategoriaBinding categoriaBinding;
 
     private int resultCode = 0;
 
     private String currentPhotoPath;
+
+    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +96,45 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
         binding.imagemProduto2.setOnClickListener(v -> showBottomSheet(2));
     }
 
+    private void configRv() {
+        categoriaBinding.rvCategorias.setLayoutManager(new LinearLayoutManager(this));
+        categoriaBinding.rvCategorias.setHasFixedSize(true);
+        categoriaDialogAdapter = new CategoriaDialogAdapter(
+                idsCategoriasSelecionadas,
+                categoriaList,
+                this
+        );
+        categoriaBinding.rvCategorias.setAdapter(categoriaDialogAdapter);
+    }
+
+    public void showDialogCategorias(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomAlertDialog);
+
+        categoriaBinding = DialogFormProdutoCategoriaBinding.inflate(LayoutInflater.from(this));
+
+        categoriaBinding.progressBar.setVisibility(View.GONE);
+
+        categoriaBinding.btnFechar.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+        categoriaBinding.btnSalvar.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+        if (categoriaList.isEmpty()) {
+            categoriaBinding.textInfo.setText("Nenhuma categoria cadastrada");
+        } else {
+            categoriaBinding.textInfo.setText("");
+        }
+
+        configRv();
+
+        builder.setView(categoriaBinding.getRoot());
+        dialog = builder.create();
+        dialog.show();
+    }
+
     private void recuperaCategorias() {
         DatabaseReference categoriaRef = FirebaseHelper.getDatabaseReference()
                 .child("categorias");
@@ -98,6 +150,8 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
                 } else {
 
                 }
+
+                Collections.reverse(categoriaList);
             }
 
             @Override
@@ -436,5 +490,10 @@ public class LojaFormProdutoActivity extends AppCompatActivity {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(binding.edtTitulo.getWindowToken(),
                 InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+    @Override
+    public void onClickListener(Categoria categoria) {
+
     }
 }
