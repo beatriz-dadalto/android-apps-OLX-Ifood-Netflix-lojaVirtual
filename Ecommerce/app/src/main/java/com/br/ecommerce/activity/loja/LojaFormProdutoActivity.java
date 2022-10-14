@@ -58,7 +58,7 @@ public class LojaFormProdutoActivity extends AppCompatActivity implements Catego
 
     private CategoriaDialogAdapter categoriaDialogAdapter;
     private List<String> idsCategoriasSelecionadas = new ArrayList<>();
-
+    private List<String> categoriaSelecionadaList = new ArrayList<>();
     private List<Categoria> categoriaList = new ArrayList<>();
 
     private List<ImagemUpload> imagemUploadList = new ArrayList<>();
@@ -171,32 +171,40 @@ public class LojaFormProdutoActivity extends AppCompatActivity implements Catego
             if (!descricao.isEmpty()) {
                 if (valorAtual > 0) {
 
-                    ocultaTeclado();
+                    if (!idsCategoriasSelecionadas.isEmpty()) {
 
-                    if (produto == null) produto = new Produto();
+                        ocultaTeclado();
 
-                    produto.setTitulo(titulo);
-                    produto.setDescricao(descricao);
-                    produto.setValorAntigo(valorAtual);
-                    if (valorAntigo > 0) produto.setValorAtual(valorAntigo);
+                        if (produto == null) produto = new Produto();
 
-                    if (novoProduto) { // Novo produto
-                        if (imagemUploadList.size() == 3) {
-                            for (int i = 0; i < imagemUploadList.size(); i++) {
-                                salvarImagemFirebase(imagemUploadList.get(i));
+                        produto.setTitulo(titulo);
+                        produto.setDescricao(descricao);
+                        produto.setValorAntigo(valorAtual);
+                        if (valorAntigo > 0) produto.setValorAtual(valorAntigo);
+                        produto.setIdsCategorias(idsCategoriasSelecionadas);
+
+                        if (novoProduto) { // Novo produto
+                            if (imagemUploadList.size() == 3) {
+                                for (int i = 0; i < imagemUploadList.size(); i++) {
+                                    salvarImagemFirebase(imagemUploadList.get(i));
+                                }
+                            } else {
+                                ocultaTeclado();
+                                Toast.makeText(this, "Escolha 3 imagens para o produto.", Toast.LENGTH_SHORT).show();
                             }
-                        } else {
-                            ocultaTeclado();
-                            Toast.makeText(this, "Escolha 3 imagens para o produto.", Toast.LENGTH_SHORT).show();
-                        }
-                    } else { // Edição do produto
-                        if (imagemUploadList.size() > 0) {
-                            for (int i = 0; i < imagemUploadList.size(); i++) {
-                                salvarImagemFirebase(imagemUploadList.get(i));
+                        } else { // Edição do produto
+                            if (imagemUploadList.size() > 0) {
+                                for (int i = 0; i < imagemUploadList.size(); i++) {
+                                    salvarImagemFirebase(imagemUploadList.get(i));
+                                }
+                            } else {
+                                produto.salvar(false);
                             }
-                        } else {
-                            produto.salvar(false);
                         }
+
+                    } else {
+                        ocultaTeclado();
+                        Toast.makeText(this, "Selecione pelo menos uma categoria para o produto.", Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
@@ -494,6 +502,12 @@ public class LojaFormProdutoActivity extends AppCompatActivity implements Catego
 
     @Override
     public void onClickListener(Categoria categoria) {
-
+        if (!idsCategoriasSelecionadas.contains(categoria.getId())) {
+            idsCategoriasSelecionadas.add(categoria.getId());
+            categoriaSelecionadaList.add(categoria.getNome());
+        } else {
+            idsCategoriasSelecionadas.remove(categoria.getId());
+            categoriaSelecionadaList.remove(categoria.getNome());
+        }
     }
 }
