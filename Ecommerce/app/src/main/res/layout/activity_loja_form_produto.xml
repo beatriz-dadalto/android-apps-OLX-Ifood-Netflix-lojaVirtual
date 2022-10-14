@@ -7,7 +7,7 @@
     tools:context=".activity.loja.LojaFormProdutoActivity">
 
     <include
-        android:id="@+id/include2"
+        android:id="@+id/include"
         layout="@layout/toolbar_voltar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +20,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2">
+        app:layout_constraintTop_toBottomOf="@+id/include">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,7 +54,7 @@
                             android:id="@+id/imagemProduto0"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"/>
+                            android:scaleType="centerCrop" />
 
                         <ImageView
                             android:id="@+id/imageFake0"
@@ -77,7 +77,7 @@
                             android:id="@+id/imagemProduto1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"/>
+                            android:scaleType="centerCrop" />
 
                         <ImageView
                             android:id="@+id/imageFake1"
@@ -100,7 +100,7 @@
                             android:id="@+id/imagemProduto2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"/>
+                            android:scaleType="centerCrop" />
 
                         <ImageView
                             android:id="@+id/imageFake2"
@@ -130,7 +130,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Tìtulo"/>
+                    android:text="Tìtulo" />
 
                 <EditText
                     android:id="@+id/edtTitulo"
@@ -138,14 +138,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_edit_off"
-                    android:padding="16dp"
-                    android:hint="Mochila Adidas" />
+                    android:hint="Mochila Adidas"
+                    android:inputType="text"
+                    android:padding="16dp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Descrição"/>
+                    android:text="Descrição" />
 
                 <EditText
                     android:id="@+id/edtDescricao"
@@ -153,8 +154,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_edit_off"
-                    android:padding="16dp"
-                    android:hint="Mochila grande e muito confortável." />
+                    android:hint="Mochila grande e muito confortável."
+                    android:padding="16dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -172,7 +173,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Valor antigo"/>
+                            android:text="Valor antigo" />
 
                         <com.blackcat.currencyedittext.CurrencyEditText
                             android:id="@+id/edtValorAntigo"
@@ -180,8 +181,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/bg_edit_off"
-                            android:padding="16dp"
-                            android:hint="Mochila Adidas" />
+                            android:hint="Mochila Adidas"
+                            android:padding="16dp" />
 
                     </LinearLayout>
 
@@ -195,15 +196,15 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Valor atual"/>
+                            android:text="Valor atual" />
 
                         <com.blackcat.currencyedittext.CurrencyEditText
                             android:id="@+id/edtValorAtual"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:padding="16dp"
-                            android:background="@drawable/bg_edit_off"/>
+                            android:background="@drawable/bg_edit_off"
+                            android:padding="16dp" />
 
                     </LinearLayout>
 
@@ -214,21 +215,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:onClick="showDialogCategorias"
                     android:background="@drawable/bg_borda_laranja"
+                    android:onClick="showDialogCategorias"
+                    android:text="Nenhuma categoria selecionada"
                     android:textAllCaps="false"
-                    android:textColor="@android:color/darker_gray"
-                    android:text="Nenhuma categoria selecionada" />
+                    android:textColor="@android:color/darker_gray" />
 
                 <android.widget.Button
                     android:id="@+id/btnLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/bg_btn"
-                    android:text="Salvar"
-                    android:onClick="validaDados"
                     android:layout_marginBottom="24dp"
+                    android:background="@drawable/bg_btn"
+                    android:onClick="validaDados"
+                    android:text="Salvar"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toTopOf="@+id/progressBar"

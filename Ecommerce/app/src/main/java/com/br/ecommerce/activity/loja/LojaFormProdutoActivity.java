@@ -7,7 +7,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Activity;
@@ -19,7 +18,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -29,7 +27,6 @@ import com.br.ecommerce.R;
 import com.br.ecommerce.adapter.CategoriaDialogAdapter;
 import com.br.ecommerce.databinding.ActivityLojaFormProdutoBinding;
 import com.br.ecommerce.databinding.BottomSheetFormProdutoBinding;
-import com.br.ecommerce.databinding.DialogFormCategoriaBinding;
 import com.br.ecommerce.databinding.DialogFormProdutoCategoriaBinding;
 import com.br.ecommerce.helper.FirebaseHelper;
 import com.br.ecommerce.model.Categoria;
@@ -80,17 +77,29 @@ public class LojaFormProdutoActivity extends AppCompatActivity implements Catego
         binding = ActivityLojaFormProdutoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        configClicks();
+        getExtra();
+        configCliques();
         iniciaComponentes();
         recuperaCategorias();
+    }
+
+    private void getExtra() {
+
     }
 
     private void iniciaComponentes() {
         binding.edtValorAntigo.setLocale(new Locale("PT", "br"));
         binding.edtValorAtual.setLocale(new Locale("PT", "br"));
+
+        if (novoProduto) {
+            binding.include.textTitulo.setText("Novo produto");
+        } else {
+            binding.include.textTitulo.setText("Edição do produto");
+        }
     }
 
-    private void configClicks() {
+    private void configCliques() {
+        binding.include.include.ibVoltar.setOnClickListener(v -> finish());
         binding.imagemProduto0.setOnClickListener(v -> showBottomSheet(0));
         binding.imagemProduto1.setOnClickListener(v -> showBottomSheet(1));
         binding.imagemProduto2.setOnClickListener(v -> showBottomSheet(2));
