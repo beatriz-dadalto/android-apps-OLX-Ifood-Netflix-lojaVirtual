@@ -161,6 +161,24 @@ public class LojaFormProdutoActivity extends AppCompatActivity implements Catego
         });
     }
 
+    // exibir os nomes das categorias selecionadas
+    private void categoriasSelecionadas() {
+        StringBuilder categorias = new StringBuilder();
+        for (int i = 0; i < categoriaSelecionadaList.size(); i++) {
+            if (i != categoriaSelecionadaList.size() - 1) {
+                categorias.append(categoriaSelecionadaList.get(i)).append(", ");
+            } else {
+                categorias.append(categoriaSelecionadaList.get(i));
+            }
+        }
+
+        if (!categoriaSelecionadaList.isEmpty()) {
+            binding.btnCategorias.setText(categorias);
+        } else {
+            binding.btnCategorias.setText("Nenhuma categorias selecionada");
+        }
+    }
+
     public void validaDados(View view) {
         String titulo = binding.edtTitulo.getText().toString().trim();
         String descricao = binding.edtDescricao.getText().toString().trim();
@@ -509,5 +527,7 @@ public class LojaFormProdutoActivity extends AppCompatActivity implements Catego
             idsCategoriasSelecionadas.remove(categoria.getId());
             categoriaSelecionadaList.remove(categoria.getNome());
         }
+
+        categoriasSelecionadas();
     }
 }

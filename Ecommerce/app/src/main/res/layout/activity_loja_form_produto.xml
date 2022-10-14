@@ -176,11 +176,13 @@
                 </LinearLayout>
 
                 <android.widget.Button
+                    android:id="@+id/btnCategorias"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:background="@drawable/bg_borda_laranja"
                     android:onClick="showDialogCategorias"
+                    android:textAllCaps="false"
                     android:text="Nenhuma categoria selecionada" />
 
                 <android.widget.Button
