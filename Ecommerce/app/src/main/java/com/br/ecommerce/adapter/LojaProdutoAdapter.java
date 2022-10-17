@@ -40,7 +40,7 @@ public class LojaProdutoAdapter extends RecyclerView.Adapter<LojaProdutoAdapter.
         Produto produto = produtoList.get(position);
 
         holder.txtNomeProduto.setText(produto.getTitulo());
-        
+
         for (int i = 0; i < produto.getUrlsImagens().size(); i++) {
             if (produto.getUrlsImagens().get(i).getIndex() == 0) {
                 Picasso.get()
@@ -58,7 +58,7 @@ public class LojaProdutoAdapter extends RecyclerView.Adapter<LojaProdutoAdapter.
         return produtoList.size();
     }
 
-    private interface OnClickLister {
+    public interface OnClickLister {
         void onClick(Produto produto);
     }
 

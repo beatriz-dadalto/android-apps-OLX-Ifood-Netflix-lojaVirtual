@@ -7,6 +7,9 @@ public class ImagemUpload implements Serializable {
     private int index;
     private String caminhoImagem;
 
+    public ImagemUpload() {
+    }
+
     public ImagemUpload(int index, String caminhoImagem) {
         this.index = index;
         this.caminhoImagem = caminhoImagem;
