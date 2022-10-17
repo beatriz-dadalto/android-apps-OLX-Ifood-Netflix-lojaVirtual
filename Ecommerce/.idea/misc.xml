@@ -38,6 +38,7 @@
         <entry key="app/src/main/res/layout/ib_voltar.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/item_categoria_dialog.xml" value="0.3890625" />
         <entry key="app/src/main/res/layout/item_categoria_horizontal.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/item_produto_adapter.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/item_selected.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/toolbar_voltar.xml" value="0.3890625" />
         <entry key="app/src/main/res/layout/toolbar_voltar_add.xml" value="0.3890625" />
