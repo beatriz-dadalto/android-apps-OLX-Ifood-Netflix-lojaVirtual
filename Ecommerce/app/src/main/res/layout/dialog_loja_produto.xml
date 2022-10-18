@@ -28,6 +28,7 @@
         <ImageView
             android:id="@+id/imagemProduto"
             android:layout_width="match_parent"
+            android:padding="8dp"
             android:layout_height="match_parent" />
 
     </androidx.cardview.widget.CardView>
