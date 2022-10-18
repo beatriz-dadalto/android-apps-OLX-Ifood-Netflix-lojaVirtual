@@ -1,6 +1,7 @@
 package com.br.ecommerce.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,20 @@ public class LojaProdutoAdapter extends RecyclerView.Adapter<LojaProdutoAdapter.
 
         holder.txtNomeProduto.setText(produto.getTitulo());
 
+        if (produto.getValorAntigo() > 0) {
+            double resto = produto.getValorAntigo() - produto.getValorAtual();
+            int porcentagem = (int) (resto / produto.getValorAntigo() * 100);
+
+            if (porcentagem >= 10) {
+                holder.txtDescontoProduto.setText(context.getString(R.string.valor_off, porcentagem, "%"));
+            } else {
+                String porcent = String.valueOf(porcentagem).replace("0", "");
+                holder.txtDescontoProduto.setText(context.getString(R.string.valor_off, Integer.parseInt(porcent), "%"));
+            }
+        } else {
+            holder.txtDescontoProduto.setText(View.GONE);
+        }
+
         for (int i = 0; i < produto.getUrlsImagens().size(); i++) {
             if (produto.getUrlsImagens().get(i).getIndex() == 0) {
                 Picasso.get()
@@ -50,7 +65,6 @@ public class LojaProdutoAdapter extends RecyclerView.Adapter<LojaProdutoAdapter.
         }
 
         holder.txtValorProduto.setText(String.valueOf(produto.getValorAtual()));
-        holder.txtDescontoProduto.setText("15% OFF");
 
         holder.itemView.setOnClickListener(v -> onClickLister.onClick(produto));
     }
