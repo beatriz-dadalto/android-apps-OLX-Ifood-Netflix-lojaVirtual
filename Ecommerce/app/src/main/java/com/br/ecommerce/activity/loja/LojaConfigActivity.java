@@ -63,6 +63,9 @@ public class LojaConfigActivity extends AppCompatActivity {
     }
 
     private void configCliques() {
+        binding.include.textTitulo.setText("Configurações");
+        binding.include.include.ibVoltar.setOnClickListener(v -> finish());
+
         binding.imgLogo.setOnClickListener(v -> {
             verificaPermissaoGaleria();
         });
@@ -84,7 +87,7 @@ public class LojaConfigActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 loja = snapshot.getValue(Loja.class);
-                
+
                 configDados();
             }
 
@@ -123,34 +126,38 @@ public class LojaConfigActivity extends AppCompatActivity {
         double pedidoMinimo = (double) binding.edtPedidoMinimo.getRawValue() / 100;
         double freteGratis = (double) binding.edtFrete.getRawValue() / 100;
 
-        if (caminhoImagem != null) {
-            if (!nomeLoja.isEmpty()) {
-                if (!CNPJ.isEmpty()) {
-                    if (CNPJ.length() == 18) {
+        if (!nomeLoja.isEmpty()) {
+            if (!CNPJ.isEmpty()) {
+                if (CNPJ.length() == 18) {
 
-                        loja.setNome(nomeLoja);
-                        loja.setCNPJ(CNPJ);
-                        loja.setPedidoMinimo(pedidoMinimo);
-                        loja.setFreteGratis(freteGratis);
+                    loja.setNome(nomeLoja);
+                    loja.setCNPJ(CNPJ);
+                    loja.setPedidoMinimo(pedidoMinimo);
+                    loja.setFreteGratis(freteGratis);
 
+                    if (caminhoImagem != null) {
                         salvarImagemFirebase();
-
+                    } else if (loja.getUrlLogo() != null) {
+                        loja.salvar();
                     } else {
-                        binding.edtCNPJ.requestFocus();
-                        binding.edtCNPJ.setError("CNPJ inválido");
+                        ocultaTeclado();
+                        Toast.makeText(this, "Escolha uma logo para sua empresa", Toast.LENGTH_SHORT).show();
                     }
+
+
                 } else {
                     binding.edtCNPJ.requestFocus();
-                    binding.edtCNPJ.setError("Informe o CNPJ da sua empresa");
+                    binding.edtCNPJ.setError("CNPJ inválido");
                 }
             } else {
-                binding.edtLoja.requestFocus();
-                binding.edtLoja.setError("Informe um nome para a sua empresa");
+                binding.edtCNPJ.requestFocus();
+                binding.edtCNPJ.setError("Informe o CNPJ da sua empresa");
             }
         } else {
-            ocultaTeclado();
-            Toast.makeText(this, "Escolha uma logo para sua empresa", Toast.LENGTH_SHORT).show();
+            binding.edtLoja.requestFocus();
+            binding.edtLoja.setError("Informe um nome para a sua empresa");
         }
+
     }
 
     private void salvarImagemFirebase() {
@@ -165,6 +172,8 @@ public class LojaConfigActivity extends AppCompatActivity {
             loja.setUrlLogo(task.getResult().toString());
 
             loja.salvar();
+
+            caminhoImagem = null;
 
         })).addOnFailureListener(e -> Toast.makeText(
                 this, "Ocorreu um erro com o upload, tente novamente.",
