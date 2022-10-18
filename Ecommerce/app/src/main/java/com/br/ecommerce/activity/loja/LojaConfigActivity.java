@@ -32,6 +32,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.List;
@@ -83,6 +84,8 @@ public class LojaConfigActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 loja = snapshot.getValue(Loja.class);
+                
+                configDados();
             }
 
             @Override
@@ -90,6 +93,28 @@ public class LojaConfigActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void configDados() {
+        if (loja.getUrlLogo() != null) {
+            Picasso.get().load(loja.getUrlLogo()).into(binding.imgLogo);
+        }
+
+        if (loja.getNome() != null) {
+            binding.edtLoja.setText(loja.getNome());
+        }
+
+        if (loja.getCNPJ() != null) {
+            binding.edtCNPJ.setText(loja.getCNPJ());
+        }
+
+        if (loja.getPedidoMinimo() != 0) {
+            binding.edtPedidoMinimo.setText(String.valueOf(loja.getPedidoMinimo() * 10));
+        }
+
+        if (loja.getFreteGratis() != 0) {
+            binding.edtFrete.setText(String.valueOf(loja.getFreteGratis() * 10));
+        }
     }
 
     private void validaDados() {
