@@ -99,6 +99,7 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnEditar"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="8dp"
@@ -106,7 +107,6 @@
                 app:cardElevation="5dp">
 
                 <ImageView
-                    android:id="@+id/btnEditar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -131,6 +131,7 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btnRemover"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="8dp"
@@ -138,7 +139,6 @@
                 app:cardElevation="5dp">
 
                 <ImageView
-                    android:id="@+id/btnRemover"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

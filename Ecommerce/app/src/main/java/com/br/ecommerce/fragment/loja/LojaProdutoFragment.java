@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.br.ecommerce.R;
 import com.br.ecommerce.activity.loja.LojaFormProdutoActivity;
@@ -88,10 +89,9 @@ public class LojaProdutoFragment extends Fragment implements LojaProdutoAdapter.
                         Produto produto = ds.getValue(Produto.class);
                         produtoList.add(produto);
                     }
-                    binding.textInfo.setText("");
-                } else {
-                    binding.textInfo.setText("Nenhum produto cadastrado.");
                 }
+
+                listEmpty();
 
                 binding.progressBar.setVisibility(View.GONE);
                 Collections.reverse(produtoList);
@@ -129,6 +129,15 @@ public class LojaProdutoFragment extends Fragment implements LojaProdutoAdapter.
             produto.setRascunho(checkButton.isChecked());
             produto.salvar(false);
         });
+
+        dialogBinding.btnRemover.setOnClickListener(view -> {
+            produto.remover();
+            dialog.dismiss();
+            Toast.makeText(requireContext(), "O produto foi removido.", Toast.LENGTH_SHORT).show();
+
+            listEmpty();
+        });
+
         dialogBinding.txtNomeProduto.setText(produto.getTitulo());
         dialogBinding.btnFechar.setOnClickListener(view -> dialog.dismiss());
 
@@ -136,5 +145,13 @@ public class LojaProdutoFragment extends Fragment implements LojaProdutoAdapter.
 
         dialog = builder.create();
         dialog.show();
+    }
+
+    private void listEmpty() {
+        if (produtoList.isEmpty()) {
+            binding.textInfo.setText("Nenhum produto cadastrado");
+        } else {
+            binding.textInfo.setText("");
+        }
     }
 }

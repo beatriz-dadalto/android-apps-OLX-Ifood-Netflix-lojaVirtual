@@ -3,6 +3,7 @@ package com.br.ecommerce.model;
 import com.br.ecommerce.helper.FirebaseHelper;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,6 +31,22 @@ public class Produto implements Serializable {
                 .child("produtos")
                 .child(getId());
         produtoRef.setValue(this);
+    }
+
+    public void remover() {
+        DatabaseReference produtoRef = FirebaseHelper.getDatabaseReference()
+                .child("produtos")
+                .child(getId());
+        produtoRef.removeValue();
+
+        for (int i = 0; i < getUrlsImagens().size(); i++) {
+            StorageReference storageReference = FirebaseHelper.getStorageReference()
+                    .child("imagens")
+                    .child("produtos")
+                    .child(getId())
+                    .child("imagem" + i + ".jpeg");
+            storageReference.delete();
+        }
     }
 
     public String getId() {
