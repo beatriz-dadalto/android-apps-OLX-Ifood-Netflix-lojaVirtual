@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.br.ecommerce.R;
 import com.br.ecommerce.activity.loja.LojaConfigActivity;
+import com.br.ecommerce.activity.loja.LojaRecebimentosActivity;
 import com.br.ecommerce.databinding.FragmentLojaConfigBinding;
 
 public class LojaConfigFragment extends Fragment {
@@ -37,6 +38,10 @@ public class LojaConfigFragment extends Fragment {
     private void configCliques() {
         binding.btnConfigLoja.setOnClickListener(v -> {
             startActivity(LojaConfigActivity.class);
+        });
+
+        binding.btnPagamentos.setOnClickListener(v -> {
+            startActivity(LojaRecebimentosActivity.class);
         });
     }
 

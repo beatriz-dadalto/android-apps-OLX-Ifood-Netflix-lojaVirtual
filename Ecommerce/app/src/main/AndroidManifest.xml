@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ecommerce">
         <activity
+            android:name=".activity.loja.LojaRecebimentosActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.loja.LojaConfigActivity"
             android:exported="false" />
         <activity
