@@ -116,12 +116,19 @@ public class LojaProdutoFragment extends Fragment implements LojaProdutoAdapter.
 
         dialogBinding = DialogLojaProdutoBinding.inflate(LayoutInflater.from(requireContext()));
 
+        dialogBinding.cbRascunho.setChecked(produto.isRascunho());
+
         for (int i = 0; i < produto.getUrlsImagens().size(); i++) {
             if (produto.getUrlsImagens().get(i).getIndex() == 0) {
                 Picasso.get().load(produto.getUrlsImagens().get(i).getCaminhoImagem())
                         .into(dialogBinding.imagemProduto);
             }
         }
+
+        dialogBinding.cbRascunho.setOnCheckedChangeListener((checkButton, b) -> {
+            produto.setRascunho(checkButton.isChecked());
+            produto.salvar(false);
+        });
         dialogBinding.txtNomeProduto.setText(produto.getTitulo());
         dialogBinding.btnFechar.setOnClickListener(view -> dialog.dismiss());
 
