@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/bg_dialog.xml" value="0.2485" />
         <entry key="app/src/main/res/drawable/ic_close.xml" value="0.2465" />
         <entry key="app/src/main/res/drawable/ic_config.xml" value="0.2485" />
+        <entry key="app/src/main/res/drawable/ic_cupom.xml" value="0.339" />
         <entry key="app/src/main/res/drawable/ic_fechar.xml" value="0.245" />
         <entry key="app/src/main/res/drawable/ic_logo.xml" value="0.303" />
         <entry key="app/src/main/res/drawable/ic_perfil.xml" value="0.2395" />
@@ -28,6 +29,7 @@
         <entry key="app/src/main/res/layout/dialog_form_categoria.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/dialog_form_produto_categoria.xml" value="0.3890625" />
         <entry key="app/src/main/res/layout/dialog_loja_produto.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/divisor.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/fragment_loja_categoria.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/fragment_loja_config.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/fragment_loja_pedido.xml" value="0.37447916666666664" />
