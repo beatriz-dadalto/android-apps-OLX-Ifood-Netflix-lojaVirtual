@@ -41,6 +41,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -84,7 +85,34 @@ public class LojaFormProdutoActivity extends AppCompatActivity implements Catego
     }
 
     private void getExtra() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            produto = (Produto) bundle.getSerializable("produtoSelecionado");
+            configProduto();
+        }
+    }
 
+    private void configProduto() {
+
+        novoProduto = false;
+
+        idsCategoriasSelecionadas.addAll(produto.getIdsCategorias());
+
+        binding.imageFake0.setVisibility(View.GONE);
+        binding.imageFake1.setVisibility(View.GONE);
+        binding.imageFake2.setVisibility(View.GONE);
+
+        Picasso.get().load(produto.getUrlsImagens().get(0).getCaminhoImagem())
+                .into(binding.imagemProduto0);
+        Picasso.get().load(produto.getUrlsImagens().get(1).getCaminhoImagem())
+                .into(binding.imagemProduto1);
+        Picasso.get().load(produto.getUrlsImagens().get(0).getCaminhoImagem())
+                .into(binding.imagemProduto2);
+
+        binding.edtTitulo.setText(produto.getTitulo());
+        binding.edtDescricao.setText(produto.getDescricao());
+        binding.edtValorAntigo.setText(String.valueOf(produto.getValorAntigo() * 10));
+        binding.edtValorAtual.setText(String.valueOf(produto.getValorAtual() * 10));
     }
 
     private void iniciaComponentes() {
@@ -156,6 +184,7 @@ public class LojaFormProdutoActivity extends AppCompatActivity implements Catego
                         Categoria categoria = ds.getValue(Categoria.class);
                         categoriaList.add(categoria);
                     }
+                    configuraCategoriasEdicao();
                 } else {
 
                 }
@@ -168,6 +197,19 @@ public class LojaFormProdutoActivity extends AppCompatActivity implements Catego
 
             }
         });
+    }
+
+    private void configuraCategoriasEdicao() {
+        if (!novoProduto) { // edicao de um produto
+            for (Categoria categoria : categoriaList) {
+                if (produto.getIdsCategorias().contains(categoria.getId())) {
+                    categoriaSelecionadaList.add(categoria.getNome());
+                }
+            }
+
+            Collections.reverse(categoriaSelecionadaList);
+            categoriasSelecionadas();
+        }
     }
 
     // exibir os nomes das categorias selecionadas
@@ -206,23 +248,24 @@ public class LojaFormProdutoActivity extends AppCompatActivity implements Catego
 
                         produto.setTitulo(titulo);
                         produto.setDescricao(descricao);
-                        produto.setValorAntigo(valorAtual);
-                        if (valorAntigo > 0) produto.setValorAtual(valorAntigo);
+                        produto.setValorAntigo(valorAntigo);
+                        if (valorAntigo > 0) produto.setValorAtual(valorAtual);
                         produto.setIdsCategorias(idsCategoriasSelecionadas);
 
                         if (novoProduto) { // Novo produto
                             if (imagemUploadList.size() == 3) {
                                 for (int i = 0; i < imagemUploadList.size(); i++) {
-                                    salvarImagemFirebase(imagemUploadList.get(i));
+                                    salvarImagemFirebase(imagemUploadList.get(i), i);
                                 }
                             } else {
                                 ocultaTeclado();
                                 Toast.makeText(this, "Escolha 3 imagens para o produto.", Toast.LENGTH_SHORT).show();
                             }
-                        } else { // Edição do produto
+                        } else { // Edicao do produto
+                            ocultaTeclado();
                             if (imagemUploadList.size() > 0) {
                                 for (int i = 0; i < imagemUploadList.size(); i++) {
-                                    salvarImagemFirebase(imagemUploadList.get(i));
+                                    salvarImagemFirebase(imagemUploadList.get(i), i);
                                 }
                             } else {
                                 produto.salvar(false);
@@ -416,7 +459,7 @@ public class LojaFormProdutoActivity extends AppCompatActivity implements Catego
 
     }
 
-    private void salvarImagemFirebase(ImagemUpload imagemUpload) {
+    private void salvarImagemFirebase(ImagemUpload imagemUpload, int count) {
 
         int index = imagemUpload.getIndex();
         String caminhoImagem = imagemUpload.getCaminhoImagem();
@@ -431,10 +474,20 @@ public class LojaFormProdutoActivity extends AppCompatActivity implements Catego
         uploadTask.addOnSuccessListener(taskSnapshot -> storageReference.getDownloadUrl().addOnCompleteListener(task -> {
 
             imagemUpload.setCaminhoImagem(task.getResult().toString());
-            produto.getUrlsImagens().add(imagemUpload);
 
-            if (imagemUploadList.size() == index + 1) {
+            if (novoProduto) {
+                produto.getUrlsImagens().add(imagemUpload);
+            } else {
+                produto.getUrlsImagens().set(index, imagemUpload);
+            }
+
+            if (imagemUploadList.size() == count + 1) {
                 produto.salvar(novoProduto);
+                imagemUploadList.clear();
+
+                if (novoProduto) {
+                    finish();
+                }
             }
 
         })).addOnFailureListener(e -> Toast.makeText(
