@@ -51,6 +51,8 @@ public class LojaProdutoAdapter extends RecyclerView.Adapter<LojaProdutoAdapter.
 
         holder.txtValorProduto.setText(String.valueOf(produto.getValorAtual()));
         holder.txtDescontoProduto.setText("15% OFF");
+
+        holder.itemView.setOnClickListener(v -> onClickLister.onClick(produto));
     }
 
     @Override
