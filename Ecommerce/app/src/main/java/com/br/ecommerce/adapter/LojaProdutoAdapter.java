@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.br.ecommerce.R;
+import com.br.ecommerce.helper.GetMask;
 import com.br.ecommerce.model.Produto;
 import com.squareup.picasso.Picasso;
 
@@ -64,7 +65,7 @@ public class LojaProdutoAdapter extends RecyclerView.Adapter<LojaProdutoAdapter.
             }
         }
 
-        holder.txtValorProduto.setText(String.valueOf(produto.getValorAtual()));
+        holder.txtValorProduto.setText(context.getString(R.string.valor, GetMask.getValor(produto.getValorAtual())));
 
         holder.itemView.setOnClickListener(v -> onClickLister.onClick(produto));
     }
