@@ -15,9 +15,15 @@ import android.widget.Toast;
 import com.br.ecommerce.R;
 import com.br.ecommerce.adapter.CategoriaAdapter;
 import com.br.ecommerce.databinding.FragmentUsuarioHomeBinding;
+import com.br.ecommerce.helper.FirebaseHelper;
 import com.br.ecommerce.model.Categoria;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UsuarioHomeFragment extends Fragment implements CategoriaAdapter.OnClick {
@@ -40,6 +46,7 @@ public class UsuarioHomeFragment extends Fragment implements CategoriaAdapter.On
         super.onViewCreated(view, savedInstanceState);
 
         configRv();
+        recuperaCategorias();
     }
 
     private void configRv() {
@@ -49,6 +56,31 @@ public class UsuarioHomeFragment extends Fragment implements CategoriaAdapter.On
         categoriaAdapter = new CategoriaAdapter(R.layout.item_categoria_horizontal,
                 true, categoriaList, this);
         binding.rvCategorias.setAdapter(categoriaAdapter);
+    }
+
+    private void recuperaCategorias() {
+        DatabaseReference categoriaRef = FirebaseHelper.getDatabaseReference()
+                .child("categorias");
+        categoriaRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                categoriaList.clear();
+
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Categoria categoria = ds.getValue(Categoria.class);
+                    categoriaList.add(categoria);
+                }
+
+                Collections.reverse(categoriaList);
+                categoriaAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
