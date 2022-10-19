@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:layout_margin="8dp"
-        app:cardCornerRadius="5dp"
         android:elevation="5dp"
+        app:cardCornerRadius="5dp"
         app:cardElevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,15 +32,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <com.like.LikeButton
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="8dp"
+                app:anim_scale_factor="2"
+                app:icon_size="25dp"
+                app:icon_type="Star"
+                app:is_enabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imagemProduto"
+                app:like_drawable="@drawable/ic_favorite"
+                app:liked="false"
+                app:unlike_drawable="@drawable/ic_favorite_border" />
+
             <TextView
                 android:id="@+id/txtNomeProduto"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
