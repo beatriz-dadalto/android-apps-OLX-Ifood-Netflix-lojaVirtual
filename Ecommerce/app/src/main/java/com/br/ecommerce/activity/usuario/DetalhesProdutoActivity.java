@@ -137,7 +137,6 @@ public class DetalhesProdutoActivity extends AppCompatActivity implements LojaPr
 
                 Collections.reverse(produtoList);
                 lojaProdutoAdapter.notifyDataSetChanged();
-
             }
 
             @Override

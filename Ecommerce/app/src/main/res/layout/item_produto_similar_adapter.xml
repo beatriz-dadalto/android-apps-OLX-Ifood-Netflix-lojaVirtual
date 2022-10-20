@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="150dp"
+        android:layout_width="170dp"
         android:layout_height="220dp"
         android:layout_margin="8dp"
         android:elevation="5dp"
@@ -27,19 +27,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginVertical="8dp"
-                tools:src="@drawable/placeholder_form_categorias"
                 app:layout_constraintBottom_toTopOf="@+id/txtNomeProduto"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/placeholder_form_categorias" />
 
             <com.like.LikeButton
                 android:id="@+id/likeButton"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginEnd="8dp"
+                android:padding="8dp"
+                android:background="@drawable/bg_like_button"
                 app:anim_scale_factor="2"
-                app:icon_size="25dp"
+                app:icon_size="20dp"
                 app:icon_type="Star"
                 app:is_enabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +69,8 @@
                 android:id="@+id/linearLayout4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginVertical="8dp"
+                android:layout_marginStart="8dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -76,19 +79,22 @@
 
                 <TextView
                     android:id="@+id/txtValorProduto"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     tools:text="R$ 149,99" />
 
                 <TextView
                     android:id="@+id/txtDescontoProduto"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:background="@drawable/bg_desconto"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
                     android:textAlignment="textEnd"
-                    android:textColor="#00A650"
-                    tools:text="10% OFF" />
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    tools:text="-10%" />
 
             </LinearLayout>
 
