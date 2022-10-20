@@ -183,11 +183,11 @@ public class UsuarioHomeFragment extends Fragment implements CategoriaAdapter.On
     }
 
     @Override
-    public void onClickFavorito(String idProduto) {
-        if (!idsFavoritos.contains(idProduto)) {
-            idsFavoritos.add(idProduto);
+    public void onClickFavorito(Produto produto) {
+        if (!idsFavoritos.contains(produto.getId())) {
+            idsFavoritos.add(produto.getId());
         } else {
-            idsFavoritos.remove(idProduto);
+            idsFavoritos.remove(produto.getId());
         }
         Favorito.salvar(idsFavoritos);
     }
