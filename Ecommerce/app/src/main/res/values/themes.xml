@@ -50,4 +50,13 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <!-- SEARCH VIEW THEME -->
+    <style name="Search_View_Theme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="colorAccent">#FFD7BB</item>
+        <item name="colorControlNormal">#FFD7BB</item>
+        <item name="android:editTextColor">@android:color/white</item>
+        <item name="android:textColorHint">#FFD7BB</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

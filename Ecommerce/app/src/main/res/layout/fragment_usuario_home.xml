@@ -13,6 +13,7 @@
         android:layout_marginHorizontal="16dp"
         android:background="@drawable/bg_pesquisa"
         android:inputType="textCapSentences"
+        android:theme="@style/Search_View_Theme"
         app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
