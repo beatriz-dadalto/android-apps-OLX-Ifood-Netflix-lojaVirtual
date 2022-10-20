@@ -24,6 +24,7 @@ import java.util.List;
 
 public class LojaProdutoAdapter extends RecyclerView.Adapter<LojaProdutoAdapter.MyViewHolder> {
 
+    private int layout;
     private List<Produto> produtoList;
     private Context context;
     private boolean favorito;
@@ -31,7 +32,8 @@ public class LojaProdutoAdapter extends RecyclerView.Adapter<LojaProdutoAdapter.
     private OnClickLister onClickLister;
     private OnClickFavorito onClickFavorito;
 
-    public LojaProdutoAdapter(List<Produto> produtoList, Context context, boolean favorito, List<String> idsFavoritos, OnClickLister onClickLister, OnClickFavorito onClickFavorito) {
+    public LojaProdutoAdapter(int layout, List<Produto> produtoList, Context context, boolean favorito, List<String> idsFavoritos, OnClickLister onClickLister, OnClickFavorito onClickFavorito) {
+        this.layout = layout;
         this.produtoList = produtoList;
         this.context = context;
         this.favorito = favorito;
@@ -43,7 +45,7 @@ public class LojaProdutoAdapter extends RecyclerView.Adapter<LojaProdutoAdapter.
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_produto_adapter, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
         return new MyViewHolder(itemView);
     }
 

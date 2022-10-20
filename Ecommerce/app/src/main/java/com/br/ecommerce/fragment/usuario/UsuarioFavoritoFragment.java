@@ -65,7 +65,7 @@ public class UsuarioFavoritoFragment extends Fragment implements LojaProdutoAdap
     private void configRvProdutos() {
         binding.rvProdutos.setLayoutManager(new GridLayoutManager(requireContext(), 2));
         binding.rvProdutos.setHasFixedSize(true);
-        lojaProdutoAdapter = new LojaProdutoAdapter(produtoList, requireContext(), true, idsFavoritos, this, this);
+        lojaProdutoAdapter = new LojaProdutoAdapter(R.layout.item_produto_adapter, produtoList, requireContext(), true, idsFavoritos, this, this);
         binding.rvProdutos.setAdapter(lojaProdutoAdapter);
     }
 
