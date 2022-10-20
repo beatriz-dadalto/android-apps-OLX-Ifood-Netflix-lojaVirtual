@@ -73,7 +73,7 @@ public class LojaProdutoFragment extends Fragment implements LojaProdutoAdapter.
     private void configRv() {
         binding.rvProdutos.setLayoutManager(new GridLayoutManager(requireContext(), 2));
         binding.rvProdutos.setHasFixedSize(true);
-        lojaProdutoAdapter = new LojaProdutoAdapter(produtoList, requireContext(), this);
+        lojaProdutoAdapter = new LojaProdutoAdapter(produtoList, requireContext(), false, new ArrayList<>(), this, null);
         binding.rvProdutos.setAdapter(lojaProdutoAdapter);
     }
 
