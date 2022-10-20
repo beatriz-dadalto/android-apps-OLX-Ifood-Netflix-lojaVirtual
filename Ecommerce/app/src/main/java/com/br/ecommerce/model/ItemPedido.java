@@ -2,7 +2,9 @@ package com.br.ecommerce.model;
 
 import com.google.firebase.database.Exclude;
 
-public class ItemPedido {
+import java.io.Serializable;
+
+public class ItemPedido implements Serializable {
 
     private int id;
     private String idProduto;
