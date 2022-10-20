@@ -28,7 +28,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.smarteist.autoimageslider.SliderView
-                android:id="@+id/imageSlider"
+                android:id="@+id/sliderView"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +62,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageSlider"
+                app:layout_constraintTop_toBottomOf="@+id/sliderView"
                 tools:text="Bicicleta South Stark" />
 
             <TextView
