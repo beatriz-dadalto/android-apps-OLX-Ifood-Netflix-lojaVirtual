@@ -68,4 +68,7 @@ dependencies {
     // https://github.com/jd-alexander/LikeButton
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
 
+    // https://github.com/smarteist/Android-Image-Slider
+    implementation 'com.github.smarteist:autoimageslider:1.4.0'
+
 }
