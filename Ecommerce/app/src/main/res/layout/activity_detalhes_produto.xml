@@ -49,7 +49,7 @@
                 app:sliderStartAutoCycle="true" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/textProduto"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
@@ -66,7 +66,7 @@
                 tools:text="Bicicleta South Stark" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -75,10 +75,10 @@
                 android:textColor="@color/color_laranja"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                app:layout_constraintTop_toBottomOf="@+id/textProduto" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/textDescricao"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
@@ -89,7 +89,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
                 tools:text="A perfeita escolha para quem está começando no mundo das bikes. Excelente desde a trilha leve até passeios." />
 
             <TextView
@@ -102,7 +102,7 @@
                 android:textColor="@color/color_laranja"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintTop_toBottomOf="@+id/textDescricao" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -151,6 +151,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/textValor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

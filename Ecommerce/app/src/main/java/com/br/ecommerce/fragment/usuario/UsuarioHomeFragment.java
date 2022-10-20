@@ -58,10 +58,15 @@ public class UsuarioHomeFragment extends Fragment implements CategoriaAdapter.On
         configRvProdutos();
 
         recuperaCategorias();
-        recuperaProdutos();
 
         recuperaFavoritos();
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        recuperaProdutos();
     }
 
     private void recuperaFavoritos() {
