@@ -36,7 +36,7 @@ public class ItemDAO {
             // criar a tabela no dispositivo
             idRetorno = write.insert(DBHelper.TABELA_ITEM, null, values);
         } catch (Exception e) {
-            Log.i("INFODB:", " Erro ao salvar o produto." + e.getMessage());
+            Log.i("INFODB:", " Erro ao salvar o item." + e.getMessage());
         }
 
         return idRetorno;
