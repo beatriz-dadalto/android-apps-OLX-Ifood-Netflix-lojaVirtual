@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/drawable/ic_cupom.xml" value="0.339" />
         <entry key="app/src/main/res/drawable/ic_fechar.xml" value="0.245" />
         <entry key="app/src/main/res/drawable/ic_logo.xml" value="0.303" />
+        <entry key="app/src/main/res/drawable/ic_menos.xml" value="0.245" />
         <entry key="app/src/main/res/drawable/ic_perfil.xml" value="0.2395" />
         <entry key="app/src/main/res/drawable/ic_user_login_on.xml" value="0.2005" />
         <entry key="app/src/main/res/drawable/placeholder_form_categorias.xml" value="0.2485" />
@@ -48,6 +49,7 @@
         <entry key="app/src/main/res/layout/fragment_usuario_pedido.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/fragment_usuario_perfil.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/ib_voltar.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/item_adapter_carrinho.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/item_categoria_dialog.xml" value="0.3890625" />
         <entry key="app/src/main/res/layout/item_categoria_horizontal.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/item_produto_adapter.xml" value="0.37447916666666664" />
