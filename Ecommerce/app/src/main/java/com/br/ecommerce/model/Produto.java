@@ -12,7 +12,7 @@ import java.util.List;
 public class Produto implements Serializable {
 
     private String id; // firebase
-    private String idLocal; // SQLite
+    private int idLocal; // SQLite
     private String titulo;
     private String descricao;
     private double valorAntigo;
@@ -58,11 +58,11 @@ public class Produto implements Serializable {
     }
 
     @Exclude
-    public String getIdLocal() {
+    public int getIdLocal() {
         return idLocal;
     }
 
-    public void setIdLocal(String idLocal) {
+    public void setIdLocal(int idLocal) {
         this.idLocal = idLocal;
     }
 
