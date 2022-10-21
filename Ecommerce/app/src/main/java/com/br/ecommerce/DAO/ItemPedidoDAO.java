@@ -71,4 +71,30 @@ public class ItemPedidoDAO {
         cursor.close();
         return produto;
     }
+
+    // recuperando do SQLite
+    public List<ItemPedido> getList() {
+        List<ItemPedido> itemPedidoList = new ArrayList<>();
+
+        String sql = "SELECT * FROM " + DBHelper.TABELA_ITEM_PEDIDO + ";";
+        Cursor cursor = read.rawQuery(sql, null);
+
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+            String id_produto = cursor.getString(cursor.getColumnIndexOrThrow("id_produto"));
+            double valor = cursor.getDouble(cursor.getColumnIndexOrThrow("valor"));
+            int quantidade = cursor.getInt(cursor.getColumnIndexOrThrow("quantidade"));
+
+            ItemPedido itemPedido = new ItemPedido();
+            itemPedido.setId(id);
+            itemPedido.setIdProduto(id_produto);
+            itemPedido.setValor(valor);
+            itemPedido.setQuantidade(quantidade);
+
+            itemPedidoList.add(itemPedido);
+        }
+
+        cursor.close();
+        return itemPedidoList;
+    }
 }
