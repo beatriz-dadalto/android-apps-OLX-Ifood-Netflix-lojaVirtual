@@ -42,6 +42,26 @@ public class ItemPedidoDAO {
         return true;
     }
 
+    public boolean atualizar(ItemPedido itemPedido) {
+
+        ContentValues values = new ContentValues();
+        values.put("quantidade", itemPedido.getQuantidade());
+
+        String WHERE = "id=?";
+        String[] args = {String.valueOf(itemPedido.getId())};
+
+        try {
+            // atualizar a tabela no dispositivo
+            write.update(DBHelper.TABELA_ITEM_PEDIDO, values, WHERE, args);
+            Log.i("INFODB:", " Sucesso ao atualizar o itemPedido.");
+        } catch (Exception e) {
+            Log.i("INFODB:", " Erro ao atualizar o itemPedido." + e.getMessage());
+            return false;
+        }
+
+        return true;
+    }
+
     // recuperando do SQLite
     public Produto getProduto(int idProduto) {
         Produto produto = null;
