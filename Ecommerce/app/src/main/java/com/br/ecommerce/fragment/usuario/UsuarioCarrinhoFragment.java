@@ -16,6 +16,7 @@ import com.br.ecommerce.DAO.ItemPedidoDAO;
 import com.br.ecommerce.R;
 import com.br.ecommerce.adapter.CarrinhoAdapter;
 import com.br.ecommerce.databinding.FragmentUsuarioCarrinhoBinding;
+import com.br.ecommerce.helper.GetMask;
 import com.br.ecommerce.model.ItemPedido;
 
 import java.util.ArrayList;
@@ -57,6 +58,12 @@ public class UsuarioCarrinhoFragment extends Fragment implements CarrinhoAdapter
         binding.rvProdutos.setHasFixedSize(true);
         carrinhoAdapter = new CarrinhoAdapter(itemPedidoList, itemPedidoDAO, requireContext(), this);
         binding.rvProdutos.setAdapter(carrinhoAdapter);
+
+        configSaldoCarrinho();
+    }
+
+    private void configSaldoCarrinho() {
+        binding.textValor.setText(getString(R.string.valor_total_carrinho, GetMask.getValor(itemPedidoDAO.getTotalCarrinho())));
     }
 
     @Override
