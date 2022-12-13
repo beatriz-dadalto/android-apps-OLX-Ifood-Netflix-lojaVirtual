@@ -18,6 +18,7 @@ import com.br.ecommerce.adapter.CarrinhoAdapter;
 import com.br.ecommerce.databinding.FragmentUsuarioCarrinhoBinding;
 import com.br.ecommerce.helper.GetMask;
 import com.br.ecommerce.model.ItemPedido;
+import com.br.ecommerce.model.Produto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -66,6 +67,28 @@ public class UsuarioCarrinhoFragment extends Fragment implements CarrinhoAdapter
         binding.textValor.setText(getString(R.string.valor_total_carrinho, GetMask.getValor(itemPedidoDAO.getTotalCarrinho())));
     }
 
+    private void configQtdProduto(int position, String operacao) {
+        ItemPedido itemPedido = itemPedidoList.get(position);
+
+        if (operacao.equals("mais")) {
+            itemPedido.setQuantidade(itemPedido.getQuantidade() + 1);
+            itemPedidoDAO.atualizar(itemPedido);
+
+            itemPedidoList.set(position, itemPedido);
+        } else {
+
+            if (itemPedido.getQuantidade() > 1) {
+                itemPedido.setQuantidade(itemPedido.getQuantidade() - 1);
+                itemPedidoDAO.atualizar(itemPedido);
+                itemPedidoList.set(position, itemPedido);
+            }
+
+        }
+
+        carrinhoAdapter.notifyDataSetChanged();
+        configSaldoCarrinho();
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -75,6 +98,17 @@ public class UsuarioCarrinhoFragment extends Fragment implements CarrinhoAdapter
 
     @Override
     public void onClickListener(int position, String operacao) {
+
+        switch (operacao) {
+            case "detalhe":
+                break;
+            case "remover":
+                break;
+            case "menos":
+            case "mais":
+                configQtdProduto(position, operacao);
+                break;
+        }
 
     }
 }
