@@ -99,11 +99,21 @@
                 app:cardCornerRadius="5dp"
                 app:cardElevation="5dp">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <com.like.LikeButton
+                    android:id="@+id/likeButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="8dp"
+                    app:anim_scale_factor="2"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_favoritos_borda" />
+                    app:icon_size="30dp"
+                    app:icon_type="Star"
+                    app:is_enabled="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imagemProduto"
+                    app:like_drawable="@drawable/ic_favorite"
+                    app:liked="false"
+                    app:unlike_drawable="@drawable/ic_favorite_border" />
 
             </androidx.cardview.widget.CardView>
 
