@@ -16,6 +16,19 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_adapter_carrinho" />
 
+    <TextView
+        android:id="@+id/textInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Nenhum produto no carrinho."
+        android:textAlignment="center"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/rvProdutos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btnAddCarrinho"
         android:layout_width="0dp"

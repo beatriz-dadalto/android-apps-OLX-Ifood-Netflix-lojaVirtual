@@ -62,6 +62,23 @@ public class ItemPedidoDAO {
         return true;
     }
 
+    public boolean remover(ItemPedido itemPedido) {
+
+        String WHERE = "id=?";
+        String[] args = {String.valueOf(itemPedido.getId())};
+
+        try {
+            // atualizar a tabela no dispositivo
+            write.delete(DBHelper.TABELA_ITEM_PEDIDO, WHERE, args);
+            Log.i("INFODB:", " Sucesso ao remover o itemPedido.");
+        } catch (Exception e) {
+            Log.i("INFODB:", " Erro ao remover o itemPedido." + e.getMessage());
+            return false;
+        }
+
+        return true;
+    }
+
     // recuperando do SQLite
     public Produto getProduto(int idProduto) {
         Produto produto = null;
