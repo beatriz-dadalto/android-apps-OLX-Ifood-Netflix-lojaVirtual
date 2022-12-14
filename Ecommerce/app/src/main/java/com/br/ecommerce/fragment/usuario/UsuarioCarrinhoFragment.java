@@ -1,24 +1,31 @@
 package com.br.ecommerce.fragment.usuario;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.br.ecommerce.DAO.ItemDAO;
 import com.br.ecommerce.DAO.ItemPedidoDAO;
 import com.br.ecommerce.R;
+import com.br.ecommerce.activity.loja.LojaFormProdutoActivity;
 import com.br.ecommerce.adapter.CarrinhoAdapter;
+import com.br.ecommerce.databinding.DialogLojaProdutoBinding;
+import com.br.ecommerce.databinding.DialogRemoverCarrinhoBinding;
 import com.br.ecommerce.databinding.FragmentUsuarioCarrinhoBinding;
 import com.br.ecommerce.helper.GetMask;
 import com.br.ecommerce.model.ItemPedido;
 import com.br.ecommerce.model.Produto;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,6 +40,8 @@ public class UsuarioCarrinhoFragment extends Fragment implements CarrinhoAdapter
     private ItemDAO itemDAO;
 
     private CarrinhoAdapter carrinhoAdapter;
+
+    private AlertDialog dialog;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -60,10 +69,10 @@ public class UsuarioCarrinhoFragment extends Fragment implements CarrinhoAdapter
         carrinhoAdapter = new CarrinhoAdapter(itemPedidoList, itemPedidoDAO, requireContext(), this);
         binding.rvProdutos.setAdapter(carrinhoAdapter);
 
-        configSaldoCarrinho();
+        configTotalCarrinho();
     }
 
-    private void configSaldoCarrinho() {
+    private void configTotalCarrinho() {
         binding.textValor.setText(getString(R.string.valor_total_carrinho, GetMask.getValor(itemPedidoDAO.getTotalCarrinho())));
     }
 
@@ -86,7 +95,40 @@ public class UsuarioCarrinhoFragment extends Fragment implements CarrinhoAdapter
         }
 
         carrinhoAdapter.notifyDataSetChanged();
-        configSaldoCarrinho();
+        configTotalCarrinho();
+    }
+
+    private void showDialogRemover(Produto produto) {
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog);
+
+        DialogRemoverCarrinhoBinding dialogBinding = DialogRemoverCarrinhoBinding.inflate(LayoutInflater.from(requireContext()));
+
+        Picasso.get().load(produto.getUrlsImagens().get(0).getCaminhoImagem())
+                .into(dialogBinding.imagemProduto);
+
+        dialogBinding.txtNomeProduto.setText(produto.getTitulo());
+
+        dialogBinding.btnCancelar.setOnClickListener(v -> dialog.dismiss());
+
+        dialogBinding.btnAddFavorito.setOnClickListener(view -> {
+            dialog.dismiss();
+        });
+
+        dialogBinding.btnRemover.setOnClickListener(view -> {
+            produto.remover();
+            dialog.dismiss();
+            Toast.makeText(requireContext(), "O produto foi removido.", Toast.LENGTH_SHORT).show();
+
+            dialog.dismiss();
+        });
+
+
+
+        builder.setView(dialogBinding.getRoot());
+
+        dialog = builder.create();
+        dialog.show();
     }
 
     @Override
@@ -99,10 +141,14 @@ public class UsuarioCarrinhoFragment extends Fragment implements CarrinhoAdapter
     @Override
     public void onClickListener(int position, String operacao) {
 
+        int idProduto = itemPedidoList.get(position).getId();
+        Produto produto = itemPedidoDAO.getProduto(idProduto);
+
         switch (operacao) {
             case "detalhe":
                 break;
             case "remover":
+                showDialogRemover(produto);
                 break;
             case "menos":
             case "mais":
