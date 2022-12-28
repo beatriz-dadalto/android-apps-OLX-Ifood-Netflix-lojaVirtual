@@ -18,10 +18,14 @@ public class UsuarioEnderecoActivity extends AppCompatActivity {
         binding = ActivityUsuarioEnderecoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.include.textTitulo.setText("Meus Endereços");
-        binding.include.include.ibVoltar.setOnClickListener(v -> finish());
+        iniciaComponentes();
 
         configCliques();
+    }
+
+    private void iniciaComponentes() {
+        binding.include.textTitulo.setText("Meus Endereços");
+        binding.include.include.ibVoltar.setOnClickListener(v -> finish());
     }
 
     private void configCliques() {

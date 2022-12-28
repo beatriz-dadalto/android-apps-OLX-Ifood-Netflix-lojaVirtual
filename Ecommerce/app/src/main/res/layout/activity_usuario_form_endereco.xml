@@ -7,7 +7,7 @@
     tools:context=".activity.usuario.UsuarioFormEnderecoActivity">
 
     <include
-        android:id="@+id/include2"
+        android:id="@+id/include"
         layout="@layout/toolbar_voltar_salvar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnBuscar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2">
+        app:layout_constraintTop_toBottomOf="@+id/include">
 
         <EditText
             android:id="@+id/edtNomeEndereco"
@@ -153,7 +153,7 @@
                     android:layout_marginTop="4dp"
                     android:background="@drawable/bg_edit_off"
                     android:hint="Centro"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:padding="16dp" />
 
             </LinearLayout>
@@ -177,7 +177,7 @@
                     android:layout_marginTop="4dp"
                     android:background="@drawable/bg_edit_off"
                     android:hint="São Paulo"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:padding="16dp" />
 
             </LinearLayout>
