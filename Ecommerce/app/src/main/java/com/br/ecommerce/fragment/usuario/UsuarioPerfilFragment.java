@@ -31,7 +31,7 @@ public class UsuarioPerfilFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.btnLogin.setOnClickListener(v -> {
+        binding.btnMeusDados.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), LoginActivity.class));
         });
     }
