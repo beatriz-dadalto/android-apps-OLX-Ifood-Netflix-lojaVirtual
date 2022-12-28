@@ -33,7 +33,7 @@
         android:id="@+id/btnAddCarrinho"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_finalizar"
+        android:background="@drawable/bg_btn_normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
