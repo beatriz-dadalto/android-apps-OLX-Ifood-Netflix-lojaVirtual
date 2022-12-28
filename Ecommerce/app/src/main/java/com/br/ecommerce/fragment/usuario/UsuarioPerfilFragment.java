@@ -12,8 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.br.ecommerce.R;
+import com.br.ecommerce.activity.usuario.UsuarioEnderecoActivity;
+import com.br.ecommerce.autenticacao.CadastroActivity;
 import com.br.ecommerce.autenticacao.LoginActivity;
 import com.br.ecommerce.databinding.FragmentUsuarioPerfilBinding;
+import com.br.ecommerce.helper.FirebaseHelper;
 
 public class UsuarioPerfilFragment extends Fragment {
 
@@ -31,8 +34,23 @@ public class UsuarioPerfilFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.btnMeusDados.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), LoginActivity.class));
+        configCliques();
+    }
+
+    private void configCliques() {
+        binding.btnEntrar.setOnClickListener(v -> startActivity(LoginActivity.class));
+        binding.btnCadastrar.setOnClickListener(v -> {
+            startActivity(new Intent(requireContext(), CadastroActivity.class));
         });
+        binding.btnMeusDados.setOnClickListener(v -> startActivity(LoginActivity.class));
+        binding.btnEnderecos.setOnClickListener(v -> startActivity(UsuarioEnderecoActivity.class));
+    }
+
+    private void startActivity(Class<?> clazz) {
+        if (FirebaseHelper.getAutenticado()) {
+            startActivity(new Intent(requireContext(), clazz));
+        } else {
+            startActivity(new Intent(requireContext(), LoginActivity.class));
+        }
     }
 }
