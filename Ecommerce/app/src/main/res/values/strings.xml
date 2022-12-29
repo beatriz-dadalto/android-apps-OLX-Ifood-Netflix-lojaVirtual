@@ -5,4 +5,6 @@
     <string name="valor_off">-%1$d%2$s</string>
     <string name="valor">R$ %1$s</string>
     <string name="valor_total_carrinho">TOTAL: R$ %1$s</string>
+    <string name="endereco_numero">N° %1$s</string>
+    <string name="endereco_logradouro">Logradouro: %1$s</string>
 </resources>

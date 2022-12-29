@@ -58,7 +58,6 @@ public class UsuarioFormEnderecoActivity extends AppCompatActivity {
                                     endereco.setCep(cep);
                                     endereco.setUf(uf);
                                     endereco.setNumero(numero);
-                                    endereco.setNomeEndereco(numero);
                                     endereco.setLogradouro(logradouro);
                                     endereco.setBairro(bairro);
                                     endereco.setLocalidade(municipio);

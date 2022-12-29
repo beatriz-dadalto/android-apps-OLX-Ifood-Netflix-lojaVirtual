@@ -1,5 +1,6 @@
 package com.br.ecommerce.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,12 @@ import java.util.List;
 public class EnderecoAdapter extends RecyclerView.Adapter<EnderecoAdapter.MyViewHolder> {
 
     private List<Endereco> enderecoList;
+    private Context context;
     private OnClickListener clickListener;
 
-    public EnderecoAdapter(List<Endereco> enderecoList, OnClickListener clickListener) {
+    public EnderecoAdapter(List<Endereco> enderecoList, Context context, OnClickListener clickListener) {
         this.enderecoList = enderecoList;
+        this.context = context;
         this.clickListener = clickListener;
     }
 
@@ -36,10 +39,13 @@ public class EnderecoAdapter extends RecyclerView.Adapter<EnderecoAdapter.MyView
         Endereco endereco = enderecoList.get(position);
 
         holder.textNomeEndereco.setText(endereco.getNomeEndereco());
-        holder.textLogradouro.setText(endereco.getLogradouro());
+        holder.textLogradouro.setText(context.getString(R.string.endereco_logradouro, endereco.getLogradouro()));
 
         if (!endereco.getNumero().isEmpty()) {
-            holder.textNumEndereco.setText(endereco.getNumero());
+            holder.textNumEndereco.setVisibility(View.VISIBLE);
+            holder.textNumEndereco.setText(context.getString(R.string.endereco_numero, endereco.getNumero()));
+        } else {
+            holder.textNumEndereco.setVisibility(View.GONE);
         }
 
         holder.itemView.setOnClickListener(view -> clickListener.onClick(endereco));
@@ -51,7 +57,7 @@ public class EnderecoAdapter extends RecyclerView.Adapter<EnderecoAdapter.MyView
         return enderecoList.size();
     }
 
-    interface OnClickListener {
+    public interface OnClickListener {
         public void onClick(Endereco endereco);
     }
 
