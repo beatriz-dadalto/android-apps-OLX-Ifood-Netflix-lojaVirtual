@@ -103,6 +103,8 @@ public class UsuarioEnderecoActivity extends AppCompatActivity implements Endere
 
     @Override
     public void onClick(Endereco endereco) {
-        Toast.makeText(this, endereco.getNomeEndereco(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, UsuarioFormEnderecoActivity.class);
+        intent.putExtra("enderecoSelecionado", endereco);
+        startActivity(intent);
     }
 }
