@@ -7,7 +7,7 @@
     tools:context=".activity.usuario.UsuarioResumoPedidoActivity">
 
     <include
-        android:id="@+id/include2"
+        android:id="@+id/include"
         layout="@layout/toolbar_voltar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
         android:padding="10dp"
         android:src="@drawable/ic_inico_laranja"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2" />
+        app:layout_constraintTop_toBottomOf="@+id/include" />
 
     <TextView
         android:id="@+id/textView10"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/textEnderecoEntrega"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -48,7 +48,7 @@
         tools:text="Avenida Paulista \nCentro, São Paulo/SP \nCEP: 29100-000" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnAlterarEndereco"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -57,7 +57,7 @@
         android:textColor="@color/color_laranja"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/textEnderecoEntrega" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -66,7 +66,7 @@
         android:background="@color/color_cinza"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/btnAlterarEndereco" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -92,6 +92,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
     <LinearLayout
+        android:id="@+id/linearLayout6"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -113,12 +114,13 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/textValorProdutos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="R$ 0,00"
                 android:textAlignment="textEnd"
-                android:textSize="12sp"
-                tools:text="R$ 199,99" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -136,12 +138,13 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/textValorFrete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="R$ 0,00"
                 android:textAlignment="textEnd"
-                android:textSize="12sp"
-                tools:text="R$ 19,99" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -160,13 +163,14 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/textValorTotal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="R$ 0,00"
                 android:textAlignment="textEnd"
                 android:textColor="@android:color/black"
-                android:textSize="12sp"
-                tools:text="R$ 219,98" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -210,6 +214,16 @@
             tools:text="TOTAL: R$ 219,98" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:indeterminateTint="@color/color_laranja"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
