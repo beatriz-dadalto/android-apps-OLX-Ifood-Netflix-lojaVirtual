@@ -3,6 +3,7 @@ package com.br.ecommerce.activity.usuario;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -29,7 +30,6 @@ public class UsuarioResumoPedidoActivity extends AppCompatActivity {
     private List<Endereco> enderecoList = new ArrayList<>();
 
     private ItemPedidoDAO itemPedidoDAO;
-    private ItemDAO itemDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +38,16 @@ public class UsuarioResumoPedidoActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         recuperaEndereco();
+        configCliques();
+    }
+
+    private void configCliques() {
+        binding.btnAlterarEndereco.setOnClickListener(view -> {
+            startActivity(new Intent(this, UsuarioSelecionaEnderecoActivity.class));
+        });
     }
 
     private void configDados() {
-        itemDAO = new ItemDAO(this);
         itemPedidoDAO = new ItemPedidoDAO(this);
 
         binding.include.textTitulo.setText("Resumo Pedido");

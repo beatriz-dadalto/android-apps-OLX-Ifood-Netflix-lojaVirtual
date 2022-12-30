@@ -24,6 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ecommerce">
         <activity
+            android:name=".activity.usuario.UsuarioSelecionaEnderecoActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.usuario.UsuarioResumoPedidoActivity"
             android:exported="false" />
         <activity
