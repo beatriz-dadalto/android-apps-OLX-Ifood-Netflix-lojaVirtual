@@ -16,11 +16,11 @@
         app:tint="@color/color_laranja" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textTitulo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:text="Deseja remover esta categoria?"
+        tools:text="Título"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        app:layout_constraintTop_toBottomOf="@+id/textTitulo">
 
         <android.widget.Button
             android:id="@+id/btnSim"
