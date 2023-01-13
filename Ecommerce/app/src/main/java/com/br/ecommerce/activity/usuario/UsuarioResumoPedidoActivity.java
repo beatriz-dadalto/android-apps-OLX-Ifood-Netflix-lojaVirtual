@@ -68,7 +68,7 @@ public class UsuarioResumoPedidoActivity extends AppCompatActivity {
                     .append(endereco.getUf())
                     .append("\n")
                     .append("CEP: ")
-                            .append(endereco.getCep());
+                    .append(endereco.getCep());
 
             binding.textEnderecoEntrega.setText(enderecoCompleto);
             binding.btnAlterarEndereco.setText("Alterar endereço de entrega");

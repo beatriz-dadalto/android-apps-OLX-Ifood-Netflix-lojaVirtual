@@ -43,9 +43,13 @@ public class EnderecoSelecaoAdapter extends RecyclerView.Adapter<EnderecoSelecao
         enderecoCompleto.append(endereco.getLogradouro())
                 .append(", ")
                 .append(endereco.getNumero())
+                .append(", ")
                 .append(endereco.getBairro())
+                .append(", ")
                 .append(endereco.getLocalidade())
+                .append("-")
                 .append(endereco.getUf())
+                .append("\n")
                 .append("CEP: ")
                 .append(endereco.getCep());
 
@@ -74,7 +78,8 @@ public class EnderecoSelecaoAdapter extends RecyclerView.Adapter<EnderecoSelecao
             super(itemView);
 
             textNomeEndereco = itemView.findViewById(R.id.textNomeEndereco);
-            textEndereco = itemView.findViewById(R.id.textLogradouro);
+            textEndereco = itemView.findViewById(R.id.textEndereco);
+            rbCheck = itemView.findViewById(R.id.rbCheck);
 
         }
     }
