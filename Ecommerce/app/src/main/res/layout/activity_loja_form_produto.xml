@@ -181,7 +181,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:background="@drawable/bg_edit_off"
-                            android:hint="Mochila Adidas"
                             android:padding="16dp" />
 
                     </LinearLayout>

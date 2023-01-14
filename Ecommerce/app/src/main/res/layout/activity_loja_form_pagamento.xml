@@ -61,14 +61,12 @@
             android:text="Valor"
             android:textAlignment="textStart" />
 
-        <EditText
+        <com.blackcat.currencyedittext.CurrencyEditText
             android:id="@+id/edtValor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/bg_edit_off"
-            android:hint="R$ 0,00"
-            android:inputType="text"
             android:padding="16dp" />
 
         <RadioGroup
