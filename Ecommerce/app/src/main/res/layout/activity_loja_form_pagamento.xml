@@ -54,75 +54,47 @@
             android:inputType="text"
             android:padding="16dp" />
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:text="Valor"
+            android:textAlignment="textStart" />
+
+        <EditText
+            android:id="@+id/edtValor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_edit_off"
+            android:hint="R$ 0,00"
+            android:inputType="text"
+            android:padding="16dp" />
+
+        <RadioGroup
+            android:id="@+id/rgValor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:orientation="horizontal">
 
-            <LinearLayout
+            <RadioButton
+                android:id="@+id/rbDesconto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="8dp"
-                android:orientation="vertical">
+                android:minHeight="0dp"
+                android:text="Desconto" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="textStart"
-                    android:text="Valor" />
-
-                <EditText
-                    android:id="@+id/edtValor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/bg_edit_off"
-                    android:hint="R$ 0,00"
-                    android:inputType="text"
-                    android:padding="16dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
+            <RadioButton
+                android:id="@+id/rbAcrescimo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:minHeight="0dp"
+                android:text="Acréscimo" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:textAlignment="textStart"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="Desconto / Acréscimo" />
-
-                <RadioGroup
-                    android:id="@+id/rgValor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp">
-
-                    <RadioButton
-                        android:id="@+id/rbDesconto"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minHeight="0dp"
-                        android:text="Desconto"/>
-
-                    <RadioButton
-                        android:id="@+id/rbAcrescimo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Acréscimo"
-                        android:minHeight="0dp"/>
-
-                </RadioGroup>
-
-            </LinearLayout>
-
-        </LinearLayout>
+        </RadioGroup>
 
         <ProgressBar
             android:id="@+id/progressBar"
