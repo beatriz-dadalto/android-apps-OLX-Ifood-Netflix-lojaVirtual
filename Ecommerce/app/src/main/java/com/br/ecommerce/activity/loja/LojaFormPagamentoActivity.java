@@ -3,6 +3,7 @@ package com.br.ecommerce.activity.loja;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -99,6 +100,9 @@ public class LojaFormPagamentoActivity extends AppCompatActivity {
                 }
                 
                 if (novoPagamento) {
+                    Intent intent = new Intent();
+                    intent.putExtra("novoPagamento", formaPagamento);
+                    setResult(RESULT_OK, intent);
                     finish();
                 } else {
                     binding.progressBar.setVisibility(View.GONE);

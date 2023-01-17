@@ -81,6 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:buttonTint="@android:color/black"
                 android:minHeight="0dp"
                 android:text="Desconto" />
 
@@ -89,6 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:buttonTint="@android:color/black"
                 android:minHeight="0dp"
                 android:text="Acréscimo" />
 
