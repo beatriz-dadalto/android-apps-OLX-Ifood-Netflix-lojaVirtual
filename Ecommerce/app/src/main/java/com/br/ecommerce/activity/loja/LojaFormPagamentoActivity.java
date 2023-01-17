@@ -20,6 +20,7 @@ public class LojaFormPagamentoActivity extends AppCompatActivity {
     private ActivityLojaFormPagamentoBinding binding;
     private FormaPagamento formaPagamento;
     private TipoValor tipoValor = null;
+    private boolean novoPagamento = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,30 @@ public class LojaFormPagamentoActivity extends AppCompatActivity {
 
         iniciaComponentes();
         configCliques();
+        getExtra();
+    }
+
+    private void getExtra() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            formaPagamento = (FormaPagamento) bundle.getSerializable("formaPagamentoSelecionada");
+            configDados();
+        }
+    }
+
+    private void configDados() {
+        // false quer dizer que eh uma edicao
+        novoPagamento = false;
+
+        binding.edtFormaPagamento.setText(formaPagamento.getNome());
+        binding.edtDescricaoPagamento.setText(formaPagamento.getDescricao());
+        binding.edtValor.setText(String.valueOf(formaPagamento.getValor() * 10));
+
+        if (formaPagamento.getTipoValor().equals(TipoValor.DESCONTO)) {
+            binding.rgValor.check(R.id.rbDesconto);
+        } else if (formaPagamento.getTipoValor().equals(TipoValor.ACRESCIMO)){
+            binding.rgValor.check(R.id.rbAcrescimo);
+        }
     }
 
     private void configCliques() {
@@ -68,10 +93,16 @@ public class LojaFormPagamentoActivity extends AppCompatActivity {
 
                 if (formaPagamento.getTipoValor() != null) {
                     formaPagamento.salvar();
-                    finish();
                 } else {
                     binding.progressBar.setVisibility(View.GONE);
                     Toast.makeText(this, "Selecione o tipo do valor", Toast.LENGTH_SHORT).show();
+                }
+                
+                if (novoPagamento) {
+                    finish();
+                } else {
+                    binding.progressBar.setVisibility(View.GONE);
+                    Toast.makeText(this, "Forma de pagamento foi salva!", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 binding.edtDescricaoPagamento.requestFocus();
