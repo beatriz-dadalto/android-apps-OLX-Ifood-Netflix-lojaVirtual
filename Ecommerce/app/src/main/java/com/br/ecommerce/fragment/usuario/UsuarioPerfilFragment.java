@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.br.ecommerce.R;
+import com.br.ecommerce.activity.usuario.MainActivityUsuario;
 import com.br.ecommerce.activity.usuario.UsuarioEnderecoActivity;
 import com.br.ecommerce.autenticacao.CadastroActivity;
 import com.br.ecommerce.autenticacao.LoginActivity;
@@ -44,6 +45,12 @@ public class UsuarioPerfilFragment extends Fragment {
         });
         binding.btnMeusDados.setOnClickListener(v -> startActivity(LoginActivity.class));
         binding.btnEnderecos.setOnClickListener(v -> startActivity(UsuarioEnderecoActivity.class));
+
+        binding.btnDeslogar.setOnClickListener(v -> {
+            FirebaseHelper.getAuth().signOut();
+            requireActivity().finish();
+            startActivity(MainActivityUsuario.class);
+        });
     }
 
     private void startActivity(Class<?> clazz) {

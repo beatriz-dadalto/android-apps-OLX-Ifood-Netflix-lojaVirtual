@@ -16,6 +16,7 @@ import com.br.ecommerce.databinding.ActivityUsuarioResumoPedidoBinding;
 import com.br.ecommerce.helper.FirebaseHelper;
 import com.br.ecommerce.helper.GetMask;
 import com.br.ecommerce.model.Endereco;
+import com.br.ecommerce.model.FormaPagamento;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +33,8 @@ public class UsuarioResumoPedidoActivity extends AppCompatActivity {
     private List<Endereco> enderecoList = new ArrayList<>();
 
     private ItemPedidoDAO itemPedidoDAO;
+    private FormaPagamento formaPagamento;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,12 @@ public class UsuarioResumoPedidoActivity extends AppCompatActivity {
 
         recuperaEndereco();
         configCliques();
+        getExtra();
+    }
+
+    private void getExtra() {
+        formaPagamento = (FormaPagamento) getIntent().getExtras().getSerializable("pagamentoSelecionado");
+        configDados();
     }
 
     private void configCliques() {

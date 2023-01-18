@@ -24,7 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ecommerce">
         <activity
-            android:name="activity.usuario.UsuarioSelecionaPagamentoActivity"
+            android:name=".activity.usuario.UsuarioSelecionaPagamentoActivity"
             android:exported="false" />
         <activity
             android:name=".activity.loja.LojaFormPagamentoActivity"

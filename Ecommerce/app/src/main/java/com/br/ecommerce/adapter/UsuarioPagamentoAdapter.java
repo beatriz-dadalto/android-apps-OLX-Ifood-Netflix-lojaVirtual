@@ -1,6 +1,8 @@
 package com.br.ecommerce.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ public class UsuarioPagamentoAdapter extends RecyclerView.Adapter<UsuarioPagamen
 
     private List<FormaPagamento> formaPagamentoList;
     private OnClick onClick;
+    private int row_index = -1;
 
     public UsuarioPagamentoAdapter(List<FormaPagamento> formaPagamentoList, OnClick onClick) {
         this.formaPagamentoList = formaPagamentoList;
@@ -42,7 +45,19 @@ public class UsuarioPagamentoAdapter extends RecyclerView.Adapter<UsuarioPagamen
         holder.textDescricaoPagamento.setText(formaPagamento.getDescricao());
 
 
-        holder.itemView.setOnClickListener(view -> onClick.onClickListener(formaPagamento));
+        holder.itemView.setOnClickListener(view -> {
+
+            onClick.onClickListener(formaPagamento);
+
+            row_index = holder.getAdapterPosition();
+            notifyDataSetChanged();
+        });
+
+        if (row_index == holder.getAdapterPosition()) {
+            holder.rbCheck.setChecked(true);
+        } else {
+            holder.rbCheck.setChecked(false);
+        }
     }
 
     @Override

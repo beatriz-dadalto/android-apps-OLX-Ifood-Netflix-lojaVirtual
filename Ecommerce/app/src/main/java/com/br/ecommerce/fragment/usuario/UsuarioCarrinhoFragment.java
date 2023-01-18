@@ -18,6 +18,7 @@ import com.br.ecommerce.DAO.ItemDAO;
 import com.br.ecommerce.DAO.ItemPedidoDAO;
 import com.br.ecommerce.R;
 import com.br.ecommerce.activity.usuario.UsuarioResumoPedidoActivity;
+import com.br.ecommerce.activity.usuario.UsuarioSelecionaPagamentoActivity;
 import com.br.ecommerce.adapter.CarrinhoAdapter;
 import com.br.ecommerce.autenticacao.LoginActivity;
 import com.br.ecommerce.databinding.DialogRemoverCarrinhoBinding;
@@ -83,7 +84,7 @@ public class UsuarioCarrinhoFragment extends Fragment implements CarrinhoAdapter
         binding.btnContinuar.setOnClickListener(view -> {
             Intent intent;
             if (FirebaseHelper.getAutenticado()){
-                intent = new Intent(requireContext(), UsuarioResumoPedidoActivity.class);
+                intent = new Intent(requireContext(), UsuarioSelecionaPagamentoActivity.class);
             } else {
                 intent = new Intent(requireContext(), LoginActivity.class);
             }
