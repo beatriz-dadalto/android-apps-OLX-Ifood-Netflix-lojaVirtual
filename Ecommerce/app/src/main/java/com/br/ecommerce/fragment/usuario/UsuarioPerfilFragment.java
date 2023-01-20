@@ -49,7 +49,7 @@ public class UsuarioPerfilFragment extends Fragment {
         binding.btnDeslogar.setOnClickListener(v -> {
             FirebaseHelper.getAuth().signOut();
             requireActivity().finish();
-            startActivity(MainActivityUsuario.class);
+            startActivity(new Intent(requireContext(), MainActivityUsuario.class));
         });
     }
 

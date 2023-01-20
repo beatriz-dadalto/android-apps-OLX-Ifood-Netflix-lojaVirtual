@@ -127,6 +127,7 @@ public class ItemPedidoDAO {
             itemPedido.setIdProduto(id_produto);
             itemPedido.setValor(valor);
             itemPedido.setQuantidade(quantidade);
+            itemPedido.setNomeProduto(getProduto(id).getTitulo());
 
             itemPedidoList.add(itemPedido);
         }

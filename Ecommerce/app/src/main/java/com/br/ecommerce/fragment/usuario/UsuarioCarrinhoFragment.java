@@ -88,7 +88,7 @@ public class UsuarioCarrinhoFragment extends Fragment implements CarrinhoAdapter
     private void configCliques() {
         binding.btnContinuar.setOnClickListener(view -> {
             if (FirebaseHelper.getAutenticado()){
-                startActivity(new Intent(requireContext(), UsuarioSelecionaEnderecoActivity.class));
+                startActivity(new Intent(requireContext(), UsuarioSelecionaPagamentoActivity.class));
             } else {
                 resultLauncher.launch(new Intent(requireContext(), LoginActivity.class));
             }

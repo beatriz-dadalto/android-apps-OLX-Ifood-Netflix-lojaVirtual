@@ -10,11 +10,12 @@
         android:id="@+id/include"
         layout="@layout/toolbar_voltar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imageView3"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="16dp"
@@ -25,71 +26,71 @@
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Endereço de entrega"
-        android:textColor="@android:color/black"
+        android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
     <TextView
         android:id="@+id/textEnderecoEntrega"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
-        tools:text="Avenida Paulista \nCentro, São Paulo/SP \nCEP: 29100-000" />
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:text="Avenida Paulista, 800 \nCentro, São Paulo/SP \nCEP: 29100-000" />
 
     <Button
         android:id="@+id/btnAlterarEndereco"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:background="@android:color/transparent"
         android:text="Alterar endereço de entrega"
         android:textColor="@color/color_laranja"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textEnderecoEntrega" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/imageView5"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/color_cinza"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAlterarEndereco" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/imageView6"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_margin="16dp"
         android:background="@drawable/bg_borda_arredondada_laranja"
         android:padding="10dp"
         android:src="@drawable/ic_cartao"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Forma de Pagamento"
-        android:textColor="@android:color/black"
+        android:layout_marginStart="16dp"
+        android:text="Forma de pagamento"
+        android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView7"
-        app:layout_constraintTop_toTopOf="@+id/imageView7" />
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintTop_toTopOf="@+id/imageView6" />
 
     <LinearLayout
         android:id="@+id/linearLayout7"
@@ -98,8 +99,8 @@
         android:layout_marginEnd="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7">
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -118,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textAlignment="textEnd"
-                tools:text="Cartão de Crédito" />
+                tools:text="Cartão de crédito" />
 
         </LinearLayout>
 
@@ -129,6 +130,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/textTipoPagamento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -146,18 +148,30 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView8"
+    <Button
+        android:id="@+id/btnAlterarPagamento"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/color_cinza"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="Alterar forma de pagamento"
+        android:textColor="@color/color_laranja"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imageView8"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_cinza"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAlterarPagamento" />
+
+    <ImageView
+        android:id="@+id/imageView4"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="16dp"
@@ -168,16 +182,16 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:text="Resumo"
-        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
     <LinearLayout
         android:id="@+id/linearLayout6"
@@ -186,8 +200,8 @@
         android:layout_marginEnd="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/textView11">
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -243,7 +257,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Total à vista"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/textValorTotal"
@@ -252,14 +266,24 @@
                 android:layout_weight="1"
                 android:text="R$ 0,00"
                 android:textAlignment="textEnd"
-                android:textColor="@android:color/black" />
+                android:textColor="@color/black" />
 
         </LinearLayout>
 
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:indeterminateTint="@color/color_laranja"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/btnAddCarrinho"
+        android:id="@+id/btnFinalizar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_btn_normal"
@@ -276,7 +300,7 @@
             android:text="Continuar"
             android:textAlignment="textEnd"
             android:textAllCaps="true"
-            android:textColor="@android:color/white"
+            android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -288,24 +312,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:elevation="2dp"
-            android:textColor="@android:color/white"
+            android:textColor="@color/white"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/btnAddCarrinho"
-            app:layout_constraintStart_toStartOf="@+id/btnAddCarrinho"
-            app:layout_constraintTop_toTopOf="@+id/btnAddCarrinho"
-            tools:text="TOTAL: R$ 219,98" />
+            app:layout_constraintBottom_toBottomOf="@+id/btnFinalizar"
+            app:layout_constraintStart_toStartOf="@+id/btnFinalizar"
+            app:layout_constraintTop_toTopOf="@+id/btnFinalizar"
+            android:text="TOTAL: R$ 0,00" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:indeterminateTint="@color/color_laranja"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
