@@ -1,8 +1,12 @@
 package com.br.ecommerce.fragment.usuario;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -18,6 +22,7 @@ import com.br.ecommerce.DAO.ItemDAO;
 import com.br.ecommerce.DAO.ItemPedidoDAO;
 import com.br.ecommerce.R;
 import com.br.ecommerce.activity.usuario.UsuarioResumoPedidoActivity;
+import com.br.ecommerce.activity.usuario.UsuarioSelecionaEnderecoActivity;
 import com.br.ecommerce.activity.usuario.UsuarioSelecionaPagamentoActivity;
 import com.br.ecommerce.adapter.CarrinhoAdapter;
 import com.br.ecommerce.autenticacao.LoginActivity;
@@ -82,13 +87,11 @@ public class UsuarioCarrinhoFragment extends Fragment implements CarrinhoAdapter
     }
     private void configCliques() {
         binding.btnContinuar.setOnClickListener(view -> {
-            Intent intent;
             if (FirebaseHelper.getAutenticado()){
-                intent = new Intent(requireContext(), UsuarioSelecionaPagamentoActivity.class);
+                startActivity(new Intent(requireContext(), UsuarioSelecionaEnderecoActivity.class));
             } else {
-                intent = new Intent(requireContext(), LoginActivity.class);
+                resultLauncher.launch(new Intent(requireContext(), LoginActivity.class));
             }
-            startActivity(intent);
         });
     }
 
@@ -230,6 +233,15 @@ public class UsuarioCarrinhoFragment extends Fragment implements CarrinhoAdapter
             binding.textInfo.setVisibility(View.GONE);
         }
     }
+
+    private final ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    startActivity(new Intent(requireContext(), UsuarioSelecionaEnderecoActivity.class));
+                }
+            }
+    );
 
     @Override
     public void onDestroyView() {
