@@ -25,33 +25,40 @@
                 android:id="@+id/llLogado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="24dp"
-                android:paddingVertical="16dp">
+                android:orientation="vertical">
 
-                <android.widget.Button
-                    android:id="@+id/btnEntrar"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_borda_laranja"
-                    android:text="Entrar"
-                    android:textColor="@color/color_laranja" />
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="24dp"
+                    android:paddingVertical="16dp">
 
-                <android.widget.Button
-                    android:id="@+id/btnCadastrar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_borda_laranja"
-                    android:text="Cadastrar"
-                    android:textColor="@color/color_laranja" />
+                    <android.widget.Button
+                        android:id="@+id/btnEntrar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_borda_laranja"
+                        android:text="Entrar"
+                        android:textColor="@color/color_laranja" />
+
+                    <android.widget.Button
+                        android:id="@+id/btnCadastrar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_borda_laranja"
+                        android:text="Cadastrar"
+                        android:textColor="@color/color_laranja" />
+
+                </LinearLayout>
+
+                <include layout="@layout/divisor" />
 
             </LinearLayout>
-
-            <include layout="@layout/divisor" />
 
             <LinearLayout
                 android:id="@+id/btnMeusDados"
@@ -243,48 +250,55 @@
                 android:id="@+id/btnDeslogar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="16dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="24dp"
-                    android:src="@drawable/ic_sair" />
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:paddingVertical="16dp">
 
-                    <TextView
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="24dp"
+                        android:src="@drawable/ic_sair" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Sair"
-                        android:textColor="@color/color_laranja"
-                        android:textSize="16sp" />
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Sair da minha conta" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sair"
+                            android:textColor="@color/color_laranja"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sair da minha conta" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="24dp"
+                        android:src="@drawable/ic_seta_direita" />
 
                 </LinearLayout>
 
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="24dp"
-                    android:src="@drawable/ic_seta_direita" />
+                <include layout="@layout/divisor" />
 
             </LinearLayout>
-
-            <include layout="@layout/divisor" />
 
         </LinearLayout>
 
