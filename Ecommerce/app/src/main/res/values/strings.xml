@@ -7,4 +7,5 @@
     <string name="valor_total_carrinho">TOTAL: R$ %1$s</string>
     <string name="endereco_numero">N° %1$s</string>
     <string name="endereco_logradouro">Logradouro: %1$s</string>
+    <string name="status_pedido">Pedido %1$s</string>
 </resources>
