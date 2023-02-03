@@ -145,4 +145,15 @@ public class ItemPedidoDAO {
 
         return total;
     }
+
+    public void limparCarrinho() {
+        try {
+            // atualizar a tabela no dispositivo
+            write.delete(DBHelper.TABELA_ITEM_PEDIDO, null, null);
+            write.delete(DBHelper.TABELA_ITEM, null, null);
+            Log.i("INFODB:", " Sucesso ao limpar o carrinho.");
+        } catch (Exception e) {
+            Log.i("INFODB:", " Erro ao limpar o carrinho." + e.getMessage());
+        }
+    }
 }

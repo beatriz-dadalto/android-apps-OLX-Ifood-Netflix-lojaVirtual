@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.br.ecommerce.DAO.ItemPedidoDAO;
 import com.br.ecommerce.activity.loja.MainActivityEmpresa;
 import com.br.ecommerce.activity.usuario.MainActivityUsuario;
 import com.br.ecommerce.R;
@@ -24,6 +25,13 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         new Handler(getMainLooper()).postDelayed(this::verificaAcesso, 2000);
+
+        limparCarrinho();
+    }
+
+    private void limparCarrinho() {
+        ItemPedidoDAO itemPedidoDAO = new ItemPedidoDAO(this);
+        itemPedidoDAO.limparCarrinho();
     }
 
     private void verificaAcesso() {

@@ -85,6 +85,13 @@ public class UsuarioResumoPedidoActivity extends AppCompatActivity {
         pedido.setItemPedidoList(itemPedidoDAO.getList());
 
         pedido.salvar(true);
+
+        itemPedidoDAO.limparCarrinho();
+
+        Intent intent = new Intent(this, MainActivityUsuario.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("id", 1);
+        startActivity(intent);
     }
 
     private void configDados() {
