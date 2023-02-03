@@ -60,11 +60,11 @@ public class Pedido implements Serializable {
         this.id = id;
     }
 
-    public PedidoStatus getStatus() {
+    public PedidoStatus getStatusPedido() {
         return status;
     }
 
-    public void setStatus(PedidoStatus status) {
+    public void setStatusPedido(PedidoStatus status) {
         this.status = status;
     }
 

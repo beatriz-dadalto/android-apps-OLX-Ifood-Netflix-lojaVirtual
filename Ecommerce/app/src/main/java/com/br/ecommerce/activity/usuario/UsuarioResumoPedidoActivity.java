@@ -74,7 +74,7 @@ public class UsuarioResumoPedidoActivity extends AppCompatActivity {
         pedido.setEndereco(enderecoList.get(0));
         pedido.setTotal(itemPedidoDAO.getTotalPedido());
         pedido.setPagamento(formaPagamento.getNome());
-        pedido.setStatus(PedidoStatus.PENDENTE);
+        pedido.setStatusPedido(PedidoStatus.PENDENTE);
 
         if (formaPagamento.getTipoValor().equals(TipoValor.DESCONTO)) {
             pedido.setDesconto(formaPagamento.getValor());
