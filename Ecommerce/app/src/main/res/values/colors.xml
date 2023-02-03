@@ -12,4 +12,6 @@
     <color name="colorIconeOnBnv">#FC6E20</color>
     <color name="colorIconeOffBnv">#A59D98</color>
     <color name="color_delete">#F44336</color>
+
+    <color name="color_status_pedido_aprovado">#34A853</color>
 </resources>
