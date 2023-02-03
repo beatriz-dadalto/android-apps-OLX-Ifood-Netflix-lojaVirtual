@@ -11,7 +11,7 @@ import java.util.List;
 public class Pedido implements Serializable {
 
     private String id;
-    private PedidoStatus status;
+    private StatusPedido statusPedido;
     private String idCliente;
     private Endereco endereco;
     private List<ItemPedido> itemPedidoList = new ArrayList<>();
@@ -24,7 +24,7 @@ public class Pedido implements Serializable {
 
     public Pedido() {
         DatabaseReference pedidoRef = FirebaseHelper.getDatabaseReference();
-        setId(pedidoRef.push().getKey());
+        this.setId(pedidoRef.push().getKey());
     }
 
     public void salvar(boolean novoPedido) {
@@ -39,7 +39,7 @@ public class Pedido implements Serializable {
                 .child(this.getId());
         lojaPedidoRef.setValue(this);
 
-        if (novoPedido) {
+        if(novoPedido){
             DatabaseReference dataPedidoUsuarioRef = usuarioPedidoRef
                     .child("dataPedido");
             dataPedidoUsuarioRef.setValue(ServerValue.TIMESTAMP);
@@ -47,8 +47,8 @@ public class Pedido implements Serializable {
             DatabaseReference dataPedidoLojaRef = lojaPedidoRef
                     .child("dataPedido");
             dataPedidoLojaRef.setValue(ServerValue.TIMESTAMP);
-        } else {
-            // status do pedido
+        }else {
+
         }
     }
 
@@ -60,12 +60,12 @@ public class Pedido implements Serializable {
         this.id = id;
     }
 
-    public PedidoStatus getStatusPedido() {
-        return status;
+    public StatusPedido getStatusPedido() {
+        return statusPedido;
     }
 
-    public void setStatusPedido(PedidoStatus status) {
-        this.status = status;
+    public void setStatusPedido(StatusPedido statusPedido) {
+        this.statusPedido = statusPedido;
     }
 
     public String getIdCliente() {

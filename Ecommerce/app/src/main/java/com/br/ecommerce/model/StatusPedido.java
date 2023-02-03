@@ -1,11 +1,11 @@
 package com.br.ecommerce.model;
 
-public enum PedidoStatus {
+public enum StatusPedido {
     PENDENTE, // 1
     APROVADO, // 2
     CANCELADO; // 3
 
-    public static String getStatus(PedidoStatus status) {
+    public static String getStatus(StatusPedido status) {
         String statusPedido;
         switch (status) {
             case PENDENTE:

@@ -14,15 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.br.ecommerce.R;
 import com.br.ecommerce.helper.GetMask;
 import com.br.ecommerce.model.Pedido;
-import com.br.ecommerce.model.PedidoStatus;
+import com.br.ecommerce.model.StatusPedido;
 
 import java.util.List;
 
 public class UsuarioPedidosAdapter extends RecyclerView.Adapter<UsuarioPedidosAdapter.MyViewHolder> {
 
-    private List<Pedido> pedidoList;
-    private Context context;
-    private OnClickListener clickListener;
+    private final List<Pedido> pedidoList;
+    private final Context context;
+    private final OnClickListener clickListener;
 
     public UsuarioPedidosAdapter(List<Pedido> pedidoList, Context context, OnClickListener clickListener) {
         this.pedidoList = pedidoList;
@@ -42,8 +42,11 @@ public class UsuarioPedidosAdapter extends RecyclerView.Adapter<UsuarioPedidosAd
         Pedido pedido = pedidoList.get(position);
 
         holder.textIdPedido.setText(pedido.getId());
+
         holder.textTotalPedido.setText(context.getString(R.string.valor, GetMask.getValor(pedido.getTotal())));
         holder.textDataPedido.setText(GetMask.getDate(pedido.getDataPedido(), 2));
+
+        holder.btnDetalhesPedido.setOnClickListener(v -> clickListener.onClick(pedido));
 
         switch (pedido.getStatusPedido()) {
             case PENDENTE:
@@ -57,7 +60,8 @@ public class UsuarioPedidosAdapter extends RecyclerView.Adapter<UsuarioPedidosAd
                 break;
         }
 
-        holder.btnDetalhesPedido.setOnClickListener(view -> clickListener.onClick(pedido));
+        holder.textStatusPedido.setText(StatusPedido.getStatus(pedido.getStatusPedido()));
+
     }
 
     @Override
@@ -76,7 +80,6 @@ public class UsuarioPedidosAdapter extends RecyclerView.Adapter<UsuarioPedidosAd
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
             textIdPedido = itemView.findViewById(R.id.textIdPedido);
             textStatusPedido = itemView.findViewById(R.id.textStatusPedido);
             textTotalPedido = itemView.findViewById(R.id.textTotalPedido);
@@ -84,4 +87,5 @@ public class UsuarioPedidosAdapter extends RecyclerView.Adapter<UsuarioPedidosAd
             btnDetalhesPedido = itemView.findViewById(R.id.btnDetalhesPedido);
         }
     }
+
 }
