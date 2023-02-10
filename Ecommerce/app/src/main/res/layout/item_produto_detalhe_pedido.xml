@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="16dp"
         android:ellipsize="end"
         android:maxLines="2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +51,7 @@
         android:maxLines="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Total: R$ 99,90" />
+        tools:text="R$ 99,90" />
 
     <ImageView
         android:id="@+id/imageView5"

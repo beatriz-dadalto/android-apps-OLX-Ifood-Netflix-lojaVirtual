@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.br.ecommerce.R;
+import com.br.ecommerce.activity.app.DetalhesPedidoActivity;
 import com.br.ecommerce.adapter.UsuarioPedidosAdapter;
 import com.br.ecommerce.autenticacao.LoginActivity;
 import com.br.ecommerce.databinding.FragmentUsuarioPedidoBinding;
@@ -117,6 +118,8 @@ public class UsuarioPedidoFragment extends Fragment implements UsuarioPedidosAda
 
     @Override
     public void onClick(Pedido pedido) {
-        Toast.makeText(requireContext(), pedido.getPagamento(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(requireContext(), DetalhesPedidoActivity.class);
+        intent.putExtra("pedidoSelecionado", pedido);
+        startActivity(intent);
     }
 }

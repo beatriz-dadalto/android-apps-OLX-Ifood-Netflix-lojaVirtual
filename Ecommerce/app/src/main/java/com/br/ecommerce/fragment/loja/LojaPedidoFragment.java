@@ -1,5 +1,6 @@
 package com.br.ecommerce.fragment.loja;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.br.ecommerce.R;
+import com.br.ecommerce.activity.app.DetalhesPedidoActivity;
 import com.br.ecommerce.adapter.LojaPedidosAdapter;
 import com.br.ecommerce.adapter.UsuarioPedidosAdapter;
 import com.br.ecommerce.databinding.FragmentLojaPedidoBinding;
@@ -96,7 +98,9 @@ public class LojaPedidoFragment extends Fragment implements LojaPedidosAdapter.O
     public void onClick(Pedido pedido, String operacao) {
         switch (operacao) {
             case "detalhes":
-                Toast.makeText(requireContext(), "Detalhes do pedido", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(requireContext(), DetalhesPedidoActivity.class);
+                intent.putExtra("pedidoSelecionado", pedido);
+                startActivity(intent);
                 break;
             case "status":
                 Toast.makeText(requireContext(), "Detalhes do staus", Toast.LENGTH_SHORT).show();

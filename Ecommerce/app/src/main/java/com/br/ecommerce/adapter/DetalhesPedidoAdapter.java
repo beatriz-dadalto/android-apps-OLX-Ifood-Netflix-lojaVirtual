@@ -50,7 +50,7 @@ public class DetalhesPedidoAdapter extends RecyclerView.Adapter<DetalhesPedidoAd
 
         recuperaProduto(itemPedido.getIdProduto(), holder);
 
-        holder.textQuantidade.setText(String.valueOf(itemPedido.getQuantidade()));
+        holder.textQuantidade.setText(context.getString(R.string.quantidade, itemPedido.getQuantidade()));
         holder.textValor.setText(context.getString(R.string.valor, GetMask.getValor(itemPedido.getValor() * itemPedido.getQuantidade())));
     }
 
