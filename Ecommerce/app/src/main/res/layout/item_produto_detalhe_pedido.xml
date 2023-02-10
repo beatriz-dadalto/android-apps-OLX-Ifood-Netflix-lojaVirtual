@@ -16,7 +16,7 @@
         tools:src="@drawable/placeholder_form_categorias" />
 
     <TextView
-        android:id="@+id/textNomeProduto"
+        android:id="@+id/textTitulo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -42,7 +42,7 @@
         tools:text="Quantidade 1" />
 
     <TextView
-        android:id="@+id/textTotal"
+        android:id="@+id/textValor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
