@@ -24,6 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ecommerce">
         <activity
+            android:name=".activity.app.DetalhesPedidoActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.usuario.UsuarioPerfilActivity"
             android:exported="false" />
         <activity
