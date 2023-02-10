@@ -1,5 +1,6 @@
 package com.br.ecommerce.fragment.usuario;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.br.ecommerce.R;
 import com.br.ecommerce.adapter.LojaProdutoAdapter;
+import com.br.ecommerce.autenticacao.LoginActivity;
 import com.br.ecommerce.databinding.FragmentUsuarioFavoritoBinding;
 import com.br.ecommerce.helper.FirebaseHelper;
 import com.br.ecommerce.model.Favorito;
@@ -50,16 +52,28 @@ public class UsuarioFavoritoFragment extends Fragment implements LojaProdutoAdap
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        configRvProdutos();
-        recuperaFavoritos();
+        configCliques();
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onStart() {
+        super.onStart();
 
-        favoritoRef.removeEventListener(eventListener);
-        binding = null;
+        if (FirebaseHelper.getAutenticado()) {
+            binding.btnLogin.setVisibility(View.GONE);
+            configRvProdutos();
+            recuperaFavoritos();
+        } else {
+            binding.btnLogin.setVisibility(View.VISIBLE);
+            binding.progressBar.setVisibility(View.GONE);
+            binding.textInfo.setText("Você não está autenticado no app");
+        }
+    }
+
+    private void configCliques() {
+        binding.btnLogin.setOnClickListener(view -> {
+            startActivity(new Intent(requireContext(), LoginActivity.class));
+        });
     }
 
     private void configRvProdutos() {
@@ -132,6 +146,14 @@ public class UsuarioFavoritoFragment extends Fragment implements LojaProdutoAdap
             binding.textInfo.setText("");
             recuperaProdutos();
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        if (eventListener != null) favoritoRef.removeEventListener(eventListener);
+        binding = null;
     }
 
     @Override

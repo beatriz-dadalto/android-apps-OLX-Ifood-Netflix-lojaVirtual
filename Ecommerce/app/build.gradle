@@ -71,4 +71,10 @@ dependencies {
     // https://github.com/smarteist/Android-Image-Slider
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
 
+    //https://square.github.io/retrofit/
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
+    // https://github.com/google/gson
+    implementation 'com.google.code.gson:gson:2.10.1'
+
 }

@@ -35,11 +35,22 @@
 
         <TextView
             android:id="@+id/textInfo"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
-            android:text="Carregando..."
-            android:textAlignment="center" />
+            android:text="Carregando..." />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/transparent"
+            android:text="Fazer login"
+            android:textColor="@android:color/black"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
     </LinearLayout>
 

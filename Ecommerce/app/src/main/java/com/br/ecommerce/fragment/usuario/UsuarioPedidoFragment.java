@@ -1,5 +1,6 @@
 package com.br.ecommerce.fragment.usuario;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.br.ecommerce.R;
 import com.br.ecommerce.adapter.UsuarioPedidosAdapter;
+import com.br.ecommerce.autenticacao.LoginActivity;
 import com.br.ecommerce.databinding.FragmentUsuarioPedidoBinding;
 import com.br.ecommerce.helper.FirebaseHelper;
 import com.br.ecommerce.model.Pedido;
@@ -45,14 +47,34 @@ public class UsuarioPedidoFragment extends Fragment implements UsuarioPedidosAda
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        configRv();
-        recuperaPedidos();
+        configCliques();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if (FirebaseHelper.getAutenticado()) {
+            binding.btnLogin.setVisibility(View.GONE);
+            configRv();
+            recuperaPedidos();
+        } else {
+            binding.btnLogin.setVisibility(View.VISIBLE);
+            binding.progressBar.setVisibility(View.GONE);
+            binding.textInfo.setText("Você não está autenticado no app");
+        }
+    }
+
+    private void configCliques() {
+        binding.btnLogin.setOnClickListener(view -> {
+            startActivity(new Intent(requireContext(), LoginActivity.class));
+        });
     }
 
     private void configRv() {
