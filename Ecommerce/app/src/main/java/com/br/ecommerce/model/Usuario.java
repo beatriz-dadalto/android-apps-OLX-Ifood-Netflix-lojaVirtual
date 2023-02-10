@@ -11,6 +11,7 @@ public class Usuario implements Serializable {
     private String id;
     private String nome;
     private String email;
+    private String telefone;
     private String senha;
 
     public Usuario() {
@@ -45,6 +46,14 @@ public class Usuario implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     @Exclude

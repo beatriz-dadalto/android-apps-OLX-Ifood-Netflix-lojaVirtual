@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.br.ecommerce.R;
 import com.br.ecommerce.activity.usuario.MainActivityUsuario;
 import com.br.ecommerce.activity.usuario.UsuarioEnderecoActivity;
+import com.br.ecommerce.activity.usuario.UsuarioPerfilActivity;
 import com.br.ecommerce.autenticacao.CadastroActivity;
 import com.br.ecommerce.autenticacao.LoginActivity;
 import com.br.ecommerce.databinding.FragmentUsuarioPerfilBinding;
@@ -50,7 +51,7 @@ public class UsuarioPerfilFragment extends Fragment {
         binding.btnCadastrar.setOnClickListener(v -> {
             startActivity(new Intent(requireContext(), CadastroActivity.class));
         });
-        binding.btnMeusDados.setOnClickListener(v -> startActivity(LoginActivity.class));
+        binding.btnMeusDados.setOnClickListener(v -> startActivity(UsuarioPerfilActivity.class));
         binding.btnEnderecos.setOnClickListener(v -> startActivity(UsuarioEnderecoActivity.class));
 
         binding.btnDeslogar.setOnClickListener(v -> {
