@@ -56,7 +56,7 @@ public class UsuarioFormEnderecoActivity extends AppCompatActivity {
 
     private void validarDados() {
         String nomeEndereco = binding.edtNomeEndereco.getText().toString().trim();
-        String cep = binding.edtCEP.getText().toString().trim();
+        String cep = binding.edtCEP.getMasked();
         String uf = binding.edtUF.getText().toString().trim();
         String numero = binding.edtNumEndereco.getText().toString().trim();
         String logradouro = binding.edtLogradouro.getText().toString().trim();

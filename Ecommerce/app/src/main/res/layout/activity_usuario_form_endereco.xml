@@ -49,15 +49,18 @@
                     android:layout_height="wrap_content"
                     android:text="CEP" />
 
-                <EditText
+                <com.santalu.maskara.widget.MaskEditText
                     android:id="@+id/edtCEP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="8dp"
                     android:background="@drawable/bg_edit_off"
                     android:hint="00000-000"
                     android:inputType="number"
-                    android:padding="16dp" />
+                    android:padding="16dp"
+                    app:mask="_____-___"
+                    app:maskCharacter="_"
+                    app:maskStyle="completable" />
 
             </LinearLayout>
 
