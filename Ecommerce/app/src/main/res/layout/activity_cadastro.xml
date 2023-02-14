@@ -8,13 +8,9 @@
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="411dp"
+        android:layout_height="731dp"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -25,9 +21,7 @@
                 layout="@layout/ib_voltar"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:layout_marginStart="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                tools:layout_editor_absoluteX="24dp" />
 
             <EditText
                 android:id="@+id/edtNome"
@@ -41,11 +35,9 @@
                 android:inputType="text"
                 android:padding="16dp"
                 app:layout_constraintBottom_toTopOf="@+id/edtEmail"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintTop_toBottomOf="@+id/include"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:layout_editor_absoluteX="24dp" />
 
             <EditText
                 android:id="@+id/edtEmail"
@@ -59,11 +51,28 @@
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:padding="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/edtTelefone"
+                app:layout_constraintTop_toBottomOf="@+id/edtNome"
+                tools:layout_editor_absoluteX="24dp" />
+
+            <com.santalu.maskara.widget.MaskEditText
+                android:id="@+id/edtTelefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_edit_off"
+                android:hint="(DDD) _____-____"
+                android:inputType="number"
+                android:padding="16dp"
                 app:layout_constraintBottom_toTopOf="@+id/edtSenha"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtNome" />
+                app:layout_constraintTop_toBottomOf="@+id/edtEmail"
+                app:mask="(__) _____-____"
+                app:maskCharacter="_"
+                app:maskStyle="completable" />
 
             <EditText
                 android:id="@+id/edtSenha"
@@ -78,10 +87,8 @@
                 android:inputType="textPassword"
                 android:padding="16dp"
                 app:layout_constraintBottom_toTopOf="@+id/edtConfirmaSenha"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtEmail" />
+                app:layout_constraintTop_toBottomOf="@+id/edtTelefone"
+                tools:layout_editor_absoluteX="24dp" />
 
             <EditText
                 android:id="@+id/edtConfirmaSenha"
@@ -96,10 +103,8 @@
                 android:inputType="textPassword"
                 android:padding="16dp"
                 app:layout_constraintBottom_toTopOf="@+id/btnCriarConta"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtSenha" />
+                app:layout_constraintTop_toBottomOf="@+id/edtSenha"
+                tools:layout_editor_absoluteX="24dp" />
 
             <android.widget.Button
                 android:id="@+id/btnCriarConta"
@@ -108,14 +113,12 @@
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_btn"
-                android:text="Criar conta"
                 android:onClick="validaDados"
+                android:text="Criar conta"
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toTopOf="@+id/progressBar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtConfirmaSenha" />
+                app:layout_constraintTop_toBottomOf="@+id/edtConfirmaSenha"
+                tools:layout_editor_absoluteX="24dp" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -125,23 +128,17 @@
                 android:indeterminateTint="@color/color_laranja"
                 android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnCriarConta"
+                tools:layout_editor_absoluteX="182dp"
                 tools:visibility="visible" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent">
+                tools:layout_editor_absoluteY="680dp">
 
                 <TextView
                     android:layout_width="wrap_content"

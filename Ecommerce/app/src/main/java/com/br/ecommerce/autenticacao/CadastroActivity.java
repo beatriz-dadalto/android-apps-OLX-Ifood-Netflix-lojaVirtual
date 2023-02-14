@@ -35,17 +35,20 @@ public class CadastroActivity extends AppCompatActivity {
     public void validaDados(View view) {
         String nome = binding.edtNome.getText().toString().trim();
         String email = binding.edtEmail.getText().toString().trim();
+        String telefone = binding.edtTelefone.getMasked();
         String senha = binding.edtSenha.getText().toString().trim();
         String confirmaSenha = binding.edtConfirmaSenha.getText().toString().trim();
 
         if (!nome.isEmpty()) {
             if (!email.isEmpty()) {
-                if (!senha.isEmpty()) {
-                    if (!confirmaSenha.isEmpty()) {
-                        if (confirmaSenha.equals(senha)) {
+                if (!telefone.isEmpty()) {
+                    if (telefone.length() == 15) {
+                        if (!senha.isEmpty()) {
+                            if (!confirmaSenha.isEmpty()) {
+                                if (confirmaSenha.equals(senha)) {
 
-                            ocultarTeclado();
-                            binding.progressBar.setVisibility(View.VISIBLE);
+                                    ocultarTeclado();
+                                    binding.progressBar.setVisibility(View.VISIBLE);
 
                             /*
                                 TODO USAR PARA CRIAR UMA LOJA
@@ -58,24 +61,33 @@ public class CadastroActivity extends AppCompatActivity {
                             */
 
 
-                            Usuario usuario = new Usuario();
-                            usuario.setNome(nome);
-                            usuario.setEmail(email);
-                            usuario.setSenha(senha);
+                                    Usuario usuario = new Usuario();
+                                    usuario.setNome(nome);
+                                    usuario.setEmail(email);
+                                    usuario.setTelefone(telefone);
+                                    usuario.setSenha(senha);
 
-                            criarConta(usuario);
+                                    criarConta(usuario);
 
+                                } else {
+                                    binding.edtConfirmaSenha.requestFocus();
+                                    binding.edtConfirmaSenha.setError("Senhas diferentes.");
+                                }
+                            } else {
+                                binding.edtConfirmaSenha.requestFocus();
+                                binding.edtConfirmaSenha.setError("Confirme a senha.");
+                            }
                         } else {
-                            binding.edtConfirmaSenha.requestFocus();
-                            binding.edtConfirmaSenha.setError("Senhas diferentes.");
+                            binding.edtSenha.requestFocus();
+                            binding.edtSenha.setError("Informe uma senha.");
                         }
                     } else {
-                        binding.edtConfirmaSenha.requestFocus();
-                        binding.edtConfirmaSenha.setError("Confirme a senha.");
+                        binding.edtTelefone.requestFocus();
+                        binding.edtTelefone.setError("Formato do telefone inválido.");
                     }
                 } else {
-                    binding.edtSenha.requestFocus();
-                    binding.edtSenha.setError("Informe uma senha.");
+                    binding.edtTelefone.requestFocus();
+                    binding.edtTelefone.setError("Informe o telefone.");
                 }
             } else {
                 binding.edtEmail.requestFocus();

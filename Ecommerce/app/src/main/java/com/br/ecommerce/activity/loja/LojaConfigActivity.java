@@ -118,6 +118,18 @@ public class LojaConfigActivity extends AppCompatActivity {
         if (loja.getFreteGratis() != 0) {
             binding.edtFrete.setText(String.valueOf(loja.getFreteGratis() * 10));
         }
+
+        if (loja.getPublicKey() != null) {
+            binding.edtPublicKey.setText(loja.getPublicKey());
+        }
+
+        if (loja.getAccessToken() != null) {
+            binding.edtAcessToken.setText(loja.getAccessToken());
+        }
+
+        if (loja.getParcelas() != 0) {
+            binding.edtParcelas.setText(String.valueOf(loja.getParcelas()));
+        }
     }
 
     private void validaDados() {
@@ -125,26 +137,76 @@ public class LojaConfigActivity extends AppCompatActivity {
         String CNPJ = binding.edtCNPJ.getMasked();
         double pedidoMinimo = (double) binding.edtPedidoMinimo.getRawValue() / 100;
         double freteGratis = (double) binding.edtFrete.getRawValue() / 100;
+        String publicKey = binding.edtPublicKey.getText().toString().trim();
+        String accessToken = binding.edtAcessToken.getText().toString().trim();
+
+        int parcelas = 0;
+        String parcelasStr = binding.edtParcelas.getText().toString().trim();
+        if (!parcelasStr.isEmpty()) {
+            parcelas = Integer.parseInt(binding.edtParcelas.getText().toString().trim());
+        }
+
+        if (!publicKey.isEmpty()) {
+            if (!accessToken.isEmpty()) {
+                if (parcelas > 0 && parcelas <= 12) {
+
+                    loja.setPublicKey(publicKey);
+                    loja.setAccessToken(accessToken);
+                    loja.setParcelas(parcelas);
+
+                    loja.salvar();
+
+                } else {
+                    binding.edtParcelas.requestFocus();
+                    binding.edtParcelas.setError("Mínimo 1 e máximo 12.");
+                }
+            } else {
+                binding.edtPublicKey.requestFocus();
+                binding.edtPublicKey.setError("Informe seu access token.");
+            }
+        } else {
+            binding.edtPublicKey.requestFocus();
+            binding.edtPublicKey.setError("Informe sua public key.");
+        }
 
         if (!nomeLoja.isEmpty()) {
             if (!CNPJ.isEmpty()) {
                 if (CNPJ.length() == 18) {
+                    if (!publicKey.isEmpty()) {
+                        if (!accessToken.isEmpty()) {
+                            if (parcelas > 0 && parcelas <= 12) {
 
-                    loja.setNome(nomeLoja);
-                    loja.setCNPJ(CNPJ);
-                    loja.setPedidoMinimo(pedidoMinimo);
-                    loja.setFreteGratis(freteGratis);
+                                ocultaTeclado();
 
-                    if (caminhoImagem != null) {
-                        salvarImagemFirebase();
-                    } else if (loja.getUrlLogo() != null) {
-                        loja.salvar();
+                                loja.setNome(nomeLoja);
+                                loja.setCNPJ(CNPJ);
+                                loja.setPedidoMinimo(pedidoMinimo);
+                                loja.setFreteGratis(freteGratis);
+                                loja.setPublicKey(publicKey);
+                                loja.setAccessToken(accessToken);
+                                loja.setParcelas(parcelas);
+
+                                if (caminhoImagem != null) {
+                                    salvarImagemFirebase();
+                                } else if (loja.getUrlLogo() != null) {
+                                    loja.salvar();
+                                } else {
+                                    ocultaTeclado();
+                                    Toast.makeText(this, "Escolha uma logo para sua empresa", Toast.LENGTH_SHORT).show();
+                                }
+
+                            } else {
+                                binding.edtParcelas.requestFocus();
+                                binding.edtParcelas.setError("Mínimo 1 e máximo 12");
+                            }
+                        } else {
+                            binding.edtAcessToken.requestFocus();
+                            binding.edtAcessToken.setError("Informe seu acess token");
+                        }
                     } else {
-                        ocultaTeclado();
-                        Toast.makeText(this, "Escolha uma logo para sua empresa", Toast.LENGTH_SHORT).show();
+                        binding.edtPublicKey.requestFocus();
+                        binding.edtPublicKey.setError("Informe sua public key");
                     }
-
-
                 } else {
                     binding.edtCNPJ.requestFocus();
                     binding.edtCNPJ.setError("CNPJ inválido");

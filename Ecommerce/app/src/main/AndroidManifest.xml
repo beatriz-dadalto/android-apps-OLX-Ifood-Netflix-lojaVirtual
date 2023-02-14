@@ -24,6 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ecommerce">
         <activity
+            android:name=".activity.usuario.UsuarioPagamentoPedidoActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.app.DetalhesPedidoActivity"
             android:exported="false" />
         <activity
@@ -52,9 +55,6 @@
             android:exported="false" />
         <activity
             android:name=".activity.usuario.DetalhesProdutoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.loja.LojaRecebimentosActivity"
             android:exported="false" />
         <activity
             android:name=".activity.loja.LojaConfigActivity"

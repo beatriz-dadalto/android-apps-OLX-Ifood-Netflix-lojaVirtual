@@ -11,7 +11,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         jcenter()
-        maven { url "https://jitpack.io" }
+        maven { url "https://jitpack.io"; "https://artifacts.mercadolibre.com/repository/android-releases/" }
     }
 }
 rootProject.name = "Ecommerce"
