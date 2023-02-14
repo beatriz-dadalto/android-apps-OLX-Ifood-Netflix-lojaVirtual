@@ -21,9 +21,9 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.MyVi
 
     private int layout;
     private boolean background;
-    private int row_index = 0;
-    private List<Categoria> categoriaList;
+    private final List<Categoria> categoriaList;
     private OnClick onClick;
+    private int row_index = 0;
 
     public CategoriaAdapter(int layout, boolean background, List<Categoria> categoriaList, OnClick onClick) {
         this.layout = layout;
@@ -45,27 +45,29 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.MyVi
 
         if (background) {
 
-            holder.itemView.setOnClickListener(view -> {
+            holder.itemView.setOnClickListener(v -> {
                 onClick.onClickListener(categoria);
 
                 row_index = holder.getAdapterPosition();
                 notifyDataSetChanged();
             });
 
-            if (row_index == holder.getAdapterPosition()) {
+            if(row_index == holder.getAdapterPosition()){
                 holder.itemView.setBackgroundResource(R.drawable.bg_categoria_home);
                 holder.nomeCategoria.setTextColor(Color.parseColor("#FFFFFF"));
                 holder.imagemCategoria.setColorFilter(Color.parseColor("#FFFFFF"), PorterDuff.Mode.SRC_IN);
-            } else {
+            }else {
                 holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
                 holder.nomeCategoria.setTextColor(Color.parseColor("#808080"));
                 holder.imagemCategoria.setColorFilter(Color.parseColor("#000000"), PorterDuff.Mode.SRC_IN);
             }
+
         } else {
             holder.itemView.setOnClickListener(v -> onClick.onClickListener(categoria));
         }
 
         holder.nomeCategoria.setText(categoria.getNome());
+
         Picasso.get().load(categoria.getUrlImagem()).into(holder.imagemCategoria);
     }
 
@@ -78,16 +80,16 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.MyVi
         void onClickListener(Categoria categoria);
     }
 
-    static class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView nomeCategoria;
         ImageView imagemCategoria;
+        TextView nomeCategoria;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            nomeCategoria = itemView.findViewById(R.id.nomeCategoria);
             imagemCategoria = itemView.findViewById(R.id.imagemCategoria);
+            nomeCategoria = itemView.findViewById(R.id.nomeCategoria);
         }
     }
+
 }

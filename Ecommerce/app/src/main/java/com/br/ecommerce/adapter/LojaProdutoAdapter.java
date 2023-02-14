@@ -24,13 +24,13 @@ import java.util.List;
 
 public class LojaProdutoAdapter extends RecyclerView.Adapter<LojaProdutoAdapter.MyViewHolder> {
 
-    private int layout;
-    private List<Produto> produtoList;
-    private Context context;
-    private boolean favorito;
-    private List<String> idsFavoritos;
-    private OnClickLister onClickLister;
-    private OnClickFavorito onClickFavorito;
+    private final int layout;
+    private final List<Produto> produtoList;
+    private final Context context;
+    private final boolean favorito;
+    private final List<String> idsFavoritos;
+    private final OnClickLister onClickLister;
+    private final OnClickFavorito onClickFavorito;
 
     public LojaProdutoAdapter(int layout, List<Produto> produtoList, Context context, boolean favorito, List<String> idsFavoritos, OnClickLister onClickLister, OnClickFavorito onClickFavorito) {
         this.layout = layout;
@@ -55,9 +55,9 @@ public class LojaProdutoAdapter extends RecyclerView.Adapter<LojaProdutoAdapter.
 
         holder.txtNomeProduto.setText(produto.getTitulo());
 
-        if (favorito) {
+        if(favorito){
             holder.likeButton.setLiked(idsFavoritos.contains(produto.getId()));
-        } else {
+        }else {
             holder.likeButton.setVisibility(View.GONE);
         }
 
@@ -79,9 +79,9 @@ public class LojaProdutoAdapter extends RecyclerView.Adapter<LojaProdutoAdapter.
         holder.likeButton.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
-                if (FirebaseHelper.getAutenticado()) {
+                if(FirebaseHelper.getAutenticado()){
                     onClickFavorito.onClickFavorito(produto);
-                } else {
+                }else {
                     Toast.makeText(context, "Você não está autenticado no app.", Toast.LENGTH_SHORT).show();
                     holder.likeButton.setLiked(false);
                 }

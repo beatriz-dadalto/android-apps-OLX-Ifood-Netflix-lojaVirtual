@@ -1,10 +1,12 @@
 package com.br.ecommerce.fragment.usuario;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.br.ecommerce.R;
@@ -31,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class UsuarioHomeFragment extends Fragment implements CategoriaAdapter.OnClick, LojaProdutoAdapter.OnClickLister, LojaProdutoAdapter.OnClickFavorito {
 
@@ -38,10 +43,13 @@ public class UsuarioHomeFragment extends Fragment implements CategoriaAdapter.On
 
     private final List<Categoria> categoriaList = new ArrayList<>();
     private final List<Produto> produtoList = new ArrayList<>();
+    private final List<Produto> filtroProdutoCategoriaList = new ArrayList<>();
     private final List<String> idsFavoritos = new ArrayList<>();
 
     private CategoriaAdapter categoriaAdapter;
     private LojaProdutoAdapter lojaProdutoAdapter;
+
+    private Categoria categoriaSelecionada;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -55,61 +63,44 @@ public class UsuarioHomeFragment extends Fragment implements CategoriaAdapter.On
         super.onViewCreated(view, savedInstanceState);
 
         configRvCategorias();
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
+        configSearchView();
 
         recuperaDados();
     }
 
-    private void recuperaDados() {
-        recuperaCategorias();
-        recuperaProdutos();
-        recuperaFavoritos();
-    }
+    private void configSearchView() {
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String pesquisa) {
+                ocultaTeclado();
 
-    private void recuperaFavoritos() {
-        if (FirebaseHelper.getAutenticado()) {
-            DatabaseReference favoritoRef = FirebaseHelper.getDatabaseReference()
-                    .child("favoritos")
-                    .child(FirebaseHelper.getIdFirebase());
-            favoritoRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                    idsFavoritos.clear();
-
-                    for (DataSnapshot ds : snapshot.getChildren()) {
-                        String idFavorito = ds.getValue(String.class);
-                        idsFavoritos.add(idFavorito);
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }
-    }
-
-    private void filtraProdutoCategoria(Categoria categoria) {
-        if (!categoria.isTodas()) {
-            List<Produto> filtroProdutoCategoriaList = new ArrayList<>();
-
-            for (Produto produto : produtoList) {
-                if (produto.getIdsCategorias().contains(categoria.getId())) {
-                    filtroProdutoCategoriaList.add(produto);
-                }
+                filtraProdutoNome(pesquisa);
+                return true;
             }
 
-            configRvProdutos(filtroProdutoCategoriaList);
-        } else {
-            configRvProdutos(produtoList);
-        }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        binding.searchView.findViewById(androidx.appcompat.R.id.search_close_btn).setOnClickListener(v -> {
+            EditText edtSerachView = binding.searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+            edtSerachView.getText().clear();
+            edtSerachView.clearFocus();
+            ocultaTeclado();
+            filtraProdutoCategoria();
+        });
+
+    }
+
+    private void recuperaDados() {
+        recuperaCategorias();
+
+        recuperaProdutos();
+
+        recuperaFavoritos();
     }
 
     private void configRvCategorias() {
@@ -117,6 +108,13 @@ public class UsuarioHomeFragment extends Fragment implements CategoriaAdapter.On
         binding.rvCategorias.setHasFixedSize(true);
         categoriaAdapter = new CategoriaAdapter(R.layout.item_categoria_horizontal, true, categoriaList, this);
         binding.rvCategorias.setAdapter(categoriaAdapter);
+    }
+
+    private void configRvProdutos(List<Produto> produtoList) {
+        binding.rvProdutos.setLayoutManager(new GridLayoutManager(requireContext(), 2));
+        binding.rvProdutos.setHasFixedSize(true);
+        lojaProdutoAdapter = new LojaProdutoAdapter(R.layout.item_produto_adapter, produtoList, requireContext(), true, idsFavoritos, this, this);
+        binding.rvProdutos.setAdapter(lojaProdutoAdapter);
     }
 
     private void recuperaCategorias() {
@@ -145,13 +143,6 @@ public class UsuarioHomeFragment extends Fragment implements CategoriaAdapter.On
         });
     }
 
-    private void configRvProdutos(List<Produto> produtoList) {
-        binding.rvProdutos.setLayoutManager(new GridLayoutManager(requireContext(), 2));
-        binding.rvProdutos.setHasFixedSize(true);
-        lojaProdutoAdapter = new LojaProdutoAdapter(R.layout.item_produto_adapter, produtoList, requireContext(), true, idsFavoritos, this, this);
-        binding.rvProdutos.setAdapter(lojaProdutoAdapter);
-    }
-
     private void recuperaProdutos() {
         DatabaseReference produtoRef = FirebaseHelper.getDatabaseReference()
                 .child("produtos");
@@ -170,6 +161,7 @@ public class UsuarioHomeFragment extends Fragment implements CategoriaAdapter.On
 
                 binding.progressBar.setVisibility(View.GONE);
                 Collections.reverse(produtoList);
+
                 configRvProdutos(produtoList);
             }
 
@@ -180,6 +172,68 @@ public class UsuarioHomeFragment extends Fragment implements CategoriaAdapter.On
         });
     }
 
+    private void recuperaFavoritos() {
+        if (FirebaseHelper.getAutenticado()) {
+            DatabaseReference favoritoRef = FirebaseHelper.getDatabaseReference()
+                    .child("favoritos")
+                    .child(FirebaseHelper.getIdFirebase());
+            favoritoRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    idsFavoritos.clear();
+
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        String idFavorito = ds.getValue(String.class);
+                        idsFavoritos.add(idFavorito);
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+    }
+
+    private void filtraProdutoCategoria() {
+        if (!categoriaSelecionada.isTodas()) {
+            for (Produto produto : produtoList) {
+                if (produto.getIdsCategorias().contains(categoriaSelecionada.getId())) {
+                    if(!filtroProdutoCategoriaList.contains(produto)){
+                        filtroProdutoCategoriaList.add(produto);
+                    }
+                }
+            }
+
+            configRvProdutos(filtroProdutoCategoriaList);
+        } else {
+            filtroProdutoCategoriaList.clear();
+            configRvProdutos(produtoList);
+        }
+    }
+
+    private void filtraProdutoNome(String pesquisa) {
+        List<Produto> filtroProdutoNomeList = new ArrayList<>();
+
+        if (!filtroProdutoCategoriaList.isEmpty()) {
+            for (Produto produto : filtroProdutoCategoriaList) {
+                if (produto.getTitulo().toUpperCase(Locale.ROOT).contains(pesquisa.toUpperCase(Locale.ROOT))) {
+                    filtroProdutoNomeList.add(produto);
+                }
+            }
+        } else {
+            for (Produto produto : produtoList) {
+                if (produto.getTitulo().toUpperCase(Locale.ROOT).contains(pesquisa.toUpperCase(Locale.ROOT))) {
+                    filtroProdutoNomeList.add(produto);
+                }
+            }
+        }
+        configRvProdutos(filtroProdutoNomeList);
+    }
+
     private void listEmpty(List<Produto> produtoList) {
         if (produtoList.isEmpty()) {
             binding.textInfo.setText("Nenhum produto localizado.");
@@ -188,15 +242,17 @@ public class UsuarioHomeFragment extends Fragment implements CategoriaAdapter.On
         }
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    // Oculta o teclado do dispotivo
+    private void ocultaTeclado() {
+        InputMethodManager inputMethodManager = (InputMethodManager) requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(binding.searchView.getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     @Override
     public void onClickListener(Categoria categoria) {
-        filtraProdutoCategoria(categoria);
+        this.categoriaSelecionada = categoria;
+        filtraProdutoCategoria();
     }
 
     @Override
@@ -215,4 +271,11 @@ public class UsuarioHomeFragment extends Fragment implements CategoriaAdapter.On
         }
         Favorito.salvar(idsFavoritos);
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
 }
