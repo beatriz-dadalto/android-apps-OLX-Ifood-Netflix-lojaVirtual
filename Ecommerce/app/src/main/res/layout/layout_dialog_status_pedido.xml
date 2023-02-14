@@ -17,6 +17,7 @@
             android:id="@+id/rbPendente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@android:color/black"
             android:minHeight="0dp"
             android:text="Pendente" />
 
@@ -24,6 +25,7 @@
             android:id="@+id/rbAprovado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@android:color/black"
             android:minHeight="0dp"
             android:text="Aprovado" />
 
@@ -31,6 +33,7 @@
             android:id="@+id/rbCancelado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@android:color/black"
             android:minHeight="0dp"
             android:text="Cancelado" />
 
