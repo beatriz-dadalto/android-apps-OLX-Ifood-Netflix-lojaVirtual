@@ -69,6 +69,7 @@ public class UsuarioResumoPedidoActivity extends AppCompatActivity {
             if (this.formaPagamento.isCredito()) {
                 Intent intent = new Intent(this, UsuarioPagamentoPedidoActivity.class);
                 intent.putExtra("enderecoSelecionado", enderecoList.get(0));
+                intent.putExtra("pagamentoSelecionado", formaPagamento);
                 startActivity(intent);
             } else {
                 finalizarPedido();
@@ -143,8 +144,8 @@ public class UsuarioResumoPedidoActivity extends AppCompatActivity {
         binding.textValorTipoPagamento.setText(getString(R.string.valor, GetMask.getValor(valorExtra)));
 
         if (itemPedidoDAO.getTotalPedido() >= valorExtra) {
-           binding.textValorTotal.setText(getString(R.string.valor, GetMask.getValor(itemPedidoDAO.getTotalPedido() - valorExtra)));
-           binding.textValor.setText(getString(R.string.valor, GetMask.getValor(itemPedidoDAO.getTotalPedido() - valorExtra)));
+            binding.textValorTotal.setText(getString(R.string.valor, GetMask.getValor(itemPedidoDAO.getTotalPedido() - valorExtra)));
+            binding.textValor.setText(getString(R.string.valor, GetMask.getValor(itemPedidoDAO.getTotalPedido() - valorExtra)));
         } else {
             binding.textValorTotal.setText(getString(R.string.valor, GetMask.getValor(0)));
             binding.textValor.setText(getString(R.string.valor, GetMask.getValor(0)));

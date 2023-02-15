@@ -1,10 +1,13 @@
 package com.br.ecommerce.activity.usuario;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.br.ecommerce.DAO.ItemDAO;
 import com.br.ecommerce.DAO.ItemPedidoDAO;
@@ -13,9 +16,13 @@ import com.br.ecommerce.api.MercadoPagoService;
 import com.br.ecommerce.databinding.ActivityUsuarioPagamentoPedidoBinding;
 import com.br.ecommerce.helper.FirebaseHelper;
 import com.br.ecommerce.model.Endereco;
+import com.br.ecommerce.model.FormaPagamento;
 import com.br.ecommerce.model.ItemPedido;
 import com.br.ecommerce.model.Loja;
+import com.br.ecommerce.model.Pedido;
 import com.br.ecommerce.model.Produto;
+import com.br.ecommerce.model.StatusPedido;
+import com.br.ecommerce.model.TipoValor;
 import com.br.ecommerce.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +34,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mercadopago.android.px.configuration.AdvancedConfiguration;
 import com.mercadopago.android.px.core.MercadoPagoCheckout;
+import com.mercadopago.android.px.model.Payment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +50,7 @@ public class UsuarioPagamentoPedidoActivity extends AppCompatActivity {
     private final int REQUEST_CODE = 100;
 
     private ActivityUsuarioPagamentoPedidoBinding binding;
+    private FormaPagamento formaPagamento;
     private Endereco enderecoSelecionado;
     private Usuario usuario;
     private Loja loja;
@@ -169,6 +178,7 @@ public class UsuarioPagamentoPedidoActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             enderecoSelecionado = (Endereco) bundle.getSerializable("enderecoSelecionado");
+            formaPagamento = (FormaPagamento) bundle.getSerializable("pagamentoSelecionado");
         }
     }
 
@@ -214,4 +224,59 @@ public class UsuarioPagamentoPedidoActivity extends AppCompatActivity {
         });
     }
 
+    private void validaRetorno(Payment payment) {
+
+        String status = payment.getPaymentStatus();
+
+        switch (status) {
+            case "approved":
+                finalizarPedido(StatusPedido.APROVADO);
+                break;
+            case "rejected":
+                finalizarPedido(StatusPedido.CANCELADO);
+                break;
+            case "in_process":
+                finalizarPedido(StatusPedido.PENDENTE);
+                break;
+        }
+    }
+
+    private void finalizarPedido(StatusPedido statusPedido) {
+        Pedido pedido = new Pedido();
+        pedido.setIdCliente(FirebaseHelper.getIdFirebase());
+        pedido.setEndereco(enderecoSelecionado);
+        pedido.setTotal(itemPedidoDAO.getTotalPedido());
+        pedido.setPagamento(formaPagamento.getNome());
+        pedido.setStatusPedido(statusPedido);
+
+        if (formaPagamento.getTipoValor().equals(TipoValor.DESCONTO)) {
+            pedido.setDesconto(formaPagamento.getValor());
+        } else {
+            pedido.setAcrescimo(formaPagamento.getValor());
+        }
+
+        pedido.setItemPedidoList(itemPedidoDAO.getList());
+
+        pedido.salvar(true);
+
+        itemPedidoDAO.limparCarrinho();
+
+        Intent intent = new Intent(this, MainActivityUsuario.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("id", 1);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        
+        if (resultCode == RESULT_OK) {
+            Payment payment = (Payment) data.getSerializableExtra(MercadoPagoCheckout.EXTRA_PAYMENT_RESULT);
+
+            validaRetorno(payment);
+        } else {
+            Toast.makeText(this, "Erro aoa efetuar o pagamento", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
