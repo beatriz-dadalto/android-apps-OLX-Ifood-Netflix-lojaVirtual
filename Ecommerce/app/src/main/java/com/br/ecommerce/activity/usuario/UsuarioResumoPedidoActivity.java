@@ -65,7 +65,15 @@ public class UsuarioResumoPedidoActivity extends AppCompatActivity {
 
         binding.btnAlterarPagamento.setOnClickListener(view -> finish());
 
-        binding.btnFinalizar.setOnClickListener(view -> finalizarPedido());
+        binding.btnFinalizar.setOnClickListener(view -> {
+            if (this.formaPagamento.isCredito()) {
+                Intent intent = new Intent(this, UsuarioPagamentoPedidoActivity.class);
+                intent.putExtra("enderecoSelecionado", enderecoList.get(0));
+                startActivity(intent);
+            } else {
+                finalizarPedido();
+            }
+        });
     }
 
     private void finalizarPedido() {

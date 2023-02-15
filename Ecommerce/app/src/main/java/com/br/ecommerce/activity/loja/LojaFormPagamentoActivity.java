@@ -91,6 +91,7 @@ public class LojaFormPagamentoActivity extends AppCompatActivity {
                 formaPagamento.setDescricao(descricao);
                 formaPagamento.setValor(valor);
                 formaPagamento.setTipoValor(tipoValor);
+                formaPagamento.setCredito(binding.cbCredito.isChecked());
 
                 if (formaPagamento.getTipoValor() != null) {
                     formaPagamento.salvar();

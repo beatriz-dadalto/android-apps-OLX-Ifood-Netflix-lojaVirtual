@@ -12,6 +12,7 @@ public class FormaPagamento implements Serializable {
     private String descricao;
     private Double valor;
     private TipoValor tipoValor; // "DESCONTO" ou "ACRESCIMO"
+    private boolean credito = false;
 
     public FormaPagamento() {
         DatabaseReference pagamentoRef = FirebaseHelper.getDatabaseReference();
@@ -71,5 +72,13 @@ public class FormaPagamento implements Serializable {
 
     public void setTipoValor(TipoValor tipoValor) {
         this.tipoValor = tipoValor;
+    }
+
+    public boolean isCredito() {
+        return credito;
+    }
+
+    public void setCredito(boolean credito) {
+        this.credito = credito;
     }
 }
