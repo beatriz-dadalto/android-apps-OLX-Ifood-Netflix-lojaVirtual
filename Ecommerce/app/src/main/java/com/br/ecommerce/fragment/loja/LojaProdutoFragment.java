@@ -21,11 +21,11 @@ import com.br.ecommerce.databinding.DialogLojaProdutoBinding;
 import com.br.ecommerce.databinding.FragmentLojaProdutoBinding;
 import com.br.ecommerce.helper.FirebaseHelper;
 import com.br.ecommerce.model.Produto;
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -120,7 +120,10 @@ public class LojaProdutoFragment extends Fragment implements LojaProdutoAdapter.
 
         for (int i = 0; i < produto.getUrlsImagens().size(); i++) {
             if (produto.getUrlsImagens().get(i).getIndex() == 0) {
-                Picasso.get().load(produto.getUrlsImagens().get(i).getCaminhoImagem())
+                Glide
+                        .with(this)
+                        .load(produto.getUrlsImagens().get(i).getCaminhoImagem())
+                        .centerCrop()
                         .into(dialogBinding.imagemProduto);
             }
         }

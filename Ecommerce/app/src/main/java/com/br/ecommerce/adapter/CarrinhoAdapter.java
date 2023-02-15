@@ -16,7 +16,7 @@ import com.br.ecommerce.R;
 import com.br.ecommerce.helper.GetMask;
 import com.br.ecommerce.model.ItemPedido;
 import com.br.ecommerce.model.Produto;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -50,7 +50,12 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.MyView
         holder.textTitulo.setText(produto.getTitulo());
         holder.textQuantidade.setText(String.valueOf(itemPedido.getQuantidade()));
         holder.textValor.setText(context.getString(R.string.valor, GetMask.getValor(itemPedido.getValor() * itemPedido.getQuantidade())));
-        Picasso.get().load(produto.getUrlsImagens().get(0).getCaminhoImagem()).into(holder.imgProduto);
+
+        Glide
+                .with(context)
+                .load(produto.getUrlsImagens().get(0).getCaminhoImagem())
+                .centerCrop()
+                .into(holder.imgProduto);
 
         holder.itemView.setOnClickListener(v -> onClick.onClickListener(position, "detalhe"));
         holder.imgRemover.setOnClickListener(v -> onClick.onClickListener(position, "remover"));

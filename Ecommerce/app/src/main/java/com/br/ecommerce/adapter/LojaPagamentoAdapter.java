@@ -17,7 +17,6 @@ import com.br.ecommerce.helper.GetMask;
 import com.br.ecommerce.model.Categoria;
 import com.br.ecommerce.model.FormaPagamento;
 import com.br.ecommerce.model.TipoValor;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

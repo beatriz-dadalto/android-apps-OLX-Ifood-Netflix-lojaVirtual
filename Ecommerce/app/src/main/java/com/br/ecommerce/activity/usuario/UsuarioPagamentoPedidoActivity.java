@@ -6,12 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.br.ecommerce.DAO.ItemDAO;
 import com.br.ecommerce.DAO.ItemPedidoDAO;
-import com.br.ecommerce.R;
 import com.br.ecommerce.api.MercadoPagoService;
 import com.br.ecommerce.databinding.ActivityUsuarioPagamentoPedidoBinding;
 import com.br.ecommerce.helper.FirebaseHelper;
@@ -28,8 +26,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mercadopago.android.px.configuration.AdvancedConfiguration;
@@ -47,7 +43,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UsuarioPagamentoPedidoActivity extends AppCompatActivity {
 
-    private final int REQUEST_CODE = 100;
+    private final int REQUEST_MERCADO_PAGO = 100;
 
     private ActivityUsuarioPagamentoPedidoBinding binding;
     private FormaPagamento formaPagamento;
@@ -161,7 +157,7 @@ public class UsuarioPagamentoPedidoActivity extends AppCompatActivity {
         new MercadoPagoCheckout.
                 Builder(loja.getPublicKey(), idPagamento)
                 .setAdvancedConfiguration(advancedConfiguration).build()
-                .startPayment(this, REQUEST_CODE);
+                .startPayment(this, REQUEST_MERCADO_PAGO);
     }
 
     private void recuperaDados() {
@@ -270,13 +266,13 @@ public class UsuarioPagamentoPedidoActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        
-        if (resultCode == RESULT_OK) {
-            Payment payment = (Payment) data.getSerializableExtra(MercadoPagoCheckout.EXTRA_PAYMENT_RESULT);
 
-            validaRetorno(payment);
-        } else {
-            Toast.makeText(this, "Erro aoa efetuar o pagamento", Toast.LENGTH_SHORT).show();
+        if (requestCode == REQUEST_MERCADO_PAGO) {
+            if (resultCode == MercadoPagoCheckout.PAYMENT_RESULT_CODE) {
+                Payment payment = (Payment) data.getSerializableExtra(MercadoPagoCheckout.EXTRA_PAYMENT_RESULT);
+
+                validaRetorno(payment);
+            }
         }
     }
 }

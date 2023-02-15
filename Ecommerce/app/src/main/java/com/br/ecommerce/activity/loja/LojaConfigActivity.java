@@ -14,16 +14,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import com.br.ecommerce.R;
 import com.br.ecommerce.databinding.ActivityLojaConfigBinding;
 import com.br.ecommerce.helper.FirebaseHelper;
-import com.br.ecommerce.model.ImagemUpload;
 import com.br.ecommerce.model.Loja;
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +29,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.List;
@@ -100,7 +96,11 @@ public class LojaConfigActivity extends AppCompatActivity {
 
     private void configDados() {
         if (loja.getUrlLogo() != null) {
-            Picasso.get().load(loja.getUrlLogo()).into(binding.imgLogo);
+            Glide
+                    .with(this)
+                    .load(loja.getUrlLogo())
+                    .centerCrop()
+                    .into(binding.imgLogo);
         }
 
         if (loja.getNome() != null) {

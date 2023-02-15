@@ -1,5 +1,6 @@
 package com.br.ecommerce.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.br.ecommerce.R;
 import com.br.ecommerce.model.Categoria;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -20,11 +21,13 @@ public class CategoriaDialogAdapter extends RecyclerView.Adapter<CategoriaDialog
 
     private List<String> idsCategoriasSelecionadas;
     private List<Categoria> categoriaList;
+    private Context context;
     private OnClick onClick;
 
-    public CategoriaDialogAdapter(List<String> idsCategoriasSelecionadas, List<Categoria> categoriaList, OnClick onClick) {
+    public CategoriaDialogAdapter(List<String> idsCategoriasSelecionadas, List<Categoria> categoriaList, Context context, OnClick onClick) {
         this.idsCategoriasSelecionadas = idsCategoriasSelecionadas;
         this.categoriaList = categoriaList;
+        this.context = context;
         this.onClick = onClick;
     }
 
@@ -39,7 +42,12 @@ public class CategoriaDialogAdapter extends RecyclerView.Adapter<CategoriaDialog
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Categoria categoria = categoriaList.get(position);
 
-        Picasso.get().load(categoria.getUrlImagem()).into(holder.imagemCategoria);
+        Glide
+                .with(context)
+                .load(categoria.getUrlImagem())
+                .centerCrop()
+                .into(holder.imagemCategoria);
+
         holder.nomeCategoria.setText(categoria.getNome());
 
         if (idsCategoriasSelecionadas.contains(categoria.getId())) {

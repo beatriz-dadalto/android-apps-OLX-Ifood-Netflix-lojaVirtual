@@ -33,13 +33,13 @@ import com.br.ecommerce.helper.GetMask;
 import com.br.ecommerce.model.Favorito;
 import com.br.ecommerce.model.ItemPedido;
 import com.br.ecommerce.model.Produto;
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -183,7 +183,10 @@ public class UsuarioCarrinhoFragment extends Fragment implements CarrinhoAdapter
             }
         });
 
-        Picasso.get().load(produto.getUrlsImagens().get(0).getCaminhoImagem())
+        Glide
+                .with(this)
+                .load(produto.getUrlsImagens().get(0).getCaminhoImagem())
+                .centerCrop()
                 .into(dialogBinding.imagemProduto);
 
         dialogBinding.txtNomeProduto.setText(produto.getTitulo());

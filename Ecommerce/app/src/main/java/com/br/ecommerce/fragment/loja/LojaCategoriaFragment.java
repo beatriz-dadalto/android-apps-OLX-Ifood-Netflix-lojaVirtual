@@ -33,6 +33,7 @@ import com.br.ecommerce.databinding.DialogFormCategoriaBinding;
 import com.br.ecommerce.databinding.FragmentLojaCategoriaBinding;
 import com.br.ecommerce.helper.FirebaseHelper;
 import com.br.ecommerce.model.Categoria;
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,7 +42,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
-import com.squareup.picasso.Picasso;
 import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
 
 import java.util.ArrayList;
@@ -82,7 +82,7 @@ public class LojaCategoriaFragment extends Fragment implements CategoriaAdapter.
     private void configRv() {
         binding.rvCategorias.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvCategorias.setHasFixedSize(true);
-        categoriaAdapter = new CategoriaAdapter(R.layout.item_categoria_vertical, false, categoriaList, this);
+        categoriaAdapter = new CategoriaAdapter(R.layout.item_categoria_vertical, false, categoriaList, this, requireContext());
         binding.rvCategorias.setAdapter(categoriaAdapter);
 
         binding.rvCategorias.setListener(new SwipeLeftRightCallback.Listener() {
@@ -178,7 +178,11 @@ public class LojaCategoriaFragment extends Fragment implements CategoriaAdapter.
 
         if (categoria != null) {
             categoriaBinding.edtCategoria.setText(categoria.getNome());
-            Picasso.get().load(categoria.getUrlImagem()).into(categoriaBinding.imagemCategoria);
+            Glide
+                    .with(this)
+                    .load(categoria.getUrlImagem())
+                    .centerCrop()
+                    .into(categoriaBinding.imagemCategoria);
             categoriaBinding.cbTodosProdutos.setChecked(categoria.isTodas());
         }
 

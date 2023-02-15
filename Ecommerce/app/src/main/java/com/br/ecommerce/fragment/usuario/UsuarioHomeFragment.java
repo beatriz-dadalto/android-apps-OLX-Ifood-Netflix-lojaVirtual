@@ -106,7 +106,7 @@ public class UsuarioHomeFragment extends Fragment implements CategoriaAdapter.On
     private void configRvCategorias() {
         binding.rvCategorias.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         binding.rvCategorias.setHasFixedSize(true);
-        categoriaAdapter = new CategoriaAdapter(R.layout.item_categoria_horizontal, true, categoriaList, this);
+        categoriaAdapter = new CategoriaAdapter(R.layout.item_categoria_horizontal, true, categoriaList, this, requireContext());
         binding.rvCategorias.setAdapter(categoriaAdapter);
     }
 

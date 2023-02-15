@@ -32,6 +32,7 @@ import com.br.ecommerce.helper.FirebaseHelper;
 import com.br.ecommerce.model.Categoria;
 import com.br.ecommerce.model.ImagemUpload;
 import com.br.ecommerce.model.Produto;
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,7 +42,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -102,11 +102,22 @@ public class LojaFormProdutoActivity extends AppCompatActivity implements Catego
         binding.imageFake1.setVisibility(View.GONE);
         binding.imageFake2.setVisibility(View.GONE);
 
-        Picasso.get().load(produto.getUrlsImagens().get(0).getCaminhoImagem())
+        Glide
+                .with(this)
+                .load(produto.getUrlsImagens().get(0).getCaminhoImagem())
+                .centerCrop()
                 .into(binding.imagemProduto0);
-        Picasso.get().load(produto.getUrlsImagens().get(1).getCaminhoImagem())
+
+        Glide
+                .with(this)
+                .load(produto.getUrlsImagens().get(1).getCaminhoImagem())
+                .centerCrop()
                 .into(binding.imagemProduto1);
-        Picasso.get().load(produto.getUrlsImagens().get(0).getCaminhoImagem())
+
+        Glide
+                .with(this)
+                .load(produto.getUrlsImagens().get(2).getCaminhoImagem())
+                .centerCrop()
                 .into(binding.imagemProduto2);
 
         binding.edtTitulo.setText(produto.getTitulo());
@@ -139,6 +150,7 @@ public class LojaFormProdutoActivity extends AppCompatActivity implements Catego
         categoriaDialogAdapter = new CategoriaDialogAdapter(
                 idsCategoriasSelecionadas,
                 categoriaList,
+                this,
                 this
         );
         categoriaBinding.rvCategorias.setAdapter(categoriaDialogAdapter);
