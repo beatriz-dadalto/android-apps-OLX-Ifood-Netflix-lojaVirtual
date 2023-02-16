@@ -77,18 +77,14 @@ public class UsuarioPagamentoPedidoActivity extends AppCompatActivity {
         JsonObject address = new JsonObject();
         JsonObject payment_methods = new JsonObject();
 
-        JsonObject excluded_payment_methods = new JsonObject();
-
         JsonObject removerBoleto = new JsonObject();
         removerBoleto.addProperty("id", "bolbradesco");
         JsonObject removerLoterica = new JsonObject();
         removerLoterica.addProperty("id", "pec");
 
-        JsonArray ids = new JsonArray();
-        ids.add(removerBoleto);
-        ids.add(removerLoterica);
-
-        excluded_payment_methods.add("excluded_payment_methods", ids);
+        JsonArray excluded_payment_methods = new JsonArray();
+        excluded_payment_methods.add(removerBoleto);
+        excluded_payment_methods.add(removerLoterica);
 
         String telefone = usuario.getTelefone()
                 .replace("(", "")
@@ -103,6 +99,7 @@ public class UsuarioPagamentoPedidoActivity extends AppCompatActivity {
         }
         address.addProperty("zip_code", enderecoSelecionado.getCep());
         payment_methods.addProperty("installments", loja.getParcelas());
+        payment_methods.add("excluded_payment_methods", excluded_payment_methods);
 
         JsonObject item;
         for (ItemPedido itemPedido : itemPedidoList) {
@@ -128,7 +125,6 @@ public class UsuarioPagamentoPedidoActivity extends AppCompatActivity {
 
             dados.add("payer", payer);
             dados.add("payment_methods", payment_methods);
-            dados.add("payment_methods", excluded_payment_methods);
 
             efetuarPagamento(dados);
         }

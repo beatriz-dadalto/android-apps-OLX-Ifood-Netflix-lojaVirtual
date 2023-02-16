@@ -14,4 +14,8 @@
     <color name="color_delete">#F44336</color>
 
     <color name="color_status_pedido_aprovado">#34A853</color>
+
+    <!--MERCADO PAGO-->
+    <color name="ui_components_android_color_primary">@color/color_laranja</color>
+    <color name="ui_components_android_color_primary_dark">@color/color_laranja</color>
 </resources>
