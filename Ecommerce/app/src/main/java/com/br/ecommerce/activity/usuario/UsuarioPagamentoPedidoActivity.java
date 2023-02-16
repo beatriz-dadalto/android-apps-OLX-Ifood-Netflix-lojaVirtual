@@ -223,12 +223,42 @@ public class UsuarioPagamentoPedidoActivity extends AppCompatActivity {
     private void validaRetorno(Payment payment) {
 
         String status = payment.getPaymentStatus();
+        String statusDetail = payment.getPaymentStatusDetail();
 
         switch (status) {
             case "approved":
                 finalizarPedido(StatusPedido.APROVADO);
                 break;
             case "rejected":
+                switch (statusDetail) {
+                    case "cc_rejected_bad_filled_card_number":
+                        Toast.makeText(this, "Número do cartão inválido!", Toast.LENGTH_LONG).show();
+                        break;
+                    case "cc_rejected_bad_filled_date":
+                        Toast.makeText(this, "Data de vencimento invalida!", Toast.LENGTH_LONG).show();
+                        break;
+                    case "cc_rejected_bad_filled_other":
+                        Toast.makeText(this, "Algum dado do cartão inserido é invalido!", Toast.LENGTH_LONG).show();
+                        break;
+                    case "cc_rejected_bad_filled_security_code":
+                        Toast.makeText(this, "Código de segurança do cartão é invalido!", Toast.LENGTH_LONG).show();
+                        break;
+                    case "cc_rejected_call_for_authorize":
+                        Toast.makeText(this, "Você deve autorizar a operadora do seu cartão a liberar o pagamento do valor ao Mercado Pago.", Toast.LENGTH_LONG).show();
+                        break;
+                    case "cc_rejected_card_disabled":
+                        Toast.makeText(this, "Ligue para a operadora do seu cartão para ativar seu cartão. O telefone está no verso do seu cartão.", Toast.LENGTH_LONG).show();
+                        break;
+                    case "cc_rejected_max_attempts":
+                        Toast.makeText(this, "Você atingiu o limite de tentativas permitido.", Toast.LENGTH_LONG).show();
+                        break;
+                    case "cc_rejected_insufficient_amount":
+                        Toast.makeText(this, "Pagamento negado por falta de saldo.", Toast.LENGTH_LONG).show();
+                        break;
+                    default:
+                        Toast.makeText(this, "Não pudemos processar seu pagamento, tente novamente mais tarde.", Toast.LENGTH_LONG).show();
+                        break;
+                }
                 finalizarPedido(StatusPedido.CANCELADO);
                 break;
             case "in_process":
