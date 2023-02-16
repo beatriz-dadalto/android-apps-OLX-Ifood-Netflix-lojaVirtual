@@ -55,6 +55,8 @@ public class LojaFormPagamentoActivity extends AppCompatActivity {
         } else if (formaPagamento.getTipoValor().equals(TipoValor.ACRESCIMO)){
             binding.rgValor.check(R.id.rbAcrescimo);
         }
+
+        binding.cbCredito.setChecked(formaPagamento.isCredito());
     }
 
     private void configCliques() {

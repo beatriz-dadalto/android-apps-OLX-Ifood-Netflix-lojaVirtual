@@ -46,9 +46,13 @@ public class UsuarioSelecionaPagamentoActivity extends AppCompatActivity impleme
         binding.include.include.ibVoltar.setOnClickListener(view -> finish());
 
         binding.btnContinuar.setOnClickListener(view -> {
-            Intent intent = new Intent(this, UsuarioResumoPedidoActivity.class);
-            intent.putExtra("pagamentoSelecionado", formaPagamento);
-            startActivity(intent);
+            if (formaPagamento != null) {
+                Intent intent = new Intent(this, UsuarioResumoPedidoActivity.class);
+                intent.putExtra("pagamentoSelecionado", formaPagamento);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Selecione a forma de pagamento do seu pedido", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

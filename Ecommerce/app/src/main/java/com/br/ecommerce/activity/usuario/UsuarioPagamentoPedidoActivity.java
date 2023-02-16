@@ -311,6 +311,8 @@ public class UsuarioPagamentoPedidoActivity extends AppCompatActivity {
                 Payment payment = (Payment) data.getSerializableExtra(MercadoPagoCheckout.EXTRA_PAYMENT_RESULT);
 
                 validaRetorno(payment);
+            } else {
+                finish();
             }
         }
     }
